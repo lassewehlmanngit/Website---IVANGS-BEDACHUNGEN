@@ -3,6 +3,7 @@ import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { ContactForm } from '@/features/contact/ContactForm';
 import { MapPin, Phone, Mail } from 'lucide-react';
+import { teamMembers } from '@/features/company/model/teamData';
 
 export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   return (
@@ -34,7 +35,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
             {/* Contact Info */}
             <div className="space-y-12">
-                <div className="bg-slate-50 p-8 rounded-xl border border-slate-100">
+                <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
                 <h3 className="text-xl font-bold mb-6 text-slate-900">Kontaktdaten</h3>
                 <ul className="space-y-6">
                     <li className="flex items-start gap-4">
@@ -68,23 +69,23 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                 </ul>
                 </div>
 
-                <div className="bg-white p-6 rounded-xl border border-slate-100 shadow-sm">
+                <div className="bg-white p-6 rounded-sm border border-slate-100 shadow-sm">
                 <h3 className="font-bold text-lg mb-4 text-slate-900">Ihr direkter Draht</h3>
                 <div className="space-y-3 text-sm">
                     <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                         <span className="text-slate-600">Rückfragen zur Rechnung?</span>
-                        <span className="font-medium text-slate-900">Isabel Ivangs</span>
+                        <span className="font-medium text-slate-900">{teamMembers.isabel.name}</span>
                     </div>
                     <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                         <span className="text-slate-600">Technische Fragen?</span>
-                        <span className="font-medium text-slate-900">Sascha Peters</span>
+                        <span className="font-medium text-slate-900">{teamMembers.sascha.name}</span>
                     </div>
                 </div>
                 </div>
             </div>
 
             {/* Form */}
-            <div className="bg-white p-8 md:p-10 rounded-xl shadow-xl border border-slate-100 h-fit">
+            <div className="bg-white p-8 md:p-10 rounded-sm shadow-xl border border-slate-100 h-fit">
                 <h3 className="text-2xl font-bold mb-6 text-slate-900">Kostenloses Angebot anfordern</h3>
                 <ContactForm />
             </div>

@@ -1,85 +1,72 @@
 import React, { useEffect, useState } from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
+import { Button } from '@/shared/ui/Button';
+import { Link } from 'react-router-dom';
 
-type CookieConsent = 'accepted' | 'rejected';
+type CookieConsent = 'accepted' | 'rejected' | 'custom';
 
-const STORAGE_KEY = 'cookie_consent_v1';
+const STORAGE_KEY = 'cookie-consent';
 
 export interface CookieBannerProps {
   lang: SupportedLang;
   className?: string;
 }
 
-const setGtagConsent = (consent: CookieConsent): void => {
-  const gtag = (window as unknown as { gtag?: (...args: unknown[]) => void }).gtag;
-  if (!gtag) return;
-
-  const analytics_storage = consent === 'accepted' ? 'granted' : 'denied';
-  gtag('consent', 'update', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage,
-  });
-};
-
 export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) => {
   const [consent, setConsent] = useState<CookieConsent | null>(null);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored === 'accepted' || stored === 'rejected') setConsent(stored);
-    } catch {
-      // ignore
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored) {
+      setConsent(stored as CookieConsent);
+    } else {
+      setShow(true);
     }
   }, []);
 
   const updateConsent = (next: CookieConsent): void => {
     setConsent(next);
-    try {
-      localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      // ignore
-    }
-    setGtagConsent(next);
+    setShow(false);
+    localStorage.setItem(STORAGE_KEY, next);
   };
 
-  if (consent) return null;
+  if (!show) return null;
 
   return (
-    <section
-      aria-label={lang === 'de' ? 'Cookie-Einstellungen' : 'Cookie preferences'}
-      className={cn(
-        'fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-background/95 p-4 backdrop-blur supports-[backdrop-filter]:bg-background/70',
-        className,
-      )}
-    >
-      <div className="container flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-sm text-white/80">
-          {lang === 'de'
-            ? 'Wir verwenden Cookies, um die Nutzung zu messen und die Website zu verbessern. Sie können zustimmen oder ablehnen.'
-            : 'We use cookies to measure usage and improve the website. You can accept or reject.'}
+    <div className={cn(
+      "fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] p-4 z-[55] animate-slide-up mb-16 md:mb-0",
+      className
+    )}>
+      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <p className="text-sm text-slate-600">
+          {lang === 'de' 
+            ? 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten.' 
+            : 'We use cookies to ensure you get the best experience on our website.'}
         </p>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={() => updateConsent('rejected')}
-            className="rounded-lg bg-white/10 px-4 py-2 text-sm font-medium text-white hover:bg-white/15"
+        <div className="flex gap-3">
+          <Link 
+            to={`/${lang}/cookies`}
+            className="text-sm font-medium text-slate-500 hover:text-slate-800 px-3 py-2 flex items-center"
           >
-            {lang === 'de' ? 'Ablehnen' : 'Reject'}
-          </button>
-          <button
-            type="button"
+            {lang === 'de' ? 'Einstellungen' : 'Settings'}
+          </Link>
+          <Button 
+            variant="outline"
+            onClick={() => updateConsent('rejected')}
+            className="text-slate-700 bg-white border-slate-300 hover:bg-slate-50"
+          >
+            {lang === 'de' ? 'Ablehnen' : 'Decline'}
+          </Button>
+          <Button 
             onClick={() => updateConsent('accepted')}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:opacity-90"
+            className="text-white"
           >
             {lang === 'de' ? 'Akzeptieren' : 'Accept'}
-          </button>
+          </Button>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
-

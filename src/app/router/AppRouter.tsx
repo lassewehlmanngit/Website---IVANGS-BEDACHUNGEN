@@ -10,7 +10,12 @@ import { DesignSystemPage } from '@/pages/DesignSystemPage';
 import { ServicesPage } from '@/pages/services/ui/ServicesPage';
 import { ServiceDetailPage } from '@/pages/service-detail/ui/ServiceDetailPage';
 import { CareerPage } from '@/pages/career/ui/CareerPage';
+import { AboutPage } from '@/pages/about/ui/AboutPage';
 import { ContactPage } from '@/pages/contact/ui/ContactPage';
+import { ImprintPage } from '@/pages/legal/ui/ImprintPage';
+import { PrivacyPage } from '@/pages/legal/ui/PrivacyPage';
+import { TermsPage } from '@/pages/legal/ui/TermsPage';
+import { CookieSettingsPage } from '@/pages/legal/ui/CookieSettingsPage';
 
 const detectBrowserLanguage = (): SupportedLang => {
   const browserLang = navigator.language || 'en';
@@ -44,7 +49,12 @@ const LanguageWrapper: React.FC = () => {
         <Route path="/services" element={<ServicesPage lang={safeLang} />} />
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
         <Route path="/career" element={<CareerPage lang={safeLang} />} />
+        <Route path="/about" element={<AboutPage lang={safeLang} />} />
         <Route path="/contact" element={<ContactPage lang={safeLang} />} />
+        <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
+        <Route path="/privacy" element={<PrivacyPage lang={safeLang} />} />
+        <Route path="/terms" element={<TermsPage lang={safeLang} />} />
+        <Route path="/cookies" element={<CookieSettingsPage lang={safeLang} />} />
         <Route path="/:slug" element={<GenericPage lang={safeLang} />} />
         <Route path="*" element={<NotFoundPage lang={safeLang} />} />
       </Routes>

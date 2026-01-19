@@ -13,7 +13,7 @@ export const CeoQuote: React.FC<{ lang: string }> = ({ lang }) => {
                 <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8">Geschäftsführer & Dachdeckermeister</p>
                 
                 <div className="prose prose-lg text-slate-600 leading-relaxed mb-10">
-                   <p className="italic font-medium text-slate-800 text-xl border-l-4 border-primary-600 pl-6 mb-6">
+                   <p className="italic font-medium text-slate-800 text-xl border-l-4 border-primary pl-6 mb-6">
                      "Warum man auf uns zählen kann? Weil unser Unternehmen mehr ist, als nur ein Business."
                    </p>
                    <p>
@@ -25,10 +25,10 @@ export const CeoQuote: React.FC<{ lang: string }> = ({ lang }) => {
                 
                 <Link 
                   to={`/${lang}/about`} 
-                  className="group flex items-center gap-3 text-slate-900 font-bold hover:text-primary-600 transition-colors"
+                  className="group flex items-center gap-3 text-slate-900 font-bold hover:text-primary transition-colors"
                 >
                   Mehr über unser Team erfahren
-                  <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center group-hover:bg-primary-600 group-hover:text-white group-hover:border-primary-600 transition-all">
+                  <div className="w-10 h-10 bg-white border border-slate-200 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:text-white group-hover:border-primary transition-all">
                     <ArrowRight size={18} />
                   </div>
                 </Link>

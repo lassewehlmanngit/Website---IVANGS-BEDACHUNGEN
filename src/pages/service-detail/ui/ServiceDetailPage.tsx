@@ -1,67 +1,34 @@
 import React from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
-import { CheckCircle2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Hammer, Thermometer, Layers, CloudRain, Sun, ShieldCheck, Calendar, Info, Ruler, HelpCircle, Image as ImageIcon, Phone, Mail } from 'lucide-react';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { servicesData, type ServiceId } from '@/features/service/model/serviceData';
+import { OptimizedImage } from '@/shared/ui/Image';
+import { ExpertTip } from '@/shared/ui/ExpertTip';
+import { ProcessTimeline } from '@/shared/ui/ProcessTimeline';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
+import { TeamContactCard } from '@/features/service/ui/TeamContactCard';
 
-const servicesData: Record<string, { title: string; desc: string; img?: string; checkpoints: string[] }> = {
-    'steildach': {
-      title: 'Steildach',
-      desc: 'Ob Schieferarbeiten oder klassische Ziegel: Wir beherrschen traditionelles Handwerk und moderne Technik für Ihr Steildach.',
-      img: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif',
-      checkpoints: [
-        "Langlebiger Schutz vor Wind & Wetter",
-        "Wertsteigerung Ihrer Immobilie",
-        "Energetische Sanierung inklusive"
-      ]
-    },
-    'flachdach': {
-      title: 'Flachdach',
-      desc: 'Ob moderne Abdichtung oder Dachbegrünung: Wir nutzen Hochleistungs-Materialien, die Jahrzehnte halten.',
-      img: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
-      checkpoints: [
-        "100% Dichtheitsgarantie",
-        "Moderne Nutzungskonzepte (Begrünung)",
-        "Optimale Raumausnutzung"
-      ]
-    },
-    'solar': {
-      title: 'Solar & PV',
-      desc: 'Machen Sie Ihr Dach zum Kraftwerk. Wir montieren Auf-Dach-Solar-Anlagen fachgerecht und sicher – alles aus einer Hand.',
-      img: undefined,
-      checkpoints: [
-        "Stromkosten senken & unabhängig werden",
-        "Sichere Montage ohne Dachschäden",
-        "Komplettservice vom Meisterbetrieb"
-      ]
-    },
-    'fenster': {
-      title: 'VELUX Fenster-Lösungen',
-      desc: 'Als VELUX-geschulter Betrieb bringen wir mehr Licht und Luft in Ihr Dachgeschoss. Fachgerecht eingebaut durch qualifizierte Mitarbeiter.',
-      img: '/uploads/ivangs-arbeiter-fenstertausch.avif',
-      checkpoints: [
-        "Helle Wohnräume und gesundes Klima",
-        "Schneller Austausch ohne viel Dreck",
-        "Effektiver Hitzeschutz"
-      ]
-    },
-    'sanierung': {
-      title: 'Fassade & Sanierung',
-      desc: 'Vom Altbau bis zum Balkon: Wir stellen den Wert Ihrer Immobilie materialgetreu wieder her.',
-      img: '/uploads/ivangs-dach-sanierung.avif',
-      checkpoints: [
-        "Materialgetreue Wiederherstellung",
-        "Energetische Optimierung",
-        "Fassadenbekleidung vom Fachmann"
-      ]
-    }
+const iconMap: Record<string, React.ElementType> = {
+  Hammer,
+  Thermometer,
+  Layers,
+  CloudRain,
+  CheckCircle2,
+  Sun,
+  ShieldCheck,
+  Calendar,
+  Info,
+  Ruler
 };
 
 export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const { id } = useParams<{ id: string }>();
-  const service = id ? servicesData[id] : null;
+  const navigate = useNavigate();
+  const service = id && id in servicesData ? servicesData[id as ServiceId] : null;
 
   if (!service) return <NotFoundPage lang={lang} />;
 
@@ -69,45 +36,164 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
     <>
       <Seo 
         title={`${service.title} - Ivangs Bedachungen`}
-        description={service.desc}
+        description={service.intro}
       />
-      <div className="pt-20 pb-24 bg-white">
-         <div className="container mx-auto px-4">
-             <Link to={`/${lang}/services`} className="inline-flex items-center text-slate-500 hover:text-primary mb-8 transition-colors">
-                 <ArrowLeft size={16} className="mr-2" /> Zur Übersicht
-             </Link>
+      
+      <div className="animate-fade-in bg-white">
+        {/* Hero Header */}
+        <div className="relative h-[60vh] min-h-[500px]">
+          <OptimizedImage 
+            src={service.img} 
+            className="w-full h-full object-cover" 
+            alt={service.title} 
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10">
+              {service.subtitle}
+            </span>
+            <h1 className="text-5xl md:text-7xl font-slab font-bold mb-6 drop-shadow-lg">{service.title}</h1>
+          </div>
+          <Link 
+            to={`/${lang}/services`}
+            className="absolute top-28 left-8 md:top-32 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-5 py-2.5 rounded-sm flex items-center gap-2 transition-colors font-medium border border-white/20 z-10"
+          >
+            <ArrowLeft size={18} /> Zur Übersicht
+          </Link>
+        </div>
 
-             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-                 {service.img && (
-                    <div className="rounded-3xl overflow-hidden shadow-2xl">
-                        <img src={service.img} alt={service.title} className="w-full h-auto object-cover" />
+        <div className="container mx-auto px-4 py-24">
+          <div className="grid lg:grid-cols-12 gap-16">
+            
+            {/* Main Content Area */}
+            <div className="lg:col-span-8">
+              
+              {/* Intro & Expert Tip */}
+              <h2 className="text-3xl font-slab font-bold text-slate-900 mb-6">Worum es wirklich geht.</h2>
+              <p className="text-xl text-slate-600 leading-relaxed mb-8">
+                {service.intro}
+              </p>
+              
+              <ExpertTip className="mb-12">
+                {service.expertTip}
+              </ExpertTip>
+
+              {/* Detailed Knowledge Sections */}
+              <div className="space-y-12 mb-20">
+                {service.sections.map((section, idx) => {
+                  const Icon = iconMap[section.icon] || Info;
+                  return (
+                    <div key={idx} className="flex gap-6 group">
+                      <div className="shrink-0 w-12 h-12 bg-white rounded-sm flex items-center justify-center border border-slate-200 shadow-sm group-hover:border-primary transition-colors">
+                        <Icon className="text-primary" size={24} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">{section.title}</h3>
+                        <p className="text-slate-600 leading-relaxed whitespace-pre-line">{section.content}</p>
+                      </div>
                     </div>
-                 )}
-                 <div className={service.img ? "" : "lg:col-span-2 max-w-4xl mx-auto text-center"}>
-                     <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{service.title}</h1>
-                     <p className="text-xl text-slate-600 leading-relaxed mb-8">
-                         {service.desc}
-                     </p>
-                     
-                     <ul className={`space-y-4 mb-10 ${!service.img ? "text-left inline-block" : ""}`}>
-                        {service.checkpoints.map((point, idx) => (
-                           <li key={idx} className="flex items-center gap-3 text-slate-800 font-medium text-lg">
-                              <CheckCircle2 className="text-primary shrink-0" size={24} />
-                              <span>{point}</span>
-                           </li>
-                        ))}
-                     </ul>
+                  );
+                })}
+              </div>
 
-                     <div className={`flex gap-4 ${!service.img ? "justify-center" : ""}`}>
-                        <Link to={`/${lang}/contact`}>
-                            <Button className="px-8 py-6 text-lg">
-                                Jetzt anfragen <ArrowRight size={20} className="ml-2" />
-                            </Button>
-                        </Link>
-                     </div>
+              {/* Process Steps Section */}
+              <div className="mb-20">
+                 <h3 className="text-2xl font-slab font-bold text-slate-900 mb-8">So läuft Ihr Projekt ab</h3>
+                 <ProcessTimeline steps={service.process} />
+              </div>
+
+              {/* Project References Gallery */}
+              {service.references && service.references.length > 0 && (
+                 <div className="mb-20">
+                    <h3 className="text-2xl font-slab font-bold text-slate-900 mb-8 flex items-center gap-2">
+                      <ImageIcon size={24} className="text-primary" /> 
+                      Ausgewählte Projekte
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {service.references.map((img, idx) => (
+                        <div key={idx} className="rounded-sm overflow-hidden h-64 border border-slate-100 group">
+                          <OptimizedImage 
+                            src={img} 
+                            alt={`Projektbeispiel ${service.title} ${idx + 1}`} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+                          />
+                        </div>
+                      ))}
+                    </div>
                  </div>
-             </div>
-         </div>
+              )}
+
+              {/* Humanized Contact Section */}
+              <div className="bg-slate-50 border border-slate-100 rounded-md p-8 mb-20">
+                 <h3 className="text-2xl font-slab font-bold text-slate-900 mb-6">Ihre Ansprechpartner für {service.title}</h3>
+                 <p className="text-slate-600 mb-8">Kurze Wege zur richtigen Antwort. Bei uns landen Sie nicht im Callcenter, sondern beim Experten.</p>
+                 
+                 <div className="grid md:grid-cols-2 gap-6">
+                    {service.contacts?.map((person, idx) => (
+                      <TeamContactCard key={idx} member={person} />
+                    ))}
+                 </div>
+              </div>
+
+              {/* FAQ Accordion Section */}
+              <div className="border-t border-slate-200 pt-10 mb-12">
+                <div className="flex items-center gap-3 mb-8">
+                   <HelpCircle className="text-primary" size={24} />
+                   <h3 className="text-2xl font-slab font-bold text-slate-900">Häufige Kundenfragen</h3>
+                </div>
+                <Accordion type="single" collapsible>
+                  {service.faq.map((item, idx) => (
+                    <AccordionItem key={idx} value={`item-${idx}`}>
+                      <AccordionTrigger className="text-lg font-bold text-slate-800 hover:text-primary">
+                        {item.q}
+                      </AccordionTrigger>
+                      <AccordionContent>
+                        <p className="text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-sm border-l-2 border-primary/30">
+                          {item.a}
+                        </p>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+
+            {/* Sidebar Navigation */}
+            <div className="lg:col-span-4 space-y-8 sticky top-24 h-fit">
+              {/* Quick CTA Box */}
+              <div className="bg-slate-900 text-white p-8 rounded-md shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-20 -mr-10 -mt-10"></div>
+                <h3 className="text-xl font-bold mb-4 font-slab relative z-10">Wir schauen uns das an.</h3>
+                <p className="text-slate-300 mb-8 text-sm relative z-10 leading-relaxed">
+                  Jedes Dach ist anders. Vereinbaren Sie einen unverbindlichen Termin vor Ort.
+                </p>
+                <Button 
+                  onClick={() => navigate(`/${lang}/contact`)}
+                  className="w-full py-6 text-lg font-bold shadow-lg shadow-primary/20"
+                >
+                  Termin anfragen <ArrowRight size={18} className="ml-2" />
+                </Button>
+              </div>
+
+              {/* Other Services Nav */}
+              <div className="bg-white p-6 rounded-md border border-slate-200 shadow-sm">
+                 <h4 className="font-bold text-slate-900 mb-4 border-b border-slate-100 pb-2">Weitere Leistungen</h4>
+                 <ul className="space-y-1">
+                   {Object.values(servicesData).filter(s => s.id !== service.id).map(s => (
+                     <li key={s.id}>
+                       <Link 
+                        to={`/${lang}/services/${s.id}`}
+                        className="text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors capitalize flex items-center justify-between w-full p-3 rounded-sm group text-left"
+                      >
+                         <span className="font-medium text-sm">{s.title}</span>
+                         <ArrowRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                       </Link>
+                     </li>
+                   ))}
+                 </ul>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

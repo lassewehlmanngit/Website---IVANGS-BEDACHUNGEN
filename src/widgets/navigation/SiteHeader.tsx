@@ -6,7 +6,6 @@ import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
 import { getNavigation, type NavigationData } from '@/shared/lib/content/globals';
 import { Drawer } from '@/shared/ui/Drawer';
-import { IconButton } from '@/shared/ui/IconButton';
 import { Button } from '@/shared/ui/Button';
 
 export interface SiteHeaderProps {
@@ -26,8 +25,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
-      'rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors',
-      isActive && 'text-primary-600',
+      'rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors',
+      isActive && 'text-primary',
     );
 
   const mobileLinkClassName = ({ isActive }: { isActive: boolean }): string =>
@@ -90,34 +89,49 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             onClose={() => setMobileMenuOpen(false)}
             side="right"
             title={t('navigation.menu')}
+            className="w-full max-w-full sm:max-w-md"
           >
             <nav
               aria-label={t('navigation.mobileNavigation')}
-              className="flex flex-col gap-1"
+              className="flex flex-col gap-4 mt-4"
             >
               {nav.items.map((item) => (
                 <NavLink
                   key={item.href}
                   to={`/${lang}${item.href}`}
-                  className={mobileLinkClassName}
+                  className={({ isActive }) => cn(
+                    "block w-full text-left text-3xl font-bold py-2 border-b border-border/50",
+                    isActive ? "text-primary" : "text-foreground"
+                  )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.label}
                 </NavLink>
               ))}
-              <div className="h-px bg-border my-2"></div>
-              {serviceLinks.map((service) => (
-                 <NavLink
-                    key={service.id}
-                    to={`/${lang}/services/${service.id}`}
-                    className={mobileLinkClassName}
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {service.label}
-                  </NavLink>
-              ))}
-               <div className="mt-4">
-                 <Button className="w-full" onClick={() => {
+              
+              <div className="mt-4">
+                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-2">Leistungen</span>
+                <div className="grid grid-cols-1 gap-2">
+                  {serviceLinks.map((service) => (
+                     <NavLink
+                        key={service.id}
+                        to={`/${lang}/services/${service.id}`}
+                        className={({ isActive }) => cn(
+                          "p-3 rounded-xl border text-left text-lg font-medium transition-colors flex items-center justify-between",
+                          isActive
+                          ? "bg-primary/10 border-primary/20 text-primary"
+                          : "bg-background border-border text-muted-foreground"
+                        )}
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {service.label}
+                      </NavLink>
+                  ))}
+                </div>
+              </div>
+
+               <div className="mt-8">
+                 <Button className="w-full py-6 text-lg" onClick={() => {
                     navigate(`/${lang}/contact`);
                     setMobileMenuOpen(false);
                  }}>Angebot anfragen</Button>
@@ -136,11 +150,21 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
                     key={service.id}
                     to={`/${lang}/services/${service.id}`}
                     className={({ isActive }) => cn(
-                        "text-sm font-medium transition-colors hover:text-primary",
+                        "text-sm font-medium transition-colors hover:text-primary relative group py-3",
                         isActive ? "text-primary" : "text-muted-foreground"
                     )}
                 >
-                    {service.label}
+                    {({ isActive }) => (
+                      <>
+                        <span>{service.label}</span>
+                        <span 
+                          className={cn(
+                            "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300",
+                            isActive ? "w-full" : "w-0 group-hover:w-full"
+                          )}
+                        ></span>
+                      </>
+                    )}
                 </NavLink>
               ))}
            </div>

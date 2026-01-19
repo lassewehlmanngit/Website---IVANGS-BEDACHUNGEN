@@ -6,7 +6,7 @@ export const ProjectShowcase: React.FC = () => {
          <div className="container mx-auto px-4">
             <div className="mb-12 flex justify-between items-end">
                 <div>
-                  <span className="text-primary-600 font-bold uppercase tracking-wider text-sm">Referenzen</span>
+                  <span className="text-primary font-bold uppercase tracking-wider text-sm">Referenzen</span>
                   <h2 className="text-4xl font-bold text-slate-900 mt-2">Ergebnisse, die zählen.</h2>
                 </div>
             </div>
@@ -24,8 +24,8 @@ export const ProjectShowcase: React.FC = () => {
                        Sanierung
                      </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Einfamilienhaus in Kempen</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary-600 pl-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">Einfamilienhaus in Kempen</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary pl-3">
                     "Durch die neue Aufsparrendämmung sparen wir jetzt <strong>30% Heizkosten</strong> pro Jahr."
                   </p>
                </div>
@@ -42,8 +42,8 @@ export const ProjectShowcase: React.FC = () => {
                        Flachdach
                      </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Gewerbehalle Viersen</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary-600 pl-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">Gewerbehalle Viersen</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary pl-3">
                     "Die Dachbegrünung sorgt im Sommer für <strong>angenehme Temperaturen</strong> in der Produktion."
                   </p>
                </div>
@@ -60,8 +60,8 @@ export const ProjectShowcase: React.FC = () => {
                        Solar
                      </div>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary-600 transition-colors">Neubau in Willich</h3>
-                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary-600 pl-3">
+                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors">Neubau in Willich</h3>
+                  <p className="text-slate-600 text-sm leading-relaxed border-l-2 border-primary pl-3">
                     "Unabhängig vom Stromnetz in nur <strong>3 Tagen Montagezeit</strong>."
                   </p>
                </div>

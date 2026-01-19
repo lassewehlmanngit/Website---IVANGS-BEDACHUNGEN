@@ -26,7 +26,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
       <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow">
         {/* Left: Copy & Main Message */}
         <div className="text-white mt-8 md:mt-0">
-          <span className="text-primary-400 font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up">
+          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up">
             Meisterbetrieb seit 1996
           </span>
           <h1 className="text-5xl md:text-7xl font-medium leading-tight tracking-tight mb-6 animate-slide-up">
@@ -60,7 +60,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
          <div className="container mx-auto px-4 py-6 md:py-8">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary-400">
+                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
                     <Users size={24} />
                  </div>
                  <div>
@@ -69,7 +69,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
               </div>
               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary-400">
+                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
                     <Truck size={24} />
                  </div>
                  <div>
@@ -78,7 +78,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
               </div>
               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary-400">
+                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
                     <Warehouse size={24} />
                  </div>
                  <div>
@@ -87,7 +87,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
               </div>
               <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary-400">
+                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
                     <Calendar size={24} />
                  </div>
                  <div>

@@ -23,7 +23,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         {/* Brand Column */}
         <div>
           <div className="flex items-center gap-2 mb-6 text-white">
-            <div className="bg-primary-600 p-1.5 rounded-sm text-white">
+            <div className="bg-primary p-1.5 rounded-sm text-primary-foreground">
               <Hammer size={20} />
             </div>
             <span className="text-xl font-bold">IVANGS</span>
@@ -32,10 +32,10 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
             Ivangs Bedachungen GmbH & Co. KG – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary-600 transition-colors text-white">
+            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white">
               <Facebook size={18} />
             </a>
-            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary-600 transition-colors text-white">
+            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white">
               <Instagram size={18} />
             </a>
           </div>
@@ -46,15 +46,15 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           <h3 className="text-white font-semibold mb-6">Kontakt</h3>
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
-              <MapPin size={18} className="text-primary-600 shrink-0 mt-0.5" />
+              <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
               <span>Musterstraße 12<br />52511 Geilenkirchen</span>
             </li>
             <li className="flex items-center gap-3">
-              <Phone size={18} className="text-primary-600 shrink-0" />
+              <Phone size={18} className="text-primary shrink-0" />
               <span>+49 123 456 789</span>
             </li>
             <li className="flex items-center gap-3">
-              <Mail size={18} className="text-primary-600 shrink-0" />
+              <Mail size={18} className="text-primary shrink-0" />
               <span>info@ivangs-bedachungen.de</span>
             </li>
           </ul>
@@ -71,8 +71,10 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
                  </li>
              )) : (
                  <>
-                    <li><Link to={`/${lang}/impressum`} className="hover:text-white transition-colors">Impressum</Link></li>
-                    <li><Link to={`/${lang}/datenschutz`} className="hover:text-white transition-colors">Datenschutz</Link></li>
+                    <li><Link to={`/${lang}/imprint`} className="hover:text-white transition-colors">Impressum</Link></li>
+                    <li><Link to={`/${lang}/privacy`} className="hover:text-white transition-colors">Datenschutz</Link></li>
+                    <li><Link to={`/${lang}/terms`} className="hover:text-white transition-colors">AGB</Link></li>
+                    <li><Link to={`/${lang}/cookies`} className="hover:text-white transition-colors">Cookie Einstellungen</Link></li>
                  </>
              )}
           </ul>
@@ -86,7 +88,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           </p>
           <Link 
             to={`/${lang}/career`}
-            className="text-primary-400 hover:text-white text-sm font-medium flex items-center gap-2 transition-colors"
+            className="text-primary hover:text-white text-sm font-medium flex items-center gap-2 transition-colors"
           >
             Zu den Stellenangeboten <ArrowRight size={16} />
           </Link>
