@@ -1,5 +1,4 @@
 ---
-id: flachdach
 title: Flachdach
 shortDescription: Flachdachabdichtung mit modernsten Systemen – sicher, langlebig und wartungsfreundlich.
 icon: Layers

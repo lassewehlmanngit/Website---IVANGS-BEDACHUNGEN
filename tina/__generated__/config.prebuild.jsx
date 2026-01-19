@@ -148,7 +148,6 @@ var config_default = defineConfig({
         path: "content/services",
         format: "md",
         fields: [
-          { type: "string", name: "id", label: "ID", required: true },
           { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
           { type: "string", name: "shortDescription", label: "Kurzbeschreibung", ui: { component: "textarea" } },
           { type: "rich-text", name: "body", label: "Beschreibung (Lang)" },
@@ -185,7 +184,6 @@ var config_default = defineConfig({
         path: "content/jobs",
         format: "md",
         fields: [
-          { type: "string", name: "id", label: "ID", required: true },
           { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
           { type: "string", name: "location", label: "Standort", required: true },
           {

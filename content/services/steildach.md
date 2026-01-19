@@ -1,5 +1,4 @@
 ---
-id: steildach
 title: Steildach
 shortDescription: Von der Neueindeckung bis zur Sanierung – wir decken Ihr Steildach fachgerecht und wetterfest.
 icon: Home

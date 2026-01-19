@@ -1,58 +1,186 @@
-fragment PageParts on Page {
+fragment HomePageParts on HomePage {
   __typename
-  title
-  description
-  featuredImage
-  draft
-  blocks {
+  seo {
     __typename
-    ... on PageBlocksHero {
-      title
-      description
-      actions {
-        __typename
-        label
-        href
-        variant
-      }
-      image
-    }
-    ... on PageBlocksFeatures {
-      title
-      description
-      items {
-        __typename
-        title
-        description
-        icon
-      }
-    }
-    ... on PageBlocksTestimonial {
-      quote
-      author
-      role
-    }
-    ... on PageBlocksContact {
-      title
-      description
-    }
-    ... on PageBlocksContent {
-      body
-    }
+    title
+    description
   }
+  hero {
+    __typename
+    eyebrow
+    title
+    subtitle
+    description
+    primaryButtonText
+    primaryButtonLink
+    secondaryButtonText
+    secondaryButtonLink
+    backgroundImage
+    videoUrl
+    showQuickForm
+  }
+  stats {
+    __typename
+    value
+    label
+    icon
+  }
+  servicesSection {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  ceoQuote {
+    __typename
+    eyebrow
+    name
+    role
+    quote
+    text
+    image
+    buttonText
+    buttonLink
+  }
+  projects {
+    __typename
+    title
+    description
+    image
+  }
+  finalCTA {
+    __typename
+    title
+    description
+    buttonText
+    buttonLink
+  }
+}
+
+fragment TeamMemberParts on TeamMember {
+  __typename
+  name
+  role
+  email
+  category
+  description
+  image
+  order
 }
 
 fragment ServiceParts on Service {
   __typename
   title
-  description
+  shortDescription
+  body
   image
   icon
-  checkpoints {
+  features
+  benefits
+  gallery {
+    __typename
+    image
+    caption
+  }
+}
+
+fragment JobParts on Job {
+  __typename
+  title
+  location
+  type
+  shortDesc
+  tasks
+  profile
+  benefits
+  published
+}
+
+fragment AboutPageParts on AboutPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  story {
+    __typename
+    title
+    text1
+    text2
+    image
+  }
+  values {
     __typename
     text
   }
-  body
+  equipment {
+    __typename
+    title
+    description
+  }
+  teamSection {
+    __typename
+    title
+    description
+  }
+  cta {
+    __typename
+    title
+    description
+    buttonText
+    email
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  title
+  description
+  address {
+    __typename
+    company
+    street
+    city
+    zip
+  }
+  phone
+  fax
+  email
+  website
+  facebook
+  officeHours {
+    __typename
+    weekdays
+  }
+  repairHours {
+    __typename
+    tueThu
+    fri
+  }
+}
+
+fragment SettingsParts on Settings {
+  __typename
+  siteName
+  siteDescription
+  favicon
+  logo
+  defaultOgImage
+  gtmId
+  gaId
+  sentryDsn
 }
 
 fragment NavigationParts on Navigation {
@@ -77,24 +205,5 @@ fragment FooterParts on Footer {
     __typename
     platform
     url
-  }
-}
-
-fragment SettingsParts on Settings {
-  __typename
-  siteName
-  siteDescription
-  favicon
-  logo
-  defaultOgImage
-  gtmId
-  gaId
-  sentryDsn
-  hero {
-    __typename
-    mediaType
-    backgroundImage
-    videoUrl
-    showQuickForm
   }
 }

@@ -54,24 +54,36 @@ type Query {
   collections: [Collection!]!
   node(id: String): Node!
   document(collection: String, relativePath: String): DocumentNode!
-  page(relativePath: String): Page!
-  pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  homePage(relativePath: String): HomePage!
+  homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
+  teamMember(relativePath: String): TeamMember!
+  teamMemberConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TeamMemberFilter): TeamMemberConnection!
   service(relativePath: String): Service!
   serviceConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServiceFilter): ServiceConnection!
+  job(relativePath: String): Job!
+  jobConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: JobFilter): JobConnection!
+  aboutPage(relativePath: String): AboutPage!
+  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
+  contactPage(relativePath: String): ContactPage!
+  contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
+  settings(relativePath: String): Settings!
+  settingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SettingsFilter): SettingsConnection!
   navigation(relativePath: String): Navigation!
   navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
   footer(relativePath: String): Footer!
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
-  settings(relativePath: String): Settings!
-  settingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SettingsFilter): SettingsConnection!
 }
 
 input DocumentFilter {
-  page: PageFilter
+  homePage: HomePageFilter
+  teamMember: TeamMemberFilter
   service: ServiceFilter
+  job: JobFilter
+  aboutPage: AboutPageFilter
+  contactPage: ContactPageFilter
+  settings: SettingsFilter
   navigation: NavigationFilter
   footer: FooterFilter
-  settings: SettingsFilter
 }
 
 type DocumentConnectionEdges {
@@ -97,56 +109,71 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Service | Navigation | Footer | Settings | Folder
+union DocumentNode = HomePage | TeamMember | Service | Job | AboutPage | ContactPage | Settings | Navigation | Footer | Folder
 
-type PageBlocksHeroActions {
-  label: String
-  href: String
-  variant: String
+type HomePageSeo {
+  title: String!
+  description: String
 }
 
-type PageBlocksHero {
-  title: String
+type HomePageHero {
+  eyebrow: String!
+  title: String!
+  subtitle: String
   description: String
-  actions: [PageBlocksHeroActions]
-  image: String
+  primaryButtonText: String
+  primaryButtonLink: String
+  secondaryButtonText: String
+  secondaryButtonLink: String
+  backgroundImage: String
+  videoUrl: String
+  showQuickForm: Boolean
 }
 
-type PageBlocksFeaturesItems {
-  title: String
-  description: String
+type HomePageStats {
+  value: String!
+  label: String!
   icon: String
 }
 
-type PageBlocksFeatures {
-  title: String
-  description: String
-  items: [PageBlocksFeaturesItems]
-}
-
-type PageBlocksTestimonial {
-  quote: String
-  author: String
-  role: String
-}
-
-type PageBlocksContact {
-  title: String
-  description: String
-}
-
-type PageBlocksContent {
-  body: JSON
-}
-
-union PageBlocks = PageBlocksHero | PageBlocksFeatures | PageBlocksTestimonial | PageBlocksContact | PageBlocksContent
-
-type Page implements Node & Document {
+type HomePageServicesSection {
+  eyebrow: String
   title: String!
   description: String
-  featuredImage: String
-  draft: Boolean
-  blocks: [PageBlocks]
+}
+
+type HomePageCeoQuote {
+  eyebrow: String
+  name: String!
+  role: String!
+  quote: String!
+  text: String
+  image: String
+  buttonText: String
+  buttonLink: String
+}
+
+type HomePageProjects {
+  title: String!
+  description: String
+  image: String!
+}
+
+type HomePageFinalCTA {
+  title: String!
+  description: String
+  buttonText: String
+  buttonLink: String
+}
+
+type HomePage implements Node & Document {
+  seo: HomePageSeo
+  hero: HomePageHero
+  stats: [HomePageStats]
+  servicesSection: HomePageServicesSection
+  ceoQuote: HomePageCeoQuote
+  projects: [HomePageProjects]
+  finalCTA: HomePageFinalCTA
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -157,6 +184,11 @@ input StringFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input HomePageSeoFilter {
+  title: StringFilter
+  description: StringFilter
 }
 
 input ImageFilter {
@@ -171,40 +203,88 @@ input BooleanFilter {
   exists: Boolean
 }
 
-input PageBlocksHeroActionsFilter {
+input HomePageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  subtitle: StringFilter
+  description: StringFilter
+  primaryButtonText: StringFilter
+  primaryButtonLink: StringFilter
+  secondaryButtonText: StringFilter
+  secondaryButtonLink: StringFilter
+  backgroundImage: ImageFilter
+  videoUrl: StringFilter
+  showQuickForm: BooleanFilter
+}
+
+input HomePageStatsFilter {
+  value: StringFilter
   label: StringFilter
-  href: StringFilter
-  variant: StringFilter
-}
-
-input PageBlocksHeroFilter {
-  title: StringFilter
-  description: StringFilter
-  actions: PageBlocksHeroActionsFilter
-  image: ImageFilter
-}
-
-input PageBlocksFeaturesItemsFilter {
-  title: StringFilter
-  description: StringFilter
   icon: StringFilter
 }
 
-input PageBlocksFeaturesFilter {
+input HomePageServicesSectionFilter {
+  eyebrow: StringFilter
   title: StringFilter
   description: StringFilter
-  items: PageBlocksFeaturesItemsFilter
 }
 
-input PageBlocksTestimonialFilter {
-  quote: StringFilter
-  author: StringFilter
+input HomePageCeoQuoteFilter {
+  eyebrow: StringFilter
+  name: StringFilter
   role: StringFilter
+  quote: StringFilter
+  text: StringFilter
+  image: ImageFilter
+  buttonText: StringFilter
+  buttonLink: StringFilter
 }
 
-input PageBlocksContactFilter {
+input HomePageProjectsFilter {
   title: StringFilter
   description: StringFilter
+  image: ImageFilter
+}
+
+input HomePageFinalCTAFilter {
+  title: StringFilter
+  description: StringFilter
+  buttonText: StringFilter
+  buttonLink: StringFilter
+}
+
+input HomePageFilter {
+  seo: HomePageSeoFilter
+  hero: HomePageHeroFilter
+  stats: HomePageStatsFilter
+  servicesSection: HomePageServicesSectionFilter
+  ceoQuote: HomePageCeoQuoteFilter
+  projects: HomePageProjectsFilter
+  finalCTA: HomePageFinalCTAFilter
+}
+
+type HomePageConnectionEdges {
+  cursor: String!
+  node: HomePage
+}
+
+type HomePageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [HomePageConnectionEdges]
+}
+
+type TeamMember implements Node & Document {
+  name: String!
+  role: String!
+  email: String
+  category: String!
+  description: JSON
+  image: String
+  order: Float
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
 }
 
 input RichTextFilter {
@@ -213,64 +293,70 @@ input RichTextFilter {
   exists: Boolean
 }
 
-input PageBlocksContentFilter {
-  body: RichTextFilter
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
 }
 
-input PageBlocksFilter {
-  hero: PageBlocksHeroFilter
-  features: PageBlocksFeaturesFilter
-  testimonial: PageBlocksTestimonialFilter
-  contact: PageBlocksContactFilter
-  content: PageBlocksContentFilter
+input TeamMemberFilter {
+  name: StringFilter
+  role: StringFilter
+  email: StringFilter
+  category: StringFilter
+  description: RichTextFilter
+  image: ImageFilter
+  order: NumberFilter
 }
 
-input PageFilter {
-  title: StringFilter
-  description: StringFilter
-  featuredImage: ImageFilter
-  draft: BooleanFilter
-  blocks: PageBlocksFilter
-}
-
-type PageConnectionEdges {
+type TeamMemberConnectionEdges {
   cursor: String!
-  node: Page
+  node: TeamMember
 }
 
-type PageConnection implements Connection {
+type TeamMemberConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
-  edges: [PageConnectionEdges]
+  edges: [TeamMemberConnectionEdges]
 }
 
-type ServiceCheckpoints {
-  text: String
+type ServiceGallery {
+  image: String
+  caption: String
 }
 
 type Service implements Node & Document {
   title: String!
-  description: String
+  shortDescription: String
+  body: JSON
   image: String
   icon: String
-  checkpoints: [ServiceCheckpoints]
-  body: JSON
+  features: [String]
+  benefits: [String]
+  gallery: [ServiceGallery]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input ServiceCheckpointsFilter {
-  text: StringFilter
+input ServiceGalleryFilter {
+  image: ImageFilter
+  caption: StringFilter
 }
 
 input ServiceFilter {
   title: StringFilter
-  description: StringFilter
+  shortDescription: StringFilter
+  body: RichTextFilter
   image: ImageFilter
   icon: StringFilter
-  checkpoints: ServiceCheckpointsFilter
-  body: RichTextFilter
+  features: StringFilter
+  benefits: StringFilter
+  gallery: ServiceGalleryFilter
 }
 
 type ServiceConnectionEdges {
@@ -282,6 +368,274 @@ type ServiceConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [ServiceConnectionEdges]
+}
+
+type Job implements Node & Document {
+  title: String!
+  location: String!
+  type: String!
+  shortDesc: String
+  tasks: [String]
+  profile: [String]
+  benefits: [String]
+  published: Boolean
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input JobFilter {
+  title: StringFilter
+  location: StringFilter
+  type: StringFilter
+  shortDesc: StringFilter
+  tasks: StringFilter
+  profile: StringFilter
+  benefits: StringFilter
+  published: BooleanFilter
+}
+
+type JobConnectionEdges {
+  cursor: String!
+  node: Job
+}
+
+type JobConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [JobConnectionEdges]
+}
+
+type AboutPageSeo {
+  title: String!
+  description: String
+}
+
+type AboutPageHero {
+  eyebrow: String
+  title: String!
+  description: String
+}
+
+type AboutPageStory {
+  title: String!
+  text1: String
+  text2: String
+  image: String
+}
+
+type AboutPageValues {
+  text: String!
+}
+
+type AboutPageEquipment {
+  title: String!
+  description: String
+}
+
+type AboutPageTeamSection {
+  title: String!
+  description: String
+}
+
+type AboutPageCta {
+  title: String!
+  description: String
+  buttonText: String
+  email: String
+}
+
+type AboutPage implements Node & Document {
+  seo: AboutPageSeo
+  hero: AboutPageHero
+  story: AboutPageStory
+  values: [AboutPageValues]
+  equipment: AboutPageEquipment
+  teamSection: AboutPageTeamSection
+  cta: AboutPageCta
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageStoryFilter {
+  title: StringFilter
+  text1: StringFilter
+  text2: StringFilter
+  image: ImageFilter
+}
+
+input AboutPageValuesFilter {
+  text: StringFilter
+}
+
+input AboutPageEquipmentFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageTeamSectionFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageCtaFilter {
+  title: StringFilter
+  description: StringFilter
+  buttonText: StringFilter
+  email: StringFilter
+}
+
+input AboutPageFilter {
+  seo: AboutPageSeoFilter
+  hero: AboutPageHeroFilter
+  story: AboutPageStoryFilter
+  values: AboutPageValuesFilter
+  equipment: AboutPageEquipmentFilter
+  teamSection: AboutPageTeamSectionFilter
+  cta: AboutPageCtaFilter
+}
+
+type AboutPageConnectionEdges {
+  cursor: String!
+  node: AboutPage
+}
+
+type AboutPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutPageConnectionEdges]
+}
+
+type ContactPageSeo {
+  title: String!
+  description: String
+}
+
+type ContactPageAddress {
+  company: String!
+  street: String!
+  city: String!
+  zip: String!
+}
+
+type ContactPageOfficeHours {
+  weekdays: String!
+}
+
+type ContactPageRepairHours {
+  tueThu: String!
+  fri: String!
+}
+
+type ContactPage implements Node & Document {
+  seo: ContactPageSeo
+  title: String!
+  description: String
+  address: ContactPageAddress
+  phone: String!
+  fax: String
+  email: String!
+  website: String
+  facebook: String
+  officeHours: ContactPageOfficeHours
+  repairHours: ContactPageRepairHours
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input ContactPageAddressFilter {
+  company: StringFilter
+  street: StringFilter
+  city: StringFilter
+  zip: StringFilter
+}
+
+input ContactPageOfficeHoursFilter {
+  weekdays: StringFilter
+}
+
+input ContactPageRepairHoursFilter {
+  tueThu: StringFilter
+  fri: StringFilter
+}
+
+input ContactPageFilter {
+  seo: ContactPageSeoFilter
+  title: StringFilter
+  description: StringFilter
+  address: ContactPageAddressFilter
+  phone: StringFilter
+  fax: StringFilter
+  email: StringFilter
+  website: StringFilter
+  facebook: StringFilter
+  officeHours: ContactPageOfficeHoursFilter
+  repairHours: ContactPageRepairHoursFilter
+}
+
+type ContactPageConnectionEdges {
+  cursor: String!
+  node: ContactPage
+}
+
+type ContactPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContactPageConnectionEdges]
+}
+
+type Settings implements Node & Document {
+  siteName: String!
+  siteDescription: String
+  favicon: String
+  logo: String
+  defaultOgImage: String
+  gtmId: String
+  gaId: String
+  sentryDsn: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input SettingsFilter {
+  siteName: StringFilter
+  siteDescription: StringFilter
+  favicon: ImageFilter
+  logo: ImageFilter
+  defaultOgImage: ImageFilter
+  gtmId: StringFilter
+  gaId: StringFilter
+  sentryDsn: StringFilter
+}
+
+type SettingsConnectionEdges {
+  cursor: String!
+  node: Settings
+}
+
+type SettingsConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [SettingsConnectionEdges]
 }
 
 type NavigationItems {
@@ -303,7 +657,7 @@ input NavigationItemsFilter {
 }
 
 input NavigationFilter {
-  logo: StringFilter
+  logo: ImageFilter
   items: NavigationItemsFilter
 }
 
@@ -364,15 +718,245 @@ type FooterConnection implements Connection {
   edges: [FooterConnectionEdges]
 }
 
-type SettingsHero {
-  mediaType: String
+type Mutation {
+  addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
+  updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
+  deleteDocument(collection: String, relativePath: String!): DocumentNode!
+  createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
+  createFolder(collection: String, relativePath: String!): DocumentNode!
+  updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  updateTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
+  createTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
+  updateService(relativePath: String!, params: ServiceMutation!): Service!
+  createService(relativePath: String!, params: ServiceMutation!): Service!
+  updateJob(relativePath: String!, params: JobMutation!): Job!
+  createJob(relativePath: String!, params: JobMutation!): Job!
+  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
+  createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
+  updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
+  createSettings(relativePath: String!, params: SettingsMutation!): Settings!
+  updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
+  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
+  createFooter(relativePath: String!, params: FooterMutation!): Footer!
+}
+
+input DocumentUpdateMutation {
+  homePage: HomePageMutation
+  teamMember: TeamMemberMutation
+  service: ServiceMutation
+  job: JobMutation
+  aboutPage: AboutPageMutation
+  contactPage: ContactPageMutation
+  settings: SettingsMutation
+  navigation: NavigationMutation
+  footer: FooterMutation
+  relativePath: String
+}
+
+input DocumentMutation {
+  homePage: HomePageMutation
+  teamMember: TeamMemberMutation
+  service: ServiceMutation
+  job: JobMutation
+  aboutPage: AboutPageMutation
+  contactPage: ContactPageMutation
+  settings: SettingsMutation
+  navigation: NavigationMutation
+  footer: FooterMutation
+}
+
+input HomePageSeoMutation {
+  title: String
+  description: String
+}
+
+input HomePageHeroMutation {
+  eyebrow: String
+  title: String
+  subtitle: String
+  description: String
+  primaryButtonText: String
+  primaryButtonLink: String
+  secondaryButtonText: String
+  secondaryButtonLink: String
   backgroundImage: String
   videoUrl: String
   showQuickForm: Boolean
 }
 
-type Settings implements Node & Document {
-  siteName: String!
+input HomePageStatsMutation {
+  value: String
+  label: String
+  icon: String
+}
+
+input HomePageServicesSectionMutation {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+input HomePageCeoQuoteMutation {
+  eyebrow: String
+  name: String
+  role: String
+  quote: String
+  text: String
+  image: String
+  buttonText: String
+  buttonLink: String
+}
+
+input HomePageProjectsMutation {
+  title: String
+  description: String
+  image: String
+}
+
+input HomePageFinalCTAMutation {
+  title: String
+  description: String
+  buttonText: String
+  buttonLink: String
+}
+
+input HomePageMutation {
+  seo: HomePageSeoMutation
+  hero: HomePageHeroMutation
+  stats: [HomePageStatsMutation]
+  servicesSection: HomePageServicesSectionMutation
+  ceoQuote: HomePageCeoQuoteMutation
+  projects: [HomePageProjectsMutation]
+  finalCTA: HomePageFinalCTAMutation
+}
+
+input TeamMemberMutation {
+  name: String
+  role: String
+  email: String
+  category: String
+  description: JSON
+  image: String
+  order: Float
+}
+
+input ServiceGalleryMutation {
+  image: String
+  caption: String
+}
+
+input ServiceMutation {
+  title: String
+  shortDescription: String
+  body: JSON
+  image: String
+  icon: String
+  features: [String]
+  benefits: [String]
+  gallery: [ServiceGalleryMutation]
+}
+
+input JobMutation {
+  title: String
+  location: String
+  type: String
+  shortDesc: String
+  tasks: [String]
+  profile: [String]
+  benefits: [String]
+  published: Boolean
+}
+
+input AboutPageSeoMutation {
+  title: String
+  description: String
+}
+
+input AboutPageHeroMutation {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+input AboutPageStoryMutation {
+  title: String
+  text1: String
+  text2: String
+  image: String
+}
+
+input AboutPageValuesMutation {
+  text: String
+}
+
+input AboutPageEquipmentMutation {
+  title: String
+  description: String
+}
+
+input AboutPageTeamSectionMutation {
+  title: String
+  description: String
+}
+
+input AboutPageCtaMutation {
+  title: String
+  description: String
+  buttonText: String
+  email: String
+}
+
+input AboutPageMutation {
+  seo: AboutPageSeoMutation
+  hero: AboutPageHeroMutation
+  story: AboutPageStoryMutation
+  values: [AboutPageValuesMutation]
+  equipment: AboutPageEquipmentMutation
+  teamSection: AboutPageTeamSectionMutation
+  cta: AboutPageCtaMutation
+}
+
+input ContactPageSeoMutation {
+  title: String
+  description: String
+}
+
+input ContactPageAddressMutation {
+  company: String
+  street: String
+  city: String
+  zip: String
+}
+
+input ContactPageOfficeHoursMutation {
+  weekdays: String
+}
+
+input ContactPageRepairHoursMutation {
+  tueThu: String
+  fri: String
+}
+
+input ContactPageMutation {
+  seo: ContactPageSeoMutation
+  title: String
+  description: String
+  address: ContactPageAddressMutation
+  phone: String
+  fax: String
+  email: String
+  website: String
+  facebook: String
+  officeHours: ContactPageOfficeHoursMutation
+  repairHours: ContactPageRepairHoursMutation
+}
+
+input SettingsMutation {
+  siteName: String
   siteDescription: String
   favicon: String
   logo: String
@@ -380,144 +964,6 @@ type Settings implements Node & Document {
   gtmId: String
   gaId: String
   sentryDsn: String
-  hero: SettingsHero
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input SettingsHeroFilter {
-  mediaType: StringFilter
-  backgroundImage: ImageFilter
-  videoUrl: StringFilter
-  showQuickForm: BooleanFilter
-}
-
-input SettingsFilter {
-  siteName: StringFilter
-  siteDescription: StringFilter
-  favicon: ImageFilter
-  logo: ImageFilter
-  defaultOgImage: ImageFilter
-  gtmId: StringFilter
-  gaId: StringFilter
-  sentryDsn: StringFilter
-  hero: SettingsHeroFilter
-}
-
-type SettingsConnectionEdges {
-  cursor: String!
-  node: Settings
-}
-
-type SettingsConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [SettingsConnectionEdges]
-}
-
-type Mutation {
-  addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
-  updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
-  deleteDocument(collection: String, relativePath: String!): DocumentNode!
-  createDocument(collection: String, relativePath: String!, params: DocumentMutation!): DocumentNode!
-  createFolder(collection: String, relativePath: String!): DocumentNode!
-  updatePage(relativePath: String!, params: PageMutation!): Page!
-  createPage(relativePath: String!, params: PageMutation!): Page!
-  updateService(relativePath: String!, params: ServiceMutation!): Service!
-  createService(relativePath: String!, params: ServiceMutation!): Service!
-  updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
-  createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
-  updateFooter(relativePath: String!, params: FooterMutation!): Footer!
-  createFooter(relativePath: String!, params: FooterMutation!): Footer!
-  updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
-  createSettings(relativePath: String!, params: SettingsMutation!): Settings!
-}
-
-input DocumentUpdateMutation {
-  page: PageMutation
-  service: ServiceMutation
-  navigation: NavigationMutation
-  footer: FooterMutation
-  settings: SettingsMutation
-  relativePath: String
-}
-
-input DocumentMutation {
-  page: PageMutation
-  service: ServiceMutation
-  navigation: NavigationMutation
-  footer: FooterMutation
-  settings: SettingsMutation
-}
-
-input PageBlocksHeroActionsMutation {
-  label: String
-  href: String
-  variant: String
-}
-
-input PageBlocksHeroMutation {
-  title: String
-  description: String
-  actions: [PageBlocksHeroActionsMutation]
-  image: String
-}
-
-input PageBlocksFeaturesItemsMutation {
-  title: String
-  description: String
-  icon: String
-}
-
-input PageBlocksFeaturesMutation {
-  title: String
-  description: String
-  items: [PageBlocksFeaturesItemsMutation]
-}
-
-input PageBlocksTestimonialMutation {
-  quote: String
-  author: String
-  role: String
-}
-
-input PageBlocksContactMutation {
-  title: String
-  description: String
-}
-
-input PageBlocksContentMutation {
-  body: JSON
-}
-
-input PageBlocksMutation {
-  hero: PageBlocksHeroMutation
-  features: PageBlocksFeaturesMutation
-  testimonial: PageBlocksTestimonialMutation
-  contact: PageBlocksContactMutation
-  content: PageBlocksContentMutation
-}
-
-input PageMutation {
-  title: String
-  description: String
-  featuredImage: String
-  draft: Boolean
-  blocks: [PageBlocksMutation]
-}
-
-input ServiceCheckpointsMutation {
-  text: String
-}
-
-input ServiceMutation {
-  title: String
-  description: String
-  image: String
-  icon: String
-  checkpoints: [ServiceCheckpointsMutation]
-  body: JSON
 }
 
 input NavigationItemsMutation {
@@ -544,25 +990,6 @@ input FooterMutation {
   copyright: String
   links: [FooterLinksMutation]
   social: [FooterSocialMutation]
-}
-
-input SettingsHeroMutation {
-  mediaType: String
-  backgroundImage: String
-  videoUrl: String
-  showQuickForm: Boolean
-}
-
-input SettingsMutation {
-  siteName: String
-  siteDescription: String
-  favicon: String
-  logo: String
-  defaultOgImage: String
-  gtmId: String
-  gaId: String
-  sentryDsn: String
-  hero: SettingsHeroMutation
 }
 
 schema {

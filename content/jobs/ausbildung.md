@@ -1,5 +1,4 @@
 ---
-id: ausbildung
 title: Ausbildung 2024 (m/w/d)
 location: Kreis Viersen
 type: Ausbildung

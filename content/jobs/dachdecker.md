@@ -1,5 +1,4 @@
 ---
-id: dachdecker
 title: Dachdeckergeselle / Vorarbeiter (m/w/d)
 location: Kreis Viersen & Umgebung
 type: Vollzeit
