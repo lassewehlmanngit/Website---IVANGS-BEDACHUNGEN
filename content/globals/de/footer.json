@@ -2,10 +2,10 @@
   "copyright": "© 2026 Ivangs Bedachungen GmbH & Co. KG. Alle Rechte vorbehalten.",
   "links": [
     { "label": "Datenschutz", "href": "/privacy" },
-    { "label": "Impressum", "href": "/imprint" }
+    { "label": "Impressum", "href": "/imprint" },
+    { "label": "Cookie-Einstellungen", "href": "/cookies" }
   ],
   "social": [
-    { "platform": "facebook", "url": "https://facebook.com/ivangsbedachungen" },
-    { "platform": "instagram", "url": "https://instagram.com/ivangsbedachungen" }
+    { "platform": "facebook", "url": "https://www.facebook.com/ivangs.de" }
   ]
 }

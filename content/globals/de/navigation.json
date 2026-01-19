@@ -2,7 +2,8 @@
   "logo": "/logo.svg",
   "items": [
     { "label": "Startseite", "href": "/" },
-    { "label": "Über uns", "href": "/about" },
+    { "label": "Unternehmen", "href": "/about" },
+    { "label": "Karriere", "href": "/career" },
     { "label": "Kontakt", "href": "/contact" }
   ]
 }

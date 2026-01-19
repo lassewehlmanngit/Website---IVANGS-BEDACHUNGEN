@@ -2,8 +2,8 @@ import React from 'react';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { ContactForm } from '@/features/contact/ContactForm';
-import { MapPin, Phone, Mail } from 'lucide-react';
-import { teamMembers } from '@/features/company/model/teamData';
+import { MapPin, Phone, Mail, Clock, Globe, Facebook } from 'lucide-react';
+import { teamMembersLegacy } from '@/features/company/model/teamData';
 
 export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   return (
@@ -15,12 +15,12 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
         ogSiteName="Ivangs Bedachungen"
         localBusiness={{
             name: "Ivangs Bedachungen GmbH & Co. KG",
-            telephone: "+49 2451 12345",
-            email: "info@ivangs-bedachungen.de",
+            telephone: "+49 2162 356666",
+            email: "bedachungen@ivangs.de",
             address: {
-                streetAddress: "Industriestraße 42",
-                addressLocality: "Geilenkirchen",
-                postalCode: "52511",
+                streetAddress: "Schmiedestraße 37",
+                addressLocality: "Viersen - Süchteln",
+                postalCode: "41749",
                 addressCountry: "DE"
             }
         }}
@@ -36,7 +36,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
 
             <div className="grid lg:grid-cols-2 gap-16 max-w-6xl mx-auto">
             {/* Contact Info */}
-            <div className="space-y-12">
+            <div className="space-y-8">
                 <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
                 <h3 className="text-xl font-bold mb-6 text-slate-900">Kontaktdaten</h3>
                 <ul className="space-y-6">
@@ -46,8 +46,12 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Anschrift</span>
-                        <span className="text-slate-600">Musterstraße 12<br/>52511 Geilenkirchen</span>
-                        <span className="text-xs text-slate-400 mt-2 block">Wir sind für Sie da – im Kreis Viersen und 200 km Umkreis.</span>
+                        <span className="text-slate-600">
+                          IVANGS<br/>
+                          Bedachungen GmbH & Co. KG<br/>
+                          Schmiedestraße 37<br/>
+                          41749 Viersen - Süchteln
+                        </span>
                     </div>
                     </li>
                     <li className="flex items-start gap-4">
@@ -56,7 +60,8 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Telefon</span>
-                        <a href="tel:+49123456789" className="text-slate-600 hover:text-primary transition-colors">+49 123 456 789</a>
+                        <a href="tel:+4921623566666" className="text-slate-600 hover:text-primary transition-colors">+49 (0) 21 62 – 35 66 66</a>
+                        <span className="block text-sm text-slate-400 mt-1">Fax: +49 (0) 21 62 - 35 66 67</span>
                     </div>
                     </li>
                     <li className="flex items-start gap-4">
@@ -65,10 +70,49 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">E-Mail</span>
-                        <a href="mailto:info@ivangs-bedachungen.de" className="text-slate-600 hover:text-primary transition-colors">info@ivangs-bedachungen.de</a>
+                        <a href="mailto:bedachungen@ivangs.de" className="text-slate-600 hover:text-primary transition-colors">bedachungen@ivangs.de</a>
+                    </div>
+                    </li>
+                    <li className="flex items-start gap-4">
+                    <div className="bg-white p-3 rounded-md shadow-sm text-primary">
+                        <Globe size={20} />
+                    </div>
+                    <div>
+                        <span className="block font-bold text-slate-900">Web</span>
+                        <a href="https://www.ivangs.de" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors">www.ivangs.de</a>
+                    </div>
+                    </li>
+                    <li className="flex items-start gap-4">
+                    <div className="bg-white p-3 rounded-md shadow-sm text-primary">
+                        <Facebook size={20} />
+                    </div>
+                    <div>
+                        <span className="block font-bold text-slate-900">Social Media</span>
+                        <a href="https://www.facebook.com/ivangs.de" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors">facebook.com/ivangs.de</a>
                     </div>
                     </li>
                 </ul>
+                </div>
+
+                {/* Opening Hours */}
+                <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
+                  <h3 className="text-xl font-bold mb-6 text-slate-900 flex items-center gap-2">
+                    <Clock size={20} className="text-primary" />
+                    Öffnungszeiten
+                  </h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-semibold text-slate-800 mb-2">Büro</h4>
+                      <p className="text-slate-600">Mo – Fr: 07.00 – 17.00 Uhr</p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-slate-800 mb-2">Reparaturplanung</h4>
+                      <p className="text-slate-600">
+                        Di – Do: 8.00 – 13.00 Uhr<br/>
+                        Fr: 11.00 – 16.00 Uhr
+                      </p>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="bg-white p-6 rounded-sm border border-slate-100 shadow-sm">
@@ -76,11 +120,15 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                 <div className="space-y-3 text-sm">
                     <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                         <span className="text-slate-600">Rückfragen zur Rechnung?</span>
-                        <span className="font-medium text-slate-900">{teamMembers.isabel.name}</span>
+                        <span className="font-medium text-slate-900">{teamMembersLegacy.isabel.name}</span>
                     </div>
                     <div className="flex justify-between items-center pb-2 border-b border-slate-100">
                         <span className="text-slate-600">Technische Fragen?</span>
-                        <span className="font-medium text-slate-900">{teamMembers.sascha.name}</span>
+                        <span className="font-medium text-slate-900">{teamMembersLegacy.sascha.name}</span>
+                    </div>
+                    <div className="flex justify-between items-center pb-2 border-b border-slate-100">
+                        <span className="text-slate-600">Reparaturtermine?</span>
+                        <span className="font-medium text-slate-900">{teamMembersLegacy.sabine.name}</span>
                     </div>
                 </div>
                 </div>

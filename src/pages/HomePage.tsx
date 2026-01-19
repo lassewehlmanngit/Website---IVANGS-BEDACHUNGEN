@@ -31,12 +31,12 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         ogSiteName="Ivangs Bedachungen"
         localBusiness={{
             name: "Ivangs Bedachungen GmbH & Co. KG",
-            telephone: "+49 2451 12345",
-            email: "info@ivangs-bedachungen.de",
+            telephone: "+49 2162 356666",
+            email: "bedachungen@ivangs.de",
             address: {
-                streetAddress: "Industriestraße 42",
-                addressLocality: "Geilenkirchen",
-                postalCode: "52511",
+                streetAddress: "Schmiedestraße 37",
+                addressLocality: "Viersen - Süchteln",
+                postalCode: "41749",
                 addressCountry: "DE"
             }
         }}

@@ -67,17 +67,21 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-              <span>Industriestraße 42<br />52511 Geilenkirchen</span>
+              <span>Schmiedestraße 37<br />41749 Viersen - Süchteln</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-primary shrink-0" />
-              <span>+49 2451 12345</span>
+              <a href="tel:+4921623566666" className="hover:text-white transition-colors">+49 (0) 21 62 – 35 66 66</a>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-primary shrink-0" />
-              <span>info@ivangs-bedachungen.de</span>
+              <a href="mailto:bedachungen@ivangs.de" className="hover:text-white transition-colors">bedachungen@ivangs.de</a>
             </li>
           </ul>
+          <div className="mt-6 pt-4 border-t border-slate-700">
+            <p className="text-xs text-slate-400 mb-2">Öffnungszeiten Büro:</p>
+            <p className="text-sm">Mo – Fr: 07.00 – 17.00 Uhr</p>
+          </div>
         </div>
 
         {/* Legal Column */}

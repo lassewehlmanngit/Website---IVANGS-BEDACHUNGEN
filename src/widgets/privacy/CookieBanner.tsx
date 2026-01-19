@@ -58,35 +58,47 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
 
   return (
     <div className={cn(
-      "fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] p-4 z-[55] animate-slide-up mb-16 md:mb-0",
+      "fixed bottom-0 left-0 w-full bg-white border-t border-slate-200 shadow-[0_-5px_20px_-5px_rgba(0,0,0,0.1)] p-4 md:p-6 z-[55] animate-fade-in mb-16 md:mb-0",
       className
     )}>
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-        <p className="text-sm text-slate-600">
-          {lang === 'de'
-            ? 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten.' 
-            : 'We use cookies to ensure you get the best experience on our website.'}
-        </p>
-        <div className="flex gap-3">
-          <Link 
-            to={`/${lang}/cookies`}
-            className="text-sm font-medium text-slate-500 hover:text-slate-800 px-3 py-2 flex items-center"
-          >
-            {lang === 'de' ? 'Einstellungen' : 'Settings'}
-          </Link>
-          <Button 
-            variant="outline"
-            onClick={handleRejectAll}
-            className="text-slate-700 bg-white border-slate-300 hover:bg-slate-50"
-          >
-            {lang === 'de' ? 'Ablehnen' : 'Decline'}
-          </Button>
-          <Button 
-            onClick={handleAcceptAll}
-            className="text-white"
-          >
-            {lang === 'de' ? 'Akzeptieren' : 'Accept'}
-          </Button>
+      <div className="container mx-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+          <div className="flex-1">
+            <p className="text-sm text-slate-600 mb-2">
+              {lang === 'de'
+                ? 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Einige sind technisch notwendig, andere helfen uns, die Website zu verbessern.' 
+                : 'We use cookies to ensure you get the best experience on our website. Some are technically necessary, others help us improve the site.'}
+            </p>
+            <div className="flex gap-4 text-xs">
+              <Link 
+                to={`/${lang}/privacy`}
+                className="text-slate-500 hover:text-primary underline"
+              >
+                {lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy'}
+              </Link>
+              <Link 
+                to={`/${lang}/cookies`}
+                className="text-slate-500 hover:text-primary underline"
+              >
+                {lang === 'de' ? 'Cookie-Einstellungen' : 'Cookie Settings'}
+              </Link>
+            </div>
+          </div>
+          <div className="flex gap-3 w-full lg:w-auto">
+            <Button 
+              variant="outline"
+              onClick={handleRejectAll}
+              className="flex-1 lg:flex-none text-slate-700 bg-white border-slate-300 hover:bg-slate-50"
+            >
+              {lang === 'de' ? 'Nur notwendige' : 'Essential only'}
+            </Button>
+            <Button 
+              onClick={handleAcceptAll}
+              className="flex-1 lg:flex-none text-white"
+            >
+              {lang === 'de' ? 'Alle akzeptieren' : 'Accept all'}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

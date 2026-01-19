@@ -2,10 +2,14 @@ import React from 'react';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { OptimizedImage } from '@/shared/ui/Image';
-import { CheckCircle, Hammer, Mail } from 'lucide-react';
-import { teamMembers } from '@/features/company/model/teamData';
+import { CheckCircle, Hammer, Mail, User } from 'lucide-react';
+import { teamMembers, getLeadership, getOfficeTeam, getCraftsmen } from '@/features/company/model/teamData';
 
 export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
+  const leadership = getLeadership();
+  const officeTeam = getOfficeTeam();
+  const craftsmen = getCraftsmen();
+
   return (
     <>
       <Seo 
@@ -77,59 +81,92 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
            </div>
         </section>
 
-        {/* Team / Leadership Section */}
+        {/* Full Team Section */}
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="mb-12 text-center">
-               <h2 className="text-3xl font-bold text-slate-900">Menschen statt Maschinen.</h2>
-               <p className="text-slate-600 mt-4 max-w-2xl mx-auto">Hinter jedem dichten Dach steht ein starkes Team. Jeder Handgriff sitzt, weil wir aufeinander eingespielt sind.</p>
+            <div className="mb-16 text-center">
+               <h2 className="text-3xl font-bold text-slate-900">Unser Team</h2>
+               <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
+                 Hinter jedem dichten Dach steht ein starkes Team. {teamMembers.length} Mitarbeiter, die aufeinander eingespielt sind.
+               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-               {/* Card 1 */}
-               <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
-                  <h3 className="font-bold text-xl text-slate-900 mb-2">Führung & Planung</h3>
-                  <p className="text-slate-600 text-sm mb-4">Die Köpfe hinter dem Projekt.</p>
-                  <ul className="space-y-3">
-                     <li className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2"></div>
-                        <span><strong>{teamMembers.marcus.name}</strong><br/><span className="text-xs text-slate-500">{teamMembers.marcus.role}</span></span>
-                     </li>
-                     <li className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2"></div>
-                        <span><strong>{teamMembers.sascha.name}</strong><br/><span className="text-xs text-slate-500">{teamMembers.sascha.role}</span></span>
-                     </li>
-                  </ul>
-               </div>
+            {/* Leadership */}
+            <div className="mb-16">
+              <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+                <span className="w-8 h-1 bg-primary rounded-full"></span>
+                Geschäftsführung & Bauleitung
+              </h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                {leadership.map((member) => (
+                  <div key={member.id} className="bg-slate-50 p-6 rounded-sm border border-slate-100 flex items-start gap-4">
+                    <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
+                      <User size={28} className="text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg text-slate-900">{member.name}</h4>
+                      <p className="text-sm text-slate-500 mb-2">{member.role}</p>
+                      {member.email && (
+                        <a href={`mailto:${member.email}`} className="text-sm text-primary hover:underline flex items-center gap-1">
+                          <Mail size={14} /> {member.email}
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-               {/* Card 2 */}
-               <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
-                  <h3 className="font-bold text-xl text-slate-900 mb-2">Organisation & Büro</h3>
-                  <p className="text-slate-600 text-sm mb-4">Ihre Ansprechpartner am Telefon.</p>
-                  <ul className="space-y-3">
-                     <li className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2"></div>
-                        <span><strong>{teamMembers.isabel.name}</strong><br/><span className="text-xs text-slate-500">{teamMembers.isabel.role}</span></span>
-                     </li>
-                     <li className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2"></div>
-                        <span><strong>{teamMembers.heike.name}</strong><br/><span className="text-xs text-slate-500">{teamMembers.heike.role}</span></span>
-                     </li>
-                     <li className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2"></div>
-                        <span><strong>{teamMembers.sabine.name}</strong><br/><span className="text-xs text-slate-500">{teamMembers.sabine.role}</span></span>
-                     </li>
-                  </ul>
-               </div>
+            {/* Office Team */}
+            <div className="mb-16">
+              <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+                <span className="w-8 h-1 bg-primary rounded-full"></span>
+                Büro & Verwaltung
+              </h3>
+              <div className="grid md:grid-cols-3 gap-6">
+                {officeTeam.map((member) => (
+                  <div key={member.id} className="bg-slate-50 p-6 rounded-sm border border-slate-100">
+                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                      <User size={20} className="text-primary" />
+                    </div>
+                    <h4 className="font-bold text-slate-900">{member.name}</h4>
+                    <p className="text-sm text-slate-500 mb-2">{member.role}</p>
+                    {member.email && (
+                      <a href={`mailto:${member.email}`} className="text-xs text-primary hover:underline">
+                        {member.email}
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
 
-               {/* Card 3 */}
-               <div className="bg-slate-50 p-8 rounded-sm border border-slate-100">
-                  <h3 className="font-bold text-xl text-slate-900 mb-2">Zukunft</h3>
-                  <p className="text-slate-600 text-sm mb-4">Wir bilden aus.</p>
-                  <p className="text-slate-600 leading-relaxed mb-4">
-                     Wir nehmen unsere Ausbildungspflicht ernst. Derzeit bilden wir <strong>fünf Jung-Dachdecker</strong> aus, um das Handwerk am Leben zu halten und Qualität für die Zukunft zu sichern.
-                  </p>
-               </div>
+            {/* Craftsmen */}
+            <div>
+              <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+                <span className="w-8 h-1 bg-primary rounded-full"></span>
+                Unsere Dachdecker
+              </h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                {craftsmen.map((member) => (
+                  <div key={member.id} className="bg-slate-50 p-4 rounded-sm border border-slate-100 text-center">
+                    <div className="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center mx-auto mb-3">
+                      <User size={18} className="text-slate-500" />
+                    </div>
+                    <h4 className="font-semibold text-sm text-slate-900">{member.name}</h4>
+                    <p className="text-xs text-slate-500 mt-1">{member.role}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Training Note */}
+            <div className="mt-16 bg-primary/5 p-8 rounded-sm border border-primary/10 text-center">
+              <h3 className="font-bold text-xl text-slate-900 mb-2">Wir bilden aus!</h3>
+              <p className="text-slate-600">
+                Derzeit bilden wir <strong>fünf Auszubildende</strong> zum Dachdecker aus. 
+                Wir investieren in die Zukunft des Handwerks.
+              </p>
             </div>
           </div>
         </section>
@@ -141,7 +178,7 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              <p className="text-slate-300 max-w-2xl mx-auto mb-8">
                Sie planen ein Neubauprojekt oder eine Sanierung? Lassen Sie uns darüber sprechen. Wir beraten Sie gerne unverbindlich vor Ort.
              </p>
-             <a href="mailto:info@ivangs-bedachungen.de" className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-sm font-bold hover:bg-primary/90 transition-colors shadow-lg">
+             <a href={`mailto:bedachungen@ivangs.de`} className="inline-flex items-center gap-2 bg-primary text-white px-8 py-4 rounded-sm font-bold hover:bg-primary/90 transition-colors shadow-lg">
                <Mail size={20} /> Kontakt aufnehmen
              </a>
           </div>
