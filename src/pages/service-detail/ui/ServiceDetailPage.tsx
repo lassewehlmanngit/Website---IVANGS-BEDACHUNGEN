@@ -173,8 +173,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               </div>
             </div>
 
-            {/* Sidebar Navigation */}
-            <div className="lg:col-span-4 space-y-8 sticky top-36 h-fit">
+            {/* Sidebar Navigation - top-40 (160px) clears header (80px) + service nav (48px) + padding */}
+            <div className="lg:col-span-4 space-y-8 sticky top-40 h-fit">
               {/* Quick CTA Box */}
               <div className="bg-slate-900 text-white p-8 rounded-md shadow-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-20 -mr-10 -mt-10"></div>

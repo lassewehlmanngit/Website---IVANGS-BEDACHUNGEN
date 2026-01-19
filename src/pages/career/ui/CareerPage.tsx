@@ -34,13 +34,17 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             sizes="100vw"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80 flex items-center justify-center">
-            <div className="text-center px-4">
-              <span className="text-primary-400 font-bold uppercase tracking-widest text-sm mb-4 block drop-shadow-md">Karriere bei Ivangs</span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
-              <p className="text-slate-200 text-lg max-w-2xl mx-auto drop-shadow-md font-medium">
-                Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.
-              </p>
+          {/* Stronger overlay for better text readability */}
+          <div className="absolute inset-0 bg-slate-900/85 flex items-center justify-center">
+            <div className="text-center px-4 max-w-4xl">
+              {/* Text container with semi-transparent background */}
+              <div className="bg-slate-900/60 backdrop-blur-sm px-8 py-10 rounded-sm border border-white/10">
+                <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">Karriere bei Ivangs</span>
+                <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
+                <p className="text-slate-200 text-lg max-w-2xl mx-auto font-medium">
+                  Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.
+                </p>
+              </div>
             </div>
           </div>
         </div>
