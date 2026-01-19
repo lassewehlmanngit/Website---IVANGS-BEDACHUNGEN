@@ -37,7 +37,7 @@ export const CeoQuote: React.FC<{ lang: string }> = ({ lang }) => {
               <div className="relative order-1 lg:order-2">
                  <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-6 translate-y-6 rounded-3xl -z-10"></div>
                  <img 
-                   src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" 
+                   src="/uploads/invangs-ceo-image.webp" 
                    className="rounded-3xl w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700" 
                    alt="Marcus Ivangs" 
                  />

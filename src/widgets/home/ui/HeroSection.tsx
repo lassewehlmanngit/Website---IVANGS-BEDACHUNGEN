@@ -14,7 +14,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
           muted 
           playsInline 
           className="w-full h-full object-cover"
-          poster="https://images.unsplash.com/photo-1621251939103-6f59c8821035?q=80&w=2070&auto=format&fit=crop"
+          poster="/uploads/ivangs-dachdecker-einsatz.avif"
         >
           <source src="https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4" type="video/mp4" />
         </video>

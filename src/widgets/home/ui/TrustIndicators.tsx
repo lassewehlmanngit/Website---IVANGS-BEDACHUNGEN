@@ -36,7 +36,7 @@ export const TrustIndicators: React.FC = () => {
               </div>
               <div className="relative h-[500px] rounded-3xl overflow-hidden border border-white/10">
                  <img 
-                    src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070&auto=format&fit=crop" 
+                    src="/uploads/ivangs-car-logo.avif" 
                     alt="Materiallager und Logistik" 
                     className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700" 
                  />

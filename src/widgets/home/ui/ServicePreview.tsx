@@ -9,19 +9,19 @@ const services = [
       id: 'steildach',
       title: 'Steildach',
       description: 'Ob Schieferarbeiten oder klassische Ziegel: Wir beherrschen traditionelles Handwerk und moderne Technik für Ihr Steildach.',
-      img: 'https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=800&auto=format&fit=crop'
+      img: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif'
     },
     {
       id: 'flachdach',
       title: 'Flachdach',
       description: 'Ob moderne Abdichtung oder Dachbegrünung: Wir nutzen Hochleistungs-Materialien, die Jahrzehnte halten.',
-      img: 'https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=800&auto=format&fit=crop'
+      img: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif'
     },
     {
       id: 'solar',
       title: 'Solar & PV',
       description: 'Machen Sie Ihr Dach zum Kraftwerk. Wir montieren Auf-Dach-Solar-Anlagen fachgerecht und sicher – alles aus einer Hand.',
-      img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop'
+      img: undefined // No image available, will be hidden by ServiceCard
     }
   ];
 
