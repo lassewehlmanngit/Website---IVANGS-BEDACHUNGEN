@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: ivangs-bedachungen
+    env: static
+    buildCommand: npm run build
+    staticPublishPath: ./dist
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: VITE_SITE_URL
+        sync: false
+      - key: TINA_PUBLIC_CLIENT_ID
+        sync: false
+      - key: TINA_TOKEN
+        sync: false
