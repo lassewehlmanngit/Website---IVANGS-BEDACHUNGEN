@@ -11,6 +11,6 @@
     "mediaType": "video",
     "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
     "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
-    "showQuickForm": false
+    "showQuickForm": true
   }
 }

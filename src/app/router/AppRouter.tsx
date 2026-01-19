@@ -7,7 +7,6 @@ import { HomePage } from '@/pages/HomePage';
 import { GenericPage } from '@/pages/GenericPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/DesignSystemPage';
-import { ServicesPage } from '@/pages/services/ui/ServicesPage';
 import { ServiceDetailPage } from '@/pages/service-detail/ui/ServiceDetailPage';
 import { CareerPage } from '@/pages/career/ui/CareerPage';
 import { AboutPage } from '@/pages/about/ui/AboutPage';
@@ -46,7 +45,7 @@ const LanguageWrapper: React.FC = () => {
     <MarketingLayout lang={safeLang}>
       <Routes>
         <Route path="/" element={<HomePage lang={safeLang} />} />
-        <Route path="/services" element={<ServicesPage lang={safeLang} />} />
+        <Route path="/services" element={<Navigate to={`/${safeLang}/services/steildach`} replace />} />
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
         <Route path="/career" element={<CareerPage lang={safeLang} />} />
         <Route path="/about" element={<AboutPage lang={safeLang} />} />

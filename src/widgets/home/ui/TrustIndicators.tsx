@@ -35,16 +35,11 @@ export const TrustIndicators: React.FC = () => {
                  </ul>
               </div>
               <div className="relative h-[500px] rounded-3xl overflow-hidden border border-white/10">
-                 <img 
-                    src="/uploads/ivangs-car-logo.avif" 
-                    alt="Materiallager und Logistik" 
-                    className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700" 
-                 />
-                 <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent p-8">
-                    <div className="flex items-center gap-4 text-white font-bold text-xl">
-                       <Truck className="text-primary-400" size={32} /> IVANGS Logistik
-                    </div>
-                 </div>
+                <img 
+                   src="/uploads/ivangs-car-logo.avif" 
+                   alt="Materiallager und Logistik" 
+                   className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700" 
+                />
               </div>
            </div>
         </div>

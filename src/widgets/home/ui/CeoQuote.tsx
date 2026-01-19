@@ -35,15 +35,12 @@ export const CeoQuote: React.FC<{ lang: string }> = ({ lang }) => {
               </div>
 
               <div className="relative order-1 lg:order-2">
-                 <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-6 translate-y-6 rounded-3xl -z-10"></div>
+                 <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-6 translate-y-6 rounded-sm -z-10"></div>
                  <img 
                    src="/uploads/invangs-ceo-image.webp" 
-                   className="rounded-3xl w-full h-[600px] object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+                   className="rounded-sm w-full h-[650px] object-cover transition-all duration-700 shadow-xl" 
                    alt="Marcus Ivangs" 
                  />
-                 <div className="absolute bottom-8 left-8 bg-white p-6 rounded-xl shadow-lg max-w-xs">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Signature_sample.svg/1200px-Signature_sample.svg.png" alt="Unterschrift" className="h-12 opacity-80" />
-                 </div>
               </div>
            </div>
         </div>

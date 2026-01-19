@@ -16,7 +16,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
   const mediaType = settings?.mediaType || 'video';
   const backgroundImage = settings?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
   const videoUrl = settings?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
-  const showQuickForm = settings?.showQuickForm ?? false;
+  const showQuickForm = settings?.showQuickForm ?? true;
 
   useEffect(() => {
     // Delay video loading to prioritize initial page render
@@ -68,14 +68,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
             Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up">
-             <Link to={`/${lang}/contact`}>
-                <Button className="w-full sm:w-auto text-lg py-6 px-8 rounded-sm shadow-lg shadow-primary/30">
-                   Projekt anfragen <ArrowRight size={20} className="ml-2" />
+          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up flex-wrap">
+             <Link to={`/${lang}/contact`} className="w-full sm:w-auto">
+                <Button className="w-full text-base md:text-lg py-5 md:py-6 px-6 md:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap">
+                   Projekt anfragen <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </Link>
-             <Link to={`/${lang}/career`}>
-                <Button variant="outline" className="w-full sm:w-auto text-lg py-6 px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20">
+             <Link to={`/${lang}/career`} className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full text-base md:text-lg py-5 md:py-6 px-6 md:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap">
                    Karriere starten
                 </Button>
              </Link>

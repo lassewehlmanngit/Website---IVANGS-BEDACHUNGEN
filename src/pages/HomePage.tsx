@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { HeroSection } from '@/widgets/home/ui/HeroSection';
+import { ServiceNavigationStrip } from '@/widgets/home/ui/ServiceNavigationStrip';
 import { ServicePreview } from '@/widgets/home/ui/ServicePreview';
 import { TrustIndicators } from '@/widgets/home/ui/TrustIndicators';
 import { CeoQuote } from '@/widgets/home/ui/CeoQuote';
@@ -41,6 +42,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         }}
       />
       <HeroSection lang={lang} settings={settings?.hero} />
+      <ServiceNavigationStrip lang={lang} />
       <ServicePreview lang={lang} />
       <TrustIndicators />
       <CeoQuote lang={lang} />
