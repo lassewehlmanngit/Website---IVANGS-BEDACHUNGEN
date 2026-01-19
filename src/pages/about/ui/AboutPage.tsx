@@ -11,6 +11,8 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <Seo 
         title="Über Uns - Ivangs Bedachungen" 
         description="Seit 1996: Ein Familienbetrieb, der hoch hinaus will. 28 Mitarbeiter, eigener Kran und modernste Technik."
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
       />
       <div className="animate-fade-in">
         {/* Header */}

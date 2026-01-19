@@ -49,7 +49,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
         <div className="container flex h-20 items-center justify-between">
             {/* Logo */}
             <Link to={`/${lang}`} className="flex items-center gap-2 cursor-pointer group">
-              <div className="bg-primary p-2 rounded-lg text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+              <div className="bg-primary p-2 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
                 <Hammer size={24} />
               </div>
               <div>
@@ -78,9 +78,15 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             </Button>
           </nav>
 
-          {/* Mobile menu button (Hidden as we use Bottom Nav, but kept for fallback/tablet) */}
+          {/* Mobile menu button */}
           <div className="md:hidden">
-             {/* Placeholder or specific tablet menu logic */}
+             <button
+                onClick={() => setMobileMenuOpen(true)}
+                className="p-2 text-slate-600 hover:text-primary transition-colors"
+                aria-label={t('navigation.menu')}
+             >
+                <Menu size={28} />
+             </button>
           </div>
 
           {/* Mobile drawer */}

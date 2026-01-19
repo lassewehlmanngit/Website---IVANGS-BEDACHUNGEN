@@ -44,6 +44,8 @@ export const ServicesPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <Seo 
         title="Leistungen - Ivangs Bedachungen" 
         description="Alles aus einer Hand: Steildach, Flachdach, Solar & PV, Fenster, Sanierung."
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
       />
       
       {/* Header */}

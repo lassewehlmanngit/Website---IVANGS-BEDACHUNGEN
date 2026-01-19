@@ -3,6 +3,11 @@
   "name": "Ivangs Bedachungen",
   "icons": [
     {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    },
+    {
       "src": "/logo.svg",
       "type": "image/svg+xml",
       "sizes": "512x512"
@@ -10,6 +15,6 @@
   ],
   "start_url": "/de",
   "display": "standalone",
-  "theme_color": "#0b1220",
+  "theme_color": "#d97706",
   "background_color": "#0b1220"
 }

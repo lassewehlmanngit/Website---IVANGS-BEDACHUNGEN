@@ -17,7 +17,7 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
   return (
     <div className="bg-white border border-slate-200 rounded-sm hover:border-primary hover:shadow-lg transition-all group overflow-hidden mb-6">
       <AccordionItem value={job.id} className="border-none">
-        <AccordionTrigger className="hover:bg-white px-8 py-8 flex-col items-start gap-4">
+        <AccordionTrigger className="hover:bg-white px-4 py-6 md:px-8 md:py-8 flex-col items-start gap-4">
           <div className="w-full">
             <div className="flex justify-between items-start mb-4">
               <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">{job.title}</h3>
@@ -52,7 +52,7 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
           </div>
         </AccordionTrigger>
         <AccordionContent className="p-0">
-          <div className="bg-slate-50 border-t border-slate-100 p-8 grid md:grid-cols-2 gap-8">
+          <div className="bg-slate-50 border-t border-slate-100 p-6 md:p-8 grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide">Deine Aufgaben</h4>
               <ul className="space-y-2 mb-6">

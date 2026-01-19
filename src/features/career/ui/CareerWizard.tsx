@@ -2,9 +2,18 @@ import React from 'react';
 import { CheckCircle, XCircle, ArrowRight, RotateCcw } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 import { useCareerWizard } from '@/features/career/model/useCareerWizard';
+import { useNavigate, useParams } from 'react-router-dom';
+import { SupportedLang } from '@/shared/config/i18n';
 
 export const CareerWizard: React.FC = () => {
   const { step, result, handleAnswer, reset } = useCareerWizard();
+  const navigate = useNavigate();
+  const { lang } = useParams<{ lang: string }>();
+  const safeLang = (lang as SupportedLang) || 'de';
+
+  const handleApply = (topic?: string) => {
+    navigate(`/${safeLang}/contact`);
+  };
 
   const questions = [
     {
@@ -35,7 +44,7 @@ export const CareerWizard: React.FC = () => {
 
   if (step === 3) {
     return (
-      <div className="bg-white p-8 rounded-xl shadow-xl border border-slate-100 text-center animate-fade-in max-w-lg mx-auto">
+      <div className="bg-white p-8 rounded-sm shadow-xl border border-slate-100 text-center animate-fade-in max-w-lg mx-auto">
         {result === "dachdecker" && (
           <div>
             <div className="inline-flex p-4 bg-green-100 text-green-600 rounded-full mb-4">
@@ -45,7 +54,7 @@ export const CareerWizard: React.FC = () => {
             <p className="text-slate-600 mb-6">
               Du scheinst perfekt für eine Stelle als <strong>Dachdeckergeselle (m/w/d)</strong> geeignet zu sein.
             </p>
-            <Button className="w-full">
+            <Button className="w-full" onClick={() => handleApply('Dachdecker')}>
               Jetzt direkt bewerben
             </Button>
           </div>
@@ -60,7 +69,7 @@ export const CareerWizard: React.FC = () => {
             <p className="text-slate-600 mb-6">
               Eine Stelle im <strong>Büro & Organisation</strong> scheint genau dein Ding zu sein.
             </p>
-            <Button className="w-full">
+            <Button className="w-full" onClick={() => handleApply('Büro')}>
               Initiativ bewerben
             </Button>
           </div>
@@ -75,7 +84,7 @@ export const CareerWizard: React.FC = () => {
             <p className="text-slate-600 mb-6">
               Unser Wizard konnte keine direkte Zuordnung finden, aber wir lernen dich gerne kennen!
             </p>
-            <Button variant="outline" className="w-full">Initiativ bewerben</Button>
+            <Button variant="outline" className="w-full" onClick={() => handleApply('Initiativ')}>Initiativ bewerben</Button>
           </div>
         )}
         
@@ -90,7 +99,7 @@ export const CareerWizard: React.FC = () => {
   const currentQ = questions.find(q => q.id === step);
 
   return (
-    <div className="bg-white p-8 rounded-xl shadow-xl border border-slate-100 max-w-lg mx-auto">
+    <div className="bg-white p-8 rounded-sm shadow-xl border border-slate-100 max-w-lg mx-auto">
       <div className="mb-6 flex justify-between items-center">
         <span className="text-xs font-bold text-primary tracking-wider uppercase">Karriere-Finder</span>
         <span className="text-xs text-slate-400">Schritt {step + 1} von 3</span>

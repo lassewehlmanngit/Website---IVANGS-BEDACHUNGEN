@@ -1,23 +1,54 @@
-import React from 'react';
-import { ArrowRight, Users, Truck, Warehouse, Calendar } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Users, Truck, Warehouse, Calendar, Mail } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
+import type { HeroSettings } from '@/shared/lib/content/globals';
 
-export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
+export interface HeroSectionProps {
+  lang: string;
+  settings?: HeroSettings;
+}
+
+export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
+  const [loadVideo, setLoadVideo] = useState(false);
+  
+  // Use settings or defaults
+  const mediaType = settings?.mediaType || 'video';
+  const backgroundImage = settings?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
+  const videoUrl = settings?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
+  const showQuickForm = settings?.showQuickForm ?? false;
+
+  useEffect(() => {
+    // Delay video loading to prioritize initial page render
+    const timer = setTimeout(() => setLoadVideo(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative min-h-[85vh] flex flex-col justify-center bg-slate-900 overflow-hidden">
-      {/* Background Video & Overlay */}
+      {/* Background Media & Overlay */}
       <div className="absolute inset-0 z-0">
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline 
-          className="w-full h-full object-cover"
-          poster="/uploads/ivangs-dachdecker-einsatz.avif"
-        >
-          <source src="https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4" type="video/mp4" />
-        </video>
+        {mediaType === 'video' ? (
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            preload="none"
+            className="w-full h-full object-cover"
+            poster={backgroundImage}
+          >
+            {loadVideo && (
+              <source src={videoUrl} type="video/mp4" />
+            )}
+          </video>
+        ) : (
+          <img 
+            src={backgroundImage} 
+            alt="Hero Background" 
+            className="w-full h-full object-cover"
+          />
+        )}
         
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-slate-900/40 z-10"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10 z-10"></div>
@@ -39,23 +70,53 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
           
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up">
              <Link to={`/${lang}/contact`}>
-                <Button className="w-full sm:w-auto text-lg py-6 px-8 rounded-full shadow-lg shadow-primary/30">
+                <Button className="w-full sm:w-auto text-lg py-6 px-8 rounded-sm shadow-lg shadow-primary/30">
                    Projekt anfragen <ArrowRight size={20} className="ml-2" />
                 </Button>
              </Link>
              <Link to={`/${lang}/career`}>
-                <Button variant="outline" className="w-full sm:w-auto text-lg py-6 px-8 rounded-full bg-white/10 text-white border-white/20 hover:bg-white/20">
+                <Button variant="outline" className="w-full sm:w-auto text-lg py-6 px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20">
                    Karriere starten
                 </Button>
              </Link>
           </div>
         </div>
 
-        {/* Right: Lead Form (Optional - skipped to focus on clear CTA for now, or could restore) */}
-        {/* For FSD migration, keeping it simple as per plan components */}
+        {/* Right: Quick Inquiry Form (Conditional) */}
+        {showQuickForm && (
+          <div className="hidden lg:block animate-slide-up">
+            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-sm shadow-2xl max-w-md ml-auto relative overflow-hidden">
+               {/* Decorative Blur */}
+               <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>
+
+              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
+                <Mail size={20} className="text-primary" /> Schnellanfrage
+              </h3>
+              <div className="space-y-4 relative z-10">
+                <div>
+                   <label htmlFor="hero-name" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block">Ihr Name</label>
+                   <input id="hero-name" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Max Mustermann" />
+                </div>
+                <div>
+                   <label htmlFor="hero-contact" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block">E-Mail oder Telefon</label>
+                   <input id="hero-contact" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Kontaktmöglichkeit" />
+                </div>
+                
+                <Link to={`/${lang}/contact`} className="block">
+                  <button className="bg-white text-slate-900 hover:bg-slate-200 px-6 py-4 rounded-sm font-bold transition-all w-full flex items-center justify-center gap-2 shadow-lg mt-2">
+                    Kostenlos anfragen <ArrowRight size={18} />
+                  </button>
+                </Link>
+                <p className="text-[10px] text-slate-400 text-center">
+                   Wir melden uns innerhalb von 24h. Unverbindlich.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
-      {/* Bottom Glass Bar */}
+      {/* Bottom Glass Bar (Desktop) */}
       <div className="relative z-20 border-t border-white/10 bg-white/5 backdrop-blur-md hidden md:block">
          <div className="container mx-auto px-4 py-6 md:py-8">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
@@ -65,7 +126,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
                  <div>
                     <h3 className="text-2xl font-medium text-white leading-none mb-1">28</h3>
-                    <p className="text-xs text-slate-400 uppercase tracking-wider font-bold">Experten</p>
+                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Experten</p>
                  </div>
               </div>
               <div className="flex items-center gap-4">
@@ -74,7 +135,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
                  <div>
                     <h3 className="text-2xl font-medium text-white leading-none mb-1">Eigener</h3>
-                    <p className="text-xs text-slate-400 uppercase tracking-wider font-bold">Kran-Service</p>
+                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Kran-Service</p>
                  </div>
               </div>
               <div className="flex items-center gap-4">
@@ -83,7 +144,7 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
                  <div>
                     <h3 className="text-2xl font-medium text-white leading-none mb-1">400m²</h3>
-                    <p className="text-xs text-slate-400 uppercase tracking-wider font-bold">Lagerfläche</p>
+                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Lagerfläche</p>
                  </div>
               </div>
               <div className="flex items-center gap-4">
@@ -92,7 +153,43 @@ export const HeroSection: React.FC<{ lang: string }> = ({ lang }) => {
                  </div>
                  <div>
                     <h3 className="text-2xl font-medium text-white leading-none mb-1">1996</h3>
-                    <p className="text-xs text-slate-400 uppercase tracking-wider font-bold">Gegründet</p>
+                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Gegründet</p>
+                 </div>
+              </div>
+           </div>
+         </div>
+      </div>
+
+      {/* Stats Grid (Mobile) */}
+      <div className="relative z-20 md:hidden border-t border-white/10 bg-slate-900/80 backdrop-blur-md">
+         <div className="container mx-auto px-4 py-8">
+           <div className="grid grid-cols-2 gap-y-8 gap-x-4">
+              <div className="flex flex-col items-center text-center gap-2">
+                 <Users size={20} className="text-primary" />
+                 <div>
+                    <h3 className="text-xl font-bold text-white leading-none mb-1">28</h3>
+                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Experten</p>
+                 </div>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2">
+                 <Truck size={20} className="text-primary" />
+                 <div>
+                    <h3 className="text-xl font-bold text-white leading-none mb-1">Eigener</h3>
+                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Kran-Service</p>
+                 </div>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2">
+                 <Warehouse size={20} className="text-primary" />
+                 <div>
+                    <h3 className="text-xl font-bold text-white leading-none mb-1">400m²</h3>
+                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Lagerfläche</p>
+                 </div>
+              </div>
+              <div className="flex flex-col items-center text-center gap-2">
+                 <Calendar size={20} className="text-primary" />
+                 <div>
+                    <h3 className="text-xl font-bold text-white leading-none mb-1">1996</h3>
+                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Gegründet</p>
                  </div>
               </div>
            </div>

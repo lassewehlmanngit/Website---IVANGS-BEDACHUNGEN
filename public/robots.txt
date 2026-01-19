@@ -1,6 +1,8 @@
-# robots.txt for https://example.com (Development/Staging)
+# robots.txt for https://ivangs-bedachungen.de
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 # Sitemap
-Sitemap: https://example.com/sitemap.xml
+Sitemap: https://ivangs-bedachungen.de/sitemap.xml

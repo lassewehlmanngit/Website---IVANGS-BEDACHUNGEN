@@ -282,9 +282,28 @@ export default defineConfig({
         fields: [
           { type: 'string', name: 'siteName', label: 'Site Name', required: true },
           { type: 'string', name: 'siteDescription', label: 'Site Description' },
-          { type: 'string', name: 'defaultOgImage', label: 'Default OG Image' },
-          { type: 'string', name: 'gtmId', label: 'GTM ID' },
+          { type: 'image', name: 'favicon', label: 'Favicon (SVG or PNG)' },
+          { type: 'image', name: 'logo', label: 'Site Logo' },
+          { type: 'image', name: 'defaultOgImage', label: 'Default OG Image' },
+          { type: 'string', name: 'gtmId', label: 'Google Tag Manager ID' },
+          { type: 'string', name: 'gaId', label: 'Google Analytics ID' },
           { type: 'string', name: 'sentryDsn', label: 'Sentry DSN' },
+          {
+            type: 'object',
+            name: 'hero',
+            label: 'Homepage Hero Settings',
+            fields: [
+              { 
+                type: 'string', 
+                name: 'mediaType', 
+                label: 'Background Type', 
+                options: ['video', 'image'] 
+              },
+              { type: 'image', name: 'backgroundImage', label: 'Background Image' },
+              { type: 'string', name: 'videoUrl', label: 'Video URL' },
+              { type: 'boolean', name: 'showQuickForm', label: 'Show Quick Inquiry Form' },
+            ]
+          }
         ],
       },
     ],

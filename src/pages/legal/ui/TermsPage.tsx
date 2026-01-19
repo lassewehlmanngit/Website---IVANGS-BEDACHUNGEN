@@ -1,13 +1,23 @@
 import React from 'react';
 import { Seo } from '@/shared/ui/Seo';
 import { SupportedLang } from '@/shared/config/i18n';
+import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
 
-export const TermsPage: React.FC<{ lang: SupportedLang }> = () => {
+export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   return (
     <>
-      <Seo title="AGB - Ivangs Bedachungen" />
+      <Seo 
+        title="AGB - Ivangs Bedachungen" 
+        description="Allgemeine Geschäftsbedingungen der Ivangs Bedachungen GmbH & Co. KG für Dachdeckerarbeiten und Bedachungen."
+        ogLocale="de_DE"
+      />
       <div className="animate-fade-in bg-white pt-12 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
+          <Breadcrumbs 
+            lang={lang}
+            items={[{ label: 'AGB' }]}
+            className="mb-6"
+          />
           <h1 className="text-4xl font-bold text-slate-900 mb-8 border-b border-slate-200 pb-4">Allgemeine Geschäftsbedingungen (AGB)</h1>
           
           <div className="prose prose-slate max-w-none text-slate-600">

@@ -1,6 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { cn } from '@/shared/lib/cn';
 
+/**
+ * Generate srcset for Unsplash images
+ * @param baseUrl - Unsplash image URL (with or without query params)
+ * @param widths - Array of widths to generate
+ * @returns srcset string
+ */
+export const generateUnsplashSrcSet = (baseUrl: string, widths: number[] = [640, 768, 1024, 1280, 1920]): string => {
+  if (!baseUrl.includes('unsplash.com')) return '';
+  
+  // Remove existing width param if present
+  const url = new URL(baseUrl);
+  url.searchParams.delete('w');
+  
+  return widths
+    .map(w => {
+      const newUrl = new URL(url.toString());
+      newUrl.searchParams.set('w', w.toString());
+      return `${newUrl.toString()} ${w}w`;
+    })
+    .join(', ');
+};
+
 export type ImageFit = 'cover' | 'contain' | 'fill' | 'none';
 export type ImageLoading = 'lazy' | 'eager';
 

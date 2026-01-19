@@ -1,7 +1,16 @@
 {
-  "siteName": "Marketing Site Starter",
-  "siteDescription": "A modern content-driven marketing site built with React, Vite, TypeScript, Tailwind CSS, and TinaCMS.",
+  "siteName": "Ivangs Bedachungen",
+  "siteDescription": "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist.",
+  "favicon": "/favicon.svg",
+  "logo": "/uploads/ivangs-logo.avif",
   "defaultOgImage": "/images/og-default.png",
   "gtmId": "",
-  "sentryDsn": ""
+  "gaId": "",
+  "sentryDsn": "",
+  "hero": {
+    "mediaType": "video",
+    "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
+    "showQuickForm": false
+  }
 }

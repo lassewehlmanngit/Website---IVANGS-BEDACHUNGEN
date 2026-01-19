@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useId, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useId, useRef, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@/shared/lib/cn';
 
@@ -37,6 +37,8 @@ const useAccordionItem = () => {
 export interface AccordionProps {
   type?: 'single' | 'multiple';
   defaultValue?: string | string[];
+  /** When type="single", allows closing all items (default: true) */
+  collapsible?: boolean;
   children: React.ReactNode;
   className?: string;
 }
@@ -44,6 +46,7 @@ export interface AccordionProps {
 export const Accordion: React.FC<AccordionProps> = ({
   type = 'single',
   defaultValue,
+  collapsible = true,
   children,
   className,
 }) => {
@@ -56,12 +59,16 @@ export const Accordion: React.FC<AccordionProps> = ({
     (value: string) => {
       setOpenItems((prev) => {
         if (type === 'single') {
+          // If collapsible is false and item is already open, keep it open
+          if (!collapsible && prev.includes(value)) {
+            return prev;
+          }
           return prev.includes(value) ? [] : [value];
         }
         return prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value];
       });
     },
-    [type],
+    [type, collapsible],
   );
 
   return (
@@ -144,6 +151,15 @@ export interface AccordionContentProps {
 export const AccordionContent: React.FC<AccordionContentProps> = ({ children, className }) => {
   const { isOpen, triggerId, contentId } = useAccordionItem();
   const contentRef = useRef<HTMLDivElement>(null);
+  const [height, setHeight] = useState<number | undefined>(0);
+
+  useEffect(() => {
+    if (isOpen && contentRef.current) {
+      setHeight(contentRef.current.scrollHeight);
+    } else {
+      setHeight(0);
+    }
+  }, [isOpen]);
 
   return (
     <div
@@ -151,13 +167,8 @@ export const AccordionContent: React.FC<AccordionContentProps> = ({ children, cl
       role="region"
       aria-labelledby={triggerId}
       aria-hidden={!isOpen}
-      className={cn(
-        'overflow-hidden transition-all duration-200 ease-in-out',
-        isOpen ? 'animate-accordion-down' : 'animate-accordion-up',
-      )}
-      style={{
-        height: isOpen ? contentRef.current?.scrollHeight : 0,
-      }}
+      className="overflow-hidden transition-[height] duration-200 ease-in-out"
+      style={{ height }}
     >
       <div ref={contentRef} className={cn('px-4 pb-4 pt-0 text-sm text-muted-foreground', className)}>
         {children}

@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight, Twitter, Linkedin } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { getFooter, type FooterData } from '@/shared/lib/content/globals';
 
 export interface SiteFooterProps {
   lang: SupportedLang;
 }
+
+const SocialIcon = ({ platform }: { platform: string }) => {
+  switch (platform.toLowerCase()) {
+    case 'facebook': return <Facebook size={18} />;
+    case 'instagram': return <Instagram size={18} />;
+    case 'twitter': return <Twitter size={18} />;
+    case 'linkedin': return <Linkedin size={18} />;
+    default: return null;
+  }
+};
 
 export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const [footer, setFooter] = useState<FooterData>({ links: [], social: [] });
@@ -28,16 +38,26 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
             </div>
             <span className="text-xl font-bold">IVANGS</span>
           </div>
-          <p className="text-slate-400 text-sm leading-relaxed mb-6">
+          <p className="text-slate-300 text-sm leading-relaxed mb-6">
             Ivangs Bedachungen GmbH & Co. KG – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
           </p>
           <div className="flex gap-4">
-            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white">
-              <Facebook size={18} />
-            </a>
-            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white">
-              <Instagram size={18} />
-            </a>
+            {footer.social.map((s) => {
+              const Icon = SocialIcon({ platform: s.platform });
+              if (!Icon) return null;
+              return (
+                <a 
+                  key={s.platform}
+                  href={s.url} 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white" 
+                  aria-label={s.platform}
+                >
+                  {Icon}
+                </a>
+              );
+            })}
           </div>
         </div>
 
@@ -47,11 +67,11 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-              <span>Musterstraße 12<br />52511 Geilenkirchen</span>
+              <span>Industriestraße 42<br />52511 Geilenkirchen</span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-primary shrink-0" />
-              <span>+49 123 456 789</span>
+              <span>+49 2451 12345</span>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-primary shrink-0" />
@@ -83,7 +103,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         {/* Career Column */}
         <div>
           <h3 className="text-white font-semibold mb-6">Karriere</h3>
-          <p className="text-sm text-slate-400 mb-4">
+          <p className="text-sm text-slate-300 mb-4">
             Werde Teil unseres 28-köpfigen Teams. Wir bilden aus!
           </p>
           <Link 

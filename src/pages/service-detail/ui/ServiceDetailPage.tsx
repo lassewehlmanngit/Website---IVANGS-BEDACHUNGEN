@@ -6,11 +6,12 @@ import { Button } from '@/shared/ui/Button';
 import { ArrowLeft, ArrowRight, CheckCircle2, Hammer, Thermometer, Layers, CloudRain, Sun, ShieldCheck, Calendar, Info, Ruler, HelpCircle, Image as ImageIcon, Phone, Mail } from 'lucide-react';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { servicesData, type ServiceId } from '@/features/service/model/serviceData';
-import { OptimizedImage } from '@/shared/ui/Image';
+import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
 import { ExpertTip } from '@/shared/ui/ExpertTip';
 import { ProcessTimeline } from '@/shared/ui/ProcessTimeline';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 import { TeamContactCard } from '@/features/service/ui/TeamContactCard';
+import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
 
 const iconMap: Record<string, React.ElementType> = {
   Hammer,
@@ -37,6 +38,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
       <Seo 
         title={`${service.title} - Ivangs Bedachungen`}
         description={service.intro}
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
       />
       
       <div className="animate-fade-in bg-white">
@@ -45,7 +48,10 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
           <OptimizedImage 
             src={service.img} 
             className="w-full h-full object-cover" 
-            alt={service.title} 
+            alt={service.title}
+            srcSet={generateUnsplashSrcSet(service.img)}
+            sizes="100vw"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
             <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10">
@@ -62,6 +68,16 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
         </div>
 
         <div className="container mx-auto px-4 py-24">
+          {/* Breadcrumbs */}
+          <Breadcrumbs 
+            lang={lang}
+            items={[
+              { label: 'Leistungen', href: '/services' },
+              { label: service.title }
+            ]}
+            className="mb-8"
+          />
+
           <div className="grid lg:grid-cols-12 gap-16">
             
             {/* Main Content Area */}
@@ -158,7 +174,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             </div>
 
             {/* Sidebar Navigation */}
-            <div className="lg:col-span-4 space-y-8 sticky top-24 h-fit">
+            <div className="lg:col-span-4 space-y-8 sticky top-36 h-fit">
               {/* Quick CTA Box */}
               <div className="bg-slate-900 text-white p-8 rounded-md shadow-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-20 -mr-10 -mt-10"></div>
@@ -194,6 +210,37 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             </div>
           </div>
         </div>
+
+        {/* CTA Section */}
+        <section className="bg-slate-50 border-t border-slate-200 py-20">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Contact CTA */}
+              <div className="bg-primary text-white p-8 rounded-sm shadow-lg shadow-primary/20">
+                <h3 className="text-2xl font-bold mb-4 font-slab">Bereit für Ihr Projekt?</h3>
+                <p className="mb-8 text-primary-100 text-lg">Vereinbaren Sie einen unverbindlichen Beratungstermin vor Ort.</p>
+                <Button 
+                  onClick={() => navigate(`/${lang}/contact`)}
+                  className="bg-white text-primary hover:bg-white/90 w-full md:w-auto font-bold"
+                >
+                  Kontakt aufnehmen
+                </Button>
+              </div>
+              {/* Career CTA */}
+              <div className="bg-slate-900 text-white p-8 rounded-sm shadow-lg">
+                <h3 className="text-2xl font-bold mb-4 font-slab">Karriere bei Ivangs</h3>
+                <p className="mb-8 text-slate-400 text-lg">Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.</p>
+                <Button 
+                  onClick={() => navigate(`/${lang}/career`)}
+                  variant="outline"
+                  className="w-full md:w-auto font-bold border-white/20 hover:bg-white/10 text-white"
+                >
+                  Offene Stellen ansehen
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

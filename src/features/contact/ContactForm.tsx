@@ -61,7 +61,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
     email: [required(t('validation.required')), email(t('validation.email'))],
     topic: [required(t('validation.required'))],
     message: [required(t('validation.required')), minLength(10), maxLength(5000)],
-    privacy: [(val) => val === true ? null : t('validation.required')],
+    privacy: [{ validate: (val: string) => val === 'true', message: t('validation.required') }],
   };
 
   const handleChange = (
@@ -112,12 +112,12 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
       setSubmitStatus('success');
       setFormData(initialFormData);
       toast.success(t('status.success'), {
-        description: 'Your message has been sent successfully.',
+        description: 'Ihre Nachricht wurde erfolgreich versendet.',
       });
     } catch (error) {
       setSubmitStatus('error');
       toast.error(t('status.error'), {
-        description: 'Failed to send message. Please try again.',
+        description: 'Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut.',
       });
     } finally {
       setIsSubmitting(false);
@@ -128,13 +128,13 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
     <form onSubmit={handleSubmit} className={className} noValidate>
       {submitStatus === 'success' && (
         <Alert variant="success" className="mb-6">
-          Thank you for your message! We'll get back to you soon.
+          Vielen Dank für Ihre Nachricht! Wir melden uns in Kürze bei Ihnen.
         </Alert>
       )}
 
       {submitStatus === 'error' && (
         <Alert variant="destructive" className="mb-6">
-          Something went wrong. Please try again later.
+          Etwas ist schiefgelaufen. Bitte versuchen Sie es später noch einmal.
         </Alert>
       )}
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { HeroSection } from '@/widgets/home/ui/HeroSection';
@@ -8,30 +8,39 @@ import { CeoQuote } from '@/widgets/home/ui/CeoQuote';
 import { ProjectShowcase } from '@/widgets/home/ui/ProjectShowcase';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
+import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
 
 export interface HomePageProps {
   lang: SupportedLang;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
+  const [settings, setSettings] = useState<SettingsData | null>(null);
+
+  useEffect(() => {
+    getSettings(lang).then(setSettings);
+  }, [lang]);
+
   return (
     <>
       <Seo
         title="Ivangs Bedachungen - Meisterbetrieb seit 1996"
         description="Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
         localBusiness={{
             name: "Ivangs Bedachungen GmbH & Co. KG",
-            telephone: "+49123456789",
+            telephone: "+49 2451 12345",
             email: "info@ivangs-bedachungen.de",
             address: {
-                streetAddress: "Musterstraße 12",
+                streetAddress: "Industriestraße 42",
                 addressLocality: "Geilenkirchen",
                 postalCode: "52511",
                 addressCountry: "DE"
             }
         }}
       />
-      <HeroSection lang={lang} />
+      <HeroSection lang={lang} settings={settings?.hero} />
       <ServicePreview lang={lang} />
       <TrustIndicators />
       <CeoQuote lang={lang} />
@@ -46,7 +55,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
           </p>
           <div className="flex justify-center gap-4">
             <Link to={`/${lang}/contact`}>
-                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-full shadow-xl font-bold">
+                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-sm shadow-xl font-bold">
                   Beratungstermin vereinbaren
                 </Button>
             </Link>

@@ -46,18 +46,105 @@ var config_default = defineConfig({
             label: "Description"
           },
           {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true
+            type: "image",
+            name: "featuredImage",
+            label: "Featured Image"
+          },
+          {
+            type: "boolean",
+            name: "draft",
+            label: "Draft",
+            description: "If enabled, this page will not be published"
+          },
+          {
+            type: "object",
+            list: true,
+            name: "blocks",
+            label: "Sections",
+            templates: [
+              {
+                name: "hero",
+                label: "Hero",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "object",
+                    name: "actions",
+                    label: "Actions",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "label", label: "Label" },
+                      { type: "string", name: "href", label: "Link" },
+                      {
+                        type: "string",
+                        name: "variant",
+                        label: "Variant",
+                        options: ["primary", "secondary", "outline", "ghost"]
+                      }
+                    ]
+                  },
+                  { type: "image", name: "image", label: "Image" }
+                ]
+              },
+              {
+                name: "features",
+                label: "Features",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
+                  {
+                    type: "object",
+                    name: "items",
+                    label: "Feature Items",
+                    list: true,
+                    fields: [
+                      { type: "string", name: "title", label: "Title" },
+                      { type: "string", name: "description", label: "Description" },
+                      { type: "string", name: "icon", label: "Icon (Lucide Name)" }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: "testimonial",
+                label: "Testimonial",
+                fields: [
+                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
+                  { type: "string", name: "author", label: "Author" },
+                  { type: "string", name: "role", label: "Role" }
+                ]
+              },
+              {
+                name: "contact",
+                label: "Contact Form",
+                fields: [
+                  { type: "string", name: "title", label: "Title" },
+                  { type: "string", name: "description", label: "Description" }
+                ]
+              },
+              {
+                name: "content",
+                label: "Rich Text",
+                fields: [{ type: "rich-text", name: "body", label: "Body" }]
+              }
+            ]
           }
         ]
       },
       {
-        name: "post",
-        label: "Blog",
-        path: "content/blog",
+        name: "service",
+        label: "Services",
+        path: "content/services",
         format: "md",
+        ui: {
+          filename: {
+            slugify: (values) => {
+              const raw = typeof values?.title === "string" ? values.title : "service";
+              return raw.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+            }
+          }
+        },
         fields: [
           {
             type: "string",
@@ -68,18 +155,28 @@ var config_default = defineConfig({
           },
           {
             type: "string",
-            name: "excerpt",
-            label: "Excerpt"
+            name: "description",
+            label: "Description",
+            ui: { component: "textarea" }
           },
           {
-            type: "datetime",
-            name: "date",
-            label: "Date"
+            type: "image",
+            name: "image",
+            label: "Cover Image"
           },
           {
             type: "string",
-            name: "description",
-            label: "Description"
+            name: "icon",
+            label: "Icon (Lucide Name)"
+          },
+          {
+            type: "object",
+            name: "checkpoints",
+            label: "Feature Checkpoints",
+            list: true,
+            fields: [
+              { type: "string", name: "text", label: "Text" }
+            ]
           },
           {
             type: "rich-text",
@@ -165,9 +262,28 @@ var config_default = defineConfig({
         fields: [
           { type: "string", name: "siteName", label: "Site Name", required: true },
           { type: "string", name: "siteDescription", label: "Site Description" },
-          { type: "string", name: "defaultOgImage", label: "Default OG Image" },
-          { type: "string", name: "gtmId", label: "GTM ID" },
-          { type: "string", name: "sentryDsn", label: "Sentry DSN" }
+          { type: "image", name: "favicon", label: "Favicon (SVG or PNG)" },
+          { type: "image", name: "logo", label: "Site Logo" },
+          { type: "image", name: "defaultOgImage", label: "Default OG Image" },
+          { type: "string", name: "gtmId", label: "Google Tag Manager ID" },
+          { type: "string", name: "gaId", label: "Google Analytics ID" },
+          { type: "string", name: "sentryDsn", label: "Sentry DSN" },
+          {
+            type: "object",
+            name: "hero",
+            label: "Homepage Hero Settings",
+            fields: [
+              {
+                type: "string",
+                name: "mediaType",
+                label: "Background Type",
+                options: ["video", "image"]
+              },
+              { type: "image", name: "backgroundImage", label: "Background Image" },
+              { type: "string", name: "videoUrl", label: "Video URL" },
+              { type: "boolean", name: "showQuickForm", label: "Show Quick Inquiry Form" }
+            ]
+          }
         ]
       }
     ]

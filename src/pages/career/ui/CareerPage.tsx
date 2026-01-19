@@ -7,7 +7,9 @@ import { JobListing } from '@/features/career/ui/JobListing';
 import { Accordion } from '@/shared/ui/Accordion';
 import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
-import { OptimizedImage } from '@/shared/ui/Image';
+import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
+
+const CAREER_HERO_IMG = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop";
 
 export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
@@ -17,21 +19,26 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <Seo 
         title="Karriere bei Ivangs - Werde Teil des Teams" 
         description="Jobs für Dachdecker und Bürokräfte im Kreis Viersen. Finde heraus, ob du zu uns passt."
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
       />
       <div className="animate-fade-in bg-slate-50 min-h-screen">
         
         {/* Hero Header */}
         <div className="relative h-[40vh] min-h-[400px]">
           <OptimizedImage 
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop" 
+            src={CAREER_HERO_IMG}
             className="w-full h-full object-cover" 
-            alt="Workers on roof" 
+            alt="Dachdecker bei der Arbeit auf einem Dach"
+            srcSet={generateUnsplashSrcSet(CAREER_HERO_IMG)}
+            sizes="100vw"
+            priority
           />
-          <div className="absolute inset-0 bg-slate-900/60 flex items-center justify-center">
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/70 to-slate-900/80 flex items-center justify-center">
             <div className="text-center px-4">
-              <span className="text-primary-400 font-bold uppercase tracking-widest text-sm mb-4 block">Karriere bei Ivangs</span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
-              <p className="text-slate-200 text-lg max-w-2xl mx-auto">
+              <span className="text-primary-400 font-bold uppercase tracking-widest text-sm mb-4 block drop-shadow-md">Karriere bei Ivangs</span>
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
+              <p className="text-slate-200 text-lg max-w-2xl mx-auto drop-shadow-md font-medium">
                 Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.
               </p>
             </div>

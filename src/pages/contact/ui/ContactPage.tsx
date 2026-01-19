@@ -11,12 +11,14 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <Seo 
         title="Kontakt - Ivangs Bedachungen" 
         description="Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten."
+        ogLocale="de_DE"
+        ogSiteName="Ivangs Bedachungen"
         localBusiness={{
             name: "Ivangs Bedachungen GmbH & Co. KG",
-            telephone: "+49123456789",
+            telephone: "+49 2451 12345",
             email: "info@ivangs-bedachungen.de",
             address: {
-                streetAddress: "Musterstraße 12",
+                streetAddress: "Industriestraße 42",
                 addressLocality: "Geilenkirchen",
                 postalCode: "52511",
                 addressCountry: "DE"

@@ -16,7 +16,7 @@ export const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description
   return (
     <Link 
       to={`/${lang}/services/${id}`}
-      className="group bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full"
+      className="group bg-white rounded-sm overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-slate-100 flex flex-col h-full"
     >
       {img && (
         <div className="relative h-64 overflow-hidden">

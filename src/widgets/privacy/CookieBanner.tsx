@@ -4,9 +4,20 @@ import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
 
-type CookieConsent = 'accepted' | 'rejected' | 'custom';
+export type CookieConsentStatus = 'accepted' | 'rejected' | 'custom';
 
-const STORAGE_KEY = 'cookie-consent';
+export interface CookiePreferences {
+  essential: boolean;
+  analytics: boolean;
+  marketing: boolean;
+}
+
+export interface CookieSettings {
+  status: CookieConsentStatus;
+  preferences: CookiePreferences;
+}
+
+export const COOKIE_STORAGE_KEY = 'cookie-consent-settings';
 
 export interface CookieBannerProps {
   lang: SupportedLang;
@@ -14,22 +25,33 @@ export interface CookieBannerProps {
 }
 
 export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) => {
-  const [consent, setConsent] = useState<CookieConsent | null>(null);
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-      setConsent(stored as CookieConsent);
-    } else {
+    const stored = localStorage.getItem(COOKIE_STORAGE_KEY);
+    if (!stored) {
       setShow(true);
     }
   }, []);
 
-  const updateConsent = (next: CookieConsent): void => {
-    setConsent(next);
+  const handleAcceptAll = () => {
+    const settings: CookieSettings = {
+      status: 'accepted',
+      preferences: { essential: true, analytics: true, marketing: true }
+    };
+    localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(settings));
     setShow(false);
-    localStorage.setItem(STORAGE_KEY, next);
+    window.dispatchEvent(new Event('cookie-settings-changed'));
+  };
+
+  const handleRejectAll = () => {
+    const settings: CookieSettings = {
+      status: 'rejected',
+      preferences: { essential: true, analytics: false, marketing: false }
+    };
+    localStorage.setItem(COOKIE_STORAGE_KEY, JSON.stringify(settings));
+    setShow(false);
+    window.dispatchEvent(new Event('cookie-settings-changed'));
   };
 
   if (!show) return null;
@@ -54,13 +76,13 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
           </Link>
           <Button 
             variant="outline"
-            onClick={() => updateConsent('rejected')}
+            onClick={handleRejectAll}
             className="text-slate-700 bg-white border-slate-300 hover:bg-slate-50"
           >
             {lang === 'de' ? 'Ablehnen' : 'Decline'}
           </Button>
           <Button 
-            onClick={() => updateConsent('accepted')}
+            onClick={handleAcceptAll}
             className="text-white"
           >
             {lang === 'de' ? 'Akzeptieren' : 'Accept'}

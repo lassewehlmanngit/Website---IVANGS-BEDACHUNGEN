@@ -2,25 +2,27 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 async function generateRobots() {
-  const baseUrl = process.env.VITE_BASE_URL || 'https://example.com';
+  const baseUrl = process.env.VITE_BASE_URL || 'https://ivangs-bedachungen.de';
   const outputPath = path.join(process.cwd(), 'public', 'robots.txt');
   const sitemapUrl = `${baseUrl}/sitemap.xml`;
 
-  const isProduction = process.env.NODE_ENV === 'production';
+  // Always generate production-ready robots.txt
+  // For staging/dev, set ROBOTS_NOINDEX=true in environment
+  const noIndex = process.env.ROBOTS_NOINDEX === 'true';
 
-  const robotsContent = isProduction
-    ? `# robots.txt for ${baseUrl}
+  const robotsContent = noIndex
+    ? `# robots.txt for ${baseUrl} (Staging/Development)
 User-agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /api/
+Disallow: /
 
 # Sitemap
 Sitemap: ${sitemapUrl}
 `
-    : `# robots.txt for ${baseUrl} (Development/Staging)
+    : `# robots.txt for ${baseUrl}
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /admin/
+Disallow: /api/
 
 # Sitemap
 Sitemap: ${sitemapUrl}
