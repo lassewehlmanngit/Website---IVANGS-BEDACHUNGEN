@@ -1,4 +1,4 @@
-import { teamMembers, TeamMember } from '../../company/model/teamData';
+import { teamMembersLegacy as teamMembers, TeamMember } from '../../company/model/teamData';
 
 export type ServiceId = 'steildach' | 'flachdach' | 'fenster' | 'sanierung' | 'solar';
 
