@@ -1,0 +1,11 @@
+# LLM Navigation
+
+- [Site Map](/sitemap.xml): Index of all pages.
+- [AI Context](/ai.txt): Summary of business services for AI.
+- [Robots](/robots.txt): Crawling rules.
+
+## Core Pages
+- /de: German Homepage (Primary)
+- /en: English Homepage
+- /de/contact: Contact Form
+- /de/services: Service Overview

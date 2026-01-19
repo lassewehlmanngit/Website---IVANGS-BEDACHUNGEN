@@ -1,0 +1,44 @@
+---
+description: "AI Coding Rules for Ivangs Bedachungen (React/Vite/Tina)"
+globs: ["**/*.{ts,tsx,css}", "tina/**/*.ts"]
+---
+
+# Project Context
+This is a modern marketing website for "Ivangs Bedachungen" (Roofing Business).
+- **Stack:** React 18, Vite, TypeScript, Tailwind CSS, TinaCMS.
+- **Languages:** English (en) and German (de).
+- **Style:** Token-based Design System (see `DESIGN_SYSTEM.md`).
+
+# Coding Standards
+
+## 1. Components & UI
+- **Primitives:** ALWAYS prefer using existing UI primitives from `src/shared/ui/` (e.g., `Button`, `Section`, `Typography`) over writing raw Tailwind classes.
+- **Icons:** Use `lucide-react` for all icons.
+- **Styling:** Use Tailwind utility classes. Do NOT create new CSS files. Use CSS variables from `src/shared/styles/tokens.css` for colors/spacing.
+- **Structure:** Functional components with strict TypeScript interfaces.
+  ```tsx
+  export interface MyComponentProps {
+    title: string;
+  }
+  export const MyComponent: React.FC<MyComponentProps> = ({ title }) => { ... }
+  ```
+
+## 2. Content & CMS (TinaCMS)
+- **Blocks:** Content pages are built using a "Block" system (Hero, Features, etc.).
+- **Schema:** When modifying `tina/config.ts`, ensure fields have clear labels and strict types.
+- **Fetching:** Use `tina/__generated__/client` for type-safe data fetching if needed, but prefer the static generation flow in `src/shared/lib/content`.
+
+## 3. SEO & Accessibility
+- **Images:** All images must have `alt` text. Use `src/shared/ui/Image.tsx` if available.
+- **Headings:** Ensure correct H1-H6 hierarchy.
+- **Localization:** Support `lang` prop in components where text is rendered.
+
+## 4. Testing
+- Use `vitest` for unit tests (`tests/`).
+- Use `playwright` for E2E tests.
+
+# File Structure
+- `src/shared/ui/`: Reusable dump components.
+- `src/features/`: Complex business logic (e.g., ContactForm).
+- `src/pages/`: Route handlers.
+- `tina/`: CMS configuration.

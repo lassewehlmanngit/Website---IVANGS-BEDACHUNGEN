@@ -1,0 +1,15 @@
+{
+  "short_name": "Ivangs",
+  "name": "Ivangs Bedachungen",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/de",
+  "display": "standalone",
+  "theme_color": "#0b1220",
+  "background_color": "#0b1220"
+}

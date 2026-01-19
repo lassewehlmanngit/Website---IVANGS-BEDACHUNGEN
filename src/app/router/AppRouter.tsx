@@ -8,6 +8,7 @@ import { GenericPage } from '@/pages/GenericPage';
 import { BlogIndexPage } from '@/pages/BlogIndexPage';
 import { BlogPostPage } from '@/pages/BlogPostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { DesignSystemPage } from '@/pages/DesignSystemPage';
 
 const detectBrowserLanguage = (): SupportedLang => {
   const browserLang = navigator.language || 'en';
@@ -52,6 +53,7 @@ export const AppRouter: React.FC = () => {
     <BrowserRouter>
       <ScrollHandler />
       <Routes>
+        <Route path="/design-system" element={<MarketingLayout lang="en"><DesignSystemPage /></MarketingLayout>} />
         <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
         <Route path="/:lang/*" element={<LanguageWrapper />} />
         <Route path="*" element={<Navigate to="/en" replace />} />
@@ -59,4 +61,3 @@ export const AppRouter: React.FC = () => {
     </BrowserRouter>
   );
 };
-

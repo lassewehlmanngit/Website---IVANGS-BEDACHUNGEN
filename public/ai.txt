@@ -1,0 +1,18 @@
+# Ivangs Bedachungen - AI Context
+
+## About
+Ivangs Bedachungen is a professional roofing company ("Dachdeckermeisterbetrieb") specializing in high-quality roofing solutions, repairs, and modern insulation techniques.
+
+## Key Services
+- **Roofing (Dachdeckerei):** Tiles, slate, metal, and flat roofs.
+- **Insulation (Dämmung):** Energy-efficient roof insulation according to latest standards.
+- **Repairs (Reparaturen):** Emergency storm damage repair and maintenance.
+- **Windows (Dachfenster):** Installation of Velux/Roto roof windows.
+
+## Contact Information
+- **Website:** https://ivangs-bedachungen.de (Example URL)
+- **Location:** Germany (Local Service Area)
+- **Emergency:** Available for urgent repairs.
+
+## Technical Details
+This website is built with React, Vite, and TinaCMS. It is fast, accessible, and optimized for mobile devices.

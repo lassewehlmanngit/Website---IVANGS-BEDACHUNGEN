@@ -1,8 +1,8 @@
 import frontMatter from 'front-matter';
 import type { SupportedLang } from '@/shared/config/i18n';
-import type { ContentPage, PageMeta } from './types';
+import type { ContentPage, PageMeta, PageBlock } from './types';
 
-type FrontMatterAttributes = Partial<PageMeta> & Record<string, unknown>;
+type FrontMatterAttributes = Partial<PageMeta> & { blocks?: PageBlock[] } & Record<string, unknown>;
 
 const pageModules = import.meta.glob('../../../../content/pages/*/*.md', { as: 'raw' });
 
@@ -28,6 +28,7 @@ export async function loadPageBySlug(lang: SupportedLang, slug: string): Promise
 
   const title = typeof parsed.attributes.title === 'string' ? parsed.attributes.title : slug;
   const description = typeof parsed.attributes.description === 'string' ? parsed.attributes.description : undefined;
+  const blocks = Array.isArray(parsed.attributes.blocks) ? parsed.attributes.blocks : undefined;
 
   return {
     slug,
@@ -36,7 +37,6 @@ export async function loadPageBySlug(lang: SupportedLang, slug: string): Promise
       title,
       description,
     },
-    body: parsed.body,
+    blocks,
   };
 }
-

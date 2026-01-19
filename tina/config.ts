@@ -73,10 +73,78 @@ export default defineConfig({
             description: 'If enabled, this page will not be published',
           },
           {
-            type: 'rich-text',
-            name: 'body',
-            label: 'Body',
-            isBody: true,
+            type: 'object',
+            list: true,
+            name: 'blocks',
+            label: 'Sections',
+            templates: [
+              {
+                name: 'hero',
+                label: 'Hero',
+                fields: [
+                  { type: 'string', name: 'title', label: 'Title' },
+                  { type: 'string', name: 'description', label: 'Description', ui: { component: 'textarea' } },
+                  {
+                    type: 'object',
+                    name: 'actions',
+                    label: 'Actions',
+                    list: true,
+                    fields: [
+                      { type: 'string', name: 'label', label: 'Label' },
+                      { type: 'string', name: 'href', label: 'Link' },
+                      {
+                        type: 'string',
+                        name: 'variant',
+                        label: 'Variant',
+                        options: ['primary', 'secondary', 'outline', 'ghost'],
+                      },
+                    ],
+                  },
+                  { type: 'image', name: 'image', label: 'Image' },
+                ],
+              },
+              {
+                name: 'features',
+                label: 'Features',
+                fields: [
+                  { type: 'string', name: 'title', label: 'Title' },
+                  { type: 'string', name: 'description', label: 'Description', ui: { component: 'textarea' } },
+                  {
+                    type: 'object',
+                    name: 'items',
+                    label: 'Feature Items',
+                    list: true,
+                    fields: [
+                      { type: 'string', name: 'title', label: 'Title' },
+                      { type: 'string', name: 'description', label: 'Description' },
+                      { type: 'string', name: 'icon', label: 'Icon (Lucide Name)' },
+                    ],
+                  },
+                ],
+              },
+              {
+                name: 'testimonial',
+                label: 'Testimonial',
+                fields: [
+                  { type: 'string', name: 'quote', label: 'Quote', ui: { component: 'textarea' } },
+                  { type: 'string', name: 'author', label: 'Author' },
+                  { type: 'string', name: 'role', label: 'Role' },
+                ],
+              },
+              {
+                name: 'contact',
+                label: 'Contact Form',
+                fields: [
+                  { type: 'string', name: 'title', label: 'Title' },
+                  { type: 'string', name: 'description', label: 'Description' },
+                ],
+              },
+              {
+                name: 'content',
+                label: 'Rich Text',
+                fields: [{ type: 'rich-text', name: 'body', label: 'Body' }],
+              },
+            ],
           },
         ],
       },

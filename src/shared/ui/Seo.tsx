@@ -16,6 +16,25 @@ export interface SeoArticle {
   tags?: string[];
 }
 
+export interface LocalBusiness {
+  name: string;
+  image?: string;
+  telephone?: string;
+  email?: string;
+  address?: {
+    streetAddress: string;
+    addressLocality: string;
+    postalCode: string;
+    addressCountry: string;
+  };
+  geo?: {
+    latitude: number;
+    longitude: number;
+  };
+  priceRange?: string;
+  openingHours?: string[];
+}
+
 export interface SeoProps {
   title: string;
   description?: string;
@@ -32,6 +51,8 @@ export interface SeoProps {
   twitterCreator?: string;
   // Article metadata
   article?: SeoArticle;
+  // Local Business
+  localBusiness?: LocalBusiness;
   // JSON-LD
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
@@ -49,6 +70,7 @@ export const Seo: React.FC<SeoProps> = ({
   twitterSite,
   twitterCreator,
   article,
+  localBusiness,
   jsonLd,
 }) => {
   // Build JSON-LD structured data
@@ -91,6 +113,41 @@ export const Seo: React.FC<SeoProps> = ({
     }
 
     structuredData.push(baseSchema);
+  }
+
+  // LocalBusiness Schema
+  if (localBusiness) {
+    structuredData.push({
+      '@context': 'https://schema.org',
+      '@type': 'RoofingContractor', // Specific for Bedachungen
+      name: localBusiness.name,
+      image: localBusiness.image,
+      telephone: localBusiness.telephone,
+      email: localBusiness.email,
+      address: localBusiness.address
+        ? {
+            '@type': 'PostalAddress',
+            streetAddress: localBusiness.address.streetAddress,
+            addressLocality: localBusiness.address.addressLocality,
+            postalCode: localBusiness.address.postalCode,
+            addressCountry: localBusiness.address.addressCountry,
+          }
+        : undefined,
+      geo: localBusiness.geo
+        ? {
+            '@type': 'GeoCoordinates',
+            latitude: localBusiness.geo.latitude,
+            longitude: localBusiness.geo.longitude,
+          }
+        : undefined,
+      priceRange: localBusiness.priceRange,
+      openingHoursSpecification: localBusiness.openingHours?.map((spec) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: spec.split(' ')[0], // Simplification, expects "Monday 09:00-17:00" format parsing in real app
+        opens: spec.split(' ')[1]?.split('-')[0],
+        closes: spec.split(' ')[1]?.split('-')[1],
+      })),
+    });
   }
 
   return (
@@ -158,4 +215,3 @@ export const Seo: React.FC<SeoProps> = ({
     </Helmet>
   );
 };
-

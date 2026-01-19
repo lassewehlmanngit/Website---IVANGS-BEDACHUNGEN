@@ -3,12 +3,95 @@ import { useParams } from 'react-router-dom';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Markdown } from '@/shared/ui/Markdown';
-import type { ContentPage } from '@/shared/lib/content/types';
+import type { ContentPage, PageBlock } from '@/shared/lib/content/types';
 import { loadPageBySlug } from '@/shared/lib/content/pages';
+import { Hero } from '@/shared/ui/Hero';
+import { FeatureSection, FeatureCard } from '@/shared/ui/Feature';
+import { Testimonial } from '@/shared/ui/Testimonial';
+import { ContactForm } from '@/features/contact/ContactForm';
+import { Section } from '@/shared/ui/Section';
+import { ButtonLink } from '@/shared/ui/ButtonLink';
+import { OptimizedImage as Image } from '@/shared/ui/Image';
+import * as Icons from 'lucide-react';
 
 export interface GenericPageProps {
   lang: SupportedLang;
 }
+
+const BlockRenderer: React.FC<{ block: PageBlock }> = ({ block }) => {
+  switch (block._template) {
+    case 'hero':
+      return (
+        <Hero
+          title={block.title}
+          description={block.description}
+          media={block.image ? <Image src={block.image} alt={block.title} className="rounded-lg shadow-xl" /> : undefined}
+          actions={
+            block.actions?.map((action, i) => (
+              <ButtonLink key={i} to={action.href} variant={action.variant as any}>
+                {action.label}
+              </ButtonLink>
+            ))
+          }
+        />
+      );
+
+    case 'features':
+      return (
+        <FeatureSection title={block.title} description={block.description}>
+          {block.items?.map((item, i) => {
+            const IconComponent = item.icon ? (Icons as any)[item.icon] : undefined;
+            return (
+              <FeatureCard
+                key={i}
+                title={item.title}
+                description={item.description}
+                icon={IconComponent ? <IconComponent /> : undefined}
+              />
+            );
+          })}
+        </FeatureSection>
+      );
+
+    case 'testimonial':
+      return (
+        <Section>
+          <div className="container mx-auto max-w-4xl">
+            <Testimonial
+              quote={block.quote}
+              author={{
+                name: block.author,
+                title: block.role,
+              }}
+            />
+          </div>
+        </Section>
+      );
+
+    case 'contact':
+      return (
+        <Section>
+          <div className="container mx-auto max-w-xl">
+            {block.title && <h2 className="mb-4 text-3xl font-bold">{block.title}</h2>}
+            {block.description && <p className="mb-8 text-muted-foreground">{block.description}</p>}
+            <ContactForm />
+          </div>
+        </Section>
+      );
+
+    case 'content':
+      return (
+        <Section>
+          <div className="container mx-auto max-w-3xl prose prose-lg dark:prose-invert">
+            <Markdown>{block.body}</Markdown>
+          </div>
+        </Section>
+      );
+
+    default:
+      return null;
+  }
+};
 
 export const GenericPage: React.FC<GenericPageProps> = ({ lang }) => {
   const { slug } = useParams<{ slug: string }>();
@@ -57,13 +140,11 @@ export const GenericPage: React.FC<GenericPageProps> = ({ lang }) => {
   }
 
   return (
-    <div className="container py-12">
+    <>
       <Seo title={page.meta.title} description={page.meta.description} />
-      <article className="prose prose-invert max-w-3xl">
-        <h1>{page.meta.title}</h1>
-        <Markdown>{page.body}</Markdown>
-      </article>
-    </div>
+      {page.blocks?.map((block, i) => (
+        <BlockRenderer key={i} block={block} />
+      ))}
+    </>
   );
 };
-
