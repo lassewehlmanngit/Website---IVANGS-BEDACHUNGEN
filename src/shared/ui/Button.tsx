@@ -14,7 +14,7 @@ export const buttonClassName = ({
   isLoading: boolean;
 }): string => {
   const base =
-    'inline-flex min-h-touch min-w-touch items-center justify-center gap-2 rounded-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50';
+    'inline-flex min-h-touch min-w-touch items-center justify-center gap-2 rounded-sm font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap';
 
   const sizes: Record<ButtonSize, string> = {
     sm: 'px-3 py-2 text-sm',
