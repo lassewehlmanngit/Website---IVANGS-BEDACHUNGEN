@@ -25,7 +25,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <div className="animate-fade-in bg-slate-50 min-h-screen">
         
         {/* Hero Header */}
-        <div className="relative h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden">
+        <div className="relative h-[60vh] md:h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden">
           <OptimizedImage 
             src={CAREER_HERO_IMG}
             className="absolute inset-0 w-full h-full object-cover" 
@@ -39,10 +39,10 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             <div className="container mx-auto px-4">
               <div className="text-center max-w-4xl mx-auto">
                 {/* Text container with semi-transparent background */}
-                <div className="bg-slate-900/60 backdrop-blur-sm px-6 md:px-8 py-8 md:py-10 rounded-sm border border-white/10">
-                  <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 block">Karriere bei Ivangs</span>
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
-                  <p className="text-slate-200 text-base md:text-lg max-w-2xl mx-auto font-medium">
+                <div className="bg-slate-900/60 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 rounded-sm border border-white/10">
+                  <span className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm mb-3 md:mb-4 block">Karriere bei Ivangs</span>
+                  <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 lg:mb-6">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
+                  <p className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium">
                     Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.
                   </p>
                 </div>
@@ -56,7 +56,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              
              {/* Left Column: Job Listings */}
              <div className="lg:col-span-7 order-2 lg:order-1">
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-6 md:mb-8">Offene Stellen</h2>
+                <h2 className="text-h2 font-bold text-slate-900 mb-6 md:mb-8">Offene Stellen</h2>
                 <div className="space-y-4 md:space-y-6">
                    <Accordion type="single" collapsible className="w-full border-none divide-y-0 rounded-none bg-transparent">
                      {jobsData.map((job, i) => (
@@ -69,14 +69,14 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              {/* Right Column: Wizard & Sidebar */}
              <div className="lg:col-span-5 space-y-6 md:space-y-8 order-1 lg:order-2">
                <div className="bg-white p-6 md:p-8 rounded-sm shadow-xl border border-slate-100">
-                 <h3 className="text-lg md:text-xl font-bold mb-4 md:mb-6 text-slate-900">Karriere Finder</h3>
+                 <h3 className="text-h4 font-bold mb-4 md:mb-6 text-slate-900">Karriere Finder</h3>
                  <p className="text-sm text-slate-500 mb-4 md:mb-6">Unsicher welche Stelle passt? Beantworte 3 Fragen.</p>
                  <CareerWizard />
                </div>
 
                <div className="bg-slate-900 text-white p-6 md:p-8 rounded-sm relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[50px] opacity-20 -mr-10 -mt-10"></div>
-                  <h3 className="text-lg md:text-xl font-bold mb-3 md:mb-4 relative z-10">Initiativbewerbung</h3>
+                  <h3 className="text-h4 font-bold mb-3 md:mb-4 relative z-10">Initiativbewerbung</h3>
                   <p className="text-slate-400 text-sm mb-4 md:mb-6 relative z-10">
                     Keine passende Stelle dabei? Wir freuen uns immer über motivierte Bewerber.
                   </p>

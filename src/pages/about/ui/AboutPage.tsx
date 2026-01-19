@@ -20,22 +20,22 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       />
       <div className="animate-fade-in">
         {/* Header */}
-        <div className="bg-slate-900 text-white py-20 relative overflow-hidden">
+        <div className="bg-slate-900 text-white py-16 md:py-20 relative overflow-hidden">
           <div className="absolute inset-0 bg-primary/10 z-0"></div>
           <div className="container mx-auto px-4 text-center relative z-10">
-            <span className="text-primary font-bold uppercase tracking-wider text-sm mb-4 block">Das Unternehmen</span>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Seit 1996: Ein Familienbetrieb, der hoch hinaus will.</h1>
-            <p className="text-slate-300 text-lg max-w-2xl mx-auto leading-relaxed">
+            <span className="text-primary font-bold uppercase tracking-wider text-xs sm:text-sm mb-3 md:mb-4 block">Das Unternehmen</span>
+            <h1 className="text-h1 font-bold mb-4 md:mb-6">Seit 1996: Ein Familienbetrieb, der hoch hinaus will.</h1>
+            <p className="text-slate-300 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
               Vom Ein-Mann-Betrieb zum 28-köpfigen Kompetenz-Team. Wir verbinden Tradition mit modernster Technik.
             </p>
           </div>
         </div>
 
         {/* Main Introduction */}
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
+        <section className="py-16 md:py-20 bg-white">
+          <div className="container mx-auto px-4 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
              <div>
-                <h2 className="text-3xl font-bold text-slate-900 mb-6">Qualität ist bei uns Familiensache.</h2>
+                <h2 className="text-h2 font-bold text-slate-900 mb-4 md:mb-6">Qualität ist bei uns Familiensache.</h2>
                 <p className="text-slate-600 text-lg leading-relaxed mb-6">
                   Was 1996 als Vision von Dachdeckermeister Marcus Ivangs begann, ist heute eine feste Größe im Kreis Viersen und darüber hinaus. Doch trotz unseres Wachstums auf 28 Mitarbeiter und 8 LKWs haben wir eines nie verloren: Den persönlichen Draht zu unseren Kunden.
                 </p>
@@ -71,10 +71,10 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
         </section>
 
         {/* Equipment Section */}
-        <section className="py-20 bg-primary/5">
+        <section className="py-16 md:py-20 bg-primary/5">
            <div className="container mx-auto px-4 text-center max-w-4xl">
-              <Hammer size={48} className="text-primary mx-auto mb-6" />
-              <h2 className="text-3xl font-bold text-slate-900 mb-4">Wir warten nicht auf Material. Wir haben es.</h2>
+              <Hammer size={40} className="md:w-12 md:h-12 text-primary mx-auto mb-4 md:mb-6" />
+              <h2 className="text-h2 font-bold text-slate-900 mb-3 md:mb-4">Wir warten nicht auf Material. Wir haben es.</h2>
               <p className="text-slate-600 text-lg leading-relaxed">
                  Mit eigenen Lagerräumen, einem modernen Maschinenpark und dem firmeneigenen Autokran (IVANGS Bauservice) sind wir unabhängig von Mietfirmen und Lieferengpässen. Das bedeutet für Sie: <strong>Keine unnötigen Verzögerungen auf der Baustelle.</strong>
               </p>
@@ -82,10 +82,10 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
         </section>
 
         {/* Full Team Section */}
-        <section className="py-20 bg-white">
+        <section className="py-16 md:py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="mb-16 text-center">
-               <h2 className="text-3xl font-bold text-slate-900">Unser Team</h2>
+            <div className="mb-12 md:mb-16 text-center">
+               <h2 className="text-h2 font-bold text-slate-900">Unser Team</h2>
                <p className="text-slate-600 mt-4 max-w-2xl mx-auto">
                  Hinter jedem dichten Dach steht ein starkes Team. {teamMembers.length} Mitarbeiter, die aufeinander eingespielt sind.
                </p>
@@ -172,9 +172,9 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
         </section>
 
         {/* Call to Action */}
-        <section className="py-20 bg-slate-900 text-white">
+        <section className="py-16 md:py-20 bg-slate-900 text-white">
           <div className="container mx-auto px-4 text-center">
-             <h2 className="text-3xl font-bold mb-6">Lernen Sie uns kennen</h2>
+             <h2 className="text-h2 font-bold mb-4 md:mb-6">Lernen Sie uns kennen</h2>
              <p className="text-slate-300 max-w-2xl mx-auto mb-8">
                Sie planen ein Neubauprojekt oder eine Sanierung? Lassen Sie uns darüber sprechen. Wir beraten Sie gerne unverbindlich vor Ort.
              </p>

@@ -67,8 +67,8 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
 
       {/* Content */}
       <div className="w-full lg:w-1/2">
-        <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">{service.title}</h3>
-        <p className="text-slate-600 text-lg leading-relaxed mb-8">
+        <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6">{service.title}</h3>
+        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8">
           {service.description}
         </p>
 
@@ -85,9 +85,9 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
 
         <Link to={`/${lang}/services/${id}`}>
           <Button
-            className="text-white bg-slate-900 px-8 py-4 rounded-sm font-bold hover:bg-primary transition-colors flex items-center gap-3 shadow-lg"
+            className="text-white bg-slate-900 px-6 py-3 md:px-8 md:py-4 rounded-sm font-bold hover:bg-primary transition-colors flex items-center gap-2 md:gap-3 shadow-lg text-sm md:text-base"
           >
-            {ctaText} <ArrowRight size={18} />
+            {ctaText} <ArrowRight size={18} className="shrink-0" />
           </Button>
         </Link>
       </div>
@@ -99,13 +99,13 @@ export const ServicePreview: React.FC<{ lang: string }> = ({ lang }) => {
   const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'solar', 'fenster', 'sanierung'];
 
   return (
-    <section className="py-24 bg-white">
+    <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
         
-        <div className="mb-24 text-center max-w-3xl mx-auto">
-          <span className="text-primary-600 font-bold uppercase tracking-wider text-sm">Unsere Expertise</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mt-2 mb-6">Nicht nur dicht, sondern durchdacht.</h2>
-          <p className="text-slate-600 text-lg">
+        <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
+          <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm">Unsere Expertise</span>
+          <h2 className="text-h2 font-bold text-slate-900 mt-2 mb-4 md:mb-6">Nicht nur dicht, sondern durchdacht.</h2>
+          <p className="text-slate-600 text-base md:text-lg">
             Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.
           </p>
         </div>

@@ -60,22 +60,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
           <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up">
             Meisterbetrieb seit 1996
           </span>
-          <h1 className="text-5xl md:text-7xl font-medium leading-tight tracking-tight mb-6 animate-slide-up">
+          <h1 className="text-h1 font-medium leading-tight tracking-tight mb-4 md:mb-6 animate-slide-up">
             Dächer, die <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">begeistern.</span>
           </h1>
-          <p className="text-xl text-slate-300 mb-10 max-w-lg font-light leading-relaxed animate-slide-up">
+          <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-10 max-w-lg font-light leading-relaxed animate-slide-up">
             Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 animate-slide-up flex-wrap">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
              <Link to={`/${lang}/contact`} className="w-full sm:w-auto">
-                <Button className="w-full text-base md:text-lg py-5 md:py-6 px-6 md:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap">
+                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap">
                    Projekt anfragen <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </Link>
              <Link to={`/${lang}/career`} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-base md:text-lg py-5 md:py-6 px-6 md:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap">
+                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap">
                    Karriere starten
                 </Button>
              </Link>
@@ -89,8 +89,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
                {/* Decorative Blur */}
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>
 
-              <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2 relative z-10">
-                <Mail size={20} className="text-primary" /> Schnellanfrage
+              <h3 className="text-h4 font-bold text-white mb-4 md:mb-6 flex items-center gap-2 relative z-10">
+                <Mail size={20} className="text-primary shrink-0" /> Schnellanfrage
               </h3>
               <div className="space-y-4 relative z-10">
                 <div>

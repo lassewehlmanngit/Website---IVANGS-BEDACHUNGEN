@@ -51,15 +51,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <HomeFAQ lang={lang} />
       
       {/* Final CTA */}
-      <section className="py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
-          <p className="text-primary-foreground/80 text-xl max-w-2xl mx-auto mb-10">
+          <h2 className="text-h2 font-bold mb-4 md:mb-6">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
+          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10">
             Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.
           </p>
           <div className="flex justify-center gap-4">
             <Link to={`/${lang}/contact`}>
-                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-sm shadow-xl font-bold">
+                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold">
                   Beratungstermin vereinbaren
                 </Button>
             </Link>
