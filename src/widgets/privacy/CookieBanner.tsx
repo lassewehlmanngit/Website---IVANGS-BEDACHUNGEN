@@ -63,7 +63,7 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
     )}>
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-slate-600">
-          {lang === 'de' 
+          {lang === 'de'
             ? 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten.' 
             : 'We use cookies to ensure you get the best experience on our website.'}
         </p>

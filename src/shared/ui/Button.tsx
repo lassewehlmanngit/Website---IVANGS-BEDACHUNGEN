@@ -57,10 +57,10 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-busy={isLoading || undefined}
         {...props}
       >
-        {leftIcon ? <span aria-hidden="true">{leftIcon}</span> : null}
+        {leftIcon ? <span aria-hidden="true" className="shrink-0">{leftIcon}</span> : null}
         {isLoading ? <Spinner aria-hidden="true" /> : null}
-        <span className={cn(isLoading && 'opacity-90')}>{children}</span>
-        {rightIcon ? <span aria-hidden="true">{rightIcon}</span> : null}
+        <span className={cn('inline-flex items-center gap-2 whitespace-nowrap', isLoading && 'opacity-90')}>{children}</span>
+        {rightIcon ? <span aria-hidden="true" className="shrink-0">{rightIcon}</span> : null}
       </button>
     );
   },
