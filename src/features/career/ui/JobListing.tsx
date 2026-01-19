@@ -15,40 +15,32 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white border border-slate-200 rounded-sm hover:border-primary hover:shadow-lg transition-all group overflow-hidden mb-6">
+    <div className="bg-white border border-slate-200 rounded-sm hover:border-primary hover:shadow-lg transition-all group overflow-hidden">
       <AccordionItem value={job.id} className="border-none">
-        <AccordionTrigger className="hover:bg-white px-4 py-6 md:px-8 md:py-8 flex-col items-start gap-4">
-          <div className="w-full">
-            <div className="flex justify-between items-start mb-4">
-              <h3 className="text-xl font-bold text-slate-900 group-hover:text-primary transition-colors">{job.title}</h3>
+        <AccordionTrigger className="hover:no-underline hover:bg-slate-50/50 px-4 py-6 md:px-6 md:py-6 [&[data-state=open]]:bg-slate-50 items-start text-left">
+          <div className="flex-1 min-w-0 pr-4">
+            <div className="flex justify-between items-start gap-3 mb-3">
+              <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors flex-1">{job.title}</h3>
               <span className={cn(
-                "px-3 py-1 rounded-sm text-xs font-bold",
+                "px-3 py-1 rounded-sm text-xs font-bold shrink-0",
                 job.type === 'Ausbildung' ? 'bg-orange-100 text-orange-700' : 'bg-primary/10 text-primary'
               )}>
                 {job.type}
               </span>
             </div>
             
-            <div className="flex gap-6 text-sm text-slate-500 mb-4">
-              <span className="flex items-center gap-1"><MapPin size={16} /> {job.location}</span>
-              <span className="flex items-center gap-1"><Clock size={16} /> Ab sofort</span>
+            <div className="flex flex-wrap gap-4 md:gap-6 text-xs md:text-sm text-slate-500 mb-3">
+              <span className="flex items-center gap-1"><MapPin size={14} className="md:w-4 md:h-4" /> {job.location}</span>
+              <span className="flex items-center gap-1"><Clock size={14} className="md:w-4 md:h-4" /> Ab sofort</span>
             </div>
 
-            <p className="text-slate-600 text-sm leading-relaxed mb-4">
+            <p className="text-slate-600 text-sm leading-relaxed mb-3">
               {job.shortDesc}
             </p>
 
-            <div className="flex items-center justify-between mt-4 w-full">
-                <span className="text-primary font-bold text-sm hover:underline flex items-center gap-1">
-                   Mehr erfahren
-                </span>
-                {/* Chevron is handled by AccordionTrigger but we can hide the default one if we want custom placement, 
-                    or rely on the trigger's chevron. My AccordionTrigger puts it at the end. 
-                    Here I want it at the end of this row. 
-                    Actually AccordionTrigger flex is 'justify-between'.
-                    So the Chevron will be at the far right.
-                */}
-            </div>
+            <span className="text-primary font-bold text-xs md:text-sm inline-flex items-center gap-1">
+               Mehr erfahren
+            </span>
           </div>
         </AccordionTrigger>
         <AccordionContent className="p-0">
