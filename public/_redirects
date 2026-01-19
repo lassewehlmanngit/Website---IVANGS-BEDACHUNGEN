@@ -1,3 +1,5 @@
-# Render Static Site SPA fallback
-# All routes that don't match a file are served by index.html
-/*    /index.html   200
+# Disable admin panel in production until Tina Cloud is set up
+/admin/index.html /404 404
+
+# SPA fallback
+/*  /index.html  200
