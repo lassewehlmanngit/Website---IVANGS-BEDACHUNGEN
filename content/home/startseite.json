@@ -1,0 +1,63 @@
+{
+  "seo": {
+    "title": "Ivangs Bedachungen - Meisterbetrieb seit 1996",
+    "description": "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+  },
+  "hero": {
+    "eyebrow": "Meisterbetrieb seit 1996",
+    "title": "Dächer, die begeistern.",
+    "subtitle": "",
+    "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.",
+    "primaryButtonText": "Projekt anfragen",
+    "primaryButtonLink": "/de/contact",
+    "secondaryButtonText": "Karriere starten",
+    "secondaryButtonLink": "/de/career",
+    "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
+    "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
+    "showQuickForm": true
+  },
+  "stats": [
+    {
+      "value": "28",
+      "label": "Experten",
+      "icon": "Users"
+    },
+    {
+      "value": "Eigener",
+      "label": "Kran-Service",
+      "icon": "Truck"
+    },
+    {
+      "value": "400m²",
+      "label": "Lagerfläche",
+      "icon": "Warehouse"
+    },
+    {
+      "value": "1996",
+      "label": "Gegründet",
+      "icon": "Calendar"
+    }
+  ],
+  "servicesSection": {
+    "eyebrow": "Unsere Expertise",
+    "title": "Nicht nur dicht, sondern durchdacht.",
+    "description": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik."
+  },
+  "ceoQuote": {
+    "eyebrow": "Ein Wort vom Chef",
+    "name": "Marcus Ivangs",
+    "role": "Geschäftsführer & Dachdeckermeister",
+    "quote": "Warum man auf uns zählen kann? Weil unser Unternehmen mehr ist, als nur ein Business.",
+    "text": "Jede Person in unserem Team ist einzigartig – und wir alle teilen die gleichen Werte. Wenn wir sagen, wir sind pünktlich, dann sind wir es. Wenn wir einen Preis nennen, dann halten wir ihn. Handwerk ist Vertrauenssache, und dieses Vertrauen erarbeiten wir uns jeden Tag neu – auf Ihrem Dach.",
+    "image": "",
+    "buttonText": "Mehr über uns erfahren",
+    "buttonLink": "/de/about"
+  },
+  "projects": [],
+  "finalCTA": {
+    "title": "Planen Sie sicher. Planen Sie mit Ivangs.",
+    "description": "Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.",
+    "buttonText": "Beratungstermin vereinbaren",
+    "buttonLink": "/de/contact"
+  }
+}

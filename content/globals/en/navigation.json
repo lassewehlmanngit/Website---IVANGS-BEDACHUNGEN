@@ -1,9 +1,0 @@
-{
-  "logo": "/logo.svg",
-  "items": [
-    { "label": "Home", "href": "/" },
-    { "label": "About", "href": "/about" },
-    { "label": "Career", "href": "/career" },
-    { "label": "Contact", "href": "/contact" }
-  ]
-}

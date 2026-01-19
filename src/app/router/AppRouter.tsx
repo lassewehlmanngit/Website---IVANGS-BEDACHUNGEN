@@ -17,9 +17,8 @@ import { TermsPage } from '@/pages/legal/ui/TermsPage';
 import { CookieSettingsPage } from '@/pages/legal/ui/CookieSettingsPage';
 
 const detectBrowserLanguage = (): SupportedLang => {
-  const browserLang = navigator.language || 'en';
-  if (browserLang.toLowerCase().startsWith('de')) return 'de';
-  return 'en';
+  // Default to German for IVANGS (German business)
+  return 'de';
 };
 
 const isSupportedLang = (lang: string): lang is SupportedLang => {
@@ -33,7 +32,7 @@ const LanguageWrapper: React.FC = () => {
   useEffect(() => {
     if (!lang) return;
     if (!isSupportedLang(lang)) {
-      navigate('/en', { replace: true });
+      navigate('/de', { replace: true });
       return;
     }
     document.documentElement.lang = lang;
@@ -66,10 +65,10 @@ export const AppRouter: React.FC = () => {
     <BrowserRouter>
       <ScrollHandler />
       <Routes>
-        <Route path="/design-system" element={<MarketingLayout lang="en"><DesignSystemPage /></MarketingLayout>} />
+        <Route path="/design-system" element={<MarketingLayout lang="de"><DesignSystemPage /></MarketingLayout>} />
         <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
         <Route path="/:lang/*" element={<LanguageWrapper />} />
-        <Route path="*" element={<Navigate to="/en" replace />} />
+        <Route path="*" element={<Navigate to="/de" replace />} />
       </Routes>
     </BrowserRouter>
   );

@@ -19,174 +19,367 @@ var config_default = defineConfig({
   },
   schema: {
     collections: [
+      // Home Page Collection (Single Document)
       {
-        name: "page",
-        label: "Pages",
-        path: "content/pages",
-        format: "md",
+        name: "homePage",
+        label: "Startseite",
+        path: "content/home",
+        format: "json",
         ui: {
-          filename: {
-            slugify: (values) => {
-              const raw = typeof values?.title === "string" ? values.title : "page";
-              return raw.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-            }
+          allowedActions: {
+            create: false,
+            delete: false
           }
         },
         fields: [
           {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true
+            type: "object",
+            name: "seo",
+            label: "SEO",
+            fields: [
+              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
           },
           {
-            type: "string",
-            name: "description",
-            label: "Description"
-          },
-          {
-            type: "image",
-            name: "featuredImage",
-            label: "Featured Image"
-          },
-          {
-            type: "boolean",
-            name: "draft",
-            label: "Draft",
-            description: "If enabled, this page will not be published"
+            type: "object",
+            name: "hero",
+            label: "Hero Bereich",
+            fields: [
+              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein", required: true },
+              { type: "string", name: "title", label: "Haupttitel", required: true },
+              { type: "string", name: "subtitle", label: "Untertitel" },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "primaryButtonText", label: "Button 1 Text" },
+              { type: "string", name: "primaryButtonLink", label: "Button 1 Link" },
+              { type: "string", name: "secondaryButtonText", label: "Button 2 Text" },
+              { type: "string", name: "secondaryButtonLink", label: "Button 2 Link" },
+              { type: "image", name: "backgroundImage", label: "Hintergrundbild" },
+              { type: "string", name: "videoUrl", label: "Video URL" },
+              { type: "boolean", name: "showQuickForm", label: "Schnellkontakt-Formular anzeigen" }
+            ]
           },
           {
             type: "object",
             list: true,
-            name: "blocks",
-            label: "Sections",
-            templates: [
-              {
-                name: "hero",
-                label: "Hero",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-                  {
-                    type: "object",
-                    name: "actions",
-                    label: "Actions",
-                    list: true,
-                    fields: [
-                      { type: "string", name: "label", label: "Label" },
-                      { type: "string", name: "href", label: "Link" },
-                      {
-                        type: "string",
-                        name: "variant",
-                        label: "Variant",
-                        options: ["primary", "secondary", "outline", "ghost"]
-                      }
-                    ]
-                  },
-                  { type: "image", name: "image", label: "Image" }
-                ]
-              },
-              {
-                name: "features",
-                label: "Features",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description", ui: { component: "textarea" } },
-                  {
-                    type: "object",
-                    name: "items",
-                    label: "Feature Items",
-                    list: true,
-                    fields: [
-                      { type: "string", name: "title", label: "Title" },
-                      { type: "string", name: "description", label: "Description" },
-                      { type: "string", name: "icon", label: "Icon (Lucide Name)" }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: "testimonial",
-                label: "Testimonial",
-                fields: [
-                  { type: "string", name: "quote", label: "Quote", ui: { component: "textarea" } },
-                  { type: "string", name: "author", label: "Author" },
-                  { type: "string", name: "role", label: "Role" }
-                ]
-              },
-              {
-                name: "contact",
-                label: "Contact Form",
-                fields: [
-                  { type: "string", name: "title", label: "Title" },
-                  { type: "string", name: "description", label: "Description" }
-                ]
-              },
-              {
-                name: "content",
-                label: "Rich Text",
-                fields: [{ type: "rich-text", name: "body", label: "Body" }]
-              }
+            name: "stats",
+            label: "Statistiken",
+            fields: [
+              { type: "string", name: "value", label: "Wert", required: true },
+              { type: "string", name: "label", label: "Beschriftung", required: true },
+              { type: "string", name: "icon", label: "Icon Name (Lucide)" }
+            ]
+          },
+          {
+            type: "object",
+            name: "servicesSection",
+            label: "Leistungen Bereich",
+            fields: [
+              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "ceoQuote",
+            label: "Gesch\xE4ftsf\xFChrer Zitat",
+            fields: [
+              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "name", label: "Name", required: true },
+              { type: "string", name: "role", label: "Position", required: true },
+              { type: "string", name: "quote", label: "Zitat", ui: { component: "textarea" }, required: true },
+              { type: "string", name: "text", label: "Text", ui: { component: "textarea" } },
+              { type: "image", name: "image", label: "Bild" },
+              { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "buttonLink", label: "Button Link" }
+            ]
+          },
+          {
+            type: "object",
+            list: true,
+            name: "projects",
+            label: "Projekt Showcase",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung" },
+              { type: "image", name: "image", label: "Bild", required: true }
+            ]
+          },
+          {
+            type: "object",
+            name: "finalCTA",
+            label: "Abschluss CTA",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "buttonLink", label: "Button Link" }
             ]
           }
         ]
       },
+      // Team Members Collection
+      {
+        name: "teamMember",
+        label: "Team Mitglieder",
+        path: "content/team",
+        format: "md",
+        fields: [
+          { type: "string", name: "name", label: "Name", required: true, isTitle: true },
+          { type: "string", name: "role", label: "Position", required: true },
+          { type: "string", name: "email", label: "E-Mail" },
+          {
+            type: "string",
+            name: "category",
+            label: "Kategorie",
+            required: true,
+            options: ["leadership", "office", "craftsmen"]
+          },
+          { type: "rich-text", name: "description", label: "Beschreibung" },
+          { type: "image", name: "image", label: "Foto" },
+          { type: "number", name: "order", label: "Reihenfolge" }
+        ]
+      },
+      // Services Collection
       {
         name: "service",
-        label: "Services",
+        label: "Leistungen",
         path: "content/services",
         format: "md",
+        fields: [
+          { type: "string", name: "id", label: "ID", required: true },
+          { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
+          { type: "string", name: "shortDescription", label: "Kurzbeschreibung", ui: { component: "textarea" } },
+          { type: "rich-text", name: "body", label: "Beschreibung (Lang)" },
+          { type: "image", name: "image", label: "Hauptbild" },
+          { type: "string", name: "icon", label: "Icon Name (Lucide)" },
+          {
+            type: "string",
+            list: true,
+            name: "features",
+            label: "Merkmale"
+          },
+          {
+            type: "string",
+            list: true,
+            name: "benefits",
+            label: "Vorteile"
+          },
+          {
+            type: "object",
+            list: true,
+            name: "gallery",
+            label: "Galerie",
+            fields: [
+              { type: "image", name: "image", label: "Bild" },
+              { type: "string", name: "caption", label: "Bildunterschrift" }
+            ]
+          }
+        ]
+      },
+      // Jobs Collection
+      {
+        name: "job",
+        label: "Stellenangebote",
+        path: "content/jobs",
+        format: "md",
+        fields: [
+          { type: "string", name: "id", label: "ID", required: true },
+          { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
+          { type: "string", name: "location", label: "Standort", required: true },
+          {
+            type: "string",
+            name: "type",
+            label: "Typ",
+            required: true,
+            options: ["Vollzeit", "Teilzeit", "Ausbildung"]
+          },
+          { type: "string", name: "shortDesc", label: "Kurzbeschreibung", ui: { component: "textarea" } },
+          {
+            type: "string",
+            list: true,
+            name: "tasks",
+            label: "Aufgaben"
+          },
+          {
+            type: "string",
+            list: true,
+            name: "profile",
+            label: "Ihr Profil"
+          },
+          {
+            type: "string",
+            list: true,
+            name: "benefits",
+            label: "Wir bieten"
+          },
+          { type: "boolean", name: "published", label: "Ver\xF6ffentlicht" }
+        ]
+      },
+      // About Page Collection (Single Document)
+      {
+        name: "aboutPage",
+        label: "\xDCber Uns Seite",
+        path: "content/about",
+        format: "json",
         ui: {
-          filename: {
-            slugify: (values) => {
-              const raw = typeof values?.title === "string" ? values.title : "service";
-              return raw.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-            }
+          allowedActions: {
+            create: false,
+            delete: false
           }
         },
         fields: [
           {
-            type: "string",
-            name: "title",
-            label: "Title",
-            isTitle: true,
-            required: true
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Description",
-            ui: { component: "textarea" }
-          },
-          {
-            type: "image",
-            name: "image",
-            label: "Cover Image"
-          },
-          {
-            type: "string",
-            name: "icon",
-            label: "Icon (Lucide Name)"
-          },
-          {
             type: "object",
-            name: "checkpoints",
-            label: "Feature Checkpoints",
-            list: true,
+            name: "seo",
+            label: "SEO",
             fields: [
-              { type: "string", name: "text", label: "Text" }
+              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
             ]
           },
           {
-            type: "rich-text",
-            name: "body",
-            label: "Body",
-            isBody: true
+            type: "object",
+            name: "hero",
+            label: "Hero Bereich",
+            fields: [
+              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "story",
+            label: "Unternehmensgeschichte",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "text1", label: "Absatz 1", ui: { component: "textarea" } },
+              { type: "string", name: "text2", label: "Absatz 2", ui: { component: "textarea" } },
+              { type: "image", name: "image", label: "Bild" }
+            ]
+          },
+          {
+            type: "object",
+            list: true,
+            name: "values",
+            label: "Werte",
+            fields: [
+              { type: "string", name: "text", label: "Text", required: true }
+            ]
+          },
+          {
+            type: "object",
+            name: "equipment",
+            label: "Ausstattung",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "teamSection",
+            label: "Team Bereich",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          {
+            type: "object",
+            name: "cta",
+            label: "Abschluss CTA",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "email", label: "E-Mail" }
+            ]
           }
         ]
       },
-      // Globals: navigation
+      // Contact Page Collection (Single Document)
+      {
+        name: "contactPage",
+        label: "Kontakt Seite",
+        path: "content/contact",
+        format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          }
+        },
+        fields: [
+          {
+            type: "object",
+            name: "seo",
+            label: "SEO",
+            fields: [
+              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          { type: "string", name: "title", label: "Titel", required: true },
+          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+          {
+            type: "object",
+            name: "address",
+            label: "Adresse",
+            fields: [
+              { type: "string", name: "company", label: "Firmenname", required: true },
+              { type: "string", name: "street", label: "Stra\xDFe", required: true },
+              { type: "string", name: "city", label: "Stadt", required: true },
+              { type: "string", name: "zip", label: "PLZ", required: true }
+            ]
+          },
+          { type: "string", name: "phone", label: "Telefon", required: true },
+          { type: "string", name: "fax", label: "Fax" },
+          { type: "string", name: "email", label: "E-Mail", required: true },
+          { type: "string", name: "website", label: "Website" },
+          { type: "string", name: "facebook", label: "Facebook URL" },
+          {
+            type: "object",
+            name: "officeHours",
+            label: "B\xFCro \xD6ffnungszeiten",
+            fields: [
+              { type: "string", name: "weekdays", label: "Mo-Fr", required: true }
+            ]
+          },
+          {
+            type: "object",
+            name: "repairHours",
+            label: "Reparaturplanung \xD6ffnungszeiten",
+            fields: [
+              { type: "string", name: "tueThu", label: "Di-Do", required: true },
+              { type: "string", name: "fri", label: "Fr", required: true }
+            ]
+          }
+        ]
+      },
+      // Settings (Global Config)
+      {
+        name: "settings",
+        label: "Einstellungen",
+        path: "content/globals",
+        format: "json",
+        match: {
+          include: "**/settings"
+        },
+        fields: [
+          { type: "string", name: "siteName", label: "Website Name", required: true },
+          { type: "string", name: "siteDescription", label: "Website Beschreibung" },
+          { type: "image", name: "favicon", label: "Favicon" },
+          { type: "image", name: "logo", label: "Logo" },
+          { type: "image", name: "defaultOgImage", label: "Standard OG Bild" },
+          { type: "string", name: "gtmId", label: "Google Tag Manager ID" },
+          { type: "string", name: "gaId", label: "Google Analytics ID" },
+          { type: "string", name: "sentryDsn", label: "Sentry DSN" }
+        ]
+      },
+      // Navigation
       {
         name: "navigation",
         label: "Navigation",
@@ -196,24 +389,20 @@ var config_default = defineConfig({
           include: "**/navigation"
         },
         fields: [
-          {
-            type: "string",
-            name: "logo",
-            label: "Logo Path"
-          },
+          { type: "image", name: "logo", label: "Logo" },
           {
             type: "object",
-            name: "items",
-            label: "Nav Items",
             list: true,
+            name: "items",
+            label: "Men\xFCpunkte",
             fields: [
-              { type: "string", name: "label", label: "Label", required: true },
+              { type: "string", name: "label", label: "Bezeichnung", required: true },
               { type: "string", name: "href", label: "Link", required: true }
             ]
           }
         ]
       },
-      // Globals: footer
+      // Footer
       {
         name: "footer",
         label: "Footer",
@@ -223,65 +412,25 @@ var config_default = defineConfig({
           include: "**/footer"
         },
         fields: [
-          {
-            type: "string",
-            name: "copyright",
-            label: "Copyright Text"
-          },
+          { type: "string", name: "copyright", label: "Copyright Text" },
           {
             type: "object",
-            name: "links",
-            label: "Footer Links",
             list: true,
+            name: "links",
+            label: "Links",
             fields: [
-              { type: "string", name: "label", label: "Label", required: true },
+              { type: "string", name: "label", label: "Bezeichnung", required: true },
               { type: "string", name: "href", label: "Link", required: true }
             ]
           },
           {
             type: "object",
-            name: "social",
-            label: "Social Links",
             list: true,
+            name: "social",
+            label: "Social Media",
             fields: [
               { type: "string", name: "platform", label: "Platform", required: true },
               { type: "string", name: "url", label: "URL", required: true }
-            ]
-          }
-        ]
-      },
-      // Globals: settings
-      {
-        name: "settings",
-        label: "Site Settings",
-        path: "content/globals",
-        format: "json",
-        match: {
-          include: "**/settings"
-        },
-        fields: [
-          { type: "string", name: "siteName", label: "Site Name", required: true },
-          { type: "string", name: "siteDescription", label: "Site Description" },
-          { type: "image", name: "favicon", label: "Favicon (SVG or PNG)" },
-          { type: "image", name: "logo", label: "Site Logo" },
-          { type: "image", name: "defaultOgImage", label: "Default OG Image" },
-          { type: "string", name: "gtmId", label: "Google Tag Manager ID" },
-          { type: "string", name: "gaId", label: "Google Analytics ID" },
-          { type: "string", name: "sentryDsn", label: "Sentry DSN" },
-          {
-            type: "object",
-            name: "hero",
-            label: "Homepage Hero Settings",
-            fields: [
-              {
-                type: "string",
-                name: "mediaType",
-                label: "Background Type",
-                options: ["video", "image"]
-              },
-              { type: "image", name: "backgroundImage", label: "Background Image" },
-              { type: "string", name: "videoUrl", label: "Video URL" },
-              { type: "boolean", name: "showQuickForm", label: "Show Quick Inquiry Form" }
             ]
           }
         ]

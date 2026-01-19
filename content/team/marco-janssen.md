@@ -1,0 +1,8 @@
+---
+name: Marco Janssen
+role: Dachdeckergeselle / Vorarbeiter
+category: craftsmen
+order: 10
+---
+
+Dachdeckergeselle bei Ivangs Bedachungen.

@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
-export const SUPPORTED_LANGS = ['de', 'en'] as const;
+export const SUPPORTED_LANGS = ['de'] as const;
 export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
 
 i18n
@@ -11,7 +11,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    fallbackLng: 'en',
+    fallbackLng: 'de',
     supportedLngs: [...SUPPORTED_LANGS],
     defaultNS: 'common',
     ns: ['common', 'cookie', 'errors', 'navigation'],

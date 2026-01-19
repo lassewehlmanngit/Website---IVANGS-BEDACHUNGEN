@@ -84,7 +84,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
 
         {/* Right: Quick Inquiry Form (Conditional) */}
         {showQuickForm && (
-          <div className="hidden lg:block">
+          <div className="hidden md:block">
             <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-sm shadow-2xl max-w-md ml-auto relative overflow-hidden animate-fade-in">
                {/* Decorative Blur */}
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>

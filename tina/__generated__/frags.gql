@@ -1,0 +1,100 @@
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  featuredImage
+  draft
+  blocks {
+    __typename
+    ... on PageBlocksHero {
+      title
+      description
+      actions {
+        __typename
+        label
+        href
+        variant
+      }
+      image
+    }
+    ... on PageBlocksFeatures {
+      title
+      description
+      items {
+        __typename
+        title
+        description
+        icon
+      }
+    }
+    ... on PageBlocksTestimonial {
+      quote
+      author
+      role
+    }
+    ... on PageBlocksContact {
+      title
+      description
+    }
+    ... on PageBlocksContent {
+      body
+    }
+  }
+}
+
+fragment ServiceParts on Service {
+  __typename
+  title
+  description
+  image
+  icon
+  checkpoints {
+    __typename
+    text
+  }
+  body
+}
+
+fragment NavigationParts on Navigation {
+  __typename
+  logo
+  items {
+    __typename
+    label
+    href
+  }
+}
+
+fragment FooterParts on Footer {
+  __typename
+  copyright
+  links {
+    __typename
+    label
+    href
+  }
+  social {
+    __typename
+    platform
+    url
+  }
+}
+
+fragment SettingsParts on Settings {
+  __typename
+  siteName
+  siteDescription
+  favicon
+  logo
+  defaultOgImage
+  gtmId
+  gaId
+  sentryDsn
+  hero {
+    __typename
+    mediaType
+    backgroundImage
+    videoUrl
+    showQuickForm
+  }
+}

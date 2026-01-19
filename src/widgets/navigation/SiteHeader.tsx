@@ -95,7 +95,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             onClose={() => setMobileMenuOpen(false)}
             side="right"
             title={t('navigation.menu')}
-            className="w-full max-w-full sm:max-w-md"
+            fullWidth={true}
           >
             <nav
               aria-label={t('navigation.mobileNavigation')}

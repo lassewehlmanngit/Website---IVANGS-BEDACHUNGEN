@@ -12,6 +12,7 @@ export interface DrawerProps {
   title?: string;
   children: React.ReactNode;
   className?: string;
+  fullWidth?: boolean;
 }
 
 const sideClasses: Record<DrawerSide, { panel: string; openAnim: string; closedAnim: string }> = {
@@ -34,6 +35,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   title,
   children,
   className,
+  fullWidth = false,
 }) => {
   const drawerRef = useRef<HTMLDivElement>(null);
   const previousActiveElement = useRef<HTMLElement | null>(null);
@@ -113,7 +115,8 @@ export const Drawer: React.FC<DrawerProps> = ({
         aria-modal="true"
         aria-labelledby={title ? 'drawer-title' : undefined}
         className={cn(
-          'fixed z-10 w-full max-w-xs border-border bg-background shadow-lg transition-transform duration-300 ease-in-out',
+          'fixed z-10 w-full border-border bg-background shadow-lg transition-transform duration-300 ease-in-out',
+          fullWidth ? 'max-w-full' : 'max-w-xs sm:max-w-md',
           sideConfig.panel,
           side === 'left' ? 'border-r' : 'border-l',
           open ? sideConfig.openAnim : sideConfig.closedAnim,

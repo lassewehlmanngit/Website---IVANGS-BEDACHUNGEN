@@ -1,0 +1,26 @@
+{
+  "seo": {
+    "title": "Kontakt - Ivangs Bedachungen",
+    "description": "Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten."
+  },
+  "title": "Der erste Schritt zum dichten Dach.",
+  "description": "Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.",
+  "address": {
+    "company": "IVANGS Bedachungen GmbH & Co. KG",
+    "street": "Schmiedestraße 37",
+    "city": "Viersen - Süchteln",
+    "zip": "41749"
+  },
+  "phone": "+49 (0) 21 62 – 35 66 66",
+  "fax": "+49 (0) 21 62 - 35 66 67",
+  "email": "bedachungen@ivangs.de",
+  "website": "www.ivangs.de",
+  "facebook": "https://www.facebook.com/ivangs.de",
+  "officeHours": {
+    "weekdays": "Mo – Fr: 07.00 – 17.00 Uhr"
+  },
+  "repairHours": {
+    "tueThu": "Di – Do: 8.00 – 13.00 Uhr",
+    "fri": "Fr: 11.00 – 16.00 Uhr"
+  }
+}
