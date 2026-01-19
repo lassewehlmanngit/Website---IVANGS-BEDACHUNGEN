@@ -1,6 +1,7 @@
 # robots.txt for https://example.com (Development/Staging)
 User-agent: *
-Disallow: /
+Allow: /
+
 
 # Sitemap
 Sitemap: https://example.com/sitemap.xml

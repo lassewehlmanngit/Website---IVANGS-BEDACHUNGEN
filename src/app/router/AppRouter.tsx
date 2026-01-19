@@ -5,10 +5,12 @@ import { SUPPORTED_LANGS, type SupportedLang } from '@/shared/config/i18n';
 import { MarketingLayout } from '@/widgets/layout/MarketingLayout';
 import { HomePage } from '@/pages/HomePage';
 import { GenericPage } from '@/pages/GenericPage';
-import { BlogIndexPage } from '@/pages/BlogIndexPage';
-import { BlogPostPage } from '@/pages/BlogPostPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/DesignSystemPage';
+import { ServicesPage } from '@/pages/services/ui/ServicesPage';
+import { ServiceDetailPage } from '@/pages/service-detail/ui/ServiceDetailPage';
+import { CareerPage } from '@/pages/career/ui/CareerPage';
+import { ContactPage } from '@/pages/contact/ui/ContactPage';
 
 const detectBrowserLanguage = (): SupportedLang => {
   const browserLang = navigator.language || 'en';
@@ -39,8 +41,10 @@ const LanguageWrapper: React.FC = () => {
     <MarketingLayout lang={safeLang}>
       <Routes>
         <Route path="/" element={<HomePage lang={safeLang} />} />
-        <Route path="/blog" element={<BlogIndexPage lang={safeLang} />} />
-        <Route path="/blog/:slug" element={<BlogPostPage lang={safeLang} />} />
+        <Route path="/services" element={<ServicesPage lang={safeLang} />} />
+        <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
+        <Route path="/career" element={<CareerPage lang={safeLang} />} />
+        <Route path="/contact" element={<ContactPage lang={safeLang} />} />
         <Route path="/:slug" element={<GenericPage lang={safeLang} />} />
         <Route path="*" element={<NotFoundPage lang={safeLang} />} />
       </Routes>

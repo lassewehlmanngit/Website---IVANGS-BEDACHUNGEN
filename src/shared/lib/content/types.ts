@@ -39,24 +39,3 @@ export interface ContentPage {
   meta: PageMeta;
   blocks?: PageBlock[]; // Optional because migration might leave some empty
 }
-
-export interface BlogPostMeta {
-  title: string;
-  description?: string;
-  excerpt?: string;
-  date?: string;
-}
-
-export interface BlogPost {
-  slug: string;
-  lang: string;
-  meta: BlogPostMeta;
-  body: any; // Rich text
-}
-
-export interface BlogPostSummary {
-  slug: string;
-  title: string;
-  excerpt?: string;
-  date?: string;
-}

@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu } from 'lucide-react';
+import { Menu, Hammer } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
 import { getNavigation, type NavigationData } from '@/shared/lib/content/globals';
 import { Drawer } from '@/shared/ui/Drawer';
 import { IconButton } from '@/shared/ui/IconButton';
+import { Button } from '@/shared/ui/Button';
 
 export interface SiteHeaderProps {
   lang: SupportedLang;
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: (open: boolean) => void;
 }
 
-export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang }) => {
+export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, setMobileMenuOpen }) => {
   const { t } = useTranslation('common');
   const [nav, setNav] = useState<NavigationData>({ items: [] });
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getNavigation(lang).then(setNav);
@@ -23,8 +26,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang }) => {
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
-      'rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted',
-      isActive && 'bg-muted text-foreground',
+      'rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary-600 transition-colors',
+      isActive && 'text-primary-600',
     );
 
   const mobileLinkClassName = ({ isActive }: { isActive: boolean }): string =>
@@ -33,66 +36,115 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang }) => {
       isActive && 'bg-muted text-foreground',
     );
 
+  const serviceLinks = [
+    { id: 'steildach', label: 'Steildach' },
+    { id: 'flachdach', label: 'Flachdach' },
+    { id: 'solar', label: 'Solar & PV' },
+    { id: 'fenster', label: 'Fenster' },
+    { id: 'sanierung', label: 'Sanierung' },
+  ];
+
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link to={`/${lang}`} className="flex items-center gap-2 font-semibold tracking-tight text-foreground">
-          {nav.logo ? (
-            <img src={nav.logo} alt="Logo" className="h-8 w-8" />
-          ) : (
-            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              M
-            </span>
-          )}
-          <span>Starter</span>
-        </Link>
+    <div className="sticky top-0 z-40 flex flex-col shadow-sm transition-all duration-300">
+      <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
+        <div className="container flex h-20 items-center justify-between">
+            {/* Logo */}
+            <Link to={`/${lang}`} className="flex items-center gap-2 cursor-pointer group">
+              <div className="bg-primary p-2 rounded-lg text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                <Hammer size={24} />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold leading-none text-foreground tracking-tight">
+                  IVANGS
+                </h1>
+                <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Bedachungen</span>
+              </div>
+            </Link>
 
-        {/* Desktop navigation */}
-        <nav
-          aria-label={t('navigation.mainNavigation')}
-          className="hidden items-center gap-1 md:flex"
-        >
-          {nav.items.map((item) => (
-            <NavLink key={item.href} to={`/${lang}${item.href}`} className={linkClassName}>
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
-
-        {/* Mobile menu button */}
-        <IconButton
-          aria-label={t('navigation.openMenu')}
-          onClick={() => setMobileMenuOpen(true)}
-          className="md:hidden"
-        >
-          <Menu className="h-5 w-5" />
-        </IconButton>
-
-        {/* Mobile drawer */}
-        <Drawer
-          open={mobileMenuOpen}
-          onClose={() => setMobileMenuOpen(false)}
-          side="right"
-          title={t('navigation.menu')}
-        >
+          {/* Desktop navigation */}
           <nav
-            aria-label={t('navigation.mobileNavigation')}
-            className="flex flex-col gap-1"
+            aria-label={t('navigation.mainNavigation')}
+            className="hidden items-center gap-6 md:flex"
           >
             {nav.items.map((item) => (
-              <NavLink
-                key={item.href}
-                to={`/${lang}${item.href}`}
-                className={mobileLinkClassName}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              <NavLink key={item.href} to={`/${lang}${item.href}`} className={linkClassName}>
                 {item.label}
               </NavLink>
             ))}
+            <Button 
+                onClick={() => navigate(`/${lang}/contact`)}
+                className="shadow-lg shadow-primary/20"
+            >
+                Angebot anfragen
+            </Button>
           </nav>
-        </Drawer>
+
+          {/* Mobile menu button (Hidden as we use Bottom Nav, but kept for fallback/tablet) */}
+          <div className="md:hidden">
+             {/* Placeholder or specific tablet menu logic */}
+          </div>
+
+          {/* Mobile drawer */}
+          <Drawer
+            open={mobileMenuOpen}
+            onClose={() => setMobileMenuOpen(false)}
+            side="right"
+            title={t('navigation.menu')}
+          >
+            <nav
+              aria-label={t('navigation.mobileNavigation')}
+              className="flex flex-col gap-1"
+            >
+              {nav.items.map((item) => (
+                <NavLink
+                  key={item.href}
+                  to={`/${lang}${item.href}`}
+                  className={mobileLinkClassName}
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+              <div className="h-px bg-border my-2"></div>
+              {serviceLinks.map((service) => (
+                 <NavLink
+                    key={service.id}
+                    to={`/${lang}/services/${service.id}`}
+                    className={mobileLinkClassName}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {service.label}
+                  </NavLink>
+              ))}
+               <div className="mt-4">
+                 <Button className="w-full" onClick={() => {
+                    navigate(`/${lang}/contact`);
+                    setMobileMenuOpen(false);
+                 }}>Angebot anfragen</Button>
+               </div>
+            </nav>
+          </Drawer>
+        </div>
+      </header>
+      
+      {/* Secondary Service Nav (Desktop Only) */}
+      <div className="hidden md:block bg-slate-50 border-b border-slate-200">
+           <div className="container h-12 flex items-center gap-8">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Leistungen:</span>
+              {serviceLinks.map((service) => (
+                <NavLink
+                    key={service.id}
+                    to={`/${lang}/services/${service.id}`}
+                    className={({ isActive }) => cn(
+                        "text-sm font-medium transition-colors hover:text-primary",
+                        isActive ? "text-primary" : "text-muted-foreground"
+                    )}
+                >
+                    {service.label}
+                </NavLink>
+              ))}
+           </div>
       </div>
-    </header>
+    </div>
   );
 };
-

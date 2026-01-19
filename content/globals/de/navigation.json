@@ -3,7 +3,6 @@
   "items": [
     { "label": "Startseite", "href": "/" },
     { "label": "Über uns", "href": "/about" },
-    { "label": "Blog", "href": "/blog" },
     { "label": "Kontakt", "href": "/contact" }
   ]
 }

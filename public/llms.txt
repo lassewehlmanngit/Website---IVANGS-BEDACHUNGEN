@@ -7,5 +7,6 @@
 ## Core Pages
 - /de: German Homepage (Primary)
 - /en: English Homepage
-- /de/contact: Contact Form
 - /de/services: Service Overview
+- /de/contact: Contact Form
+- /de/career: Career Opportunities

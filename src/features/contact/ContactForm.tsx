@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';
+import { Select } from '@/shared/ui/Select';
+import { Checkbox } from '@/shared/ui/Checkbox';
 import { FormField } from '@/shared/ui/FormField';
 import { Alert } from '@/shared/ui/Alert';
 import { toast } from '@/shared/lib/toast';
@@ -18,8 +20,10 @@ import {
 export interface ContactFormData {
   name: string;
   email: string;
-  subject: string;
+  topic: string;
   message: string;
+  privacy: boolean;
+  _gotcha: string; // Honeypot field
 }
 
 export interface ContactFormProps {
@@ -30,9 +34,20 @@ export interface ContactFormProps {
 const initialFormData: ContactFormData = {
   name: '',
   email: '',
-  subject: '',
+  topic: 'Allgemeine Anfrage',
   message: '',
+  privacy: false,
+  _gotcha: '',
 };
+
+const TOPICS = [
+    { value: 'Allgemeine Anfrage', label: 'Allgemeine Anfrage' },
+    { value: 'Angebot Steildach', label: 'Angebot Steildach' },
+    { value: 'Angebot Flachdach', label: 'Angebot Flachdach' },
+    { value: 'Angebot Solar/PV', label: 'Angebot Solar/PV' },
+    { value: 'Reparatur / Wartung', label: 'Reparatur / Wartung' },
+    { value: 'Bewerbung', label: 'Bewerbung' },
+];
 
 export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className }) => {
   const { t } = useTranslation('common');
@@ -44,17 +59,22 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
   const validationSchema: Partial<Record<keyof ContactFormData, FieldValidation>> = {
     name: [required(t('validation.required')), minLength(2), maxLength(100)],
     email: [required(t('validation.required')), email(t('validation.email'))],
-    subject: [required(t('validation.required')), minLength(3), maxLength(200)],
+    topic: [required(t('validation.required'))],
     message: [required(t('validation.required')), minLength(10), maxLength(5000)],
+    privacy: [(val) => val === true ? null : t('validation.required')],
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, type } = e.target;
+    
+    if (type === 'checkbox') {
+        setFormData((prev) => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
+    } else {
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    }
 
-    // Clear error when user starts typing
     if (errors[name as keyof ContactFormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -63,6 +83,14 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitStatus('idle');
+
+    // Honeypot check
+    if (formData._gotcha) {
+      // Bot detected - simulate success
+      setSubmitStatus('success');
+      setFormData(initialFormData);
+      return;
+    }
 
     // Validate form
     const validationErrors = validateForm(formData, validationSchema);
@@ -110,6 +138,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
         </Alert>
       )}
 
+      {/* Honeypot field (hidden) */}
+      <input
+        type="text"
+        name="_gotcha"
+        value={formData._gotcha}
+        onChange={handleChange}
+        style={{ display: 'none' }}
+        tabIndex={-1}
+        autoComplete="off"
+      />
+
       <div className="space-y-4">
         <FormField
           label="Name"
@@ -123,7 +162,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             type="text"
             value={formData.name}
             onChange={handleChange}
-            placeholder="Your name"
+            placeholder="Ihr Name"
             autoComplete="name"
             aria-invalid={!!errors.name}
           />
@@ -141,31 +180,30 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             type="email"
             value={formData.email}
             onChange={handleChange}
-            placeholder="your@email.com"
+            placeholder="ihre@email.de"
             autoComplete="email"
             aria-invalid={!!errors.email}
           />
         </FormField>
 
         <FormField
-          label="Subject"
-          htmlFor="contact-subject"
-          error={errors.subject}
+          label="Worum geht es?"
+          htmlFor="contact-topic"
+          error={errors.topic}
           required
         >
-          <Input
-            id="contact-subject"
-            name="subject"
-            type="text"
-            value={formData.subject}
+          <Select
+            id="contact-topic"
+            name="topic"
+            value={formData.topic}
             onChange={handleChange}
-            placeholder="What is this about?"
-            aria-invalid={!!errors.subject}
+            options={TOPICS}
+            aria-invalid={!!errors.topic}
           />
         </FormField>
 
         <FormField
-          label="Message"
+          label="Nachricht"
           htmlFor="contact-message"
           error={errors.message}
           required
@@ -175,14 +213,26 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             name="message"
             value={formData.message}
             onChange={handleChange}
-            placeholder="Your message..."
+            placeholder="Ihre Nachricht..."
             rows={5}
             aria-invalid={!!errors.message}
           />
         </FormField>
+        
+        <div className="py-2">
+            <Checkbox 
+                id="contact-privacy"
+                name="privacy"
+                checked={formData.privacy}
+                onChange={handleChange}
+                label="Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu."
+                aria-invalid={!!errors.privacy}
+            />
+            {errors.privacy && <p className="text-sm text-destructive mt-1">{errors.privacy}</p>}
+        </div>
 
         <Button type="submit" isLoading={isSubmitting} className="w-full sm:w-auto">
-          {t('actions.submit')}
+          Nachricht absenden
         </Button>
       </div>
     </form>

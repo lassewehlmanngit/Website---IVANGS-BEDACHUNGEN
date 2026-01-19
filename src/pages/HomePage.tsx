@@ -1,48 +1,58 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
-import { ButtonLink } from '@/shared/ui/ButtonLink';
+import { HeroSection } from '@/widgets/home/ui/HeroSection';
+import { ServicePreview } from '@/widgets/home/ui/ServicePreview';
+import { TrustIndicators } from '@/widgets/home/ui/TrustIndicators';
+import { CeoQuote } from '@/widgets/home/ui/CeoQuote';
+import { ProjectShowcase } from '@/widgets/home/ui/ProjectShowcase';
+import { Link } from 'react-router-dom';
+import { Button } from '@/shared/ui/Button';
 
 export interface HomePageProps {
   lang: SupportedLang;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
-  const { t } = useTranslation('common');
-
   return (
-    <div className="container py-12">
+    <>
       <Seo
-        title={lang === 'de' ? 'Startseite' : 'Home'}
-        description={
-          lang === 'de'
-            ? 'Ein Starter für Marketing-Websites: React, Vite, TypeScript, Tailwind und TinaCMS.'
-            : 'A production-ready starter for marketing websites: React, Vite, TypeScript, Tailwind, and TinaCMS.'
-        }
+        title="Ivangs Bedachungen - Meisterbetrieb seit 1996"
+        description="Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+        localBusiness={{
+            name: "Ivangs Bedachungen GmbH & Co. KG",
+            telephone: "+49123456789",
+            email: "info@ivangs-bedachungen.de",
+            address: {
+                streetAddress: "Musterstraße 12",
+                addressLocality: "Geilenkirchen",
+                postalCode: "52511",
+                addressCountry: "DE"
+            }
+        }}
       />
-
-      <div className="mx-auto max-w-3xl">
-        <p className="text-sm font-medium text-white/70">{t('brandTagline')}</p>
-        <h1 className="mt-3 text-4xl font-semibold tracking-tight sm:text-5xl">
-          {lang === 'de' ? 'Marketing Site Starter' : 'Marketing Site Starter'}
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-white/80">
-          {lang === 'de'
-            ? 'Diese Seite ist absichtlich minimal: Inhalte kommen aus TinaCMS und werden bei Bedarf erweitert.'
-            : 'This page is intentionally minimal: content comes from TinaCMS and can be extended as needed.'}
-        </p>
-
-        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-          <ButtonLink to={`/${lang}/about`} variant="primary">
-            {lang === 'de' ? 'Beispielseite ansehen' : 'View example page'}
-          </ButtonLink>
-          <ButtonLink to={`/${lang}/blog`} variant="secondary">
-            {lang === 'de' ? 'Zum Blog' : 'Go to blog'}
-          </ButtonLink>
+      <HeroSection lang={lang} />
+      <ServicePreview lang={lang} />
+      <TrustIndicators />
+      <CeoQuote lang={lang} />
+      <ProjectShowcase />
+      
+      {/* Final CTA */}
+      <section className="py-24 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
+          <p className="text-primary-foreground/80 text-xl max-w-2xl mx-auto mb-10">
+            Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.
+          </p>
+          <div className="flex justify-center gap-4">
+            <Link to={`/${lang}/contact`}>
+                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg rounded-full shadow-xl font-bold">
+                  Beratungstermin vereinbaren
+                </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
-

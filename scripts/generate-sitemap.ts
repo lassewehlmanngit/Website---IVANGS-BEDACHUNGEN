@@ -44,7 +44,7 @@ async function generateSitemap() {
   const urls: SitemapUrl[] = [];
 
   // Helper to check if a file exists for a given language and collection
-  const checkExists = (lang: string, collection: 'pages' | 'blog', slug: string) => {
+  const checkExists = (lang: string, collection: 'pages', slug: string) => {
     // Check both slug.md and slug/index.md
     const p1 = path.join(contentDir, collection, lang, `${slug}.md`);
     const p2 = path.join(contentDir, collection, lang, slug, 'index.md');
@@ -78,23 +78,6 @@ async function generateSitemap() {
         loc: `${baseUrl}/${lang}/${slug}`,
         changefreq: 'weekly',
         priority: 0.8,
-        alternates,
-      });
-    }
-
-    // 3. Blog
-    const blogDir = path.join(contentDir, 'blog', lang);
-    const blogSlugs = scanMarkdownSlugs(blogDir);
-    for (const slug of blogSlugs) {
-      const alternates = [{ lang, href: `${baseUrl}/${lang}/blog/${slug}` }];
-      if (checkExists(otherLang, 'blog', slug)) {
-        alternates.push({ lang: otherLang, href: `${baseUrl}/${otherLang}/blog/${slug}` });
-      }
-
-      urls.push({
-        loc: `${baseUrl}/${lang}/blog/${slug}`,
-        changefreq: 'monthly',
-        priority: 0.6,
         alternates,
       });
     }

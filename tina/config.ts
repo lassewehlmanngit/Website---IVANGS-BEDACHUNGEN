@@ -149,14 +149,14 @@ export default defineConfig({
         ],
       },
       {
-        name: 'post',
-        label: 'Blog',
-        path: 'content/blog',
+        name: 'service',
+        label: 'Services',
+        path: 'content/services',
         format: 'md',
         ui: {
           filename: {
             slugify: (values) => {
-              const raw = typeof values?.title === 'string' ? values.title : 'post';
+              const raw = typeof values?.title === 'string' ? values.title : 'service';
               return raw
                 .toLowerCase()
                 .trim()
@@ -175,63 +175,28 @@ export default defineConfig({
           },
           {
             type: 'string',
-            name: 'excerpt',
-            label: 'Excerpt',
-            ui: {
-              component: 'textarea',
-            },
-          },
-          {
-            type: 'datetime',
-            name: 'date',
-            label: 'Publish Date',
-            required: true,
-          },
-          {
-            type: 'string',
             name: 'description',
-            label: 'SEO Description',
+            label: 'Description',
+            ui: { component: 'textarea' },
           },
           {
             type: 'image',
-            name: 'featuredImage',
-            label: 'Featured Image',
+            name: 'image',
+            label: 'Cover Image',
+          },
+          {
+            type: 'string',
+            name: 'icon',
+            label: 'Icon (Lucide Name)',
           },
           {
             type: 'object',
-            name: 'author',
-            label: 'Author',
-            fields: [
-              { type: 'string', name: 'name', label: 'Name', required: true },
-              { type: 'string', name: 'title', label: 'Title' },
-              { type: 'image', name: 'avatar', label: 'Avatar' },
-            ],
-          },
-          {
-            type: 'string',
-            name: 'tags',
-            label: 'Tags',
+            name: 'checkpoints',
+            label: 'Feature Checkpoints',
             list: true,
-            ui: {
-              component: 'tags',
-            },
-          },
-          {
-            type: 'string',
-            name: 'category',
-            label: 'Category',
-            options: [
-              { value: 'news', label: 'News' },
-              { value: 'tutorial', label: 'Tutorial' },
-              { value: 'case-study', label: 'Case Study' },
-              { value: 'announcement', label: 'Announcement' },
-            ],
-          },
-          {
-            type: 'boolean',
-            name: 'draft',
-            label: 'Draft',
-            description: 'If enabled, this post will not be published',
+            fields: [
+              { type: 'string', name: 'text', label: 'Text' }
+            ]
           },
           {
             type: 'rich-text',

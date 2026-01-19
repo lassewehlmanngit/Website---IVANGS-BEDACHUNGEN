@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { getFooter, type FooterData } from '@/shared/lib/content/globals';
 
@@ -17,42 +18,84 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border">
-      <div className="container py-10">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-sm text-muted-foreground">
-            {footer.copyright || `© ${year} Marketing Site Starter`}
-          </p>
-          <div className="flex flex-wrap gap-4 text-sm">
-            {footer.links.map((link) => (
-              <Link
-                key={link.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                to={`/${lang}${link.href}`}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          {footer.social.length > 0 && (
-            <div className="flex gap-3">
-              {footer.social.map((s) => (
-                <a
-                  key={s.platform}
-                  href={s.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  aria-label={s.platform}
-                >
-                  {s.platform}
-                </a>
-              ))}
+    <footer className="bg-slate-900 text-slate-300 py-16 mb-16 md:mb-0">
+      <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12">
+        {/* Brand Column */}
+        <div>
+          <div className="flex items-center gap-2 mb-6 text-white">
+            <div className="bg-primary-600 p-1.5 rounded-sm text-white">
+              <Hammer size={20} />
             </div>
-          )}
+            <span className="text-xl font-bold">IVANGS</span>
+          </div>
+          <p className="text-slate-400 text-sm leading-relaxed mb-6">
+            Ivangs Bedachungen GmbH & Co. KG – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
+          </p>
+          <div className="flex gap-4">
+            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary-600 transition-colors text-white">
+              <Facebook size={18} />
+            </a>
+            <a href="#" className="p-2 bg-slate-800 rounded-full hover:bg-primary-600 transition-colors text-white">
+              <Instagram size={18} />
+            </a>
+          </div>
         </div>
+
+        {/* Contact Column */}
+        <div>
+          <h3 className="text-white font-semibold mb-6">Kontakt</h3>
+          <ul className="space-y-4 text-sm">
+            <li className="flex items-start gap-3">
+              <MapPin size={18} className="text-primary-600 shrink-0 mt-0.5" />
+              <span>Musterstraße 12<br />52511 Geilenkirchen</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Phone size={18} className="text-primary-600 shrink-0" />
+              <span>+49 123 456 789</span>
+            </li>
+            <li className="flex items-center gap-3">
+              <Mail size={18} className="text-primary-600 shrink-0" />
+              <span>info@ivangs-bedachungen.de</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal Column */}
+        <div>
+          <h3 className="text-white font-semibold mb-6">Rechtliches</h3>
+          <ul className="space-y-3 text-sm">
+             {/* Use fetched links if available, otherwise hardcode common ones */}
+             {footer.links.length > 0 ? footer.links.map(link => (
+                 <li key={link.href}>
+                     <Link to={`/${lang}${link.href}`} className="hover:text-white transition-colors">{link.label}</Link>
+                 </li>
+             )) : (
+                 <>
+                    <li><Link to={`/${lang}/impressum`} className="hover:text-white transition-colors">Impressum</Link></li>
+                    <li><Link to={`/${lang}/datenschutz`} className="hover:text-white transition-colors">Datenschutz</Link></li>
+                 </>
+             )}
+          </ul>
+        </div>
+
+        {/* Career Column */}
+        <div>
+          <h3 className="text-white font-semibold mb-6">Karriere</h3>
+          <p className="text-sm text-slate-400 mb-4">
+            Werde Teil unseres 28-köpfigen Teams. Wir bilden aus!
+          </p>
+          <Link 
+            to={`/${lang}/career`}
+            className="text-primary-400 hover:text-white text-sm font-medium flex items-center gap-2 transition-colors"
+          >
+            Zu den Stellenangeboten <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+        {footer.copyright || `© ${year} Ivangs Bedachungen GmbH & Co. KG. Alle Rechte vorbehalten.`}
       </div>
     </footer>
   );
 };
-
