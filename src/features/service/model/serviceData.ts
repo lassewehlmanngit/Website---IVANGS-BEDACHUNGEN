@@ -76,8 +76,15 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.sascha, teamMembers.isabel],
     faq: [
-      { q: 'Wie lange dauert eine komplette Sanierung?', a: 'Bei einem Einfamilienhaus rechnen wir wetterabhängig mit ca. 2 Wochen.' },
-      { q: 'Kann ich während der Arbeiten im Haus wohnen?', a: 'Ja, absolut. Da wir meist von außen arbeiten, ist die Beeinträchtigung im Wohnraum minimal.' }
+      { q: 'Was kostet eine Steildachsanierung im Kreis Viersen?', a: 'Die Kosten für eine Steildachsanierung variieren je nach Dachfläche, Material und Dämmung. Bei einem durchschnittlichen Einfamilienhaus (ca. 100-150 m²) können Sie mit 15.000 bis 35.000 Euro rechnen. Wir erstellen Ihnen gerne ein kostenloses, detailliertes Festpreis-Angebot.' },
+      { q: 'Wie lange dauert eine komplette Dachsanierung?', a: 'Bei einem Einfamilienhaus rechnen wir wetterabhängig mit ca. 2 Wochen Bauzeit. Ein Reihenhaus dauert etwa 1 Woche, größere Objekte entsprechend länger. Wir planen Pufferzeiten für Schlechtwetter ein und halten Sie stets auf dem Laufenden.' },
+      { q: 'Kann ich während der Dacharbeiten im Haus wohnen?', a: 'Ja, absolut. Da wir ausschließlich von außen arbeiten, ist die Beeinträchtigung im Wohnraum minimal. Sie müssen lediglich mit Geräuschen durch Abbruch und Montage rechnen. Bei Dachfenstertausch wird kurzzeitig von innen gearbeitet.' },
+      { q: 'Welche Dachziegel sind die besten?', a: 'Das hängt von Ihren Prioritäten ab: Tonziegel sind das langlebigste Naturprodukt (80+ Jahre), Betondachsteine sind wirtschaftlich und robust, Naturschiefer ist die Premium-Lösung für zeitlose Eleganz. Wir beraten Sie objektiv basierend auf Ihrem Budget und der Architektur.' },
+      { q: 'Wird eine Dachsanierung gefördert?', a: 'Ja! Bei energetischer Sanierung mit Dämmung können Sie BAFA-Förderung (bis zu 20% der Kosten) oder KfW-Kredite mit Tilgungszuschuss beantragen. Wir unterstützen Sie bei der Antragstellung und kennen die Anforderungen für förderfähige Maßnahmen.' },
+      { q: 'Brauche ich eine Baugenehmigung für die Dachsanierung?', a: 'Eine reine Sanierung (gleiche Dachform, gleiches Material) ist in NRW genehmigungsfrei. Bei Änderungen der Dachneigung, Gauben oder Dachaufbauten benötigen Sie eine Genehmigung. Wir prüfen das vorab für Sie und koordinieren bei Bedarf mit dem Bauamt.' },
+      { q: 'Wie erkenne ich, dass mein Dach saniert werden muss?', a: 'Warnsignale sind: poröse oder verrutschte Ziegel, Feuchtigkeit auf dem Dachboden, sichtbare Risse, Moos- und Algenbefall oder eine Dämmung älter als 30 Jahre. Wir bieten eine kostenlose Dachinspektion an und beraten ehrlich, ob Reparatur oder Sanierung sinnvoll ist.' },
+      { q: 'Welche Dämmung empfehlen Sie für Steildächer?', a: 'Wir setzen auf Aufsparrendämmung mit PU-Hartschaum (beste Dämmwerte, dünn) oder Holzfaser (ökologisch, guter Hitzeschutz im Sommer). Zwischensparrendämmung ist günstiger, aber weniger effektiv. Die Wahl hängt von Ihrem Budget und Ihren Werten ab.' },
+      { q: 'Arbeiten Sie auch bei Regen?', a: 'Starkregen stoppt die Arbeiten aus Sicherheitsgründen. Bei leichtem Regen können wir mit Notabdeckungen weiterarbeiten. Sobald die Dämmung montiert ist, ist Ihr Haus wieder vollständig wetterfest. Wir planen Wetterpuffer ein und informieren Sie proaktiv.' }
     ]
   },
   flachdach: {
@@ -118,8 +125,15 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.sascha, teamMembers.isabel],
     faq: [
-      { q: 'Wie oft muss ein Flachdach gewartet werden?', a: 'Wir empfehlen 1x jährlich. Wir reinigen die Abläufe (Laub!) und prüfen die Nähte.' },
-      { q: 'Kann ich Kies aufs Dach schütten?', a: 'Kies schützt vor UV-Strahlung, ist aber schwer. Wir müssen vorher die Statik prüfen.' }
+      { q: 'Was kostet eine Flachdachabdichtung pro m²?', a: 'Eine professionelle Flachdachabdichtung kostet zwischen 80 und 150 Euro pro m², abhängig vom System (Bitumen oder Kunststoff), der Dämmstärke und Zugänglichkeit. Dachbegrünung erhöht die Kosten auf 120-200 Euro/m². Wir kalkulieren transparent und bieten Festpreise an.' },
+      { q: 'Wie lange hält ein Flachdach?', a: 'Ein fachgerecht abgedichtetes Flachdach hält 25-40 Jahre. Bitumenbahnen halten etwa 25-30 Jahre, moderne Kunststoffbahnen (FPO/PVC) erreichen 30-40 Jahre. Entscheidend ist die regelmäßige Wartung – damit verlängern Sie die Lebensdauer erheblich.' },
+      { q: 'Wie oft muss ein Flachdach gewartet werden?', a: 'Wir empfehlen eine professionelle Wartung einmal jährlich, idealerweise im Herbst. Dabei reinigen wir die Abläufe von Laub und Schmutz, prüfen Nähte und Anschlüsse und dokumentieren den Zustand. Das kostet etwa 200-400 Euro und verhindert teure Folgeschäden.' },
+      { q: 'Kann ich mein Flachdach begrünen?', a: 'Ja, Dachbegrünung ist eine hervorragende Lösung! Sie schützt die Abdichtung vor UV-Strahlung, verbessert das Raumklima und bindet Regenwasser. Wichtig ist die Statikprüfung (Zusatzlast ca. 60-150 kg/m²). Wir planen und bauen extensive und intensive Begrünungen.' },
+      { q: 'Ist ein Flachdach als Terrasse nutzbar?', a: 'Absolut! Wir planen begehbare Flachdächer mit entsprechender Abdichtung und Entwässerung. Sie können Terrassenplatten, Kies oder Holzdielen verlegen. Die Statik muss die Nutzlast tragen, und die Abdichtung muss durchtrittsicher sein – beides planen wir für Sie.' },
+      { q: 'Warum ist mein Flachdach undicht?', a: 'Häufigste Ursachen sind verstopfte Abläufe (Wasser staut sich), gerissene Nähte durch Alterung, mechanische Beschädigungen oder fehlerhafte Anschlüsse an Wände/Lichtkuppeln. Wir finden die Leckage mit Thermografie oder Rauchprüfung und reparieren gezielt.' },
+      { q: 'Bitumen oder Kunststoff – was ist besser?', a: 'Bitumen ist robust, schwer und ideal für begehbare Dächer. Kunststoff (FPO/PVC) ist leicht, flexibel und chemisch beständig – perfekt für große Flächen und Leichtbau. Beide Systeme sind langlebig. Wir beraten objektiv basierend auf Ihrem Objekt und Nutzung.' },
+      { q: 'Braucht ein Flachdach ein Gefälle?', a: 'Ja, mindestens 2% Gefälle sind Pflicht! Nur so fließt Regenwasser zuverlässig ab. Wir erzeugen das Gefälle durch Gefälledämmung – das spart Bauhöhe und verbessert die Dämmleistung. Stehendes Wasser ist der Feind jeder Abdichtung.' },
+      { q: 'Kann ich ein altes Flachdach überdachen statt es zu erneuern?', a: 'Ja, wenn die alte Abdichtung noch intakt ist, können wir eine neue Lage aufschweißen (Aufdoppelung). Das spart Entsorgungskosten. Ist die Dämmung aber durchfeuchtet oder die Statik überlastet, empfehlen wir einen Komplettabriss und Neuaufbau.' }
     ]
   },
   fenster: {
@@ -161,8 +175,15 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.sabine, teamMembers.sascha],
     faq: [
-      { q: 'Holz oder Kunststoff?', a: 'Im Bad immer Kunststoff (feuchtraumgeeignet). Im Wohnraum wirkt Holz gemütlicher. VELUX bietet beides.' },
-      { q: 'Lohnt sich 3-fach Verglasung?', a: 'Ja! Sie dämmt besser und reduziert Regengeräusche massiv ("Anti-Regen-Geräusch-Effekt").' }
+      { q: 'Was kostet ein VELUX Dachfenster mit Einbau?', a: 'Ein Standard-VELUX Schwingfenster (78x118 cm) kostet komplett eingebaut etwa 1.200-1.800 Euro, abhängig von Verglasung und Zubehör. Größere Fenster oder Klapp-Schwing-Varianten kosten entsprechend mehr. Der Einbau dauert etwa 3-4 Stunden pro Fenster.' },
+      { q: 'Kann man alte Dachfenster einfach austauschen?', a: 'Ja! Mit VELUX-Renovierungsrahmen geht der Austausch oft in 2-3 Stunden ohne Dreck im Innenraum. Der alte Rahmen bleibt als Basis, das neue Fenster wird eingesetzt. Das spart Zeit und Kosten. Wir prüfen vorab, ob Ihr altes Fenster dafür geeignet ist.' },
+      { q: 'Welches Material ist besser: Holz oder Kunststoff?', a: 'Im Bad und Feuchträumen empfehlen wir immer Kunststoff (wartungsfrei, feuchtigkeitsresistent). Im Wohnbereich wirkt Holz wärmer und natürlicher. VELUX bietet beide Varianten in gleicher Qualität. Preislich liegen sie etwa gleichauf.' },
+      { q: 'Lohnt sich 3-fach Verglasung bei Dachfenstern?', a: 'Absolut! 3-fach Verglasung dämmt deutlich besser (U-Wert 0,5 statt 1,1), reduziert Regengeräusche erheblich und verhindert Kondenswasser. Der Aufpreis von ca. 150 Euro amortisiert sich durch Energieeinsparung und höheren Wohnkomfort.' },
+      { q: 'Wie schütze ich mein Dachfenster vor Hitze im Sommer?', a: 'Außenrollläden oder Markisen sind am effektivsten – sie halten bis zu 95% der Hitze draußen. Innenliegende Verdunkelungsrollos helfen gegen Licht, aber kaum gegen Hitze. Wir montieren elektrische Rollläden, die per App oder Zeitschaltuhr gesteuert werden können.' },
+      { q: 'Brauche ich eine Baugenehmigung für ein neues Dachfenster?', a: 'In NRW sind Dachfenster in bestehende Dächer meist genehmigungsfrei, solange sie nicht zur Straßenseite zeigen und die Dachform unverändert bleibt. Bei Denkmalschutz oder in speziellen Baugebieten gelten Sonderregeln. Wir klären das vorab für Sie.' },
+      { q: 'Kann man Dachfenster nachträglich elektrisch nachrüsten?', a: 'Ja, VELUX bietet Nachrüst-Motoren für bestehende Fenster an. Auch Rollläden, Jalousien und Hitzeschutz können elektrisch und smart gesteuert werden. Die Steuerung erfolgt per Fernbedienung, App oder Sprachassistent (Alexa, Google Home).' },
+      { q: 'Wie verhindere ich Kondenswasser am Dachfenster?', a: 'Kondenswasser entsteht durch hohe Luftfeuchtigkeit (Kochen, Duschen) und kalte Scheiben. Lösungen: Regelmäßiges Stoßlüften, 3-fach Verglasung (wärmere Innenscheibe), Lüftungsklappen am Fenster. Wir bauen optional elektrische Lüftungsklappen ein, die automatisch bei hoher Luftfeuchte öffnen.' },
+      { q: 'Wie lange hält ein VELUX Dachfenster?', a: 'VELUX gibt 10 Jahre Garantie, aber ein Dachfenster hält bei guter Pflege 30-40 Jahre. Wichtig ist regelmäßige Reinigung der Dichtungen und Scharniere. Holzfenster sollten alle 5-7 Jahre nachgestrichen werden. Wir bieten auch Wartungsservice an.' }
     ]
   },
   sanierung: {
@@ -202,8 +223,15 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.sabine, teamMembers.isabel],
     faq: [
-      { q: 'Was kostet eine Rinnenreinigung?', a: 'Das hängt von der Länge und Höhe ab. Rufen Sie Sabine Hammes an, sie gibt Ihnen einen Richtwert.' },
-      { q: 'Helfen Sie bei Versicherungsschäden?', a: 'Ja, wir erstellen die nötigen Fotos und Berichte für Ihre Wohngebäudeversicherung.' }
+      { q: 'Was kostet eine Dachreparatur im Kreis Viersen?', a: 'Kleine Reparaturen (einzelne Ziegel, Dichtungen) kosten etwa 200-500 Euro. Größere Arbeiten wie Rinnenerneuerung oder Flachdachabdichtung liegen bei 1.000-5.000 Euro. Sturmschäden rechnen wir oft direkt mit Ihrer Versicherung ab. Wir erstellen kostenlose Kostenvoranschläge.' },
+      { q: 'Wie schnell können Sie bei einem Notfall kommen?', a: 'Bei akuten Schadensfällen (Sturmschaden, Wassereintritt) sind wir innerhalb von 24 Stunden vor Ort und sichern das Dach provisorisch ab. Für reguläre Reparaturen bieten wir Termine innerhalb einer Woche. Rufen Sie uns an: 02162 356666.' },
+      { q: 'Was kostet eine Rinnenreinigung?', a: 'Eine Rinnenreinigung kostet pauschal etwa 150-300 Euro für ein Einfamilienhaus, abhängig von Länge und Höhe. Bei stark verschmutzten oder schwer zugänglichen Rinnen kann es mehr werden. Wir bieten auch Wartungsverträge mit jährlicher Rinnenreinigung an.' },
+      { q: 'Helfen Sie bei Versicherungsschäden?', a: 'Ja, wir sind erfahren im Umgang mit Versicherungen. Wir dokumentieren den Schaden mit Fotos, erstellen detaillierte Gutachten und rechnen auf Wunsch direkt mit Ihrer Wohngebäudeversicherung ab. Das spart Ihnen Aufwand und beschleunigt die Schadenregulierung.' },
+      { q: 'Lohnt sich ein Wartungsvertrag fürs Dach?', a: 'Absolut! Ein Wartungsvertrag kostet etwa 200-400 Euro jährlich und beinhaltet Rinnenreinigung, Sichtprüfung und Protokoll. Damit verhindern Sie teure Folgeschäden und haben ein gutes Gefühl. Viele Versicherungen gewähren Rabatte bei regelmäßiger Wartung.' },
+      { q: 'Können Sie auch historische Dächer sanieren?', a: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden und historischen Baustoffen. Wir arbeiten mit Naturschiefer, historischen Ziegeln und traditionellen Techniken. Bei Bedarf koordinieren wir mit der Denkmalbehörde und beraten zu förderfähigen Maßnahmen.' },
+      { q: 'Was ist der Unterschied zwischen Reparatur und Sanierung?', a: 'Reparatur bedeutet punktuellen Austausch defekter Teile (Ziegel, Rinnen, Abdichtung). Sanierung ist die Erneuerung größerer Bereiche oder des gesamten Daches inkl. Dämmung. Faustregel: Sind mehr als 30% der Fläche betroffen, lohnt sich eine Komplettsanierung.' },
+      { q: 'Wie erkenne ich einen Sturmschaden am Dach?', a: 'Typische Anzeichen: fehlende oder verschobene Ziegel, abgerissene Dachrinnen, gelöste Bleche oder Eindringen von Wasser. Nach Unwettern empfehlen wir eine Sichtprüfung. Melden Sie Schäden sofort der Versicherung – wir unterstützen Sie bei der Dokumentation.' },
+      { q: 'Übernehmen Sie auch Fassadenarbeiten?', a: 'Ja, als Fachbetrieb für Außenhülle machen wir auch Fassadenverkleidungen mit Schiefer, Metall oder Faserzement. Das passt perfekt zur Dacharbeit – so haben Sie einen Ansprechpartner für die komplette Gebäudehülle und einheitliche Optik.' }
     ]
   },
   solar: {
@@ -245,8 +273,16 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.marcus, teamMembers.sascha],
     faq: [
-      { q: 'Lohnt sich ein Speicher?', a: 'Ja, um den Eigenverbrauch zu erhöhen (Strom abends nutzen).' },
-      { q: 'Kann ich Solar auf ein altes Dach bauen?', a: 'Nur wenn das Dach noch 20 Jahre hält. Sonst sanieren wir vorher – das spart Gerüstkosten.' }
+      { q: 'Was kostet eine Solaranlage mit Montage?', a: 'Eine Photovoltaik-Anlage für ein Einfamilienhaus (6-10 kWp, ca. 15-25 Module) kostet komplett installiert zwischen 12.000 und 20.000 Euro. Das beinhaltet Module, Wechselrichter, Montagesystem und fachgerechten Einbau durch uns. Mit Speicher (5-10 kWh) kommen 6.000-12.000 Euro hinzu.' },
+      { q: 'Warum sollte ein Dachdecker die Solaranlage montieren?', a: 'Weil wir die Dachhaut kennen und schützen! Viele Elektriker bohren Ziegel an oder beschädigen die Abdichtung – mit teuren Folgeschäden. Wir setzen Dachhaken fachgerecht, verwenden Metalldachplatten wo nötig und garantieren: Strom fließt, Wasser bleibt draußen.' },
+      { q: 'Lohnt sich ein Stromspeicher?', a: 'Ja, wenn Sie Ihren Eigenverbrauch maximieren wollen. Ohne Speicher nutzen Sie ca. 30% des Solarstroms selbst, mit Speicher bis zu 70%. Ein Speicher kostet etwa 6.000-12.000 Euro und amortisiert sich durch eingesparte Stromkosten in 10-15 Jahren. Wir rechnen das individuell für Sie durch.' },
+      { q: 'Kann ich Solar auf ein altes Dach montieren?', a: 'Nur wenn das Dach noch mindestens 20 Jahre hält – eine Solaranlage hat diese Lebensdauer. Sonst sanieren wir das Dach vorher, was sogar günstiger ist, da wir das Gerüst nur einmal aufbauen. Wir prüfen den Dachzustand kostenlos und beraten ehrlich.' },
+      { q: 'Trägt mein Dach das Gewicht einer Solaranlage?', a: 'Eine PV-Anlage wiegt etwa 15-20 kg pro m² – die meisten Dächer halten das problemlos. Wir prüfen vorab die Statik und erkennen als Dachdecker morsche Balken oder Schwachstellen sofort. Bei Bedarf verstärken wir die Konstruktion, bevor wir montieren.' },
+      { q: 'Wie lange dauert die Montage einer Solaranlage?', a: 'Bei einem Einfamilienhaus dauert die reine Montage 2-3 Tage: Tag 1 Gerüst und Dachhaken, Tag 2 Schienen und Module, Tag 3 elektrischer Anschluss (mit Partner-Elektriker). Nach 1-2 Wochen kommt der Netzbetreiber für die Zählermontage und Netzfreischaltung.' },
+      { q: 'Gibt es Förderung für Photovoltaik?', a: 'Ja! Die Einspeisevergütung läuft 20 Jahre (aktuell ca. 8-13 Cent/kWh je nach Anlagengröße). Zudem gibt es zinsgünstige KfW-Kredite und regionale Förderprogramme. Seit 2023 entfällt die Mehrwertsteuer bei PV-Anlagen. Wir beraten Sie zu allen Fördermöglichkeiten.' },
+      { q: 'Muss ich die Solaranlage warten?', a: 'PV-Anlagen sind wartungsarm. Wir empfehlen alle 3-5 Jahre eine Sichtprüfung und Reinigung der Module (Verschmutzung reduziert Ertrag um 5-10%). Die Überprüfung der elektrischen Anlage sollte alle 4 Jahre erfolgen. Wir bieten Wartungsverträge ab 150 Euro/Jahr an.' },
+      { q: 'Was passiert bei Schnee und Sturm?', a: 'Module sind für Schneelasten bis 5.400 Pa (ca. 50 cm Schnee) und Windlasten bis 2.400 Pa ausgelegt. Unsere Montage ist TÜV-geprüft und hält Orkanen stand. Schnee rutscht von geneigten Modulen meist von selbst ab. Bei extremen Wetterlagen prüfen wir die Anlage kostenfrei.' },
+      { q: 'Kann ich mit Solar autark werden?', a: 'Vollständig autark ist in Deutschland schwierig – im Winter reicht die Sonne nicht. Mit großzügiger Anlage (10+ kWp) und Speicher (10+ kWh) erreichen Sie etwa 70-80% Autarkie übers Jahr. Für 100% bräuchten Sie riesige Speicher, was wirtschaftlich nicht sinnvoll ist. Wir planen Ihre optimale Eigenverbrauchsquote.' }
     ]
   }
 };

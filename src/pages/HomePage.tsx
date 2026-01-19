@@ -7,6 +7,7 @@ import { ServicePreview } from '@/widgets/home/ui/ServicePreview';
 import { TrustIndicators } from '@/widgets/home/ui/TrustIndicators';
 import { CeoQuote } from '@/widgets/home/ui/CeoQuote';
 import { ProjectShowcase } from '@/widgets/home/ui/ProjectShowcase';
+import { HomeFAQ } from '@/widgets/home/ui/HomeFAQ';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
@@ -47,6 +48,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <TrustIndicators />
       <CeoQuote lang={lang} />
       <ProjectShowcase />
+      <HomeFAQ lang={lang} />
       
       {/* Final CTA */}
       <section className="py-24 bg-primary text-primary-foreground">
