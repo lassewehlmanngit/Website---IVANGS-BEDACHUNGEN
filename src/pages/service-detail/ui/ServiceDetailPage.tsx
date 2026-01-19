@@ -52,6 +52,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             srcSet={generateUnsplashSrcSet(service.img)}
             sizes="100vw"
             priority
+            containerClassName="absolute inset-0"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
             <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10">
