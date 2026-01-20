@@ -32,7 +32,7 @@ interface TinaPayload {
 }
 
 export function useSettingsData() {
-  const relativePath = 'settings.json';
+  const relativePath = 'de/settings.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
