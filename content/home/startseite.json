@@ -88,6 +88,21 @@
       }
     ]
   },
+  "projectsHeader": {
+    "eyebrow": "Referenzen",
+    "title": "Ergebnisse, die zählen."
+  },
+  "faqHeader": {
+    "title": "Häufig gestellte Fragen",
+    "description": "Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet"
+  },
+  "faqCTA": {
+    "title": "Ihre Frage war nicht dabei?",
+    "description": "Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.",
+    "phone": "02162 356666",
+    "buttonText": "Nachricht senden",
+    "buttonLink": "/de/contact"
+  },
   "faq": [
     {
       "question": "Was kostet eine professionelle Dachsanierung im Kreis Viersen?",

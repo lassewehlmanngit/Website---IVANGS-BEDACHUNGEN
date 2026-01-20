@@ -44,7 +44,6 @@ const LanguageWrapper: React.FC = () => {
     <MarketingLayout lang={safeLang}>
       <Routes>
         <Route path="/" element={<HomePage lang={safeLang} />} />
-        <Route path="/services" element={<Navigate to={`/${safeLang}/services/steildach`} replace />} />
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
         <Route path="/career" element={<CareerPage lang={safeLang} />} />
         <Route path="/about" element={<AboutPage lang={safeLang} />} />

@@ -94,6 +94,8 @@ export type Query = {
   pageConnection: PageConnection;
   aboutPage: AboutPage;
   aboutPageConnection: AboutPageConnection;
+  careerPage: CareerPage;
+  careerPageConnection: CareerPageConnection;
   contactPage: ContactPage;
   contactPageConnection: ContactPageConnection;
   settings: Settings;
@@ -102,6 +104,8 @@ export type Query = {
   navigationConnection: NavigationConnection;
   footer: Footer;
   footerConnection: FooterConnection;
+  legalPage: LegalPage;
+  legalPageConnection: LegalPageConnection;
 };
 
 
@@ -216,6 +220,21 @@ export type QueryAboutPageConnectionArgs = {
 };
 
 
+export type QueryCareerPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCareerPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CareerPageFilter>;
+};
+
+
 export type QueryContactPageArgs = {
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
@@ -275,6 +294,21 @@ export type QueryFooterConnectionArgs = {
   filter?: InputMaybe<FooterFilter>;
 };
 
+
+export type QueryLegalPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryLegalPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LegalPageFilter>;
+};
+
 export type DocumentFilter = {
   homePage?: InputMaybe<HomePageFilter>;
   teamMember?: InputMaybe<TeamMemberFilter>;
@@ -282,10 +316,12 @@ export type DocumentFilter = {
   job?: InputMaybe<JobFilter>;
   page?: InputMaybe<PageFilter>;
   aboutPage?: InputMaybe<AboutPageFilter>;
+  careerPage?: InputMaybe<CareerPageFilter>;
   contactPage?: InputMaybe<ContactPageFilter>;
   settings?: InputMaybe<SettingsFilter>;
   navigation?: InputMaybe<NavigationFilter>;
   footer?: InputMaybe<FooterFilter>;
+  legalPage?: InputMaybe<LegalPageFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -325,7 +361,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = HomePage | TeamMember | Service | Job | Page | AboutPage | ContactPage | Settings | Navigation | Footer | Folder;
+export type DocumentNode = HomePage | TeamMember | Service | Job | Page | AboutPage | CareerPage | ContactPage | Settings | Navigation | Footer | LegalPage | Folder;
 
 export type HomePageSeo = {
   __typename?: 'HomePageSeo';
@@ -397,10 +433,31 @@ export type HomePageTrustIndicators = {
   items?: Maybe<Array<Maybe<HomePageTrustIndicatorsItems>>>;
 };
 
+export type HomePageProjectsHeader = {
+  __typename?: 'HomePageProjectsHeader';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+};
+
+export type HomePageFaqHeader = {
+  __typename?: 'HomePageFaqHeader';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomePageFaq = {
   __typename?: 'HomePageFaq';
   question: Scalars['String']['output'];
   answer: Scalars['String']['output'];
+};
+
+export type HomePageFaqCta = {
+  __typename?: 'HomePageFaqCTA';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  phone?: Maybe<Scalars['String']['output']>;
+  buttonText?: Maybe<Scalars['String']['output']>;
+  buttonLink?: Maybe<Scalars['String']['output']>;
 };
 
 export type HomePageFinalCta = {
@@ -420,7 +477,10 @@ export type HomePage = Node & Document & {
   ceoQuote?: Maybe<HomePageCeoQuote>;
   projects?: Maybe<Array<Maybe<HomePageProjects>>>;
   trustIndicators?: Maybe<HomePageTrustIndicators>;
+  projectsHeader?: Maybe<HomePageProjectsHeader>;
+  faqHeader?: Maybe<HomePageFaqHeader>;
   faq?: Maybe<Array<Maybe<HomePageFaq>>>;
+  faqCTA?: Maybe<HomePageFaqCta>;
   finalCTA?: Maybe<HomePageFinalCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -508,9 +568,27 @@ export type HomePageTrustIndicatorsFilter = {
   items?: InputMaybe<HomePageTrustIndicatorsItemsFilter>;
 };
 
+export type HomePageProjectsHeaderFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+};
+
+export type HomePageFaqHeaderFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
 export type HomePageFaqFilter = {
   question?: InputMaybe<StringFilter>;
   answer?: InputMaybe<StringFilter>;
+};
+
+export type HomePageFaqCtaFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  phone?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
+  buttonLink?: InputMaybe<StringFilter>;
 };
 
 export type HomePageFinalCtaFilter = {
@@ -528,7 +606,10 @@ export type HomePageFilter = {
   ceoQuote?: InputMaybe<HomePageCeoQuoteFilter>;
   projects?: InputMaybe<HomePageProjectsFilter>;
   trustIndicators?: InputMaybe<HomePageTrustIndicatorsFilter>;
+  projectsHeader?: InputMaybe<HomePageProjectsHeaderFilter>;
+  faqHeader?: InputMaybe<HomePageFaqHeaderFilter>;
   faq?: InputMaybe<HomePageFaqFilter>;
+  faqCTA?: InputMaybe<HomePageFaqCtaFilter>;
   finalCTA?: InputMaybe<HomePageFinalCtaFilter>;
 };
 
@@ -624,6 +705,15 @@ export type ServiceGallery = {
   caption?: Maybe<Scalars['String']['output']>;
 };
 
+export type ServiceUiText = {
+  __typename?: 'ServiceUiText';
+  introHeader: Scalars['String']['output'];
+  contactButtonText?: Maybe<Scalars['String']['output']>;
+  careerCtaTitle?: Maybe<Scalars['String']['output']>;
+  careerCtaDescription?: Maybe<Scalars['String']['output']>;
+  careerCtaButtonText?: Maybe<Scalars['String']['output']>;
+};
+
 export type Service = Node & Document & {
   __typename?: 'Service';
   title: Scalars['String']['output'];
@@ -643,6 +733,7 @@ export type Service = Node & Document & {
   contactIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   faq?: Maybe<Array<Maybe<ServiceFaq>>>;
   gallery?: Maybe<Array<Maybe<ServiceGallery>>>;
+  uiText?: Maybe<ServiceUiText>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -670,6 +761,14 @@ export type ServiceGalleryFilter = {
   caption?: InputMaybe<StringFilter>;
 };
 
+export type ServiceUiTextFilter = {
+  introHeader?: InputMaybe<StringFilter>;
+  contactButtonText?: InputMaybe<StringFilter>;
+  careerCtaTitle?: InputMaybe<StringFilter>;
+  careerCtaDescription?: InputMaybe<StringFilter>;
+  careerCtaButtonText?: InputMaybe<StringFilter>;
+};
+
 export type ServiceFilter = {
   title?: InputMaybe<StringFilter>;
   subtitle?: InputMaybe<StringFilter>;
@@ -688,6 +787,7 @@ export type ServiceFilter = {
   contactIds?: InputMaybe<StringFilter>;
   faq?: InputMaybe<ServiceFaqFilter>;
   gallery?: InputMaybe<ServiceGalleryFilter>;
+  uiText?: InputMaybe<ServiceUiTextFilter>;
 };
 
 export type ServiceConnectionEdges = {
@@ -990,6 +1090,85 @@ export type AboutPageConnection = Connection & {
   edges?: Maybe<Array<Maybe<AboutPageConnectionEdges>>>;
 };
 
+export type CareerPageSeo = {
+  __typename?: 'CareerPageSeo';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageHero = {
+  __typename?: 'CareerPageHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageJobsSection = {
+  __typename?: 'CareerPageJobsSection';
+  title: Scalars['String']['output'];
+  emptyMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageWizardSection = {
+  __typename?: 'CareerPageWizardSection';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPage = Node & Document & {
+  __typename?: 'CareerPage';
+  seo?: Maybe<CareerPageSeo>;
+  hero?: Maybe<CareerPageHero>;
+  jobsSection?: Maybe<CareerPageJobsSection>;
+  wizardSection?: Maybe<CareerPageWizardSection>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CareerPageSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+};
+
+export type CareerPageJobsSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  emptyMessage?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageWizardSectionFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageFilter = {
+  seo?: InputMaybe<CareerPageSeoFilter>;
+  hero?: InputMaybe<CareerPageHeroFilter>;
+  jobsSection?: InputMaybe<CareerPageJobsSectionFilter>;
+  wizardSection?: InputMaybe<CareerPageWizardSectionFilter>;
+};
+
+export type CareerPageConnectionEdges = {
+  __typename?: 'CareerPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<CareerPage>;
+};
+
+export type CareerPageConnection = Connection & {
+  __typename?: 'CareerPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CareerPageConnectionEdges>>>;
+};
+
 export type ContactPageSeo = {
   __typename?: 'ContactPageSeo';
   title: Scalars['String']['output'];
@@ -1081,6 +1260,22 @@ export type ContactPageConnection = Connection & {
   edges?: Maybe<Array<Maybe<ContactPageConnectionEdges>>>;
 };
 
+export type SettingsCookieBanner = {
+  __typename?: 'SettingsCookieBanner';
+  message?: Maybe<Scalars['String']['output']>;
+  privacyLinkText?: Maybe<Scalars['String']['output']>;
+  cookieLinkText?: Maybe<Scalars['String']['output']>;
+  rejectButtonText?: Maybe<Scalars['String']['output']>;
+  acceptButtonText?: Maybe<Scalars['String']['output']>;
+};
+
+export type SettingsNotFoundPage = {
+  __typename?: 'SettingsNotFoundPage';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  buttonText?: Maybe<Scalars['String']['output']>;
+};
+
 export type Settings = Node & Document & {
   __typename?: 'Settings';
   siteName: Scalars['String']['output'];
@@ -1091,9 +1286,25 @@ export type Settings = Node & Document & {
   gtmId?: Maybe<Scalars['String']['output']>;
   gaId?: Maybe<Scalars['String']['output']>;
   sentryDsn?: Maybe<Scalars['String']['output']>;
+  cookieBanner?: Maybe<SettingsCookieBanner>;
+  notFoundPage?: Maybe<SettingsNotFoundPage>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type SettingsCookieBannerFilter = {
+  message?: InputMaybe<StringFilter>;
+  privacyLinkText?: InputMaybe<StringFilter>;
+  cookieLinkText?: InputMaybe<StringFilter>;
+  rejectButtonText?: InputMaybe<StringFilter>;
+  acceptButtonText?: InputMaybe<StringFilter>;
+};
+
+export type SettingsNotFoundPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  buttonText?: InputMaybe<StringFilter>;
 };
 
 export type SettingsFilter = {
@@ -1105,6 +1316,8 @@ export type SettingsFilter = {
   gtmId?: InputMaybe<StringFilter>;
   gaId?: InputMaybe<StringFilter>;
   sentryDsn?: InputMaybe<StringFilter>;
+  cookieBanner?: InputMaybe<SettingsCookieBannerFilter>;
+  notFoundPage?: InputMaybe<SettingsNotFoundPageFilter>;
 };
 
 export type SettingsConnectionEdges = {
@@ -1120,6 +1333,12 @@ export type SettingsConnection = Connection & {
   edges?: Maybe<Array<Maybe<SettingsConnectionEdges>>>;
 };
 
+export type NavigationCtaButton = {
+  __typename?: 'NavigationCtaButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+};
+
 export type NavigationItems = {
   __typename?: 'NavigationItems';
   label: Scalars['String']['output'];
@@ -1129,10 +1348,16 @@ export type NavigationItems = {
 export type Navigation = Node & Document & {
   __typename?: 'Navigation';
   logo?: Maybe<Scalars['String']['output']>;
+  ctaButton?: Maybe<NavigationCtaButton>;
   items?: Maybe<Array<Maybe<NavigationItems>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type NavigationCtaButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
 };
 
 export type NavigationItemsFilter = {
@@ -1142,6 +1367,7 @@ export type NavigationItemsFilter = {
 
 export type NavigationFilter = {
   logo?: InputMaybe<ImageFilter>;
+  ctaButton?: InputMaybe<NavigationCtaButtonFilter>;
   items?: InputMaybe<NavigationItemsFilter>;
 };
 
@@ -1209,6 +1435,35 @@ export type FooterConnection = Connection & {
   edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
 };
 
+export type LegalPage = Node & Document & {
+  __typename?: 'LegalPage';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type LegalPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+};
+
+export type LegalPageConnectionEdges = {
+  __typename?: 'LegalPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<LegalPage>;
+};
+
+export type LegalPageConnection = Connection & {
+  __typename?: 'LegalPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<LegalPageConnectionEdges>>>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -1228,6 +1483,8 @@ export type Mutation = {
   createPage: Page;
   updateAboutPage: AboutPage;
   createAboutPage: AboutPage;
+  updateCareerPage: CareerPage;
+  createCareerPage: CareerPage;
   updateContactPage: ContactPage;
   createContactPage: ContactPage;
   updateSettings: Settings;
@@ -1236,6 +1493,8 @@ export type Mutation = {
   createNavigation: Navigation;
   updateFooter: Footer;
   createFooter: Footer;
+  updateLegalPage: LegalPage;
+  createLegalPage: LegalPage;
 };
 
 
@@ -1344,6 +1603,18 @@ export type MutationCreateAboutPageArgs = {
 };
 
 
+export type MutationUpdateCareerPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareerPageMutation;
+};
+
+
+export type MutationCreateCareerPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareerPageMutation;
+};
+
+
 export type MutationUpdateContactPageArgs = {
   relativePath: Scalars['String']['input'];
   params: ContactPageMutation;
@@ -1391,6 +1662,18 @@ export type MutationCreateFooterArgs = {
   params: FooterMutation;
 };
 
+
+export type MutationUpdateLegalPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LegalPageMutation;
+};
+
+
+export type MutationCreateLegalPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: LegalPageMutation;
+};
+
 export type DocumentUpdateMutation = {
   homePage?: InputMaybe<HomePageMutation>;
   teamMember?: InputMaybe<TeamMemberMutation>;
@@ -1398,10 +1681,12 @@ export type DocumentUpdateMutation = {
   job?: InputMaybe<JobMutation>;
   page?: InputMaybe<PageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
+  careerPage?: InputMaybe<CareerPageMutation>;
   contactPage?: InputMaybe<ContactPageMutation>;
   settings?: InputMaybe<SettingsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
   footer?: InputMaybe<FooterMutation>;
+  legalPage?: InputMaybe<LegalPageMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1412,10 +1697,12 @@ export type DocumentMutation = {
   job?: InputMaybe<JobMutation>;
   page?: InputMaybe<PageMutation>;
   aboutPage?: InputMaybe<AboutPageMutation>;
+  careerPage?: InputMaybe<CareerPageMutation>;
   contactPage?: InputMaybe<ContactPageMutation>;
   settings?: InputMaybe<SettingsMutation>;
   navigation?: InputMaybe<NavigationMutation>;
   footer?: InputMaybe<FooterMutation>;
+  legalPage?: InputMaybe<LegalPageMutation>;
 };
 
 export type HomePageSeoMutation = {
@@ -1480,9 +1767,27 @@ export type HomePageTrustIndicatorsMutation = {
   items?: InputMaybe<Array<InputMaybe<HomePageTrustIndicatorsItemsMutation>>>;
 };
 
+export type HomePageProjectsHeaderMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomePageFaqHeaderMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomePageFaqMutation = {
   question?: InputMaybe<Scalars['String']['input']>;
   answer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomePageFaqCtaMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+  buttonLink?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type HomePageFinalCtaMutation = {
@@ -1500,7 +1805,10 @@ export type HomePageMutation = {
   ceoQuote?: InputMaybe<HomePageCeoQuoteMutation>;
   projects?: InputMaybe<Array<InputMaybe<HomePageProjectsMutation>>>;
   trustIndicators?: InputMaybe<HomePageTrustIndicatorsMutation>;
+  projectsHeader?: InputMaybe<HomePageProjectsHeaderMutation>;
+  faqHeader?: InputMaybe<HomePageFaqHeaderMutation>;
   faq?: InputMaybe<Array<InputMaybe<HomePageFaqMutation>>>;
+  faqCTA?: InputMaybe<HomePageFaqCtaMutation>;
   finalCTA?: InputMaybe<HomePageFinalCtaMutation>;
 };
 
@@ -1536,6 +1844,14 @@ export type ServiceGalleryMutation = {
   caption?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type ServiceUiTextMutation = {
+  introHeader?: InputMaybe<Scalars['String']['input']>;
+  contactButtonText?: InputMaybe<Scalars['String']['input']>;
+  careerCtaTitle?: InputMaybe<Scalars['String']['input']>;
+  careerCtaDescription?: InputMaybe<Scalars['String']['input']>;
+  careerCtaButtonText?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ServiceMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   subtitle?: InputMaybe<Scalars['String']['input']>;
@@ -1554,6 +1870,7 @@ export type ServiceMutation = {
   contactIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   faq?: InputMaybe<Array<InputMaybe<ServiceFaqMutation>>>;
   gallery?: InputMaybe<Array<InputMaybe<ServiceGalleryMutation>>>;
+  uiText?: InputMaybe<ServiceUiTextMutation>;
 };
 
 export type JobMutation = {
@@ -1670,6 +1987,35 @@ export type AboutPageMutation = {
   cta?: InputMaybe<AboutPageCtaMutation>;
 };
 
+export type CareerPageSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageJobsSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  emptyMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageWizardSectionMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageMutation = {
+  seo?: InputMaybe<CareerPageSeoMutation>;
+  hero?: InputMaybe<CareerPageHeroMutation>;
+  jobsSection?: InputMaybe<CareerPageJobsSectionMutation>;
+  wizardSection?: InputMaybe<CareerPageWizardSectionMutation>;
+};
+
 export type ContactPageSeoMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -1705,6 +2051,20 @@ export type ContactPageMutation = {
   repairHours?: InputMaybe<ContactPageRepairHoursMutation>;
 };
 
+export type SettingsCookieBannerMutation = {
+  message?: InputMaybe<Scalars['String']['input']>;
+  privacyLinkText?: InputMaybe<Scalars['String']['input']>;
+  cookieLinkText?: InputMaybe<Scalars['String']['input']>;
+  rejectButtonText?: InputMaybe<Scalars['String']['input']>;
+  acceptButtonText?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type SettingsNotFoundPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  buttonText?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type SettingsMutation = {
   siteName?: InputMaybe<Scalars['String']['input']>;
   siteDescription?: InputMaybe<Scalars['String']['input']>;
@@ -1714,6 +2074,13 @@ export type SettingsMutation = {
   gtmId?: InputMaybe<Scalars['String']['input']>;
   gaId?: InputMaybe<Scalars['String']['input']>;
   sentryDsn?: InputMaybe<Scalars['String']['input']>;
+  cookieBanner?: InputMaybe<SettingsCookieBannerMutation>;
+  notFoundPage?: InputMaybe<SettingsNotFoundPageMutation>;
+};
+
+export type NavigationCtaButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type NavigationItemsMutation = {
@@ -1723,6 +2090,7 @@ export type NavigationItemsMutation = {
 
 export type NavigationMutation = {
   logo?: InputMaybe<Scalars['String']['input']>;
+  ctaButton?: InputMaybe<NavigationCtaButtonMutation>;
   items?: InputMaybe<Array<InputMaybe<NavigationItemsMutation>>>;
 };
 
@@ -1742,11 +2110,17 @@ export type FooterMutation = {
   social?: InputMaybe<Array<InputMaybe<FooterSocialMutation>>>;
 };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
+export type LegalPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+};
+
+export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, projectsHeader?: { __typename: 'HomePageProjectsHeader', eyebrow?: string | null, title: string } | null, faqHeader?: { __typename: 'HomePageFaqHeader', title: string, description?: string | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, faqCTA?: { __typename: 'HomePageFaqCTA', title: string, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
 
 export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, email?: string | null, category: string, description?: any | null, image?: string | null, order?: number | null };
 
-export type ServicePartsFragment = { __typename: 'Service', title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null };
+export type ServicePartsFragment = { __typename: 'Service', title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null, uiText?: { __typename: 'ServiceUiText', introHeader: string, contactButtonText?: string | null, careerCtaTitle?: string | null, careerCtaDescription?: string | null, careerCtaButtonText?: string | null } | null };
 
 export type JobPartsFragment = { __typename: 'Job', title: string, location: string, type: string, shortDesc?: string | null, tasks?: Array<string | null> | null, profile?: Array<string | null> | null, benefits?: Array<string | null> | null, published?: boolean | null };
 
@@ -1754,20 +2128,24 @@ export type PagePartsFragment = { __typename: 'Page', title: string, description
 
 export type AboutPagePartsFragment = { __typename: 'AboutPage', seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title: string, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title: string, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title: string, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title: string, description?: string | null, buttonText?: string | null, email?: string | null } | null };
 
+export type CareerPagePartsFragment = { __typename: 'CareerPage', seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'CareerPageHero', eyebrow?: string | null, title: string, description?: string | null, backgroundImage?: string | null } | null, jobsSection?: { __typename: 'CareerPageJobsSection', title: string, emptyMessage?: string | null } | null, wizardSection?: { __typename: 'CareerPageWizardSection', title: string, description?: string | null } | null };
+
 export type ContactPagePartsFragment = { __typename: 'ContactPage', title: string, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null };
 
-export type SettingsPartsFragment = { __typename: 'Settings', siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null };
+export type SettingsPartsFragment = { __typename: 'Settings', siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null, cookieBanner?: { __typename: 'SettingsCookieBanner', message?: string | null, privacyLinkText?: string | null, cookieLinkText?: string | null, rejectButtonText?: string | null, acceptButtonText?: string | null } | null, notFoundPage?: { __typename: 'SettingsNotFoundPage', title: string, description?: string | null, buttonText?: string | null } | null };
 
-export type NavigationPartsFragment = { __typename: 'Navigation', logo?: string | null, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null };
+export type NavigationPartsFragment = { __typename: 'Navigation', logo?: string | null, ctaButton?: { __typename: 'NavigationCtaButton', text: string, link: string } | null, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', copyright?: string | null, links?: Array<{ __typename: 'FooterLinks', label: string, href: string } | null> | null, social?: Array<{ __typename: 'FooterSocial', platform: string, url: string } | null> | null };
+
+export type LegalPagePartsFragment = { __typename: 'LegalPage', title: string, description?: string | null, body?: any | null };
 
 export type HomePageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
+export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, projectsHeader?: { __typename: 'HomePageProjectsHeader', eyebrow?: string | null, title: string } | null, faqHeader?: { __typename: 'HomePageFaqHeader', title: string, description?: string | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, faqCTA?: { __typename: 'HomePageFaqCTA', title: string, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
 
 export type HomePageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1779,7 +2157,7 @@ export type HomePageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
+export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, projectsHeader?: { __typename: 'HomePageProjectsHeader', eyebrow?: string | null, title: string } | null, faqHeader?: { __typename: 'HomePageFaqHeader', title: string, description?: string | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, faqCTA?: { __typename: 'HomePageFaqCTA', title: string, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
 
 export type TeamMemberQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1805,7 +2183,7 @@ export type ServiceQueryVariables = Exact<{
 }>;
 
 
-export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } };
+export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null, uiText?: { __typename: 'ServiceUiText', introHeader: string, contactButtonText?: string | null, careerCtaTitle?: string | null, careerCtaDescription?: string | null, careerCtaButtonText?: string | null } | null } };
 
 export type ServiceConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1817,7 +2195,7 @@ export type ServiceConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServiceConnectionQuery = { __typename?: 'Query', serviceConnection: { __typename?: 'ServiceConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServiceConnectionEdges', cursor: string, node?: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } | null } | null> | null } };
+export type ServiceConnectionQuery = { __typename?: 'Query', serviceConnection: { __typename?: 'ServiceConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServiceConnectionEdges', cursor: string, node?: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null, uiText?: { __typename: 'ServiceUiText', introHeader: string, contactButtonText?: string | null, careerCtaTitle?: string | null, careerCtaDescription?: string | null, careerCtaButtonText?: string | null } | null } | null } | null> | null } };
 
 export type JobQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1876,6 +2254,25 @@ export type AboutPageConnectionQueryVariables = Exact<{
 
 export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title: string, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title: string, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title: string, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title: string, description?: string | null, buttonText?: string | null, email?: string | null } | null } | null } | null> | null } };
 
+export type CareerPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type CareerPageQuery = { __typename?: 'Query', careerPage: { __typename: 'CareerPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'CareerPageHero', eyebrow?: string | null, title: string, description?: string | null, backgroundImage?: string | null } | null, jobsSection?: { __typename: 'CareerPageJobsSection', title: string, emptyMessage?: string | null } | null, wizardSection?: { __typename: 'CareerPageWizardSection', title: string, description?: string | null } | null } };
+
+export type CareerPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CareerPageFilter>;
+}>;
+
+
+export type CareerPageConnectionQuery = { __typename?: 'Query', careerPageConnection: { __typename?: 'CareerPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CareerPageConnectionEdges', cursor: string, node?: { __typename: 'CareerPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'CareerPageHero', eyebrow?: string | null, title: string, description?: string | null, backgroundImage?: string | null } | null, jobsSection?: { __typename: 'CareerPageJobsSection', title: string, emptyMessage?: string | null } | null, wizardSection?: { __typename: 'CareerPageWizardSection', title: string, description?: string | null } | null } | null } | null> | null } };
+
 export type ContactPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
@@ -1900,7 +2297,7 @@ export type SettingsQueryVariables = Exact<{
 }>;
 
 
-export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type SettingsQuery = { __typename?: 'Query', settings: { __typename: 'Settings', id: string, siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cookieBanner?: { __typename: 'SettingsCookieBanner', message?: string | null, privacyLinkText?: string | null, cookieLinkText?: string | null, rejectButtonText?: string | null, acceptButtonText?: string | null } | null, notFoundPage?: { __typename: 'SettingsNotFoundPage', title: string, description?: string | null, buttonText?: string | null } | null } };
 
 export type SettingsConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1912,14 +2309,14 @@ export type SettingsConnectionQueryVariables = Exact<{
 }>;
 
 
-export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type SettingsConnectionQuery = { __typename?: 'Query', settingsConnection: { __typename?: 'SettingsConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'SettingsConnectionEdges', cursor: string, node?: { __typename: 'Settings', id: string, siteName: string, siteDescription?: string | null, favicon?: string | null, logo?: string | null, defaultOgImage?: string | null, gtmId?: string | null, gaId?: string | null, sentryDsn?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, cookieBanner?: { __typename: 'SettingsCookieBanner', message?: string | null, privacyLinkText?: string | null, cookieLinkText?: string | null, rejectButtonText?: string | null, acceptButtonText?: string | null } | null, notFoundPage?: { __typename: 'SettingsNotFoundPage', title: string, description?: string | null, buttonText?: string | null } | null } | null } | null> | null } };
 
 export type NavigationQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, logo?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null } };
+export type NavigationQuery = { __typename?: 'Query', navigation: { __typename: 'Navigation', id: string, logo?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, ctaButton?: { __typename: 'NavigationCtaButton', text: string, link: string } | null, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null } };
 
 export type NavigationConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1931,7 +2328,7 @@ export type NavigationConnectionQueryVariables = Exact<{
 }>;
 
 
-export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, logo?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null } | null } | null> | null } };
+export type NavigationConnectionQuery = { __typename?: 'Query', navigationConnection: { __typename?: 'NavigationConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'NavigationConnectionEdges', cursor: string, node?: { __typename: 'Navigation', id: string, logo?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, ctaButton?: { __typename: 'NavigationCtaButton', text: string, link: string } | null, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null } | null } | null> | null } };
 
 export type FooterQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1951,6 +2348,25 @@ export type FooterConnectionQueryVariables = Exact<{
 
 
 export type FooterConnectionQuery = { __typename?: 'Query', footerConnection: { __typename?: 'FooterConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'FooterConnectionEdges', cursor: string, node?: { __typename: 'Footer', id: string, copyright?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, links?: Array<{ __typename: 'FooterLinks', label: string, href: string } | null> | null, social?: Array<{ __typename: 'FooterSocial', platform: string, url: string } | null> | null } | null } | null> | null } };
+
+export type LegalPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type LegalPageQuery = { __typename?: 'Query', legalPage: { __typename: 'LegalPage', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+
+export type LegalPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<LegalPageFilter>;
+}>;
+
+
+export type LegalPageConnectionQuery = { __typename?: 'Query', legalPageConnection: { __typename?: 'LegalPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'LegalPageConnectionEdges', cursor: string, node?: { __typename: 'LegalPage', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const HomePagePartsFragmentDoc = gql`
     fragment HomePageParts on HomePage {
@@ -2016,10 +2432,28 @@ export const HomePagePartsFragmentDoc = gql`
       icon
     }
   }
+  projectsHeader {
+    __typename
+    eyebrow
+    title
+  }
+  faqHeader {
+    __typename
+    title
+    description
+  }
   faq {
     __typename
     question
     answer
+  }
+  faqCTA {
+    __typename
+    title
+    description
+    phone
+    buttonText
+    buttonLink
   }
   finalCTA {
     __typename
@@ -2079,6 +2513,14 @@ export const ServicePartsFragmentDoc = gql`
     __typename
     image
     caption
+  }
+  uiText {
+    __typename
+    introHeader
+    contactButtonText
+    careerCtaTitle
+    careerCtaDescription
+    careerCtaButtonText
   }
 }
     `;
@@ -2182,6 +2624,33 @@ export const AboutPagePartsFragmentDoc = gql`
   }
 }
     `;
+export const CareerPagePartsFragmentDoc = gql`
+    fragment CareerPageParts on CareerPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    description
+    backgroundImage
+  }
+  jobsSection {
+    __typename
+    title
+    emptyMessage
+  }
+  wizardSection {
+    __typename
+    title
+    description
+  }
+}
+    `;
 export const ContactPagePartsFragmentDoc = gql`
     fragment ContactPageParts on ContactPage {
   __typename
@@ -2226,12 +2695,31 @@ export const SettingsPartsFragmentDoc = gql`
   gtmId
   gaId
   sentryDsn
+  cookieBanner {
+    __typename
+    message
+    privacyLinkText
+    cookieLinkText
+    rejectButtonText
+    acceptButtonText
+  }
+  notFoundPage {
+    __typename
+    title
+    description
+    buttonText
+  }
 }
     `;
 export const NavigationPartsFragmentDoc = gql`
     fragment NavigationParts on Navigation {
   __typename
   logo
+  ctaButton {
+    __typename
+    text
+    link
+  }
   items {
     __typename
     label
@@ -2253,6 +2741,14 @@ export const FooterPartsFragmentDoc = gql`
     platform
     url
   }
+}
+    `;
+export const LegalPagePartsFragmentDoc = gql`
+    fragment LegalPageParts on LegalPage {
+  __typename
+  title
+  description
+  body
 }
     `;
 export const HomePageDocument = gql`
@@ -2597,6 +3093,63 @@ export const AboutPageConnectionDocument = gql`
   }
 }
     ${AboutPagePartsFragmentDoc}`;
+export const CareerPageDocument = gql`
+    query careerPage($relativePath: String!) {
+  careerPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CareerPageParts
+  }
+}
+    ${CareerPagePartsFragmentDoc}`;
+export const CareerPageConnectionDocument = gql`
+    query careerPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CareerPageFilter) {
+  careerPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CareerPageParts
+      }
+    }
+  }
+}
+    ${CareerPagePartsFragmentDoc}`;
 export const ContactPageDocument = gql`
     query contactPage($relativePath: String!) {
   contactPage(relativePath: $relativePath) {
@@ -2825,6 +3378,63 @@ export const FooterConnectionDocument = gql`
   }
 }
     ${FooterPartsFragmentDoc}`;
+export const LegalPageDocument = gql`
+    query legalPage($relativePath: String!) {
+  legalPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...LegalPageParts
+  }
+}
+    ${LegalPagePartsFragmentDoc}`;
+export const LegalPageConnectionDocument = gql`
+    query legalPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: LegalPageFilter) {
+  legalPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...LegalPageParts
+      }
+    }
+  }
+}
+    ${LegalPagePartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -2864,6 +3474,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
     aboutPageConnection(variables?: AboutPageConnectionQueryVariables, options?: C): Promise<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}> {
         return requester<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}, AboutPageConnectionQueryVariables>(AboutPageConnectionDocument, variables, options);
       },
+    careerPage(variables: CareerPageQueryVariables, options?: C): Promise<{data: CareerPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageQueryVariables, query: string}> {
+        return requester<{data: CareerPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageQueryVariables, query: string}, CareerPageQueryVariables>(CareerPageDocument, variables, options);
+      },
+    careerPageConnection(variables?: CareerPageConnectionQueryVariables, options?: C): Promise<{data: CareerPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageConnectionQueryVariables, query: string}> {
+        return requester<{data: CareerPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageConnectionQueryVariables, query: string}, CareerPageConnectionQueryVariables>(CareerPageConnectionDocument, variables, options);
+      },
     contactPage(variables: ContactPageQueryVariables, options?: C): Promise<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}> {
         return requester<{data: ContactPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactPageQueryVariables, query: string}, ContactPageQueryVariables>(ContactPageDocument, variables, options);
       },
@@ -2887,6 +3503,12 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     footerConnection(variables?: FooterConnectionQueryVariables, options?: C): Promise<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}> {
         return requester<{data: FooterConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: FooterConnectionQueryVariables, query: string}, FooterConnectionQueryVariables>(FooterConnectionDocument, variables, options);
+      },
+    legalPage(variables: LegalPageQueryVariables, options?: C): Promise<{data: LegalPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageQueryVariables, query: string}> {
+        return requester<{data: LegalPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageQueryVariables, query: string}, LegalPageQueryVariables>(LegalPageDocument, variables, options);
+      },
+    legalPageConnection(variables?: LegalPageConnectionQueryVariables, options?: C): Promise<{data: LegalPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageConnectionQueryVariables, query: string}> {
+        return requester<{data: LegalPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: LegalPageConnectionQueryVariables, query: string}, LegalPageConnectionQueryVariables>(LegalPageConnectionDocument, variables, options);
       }
     };
   }

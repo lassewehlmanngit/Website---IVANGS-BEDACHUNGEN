@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight, Twitter, Linkedin } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { useFooterData } from '@/shared/lib/tina/useFooterData';
+import { useContactPageData } from '@/shared/lib/tina/useContactPageData';
 import { tinaField } from 'tinacms/dist/react';
 
 export interface SiteFooterProps {
@@ -21,7 +22,9 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 
 export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const { data } = useFooterData(lang);
+  const { data: contactData } = useContactPageData(lang);
   const footer = data?.footer || { links: [], social: [] };
+  const contact = contactData?.contactPage || {};
   const year = new Date().getFullYear();
 
   return (
@@ -35,8 +38,11 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
             </div>
             <span className="text-xl font-bold">IVANGS</span>
           </div>
-          <p className="text-slate-300 text-sm leading-relaxed mb-6">
-            Ivangs Bedachungen GmbH & Co. KG – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
+          <p 
+            className="text-slate-300 text-sm leading-relaxed mb-6"
+            data-tina-field={contactData?.contactPage?.address && tinaField(contactData.contactPage.address, 'company')}
+          >
+            {contact.address?.company || 'Ivangs Bedachungen GmbH & Co. KG'} – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
           </p>
           <div className="flex gap-4">
             {footer.social.map((s: any, index: number) => {
@@ -65,20 +71,45 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-              <span>Schmiedestraße 37<br />41749 Viersen - Süchteln</span>
+              <span data-tina-field={contactData?.contactPage?.address && tinaField(contactData.contactPage.address, 'street')}>
+                {contact.address?.street || 'Schmiedestraße 37'}<br />
+                <span data-tina-field={contactData?.contactPage?.address && tinaField(contactData.contactPage.address, 'zip')}>
+                  {contact.address?.zip || '41749'}{' '}
+                </span>
+                <span data-tina-field={contactData?.contactPage?.address && tinaField(contactData.contactPage.address, 'city')}>
+                  {contact.address?.city || 'Viersen - Süchteln'}
+                </span>
+              </span>
             </li>
             <li className="flex items-center gap-3">
               <Phone size={18} className="text-primary shrink-0" />
-              <a href="tel:+4921623566666" className="hover:text-white transition-colors">+49 (0) 21 62 – 35 66 66</a>
+              <a 
+                href={`tel:${contact.phone?.replace(/\s/g, '') || '+4921623566666'}`}
+                className="hover:text-white transition-colors"
+                data-tina-field={contactData?.contactPage && tinaField(contactData.contactPage, 'phone')}
+              >
+                {contact.phone || '+49 (0) 21 62 – 35 66 66'}
+              </a>
             </li>
             <li className="flex items-center gap-3">
               <Mail size={18} className="text-primary shrink-0" />
-              <a href="mailto:bedachungen@ivangs.de" className="hover:text-white transition-colors">bedachungen@ivangs.de</a>
+              <a 
+                href={`mailto:${contact.email || 'bedachungen@ivangs.de'}`}
+                className="hover:text-white transition-colors"
+                data-tina-field={contactData?.contactPage && tinaField(contactData.contactPage, 'email')}
+              >
+                {contact.email || 'bedachungen@ivangs.de'}
+              </a>
             </li>
           </ul>
           <div className="mt-6 pt-4 border-t border-slate-700">
             <p className="text-xs text-slate-400 mb-2">Öffnungszeiten Büro:</p>
-            <p className="text-sm">Mo – Fr: 07.00 – 17.00 Uhr</p>
+            <p 
+              className="text-sm"
+              data-tina-field={contactData?.contactPage?.officeHours && tinaField(contactData.contactPage.officeHours, 'weekdays')}
+            >
+              {contact.officeHours?.weekdays || 'Mo – Fr: 07.00 – 17.00 Uhr'}
+            </p>
           </div>
         </div>
 

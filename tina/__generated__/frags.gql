@@ -61,10 +61,28 @@ fragment HomePageParts on HomePage {
       icon
     }
   }
+  projectsHeader {
+    __typename
+    eyebrow
+    title
+  }
+  faqHeader {
+    __typename
+    title
+    description
+  }
   faq {
     __typename
     question
     answer
+  }
+  faqCTA {
+    __typename
+    title
+    description
+    phone
+    buttonText
+    buttonLink
   }
   finalCTA {
     __typename
@@ -122,6 +140,14 @@ fragment ServiceParts on Service {
     __typename
     image
     caption
+  }
+  uiText {
+    __typename
+    introHeader
+    contactButtonText
+    careerCtaTitle
+    careerCtaDescription
+    careerCtaButtonText
   }
 }
 
@@ -222,6 +248,32 @@ fragment AboutPageParts on AboutPage {
   }
 }
 
+fragment CareerPageParts on CareerPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    description
+    backgroundImage
+  }
+  jobsSection {
+    __typename
+    title
+    emptyMessage
+  }
+  wizardSection {
+    __typename
+    title
+    description
+  }
+}
+
 fragment ContactPageParts on ContactPage {
   __typename
   seo {
@@ -264,11 +316,30 @@ fragment SettingsParts on Settings {
   gtmId
   gaId
   sentryDsn
+  cookieBanner {
+    __typename
+    message
+    privacyLinkText
+    cookieLinkText
+    rejectButtonText
+    acceptButtonText
+  }
+  notFoundPage {
+    __typename
+    title
+    description
+    buttonText
+  }
 }
 
 fragment NavigationParts on Navigation {
   __typename
   logo
+  ctaButton {
+    __typename
+    text
+    link
+  }
   items {
     __typename
     label
@@ -289,4 +360,11 @@ fragment FooterParts on Footer {
     platform
     url
   }
+}
+
+fragment LegalPageParts on LegalPage {
+  __typename
+  title
+  description
+  body
 }

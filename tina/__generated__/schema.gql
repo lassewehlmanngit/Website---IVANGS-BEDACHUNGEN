@@ -66,6 +66,8 @@ type Query {
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
   aboutPage(relativePath: String): AboutPage!
   aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
+  careerPage(relativePath: String): CareerPage!
+  careerPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CareerPageFilter): CareerPageConnection!
   contactPage(relativePath: String): ContactPage!
   contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
   settings(relativePath: String): Settings!
@@ -74,6 +76,8 @@ type Query {
   navigationConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: NavigationFilter): NavigationConnection!
   footer(relativePath: String): Footer!
   footerConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: FooterFilter): FooterConnection!
+  legalPage(relativePath: String): LegalPage!
+  legalPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: LegalPageFilter): LegalPageConnection!
 }
 
 input DocumentFilter {
@@ -83,10 +87,12 @@ input DocumentFilter {
   job: JobFilter
   page: PageFilter
   aboutPage: AboutPageFilter
+  careerPage: CareerPageFilter
   contactPage: ContactPageFilter
   settings: SettingsFilter
   navigation: NavigationFilter
   footer: FooterFilter
+  legalPage: LegalPageFilter
 }
 
 type DocumentConnectionEdges {
@@ -112,7 +118,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = HomePage | TeamMember | Service | Job | Page | AboutPage | ContactPage | Settings | Navigation | Footer | Folder
+union DocumentNode = HomePage | TeamMember | Service | Job | Page | AboutPage | CareerPage | ContactPage | Settings | Navigation | Footer | LegalPage | Folder
 
 type HomePageSeo {
   title: String!
@@ -176,9 +182,27 @@ type HomePageTrustIndicators {
   items: [HomePageTrustIndicatorsItems]
 }
 
+type HomePageProjectsHeader {
+  eyebrow: String
+  title: String!
+}
+
+type HomePageFaqHeader {
+  title: String!
+  description: String
+}
+
 type HomePageFaq {
   question: String!
   answer: String!
+}
+
+type HomePageFaqCTA {
+  title: String!
+  description: String
+  phone: String
+  buttonText: String
+  buttonLink: String
 }
 
 type HomePageFinalCTA {
@@ -196,7 +220,10 @@ type HomePage implements Node & Document {
   ceoQuote: HomePageCeoQuote
   projects: [HomePageProjects]
   trustIndicators: HomePageTrustIndicators
+  projectsHeader: HomePageProjectsHeader
+  faqHeader: HomePageFaqHeader
   faq: [HomePageFaq]
+  faqCTA: HomePageFaqCTA
   finalCTA: HomePageFinalCTA
   id: ID!
   _sys: SystemInfo!
@@ -284,9 +311,27 @@ input HomePageTrustIndicatorsFilter {
   items: HomePageTrustIndicatorsItemsFilter
 }
 
+input HomePageProjectsHeaderFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+}
+
+input HomePageFaqHeaderFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
 input HomePageFaqFilter {
   question: StringFilter
   answer: StringFilter
+}
+
+input HomePageFaqCTAFilter {
+  title: StringFilter
+  description: StringFilter
+  phone: StringFilter
+  buttonText: StringFilter
+  buttonLink: StringFilter
 }
 
 input HomePageFinalCTAFilter {
@@ -304,7 +349,10 @@ input HomePageFilter {
   ceoQuote: HomePageCeoQuoteFilter
   projects: HomePageProjectsFilter
   trustIndicators: HomePageTrustIndicatorsFilter
+  projectsHeader: HomePageProjectsHeaderFilter
+  faqHeader: HomePageFaqHeaderFilter
   faq: HomePageFaqFilter
+  faqCTA: HomePageFaqCTAFilter
   finalCTA: HomePageFinalCTAFilter
 }
 
@@ -391,6 +439,14 @@ type ServiceGallery {
   caption: String
 }
 
+type ServiceUiText {
+  introHeader: String!
+  contactButtonText: String
+  careerCtaTitle: String
+  careerCtaDescription: String
+  careerCtaButtonText: String
+}
+
 type Service implements Node & Document {
   title: String!
   subtitle: String
@@ -409,6 +465,7 @@ type Service implements Node & Document {
   contactIds: [String]
   faq: [ServiceFaq]
   gallery: [ServiceGallery]
+  uiText: ServiceUiText
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -436,6 +493,14 @@ input ServiceGalleryFilter {
   caption: StringFilter
 }
 
+input ServiceUiTextFilter {
+  introHeader: StringFilter
+  contactButtonText: StringFilter
+  careerCtaTitle: StringFilter
+  careerCtaDescription: StringFilter
+  careerCtaButtonText: StringFilter
+}
+
 input ServiceFilter {
   title: StringFilter
   subtitle: StringFilter
@@ -454,6 +519,7 @@ input ServiceFilter {
   contactIds: StringFilter
   faq: ServiceFaqFilter
   gallery: ServiceGalleryFilter
+  uiText: ServiceUiTextFilter
 }
 
 type ServiceConnectionEdges {
@@ -731,6 +797,78 @@ type AboutPageConnection implements Connection {
   edges: [AboutPageConnectionEdges]
 }
 
+type CareerPageSeo {
+  title: String!
+  description: String
+}
+
+type CareerPageHero {
+  eyebrow: String
+  title: String!
+  description: String
+  backgroundImage: String
+}
+
+type CareerPageJobsSection {
+  title: String!
+  emptyMessage: String
+}
+
+type CareerPageWizardSection {
+  title: String!
+  description: String
+}
+
+type CareerPage implements Node & Document {
+  seo: CareerPageSeo
+  hero: CareerPageHero
+  jobsSection: CareerPageJobsSection
+  wizardSection: CareerPageWizardSection
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CareerPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input CareerPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  backgroundImage: ImageFilter
+}
+
+input CareerPageJobsSectionFilter {
+  title: StringFilter
+  emptyMessage: StringFilter
+}
+
+input CareerPageWizardSectionFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input CareerPageFilter {
+  seo: CareerPageSeoFilter
+  hero: CareerPageHeroFilter
+  jobsSection: CareerPageJobsSectionFilter
+  wizardSection: CareerPageWizardSectionFilter
+}
+
+type CareerPageConnectionEdges {
+  cursor: String!
+  node: CareerPage
+}
+
+type CareerPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CareerPageConnectionEdges]
+}
+
 type ContactPageSeo {
   title: String!
   description: String
@@ -815,6 +953,20 @@ type ContactPageConnection implements Connection {
   edges: [ContactPageConnectionEdges]
 }
 
+type SettingsCookieBanner {
+  message: String
+  privacyLinkText: String
+  cookieLinkText: String
+  rejectButtonText: String
+  acceptButtonText: String
+}
+
+type SettingsNotFoundPage {
+  title: String!
+  description: String
+  buttonText: String
+}
+
 type Settings implements Node & Document {
   siteName: String!
   siteDescription: String
@@ -824,9 +976,25 @@ type Settings implements Node & Document {
   gtmId: String
   gaId: String
   sentryDsn: String
+  cookieBanner: SettingsCookieBanner
+  notFoundPage: SettingsNotFoundPage
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input SettingsCookieBannerFilter {
+  message: StringFilter
+  privacyLinkText: StringFilter
+  cookieLinkText: StringFilter
+  rejectButtonText: StringFilter
+  acceptButtonText: StringFilter
+}
+
+input SettingsNotFoundPageFilter {
+  title: StringFilter
+  description: StringFilter
+  buttonText: StringFilter
 }
 
 input SettingsFilter {
@@ -838,6 +1006,8 @@ input SettingsFilter {
   gtmId: StringFilter
   gaId: StringFilter
   sentryDsn: StringFilter
+  cookieBanner: SettingsCookieBannerFilter
+  notFoundPage: SettingsNotFoundPageFilter
 }
 
 type SettingsConnectionEdges {
@@ -851,6 +1021,11 @@ type SettingsConnection implements Connection {
   edges: [SettingsConnectionEdges]
 }
 
+type NavigationCtaButton {
+  text: String!
+  link: String!
+}
+
 type NavigationItems {
   label: String!
   href: String!
@@ -858,10 +1033,16 @@ type NavigationItems {
 
 type Navigation implements Node & Document {
   logo: String
+  ctaButton: NavigationCtaButton
   items: [NavigationItems]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input NavigationCtaButtonFilter {
+  text: StringFilter
+  link: StringFilter
 }
 
 input NavigationItemsFilter {
@@ -871,6 +1052,7 @@ input NavigationItemsFilter {
 
 input NavigationFilter {
   logo: ImageFilter
+  ctaButton: NavigationCtaButtonFilter
   items: NavigationItemsFilter
 }
 
@@ -931,6 +1113,32 @@ type FooterConnection implements Connection {
   edges: [FooterConnectionEdges]
 }
 
+type LegalPage implements Node & Document {
+  title: String!
+  description: String
+  body: JSON
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input LegalPageFilter {
+  title: StringFilter
+  description: StringFilter
+  body: RichTextFilter
+}
+
+type LegalPageConnectionEdges {
+  cursor: String!
+  node: LegalPage
+}
+
+type LegalPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [LegalPageConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -949,6 +1157,8 @@ type Mutation {
   createPage(relativePath: String!, params: PageMutation!): Page!
   updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
   createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  updateCareerPage(relativePath: String!, params: CareerPageMutation!): CareerPage!
+  createCareerPage(relativePath: String!, params: CareerPageMutation!): CareerPage!
   updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
@@ -957,6 +1167,8 @@ type Mutation {
   createNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
   updateFooter(relativePath: String!, params: FooterMutation!): Footer!
   createFooter(relativePath: String!, params: FooterMutation!): Footer!
+  updateLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
+  createLegalPage(relativePath: String!, params: LegalPageMutation!): LegalPage!
 }
 
 input DocumentUpdateMutation {
@@ -966,10 +1178,12 @@ input DocumentUpdateMutation {
   job: JobMutation
   page: PageMutation
   aboutPage: AboutPageMutation
+  careerPage: CareerPageMutation
   contactPage: ContactPageMutation
   settings: SettingsMutation
   navigation: NavigationMutation
   footer: FooterMutation
+  legalPage: LegalPageMutation
   relativePath: String
 }
 
@@ -980,10 +1194,12 @@ input DocumentMutation {
   job: JobMutation
   page: PageMutation
   aboutPage: AboutPageMutation
+  careerPage: CareerPageMutation
   contactPage: ContactPageMutation
   settings: SettingsMutation
   navigation: NavigationMutation
   footer: FooterMutation
+  legalPage: LegalPageMutation
 }
 
 input HomePageSeoMutation {
@@ -1048,9 +1264,27 @@ input HomePageTrustIndicatorsMutation {
   items: [HomePageTrustIndicatorsItemsMutation]
 }
 
+input HomePageProjectsHeaderMutation {
+  eyebrow: String
+  title: String
+}
+
+input HomePageFaqHeaderMutation {
+  title: String
+  description: String
+}
+
 input HomePageFaqMutation {
   question: String
   answer: String
+}
+
+input HomePageFaqCTAMutation {
+  title: String
+  description: String
+  phone: String
+  buttonText: String
+  buttonLink: String
 }
 
 input HomePageFinalCTAMutation {
@@ -1068,7 +1302,10 @@ input HomePageMutation {
   ceoQuote: HomePageCeoQuoteMutation
   projects: [HomePageProjectsMutation]
   trustIndicators: HomePageTrustIndicatorsMutation
+  projectsHeader: HomePageProjectsHeaderMutation
+  faqHeader: HomePageFaqHeaderMutation
   faq: [HomePageFaqMutation]
+  faqCTA: HomePageFaqCTAMutation
   finalCTA: HomePageFinalCTAMutation
 }
 
@@ -1104,6 +1341,14 @@ input ServiceGalleryMutation {
   caption: String
 }
 
+input ServiceUiTextMutation {
+  introHeader: String
+  contactButtonText: String
+  careerCtaTitle: String
+  careerCtaDescription: String
+  careerCtaButtonText: String
+}
+
 input ServiceMutation {
   title: String
   subtitle: String
@@ -1122,6 +1367,7 @@ input ServiceMutation {
   contactIds: [String]
   faq: [ServiceFaqMutation]
   gallery: [ServiceGalleryMutation]
+  uiText: ServiceUiTextMutation
 }
 
 input JobMutation {
@@ -1238,6 +1484,35 @@ input AboutPageMutation {
   cta: AboutPageCtaMutation
 }
 
+input CareerPageSeoMutation {
+  title: String
+  description: String
+}
+
+input CareerPageHeroMutation {
+  eyebrow: String
+  title: String
+  description: String
+  backgroundImage: String
+}
+
+input CareerPageJobsSectionMutation {
+  title: String
+  emptyMessage: String
+}
+
+input CareerPageWizardSectionMutation {
+  title: String
+  description: String
+}
+
+input CareerPageMutation {
+  seo: CareerPageSeoMutation
+  hero: CareerPageHeroMutation
+  jobsSection: CareerPageJobsSectionMutation
+  wizardSection: CareerPageWizardSectionMutation
+}
+
 input ContactPageSeoMutation {
   title: String
   description: String
@@ -1273,6 +1548,20 @@ input ContactPageMutation {
   repairHours: ContactPageRepairHoursMutation
 }
 
+input SettingsCookieBannerMutation {
+  message: String
+  privacyLinkText: String
+  cookieLinkText: String
+  rejectButtonText: String
+  acceptButtonText: String
+}
+
+input SettingsNotFoundPageMutation {
+  title: String
+  description: String
+  buttonText: String
+}
+
 input SettingsMutation {
   siteName: String
   siteDescription: String
@@ -1282,6 +1571,13 @@ input SettingsMutation {
   gtmId: String
   gaId: String
   sentryDsn: String
+  cookieBanner: SettingsCookieBannerMutation
+  notFoundPage: SettingsNotFoundPageMutation
+}
+
+input NavigationCtaButtonMutation {
+  text: String
+  link: String
 }
 
 input NavigationItemsMutation {
@@ -1291,6 +1587,7 @@ input NavigationItemsMutation {
 
 input NavigationMutation {
   logo: String
+  ctaButton: NavigationCtaButtonMutation
   items: [NavigationItemsMutation]
 }
 
@@ -1308,6 +1605,12 @@ input FooterMutation {
   copyright: String
   links: [FooterLinksMutation]
   social: [FooterSocialMutation]
+}
+
+input LegalPageMutation {
+  title: String
+  description: String
+  body: JSON
 }
 
 schema {

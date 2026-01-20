@@ -105,7 +105,12 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             <div className="lg:col-span-8">
               
               {/* Intro & Expert Tip */}
-              <h2 className="text-h2 font-bold text-slate-900 mb-4 md:mb-6">Worum es wirklich geht.</h2>
+              <h2 
+                className="text-h2 font-bold text-slate-900 mb-4 md:mb-6"
+                data-tina-field={useTinaData && tinaField(data.service.uiText, 'introHeader')}
+              >
+                {service.uiText?.introHeader || 'Worum es wirklich geht.'}
+              </h2>
               <p 
                 className="text-xl text-slate-600 leading-relaxed mb-8"
                 data-tina-field={useTinaData && tinaField(data.service, 'intro')}
@@ -279,20 +284,32 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 <Button 
                   onClick={() => navigate(`/${lang}/contact`)}
                   className="bg-white text-primary hover:bg-white/90 w-full md:w-auto font-bold"
+                  data-tina-field={useTinaData && tinaField(data.service.uiText, 'contactButtonText')}
                 >
-                  Kontakt aufnehmen
+                  {service.uiText?.contactButtonText || 'Kontakt aufnehmen'}
                 </Button>
               </div>
               {/* Career CTA */}
               <div className="bg-slate-900 text-white p-6 md:p-8 rounded-sm shadow-lg">
-                <h3 className="text-h3 font-bold mb-3 md:mb-4">Karriere bei Ivangs</h3>
-                <p className="mb-8 text-slate-400 text-lg">Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.</p>
+                <h3 
+                  className="text-h3 font-bold mb-3 md:mb-4"
+                  data-tina-field={useTinaData && tinaField(data.service.uiText, 'careerCtaTitle')}
+                >
+                  {service.uiText?.careerCtaTitle || 'Karriere bei Ivangs'}
+                </h3>
+                <p 
+                  className="mb-8 text-slate-400 text-lg"
+                  data-tina-field={useTinaData && tinaField(data.service.uiText, 'careerCtaDescription')}
+                >
+                  {service.uiText?.careerCtaDescription || 'Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.'}
+                </p>
                 <Button 
                   onClick={() => navigate(`/${lang}/career`)}
                   variant="outline"
                   className="w-full md:w-auto font-bold border-white/20 hover:bg-white/10 text-white"
+                  data-tina-field={useTinaData && tinaField(data.service.uiText, 'careerCtaButtonText')}
                 >
-                  Offene Stellen ansehen
+                  {service.uiText?.careerCtaButtonText || 'Offene Stellen ansehen'}
                 </Button>
               </div>
             </div>

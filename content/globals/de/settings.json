@@ -1,16 +1,16 @@
 {
   "siteName": "Ivangs Bedachungen",
-  "siteDescription": "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist.",
-  "favicon": "/favicon.svg",
-  "logo": "/uploads/ivangs-logo.avif",
-  "defaultOgImage": "/images/og-default.png",
-  "gtmId": "",
-  "gaId": "",
-  "sentryDsn": "",
-  "hero": {
-    "mediaType": "video",
-    "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
-    "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
-    "showQuickForm": true
+  "siteDescription": "Meisterbetrieb für Dachdeckerarbeiten im Kreis Viersen seit 1996",
+  "cookieBanner": {
+    "message": "Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Einige sind technisch notwendig, andere helfen uns, die Website zu verbessern.",
+    "privacyLinkText": "Datenschutzerklärung",
+    "cookieLinkText": "Cookie-Einstellungen",
+    "rejectButtonText": "Nur notwendige",
+    "acceptButtonText": "Alle akzeptieren"
+  },
+  "notFoundPage": {
+    "title": "Seite nicht gefunden",
+    "description": "Die angeforderte Seite existiert nicht oder wurde verschoben.",
+    "buttonText": "Zur Startseite"
   }
 }

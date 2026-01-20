@@ -10,14 +10,21 @@ import { useNavigate } from 'react-router-dom';
 import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
 import { useTina, tinaField } from 'tinacms/dist/react';
 import { useJobsData } from '@/shared/lib/tina/useJobsData';
-
-const CAREER_HERO_IMG = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop";
+import { useCareerPageData } from '@/shared/lib/tina/useCareerPageData';
 
 export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
   
+  // Fetch career page data from TinaCMS
+  const { data: careerData, isLoading: careerLoading } = useCareerPageData(lang);
+  
   // Fetch jobs data from TinaCMS with visual editing support
   const { data, isLoading } = useJobsData();
+  
+  const career = careerData?.careerPage || {};
+  const hero = career.hero || {};
+  const jobsSection = career.jobsSection || {};
+  const wizardSection = career.wizardSection || {};
   
   // Show loading state
   if (isLoading) {
@@ -39,8 +46,8 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   return (
     <>
       <Seo 
-        title="Karriere bei Ivangs - Werde Teil des Teams" 
-        description="Jobs für Dachdecker und Bürokräfte im Kreis Viersen. Finde heraus, ob du zu uns passt."
+        title={career.seo?.title || "Karriere bei Ivangs - Werde Teil des Teams"}
+        description={career.seo?.description || "Arbeite bei einem der führenden Dachdeckerbetriebe im Kreis Viersen. Faire Bezahlung, modernes Equipment, starkes Team."}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />
@@ -49,12 +56,13 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
         {/* Hero Header */}
         <div className="relative h-[60vh] md:h-[50vh] min-h-[400px] max-h-[600px] overflow-hidden">
           <OptimizedImage 
-            src={CAREER_HERO_IMG}
+            src={hero.backgroundImage || ""}
             className="absolute inset-0 w-full h-full object-cover" 
             alt="Dachdecker bei der Arbeit auf einem Dach"
-            srcSet={generateUnsplashSrcSet(CAREER_HERO_IMG)}
+            srcSet={hero.backgroundImage ? generateUnsplashSrcSet(hero.backgroundImage) : undefined}
             sizes="100vw"
             priority
+            data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'backgroundImage')}
           />
           {/* Stronger overlay for better text readability */}
           <div className="absolute inset-0 bg-slate-900/80 flex items-center justify-center">
@@ -62,10 +70,23 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
               <div className="text-center max-w-4xl mx-auto">
                 {/* Text container with semi-transparent background */}
                 <div className="bg-slate-900/60 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 rounded-sm border border-white/10">
-                  <span className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm mb-3 md:mb-4 block">Karriere bei Ivangs</span>
-                  <h1 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 lg:mb-6">Bock auf Handwerk? Komm ins Team Ivangs.</h1>
-                  <p className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium">
-                    Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.
+                  <span 
+                    className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm mb-3 md:mb-4 block"
+                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'eyebrow')}
+                  >
+                    {hero.eyebrow || 'Karriere bei Ivangs'}
+                  </span>
+                  <h1 
+                    className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 lg:mb-6"
+                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'title')}
+                  >
+                    {hero.title || 'Bock auf Handwerk? Komm ins Team Ivangs.'}
+                  </h1>
+                  <p 
+                    className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium"
+                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'description')}
+                  >
+                    {hero.description || 'Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.'}
                   </p>
                 </div>
               </div>
@@ -78,7 +99,12 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              
              {/* Left Column: Job Listings */}
              <div className="lg:col-span-7 order-2 lg:order-1">
-                <h2 className="text-h2 font-bold text-slate-900 mb-6 md:mb-8">Offene Stellen</h2>
+                <h2 
+                  className="text-h2 font-bold text-slate-900 mb-6 md:mb-8"
+                  data-tina-field={careerData?.careerPage?.jobsSection && tinaField(careerData.careerPage.jobsSection, 'title')}
+                >
+                  {jobsSection.title || 'Offene Stellen'}
+                </h2>
                 {jobs.length > 0 ? (
                   <div className="space-y-4 md:space-y-6">
                      <Accordion type="single" collapsible className="w-full border-none divide-y-0 rounded-none bg-transparent">
@@ -88,15 +114,30 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                      </Accordion>
                   </div>
                 ) : (
-                  <p className="text-slate-600">Aktuell keine offenen Stellen verfügbar.</p>
+                  <p 
+                    className="text-slate-600"
+                    data-tina-field={careerData?.careerPage?.jobsSection && tinaField(careerData.careerPage.jobsSection, 'emptyMessage')}
+                  >
+                    {jobsSection.emptyMessage || 'Aktuell keine offenen Stellen verfügbar.'}
+                  </p>
                 )}
              </div>
              
              {/* Right Column: Wizard & Sidebar */}
              <div className="lg:col-span-5 space-y-6 md:space-y-8 order-1 lg:order-2">
                <div className="bg-white p-6 md:p-8 rounded-sm shadow-xl border border-slate-100">
-                 <h3 className="text-h4 font-bold mb-4 md:mb-6 text-slate-900">Karriere Finder</h3>
-                 <p className="text-sm text-slate-500 mb-4 md:mb-6">Unsicher welche Stelle passt? Beantworte 3 Fragen.</p>
+                 <h3 
+                   className="text-h4 font-bold mb-4 md:mb-6 text-slate-900"
+                   data-tina-field={careerData?.careerPage?.wizardSection && tinaField(careerData.careerPage.wizardSection, 'title')}
+                 >
+                   {wizardSection.title || 'Karriere Finder'}
+                 </h3>
+                 <p 
+                   className="text-sm text-slate-500 mb-4 md:mb-6"
+                   data-tina-field={careerData?.careerPage?.wizardSection && tinaField(careerData.careerPage.wizardSection, 'description')}
+                 >
+                   {wizardSection.description || 'Unsicher welche Stelle passt? Beantworte 3 Fragen.'}
+                 </p>
                  <CareerWizard />
                </div>
 

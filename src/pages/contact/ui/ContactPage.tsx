@@ -132,13 +132,27 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                   <div className="space-y-4">
                     <div>
                       <h4 className="font-semibold text-slate-800 mb-2">Büro</h4>
-                      <p className="text-slate-600">Mo – Fr: 07.00 – 17.00 Uhr</p>
+                      <p 
+                        className="text-slate-600"
+                        data-tina-field={data?.contactPage?.officeHours && tinaField(data.contactPage.officeHours, 'weekdays')}
+                      >
+                        {contact.officeHours?.weekdays || 'Mo – Fr: 07.00 – 17.00 Uhr'}
+                      </p>
                     </div>
                     <div>
                       <h4 className="font-semibold text-slate-800 mb-2">Reparaturplanung</h4>
                       <p className="text-slate-600">
-                        Di – Do: 8.00 – 13.00 Uhr<br/>
-                        Fr: 11.00 – 16.00 Uhr
+                        <span 
+                          data-tina-field={data?.contactPage?.repairHours && tinaField(data.contactPage.repairHours, 'tueThu')}
+                        >
+                          {contact.repairHours?.tueThu || 'Di – Do: 8.00 – 13.00 Uhr'}
+                        </span>
+                        <br/>
+                        <span 
+                          data-tina-field={data?.contactPage?.repairHours && tinaField(data.contactPage.repairHours, 'fri')}
+                        >
+                          {contact.repairHours?.fri || 'Fr: 11.00 – 16.00 Uhr'}
+                        </span>
                       </p>
                     </div>
                   </div>

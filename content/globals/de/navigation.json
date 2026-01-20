@@ -1,5 +1,9 @@
 {
   "logo": "/logo.svg",
+  "ctaButton": {
+    "text": "Angebot anfragen",
+    "link": "/de/contact"
+  },
   "items": [
     { "label": "Startseite", "href": "/" },
     { "label": "Unternehmen", "href": "/about" },

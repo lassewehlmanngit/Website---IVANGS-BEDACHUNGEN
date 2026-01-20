@@ -56,12 +56,25 @@ const defaultHomeFAQ: FAQItem[] = [
 
 interface HomeFAQProps {
   lang: SupportedLang;
+  faqHeader?: any;
   faqData?: any[];
+  faqCTA?: any;
 }
 
-export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqData }) => {
+export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqHeader, faqData, faqCTA }) => {
   // Use faqData from TinaCMS if available, otherwise fall back to hardcoded defaults
   const faqList = faqData || defaultHomeFAQ;
+  
+  // Header data with fallbacks
+  const headerTitle = faqHeader?.title || 'Häufig gestellte Fragen';
+  const headerDescription = faqHeader?.description || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
+  
+  // CTA data with fallbacks
+  const ctaTitle = faqCTA?.title || 'Ihre Frage war nicht dabei?';
+  const ctaDescription = faqCTA?.description || 'Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.';
+  const ctaPhone = faqCTA?.phone || '02162 356666';
+  const ctaButtonText = faqCTA?.buttonText || 'Nachricht senden';
+  const ctaButtonLink = faqCTA?.buttonLink || `/${lang}/contact`;
   
   return (
     <section className="py-20 bg-white border-t border-slate-100">
@@ -71,12 +84,18 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqData }) => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <HelpCircle className="text-primary" size={32} />
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
-                Häufig gestellte Fragen
+              <h2 
+                className="text-3xl md:text-4xl font-bold text-slate-900"
+                data-tina-field={faqHeader && tinaField(faqHeader, 'title')}
+              >
+                {headerTitle}
               </h2>
             </div>
-            <p className="text-slate-600 text-lg">
-              Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet
+            <p 
+              className="text-slate-600 text-lg"
+              data-tina-field={faqHeader && tinaField(faqHeader, 'description')}
+            >
+              {headerDescription}
             </p>
           </div>
 
@@ -104,24 +123,32 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqData }) => {
 
           {/* CTA below FAQ */}
           <div className="mt-12 text-center p-8 bg-slate-50 rounded-sm border border-slate-100">
-            <p className="text-slate-700 text-lg mb-4">
-              Ihre Frage war nicht dabei?
+            <p 
+              className="text-slate-700 text-lg mb-4"
+              data-tina-field={faqCTA && tinaField(faqCTA, 'title')}
+            >
+              {ctaTitle}
             </p>
-            <p className="text-slate-600 mb-6">
-              Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.
+            <p 
+              className="text-slate-600 mb-6"
+              data-tina-field={faqCTA && tinaField(faqCTA, 'description')}
+            >
+              {ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
-                href="tel:+4921623566666" 
+                href={`tel:+49${ctaPhone.replace(/\s/g, '').replace(/^0/, '')}`}
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-sm hover:bg-primary/90 transition-colors"
+                data-tina-field={faqCTA && tinaField(faqCTA, 'phone')}
               >
-                02162 356666
+                {ctaPhone}
               </a>
               <a 
-                href={`/${lang}/contact`}
+                href={ctaButtonLink}
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-bold rounded-sm border-2 border-primary hover:bg-primary/5 transition-colors"
+                data-tina-field={faqCTA && tinaField(faqCTA, 'buttonText')}
               >
-                Nachricht senden
+                {ctaButtonText}
               </a>
             </div>
           </div>

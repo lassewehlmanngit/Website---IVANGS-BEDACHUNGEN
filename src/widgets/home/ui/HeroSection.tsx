@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Users, Truck, Warehouse, Calendar, Mail } from 'lucide-react';
+import { ArrowRight, Users, Truck, Warehouse, Calendar, Mail, LucideIcon } from 'lucide-react';
+import * as LucideIcons from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
 import type { HeroSettings } from '@/shared/lib/content/globals';
@@ -20,6 +21,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
   const backgroundImage = heroData?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
   const videoUrl = heroData?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
   const showQuickForm = heroData?.showQuickForm ?? true;
+
+  // Stats data from CMS or fallback
+  const stats = homeData?.stats || [
+    { value: '28', label: 'Experten', icon: 'Users' },
+    { value: 'Eigener', label: 'Kran-Service', icon: 'Truck' },
+    { value: '400m²', label: 'Lagerfläche', icon: 'Warehouse' },
+    { value: '1996', label: 'Gegründet', icon: 'Calendar' },
+  ];
+
+  // Helper to get icon component from string
+  const getIcon = (iconName: string): LucideIcon => {
+    const icons: Record<string, LucideIcon> = {
+      Users, Truck, Warehouse, Calendar
+    };
+    return icons[iconName] || Users;
+  };
 
   useEffect(() => {
     // Delay video loading to prioritize initial page render
@@ -122,42 +139,30 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       <div className="relative z-20 border-t border-white/10 bg-white/5 backdrop-blur-md hidden md:block">
          <div className="container mx-auto px-4 py-6 md:py-8">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
-                    <Users size={24} />
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-medium text-white leading-none mb-1">28</h3>
-                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Experten</p>
-                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
-                    <Truck size={24} />
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-medium text-white leading-none mb-1">Eigener</h3>
-                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Kran-Service</p>
-                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
-                    <Warehouse size={24} />
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-medium text-white leading-none mb-1">400m²</h3>
-                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Lagerfläche</p>
-                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
-                    <Calendar size={24} />
-                 </div>
-                 <div>
-                    <h3 className="text-2xl font-medium text-white leading-none mb-1">1996</h3>
-                    <p className="text-xs text-slate-300 uppercase tracking-wider font-bold">Gegründet</p>
-                 </div>
-              </div>
+              {stats.map((stat, index) => {
+                const Icon = getIcon(stat.icon || 'Users');
+                return (
+                  <div key={index} className="flex items-center gap-4">
+                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
+                        <Icon size={24} />
+                     </div>
+                     <div>
+                        <h3 
+                          className="text-2xl font-medium text-white leading-none mb-1"
+                          data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
+                        >
+                          {stat.value}
+                        </h3>
+                        <p 
+                          className="text-xs text-slate-300 uppercase tracking-wider font-bold"
+                          data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'label')}
+                        >
+                          {stat.label}
+                        </p>
+                     </div>
+                  </div>
+                );
+              })}
            </div>
          </div>
       </div>
@@ -166,34 +171,28 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       <div className="relative z-20 md:hidden border-t border-white/10 bg-slate-900/80 backdrop-blur-md">
          <div className="container mx-auto px-4 py-8">
            <div className="grid grid-cols-2 gap-y-8 gap-x-4">
-              <div className="flex flex-col items-center text-center gap-2">
-                 <Users size={20} className="text-primary" />
-                 <div>
-                    <h3 className="text-xl font-bold text-white leading-none mb-1">28</h3>
-                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Experten</p>
-                 </div>
-              </div>
-              <div className="flex flex-col items-center text-center gap-2">
-                 <Truck size={20} className="text-primary" />
-                 <div>
-                    <h3 className="text-xl font-bold text-white leading-none mb-1">Eigener</h3>
-                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Kran-Service</p>
-                 </div>
-              </div>
-              <div className="flex flex-col items-center text-center gap-2">
-                 <Warehouse size={20} className="text-primary" />
-                 <div>
-                    <h3 className="text-xl font-bold text-white leading-none mb-1">400m²</h3>
-                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Lagerfläche</p>
-                 </div>
-              </div>
-              <div className="flex flex-col items-center text-center gap-2">
-                 <Calendar size={20} className="text-primary" />
-                 <div>
-                    <h3 className="text-xl font-bold text-white leading-none mb-1">1996</h3>
-                    <p className="text-[10px] text-slate-300 uppercase tracking-wider font-bold">Gegründet</p>
-                 </div>
-              </div>
+              {stats.map((stat, index) => {
+                const Icon = getIcon(stat.icon || 'Users');
+                return (
+                  <div key={index} className="flex flex-col items-center text-center gap-2">
+                     <Icon size={20} className="text-primary" />
+                     <div>
+                        <h3 
+                          className="text-xl font-bold text-white leading-none mb-1"
+                          data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
+                        >
+                          {stat.value}
+                        </h3>
+                        <p 
+                          className="text-[10px] text-slate-300 uppercase tracking-wider font-bold"
+                          data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'label')}
+                        >
+                          {stat.label}
+                        </p>
+                     </div>
+                  </div>
+                );
+              })}
            </div>
          </div>
       </div>

@@ -6,6 +6,7 @@ import { OptimizedImage } from '@/shared/ui/Image';
 import { servicesData, ServiceId } from '@/features/service/model/serviceData';
 import { cn } from '@/shared/lib/cn';
 import { tinaField } from 'tinacms/dist/react';
+import { useServicesListData } from '@/shared/lib/tina/useServicesListData';
 
 interface ServiceSectionProps {
   id: ServiceId;
@@ -102,8 +103,27 @@ export interface ServicePreviewProps {
 }
 
 export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSection }) => {
+  const { data: servicesData, isLoading } = useServicesListData();
   const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'solar', 'fenster', 'sanierung'];
   const section = servicesSection || {};
+  
+  // Extract services from CMS if available
+  const cmsServices = servicesData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
+  
+  // If we have CMS services, use them; otherwise fall back to hardcoded order
+  const displayOrder = cmsServices.length > 0 
+    ? cmsServices.map((s: any) => s._sys.filename).filter((id: string) => serviceOrder.includes(id as ServiceId))
+    : serviceOrder;
+
+  if (isLoading) {
+    return (
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 md:py-24 bg-white">
@@ -122,10 +142,10 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSe
         </div>
 
         <div className="space-y-24 lg:space-y-32">
-          {serviceOrder.map((id, index) => (
+          {displayOrder.map((id, index) => (
             <ServiceSection 
               key={id}
-              id={id}
+              id={id as ServiceId}
               lang={lang}
               reverse={index % 2 === 1}
             />

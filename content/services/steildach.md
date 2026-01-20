@@ -6,6 +6,12 @@ intro: Ein Steildach ist ein komplexes System aus vielen Schichten. Es muss atme
 heroImage: /uploads/steildach.avif
 icon: Home
 expertTip: Wussten Sie schon? Ein neues Dach mit Aufsparrendämmung kann Ihre Heizkosten um bis zu 30% senken und wird vom Staat (BAFA) hoch gefördert.
+uiText:
+  introHeader: Worum es wirklich geht.
+  contactButtonText: Kontakt aufnehmen
+  careerCtaTitle: Karriere bei Ivangs
+  careerCtaDescription: Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.
+  careerCtaButtonText: Offene Stellen ansehen
 features:
   - Neueindeckung mit Ziegel, Schiefer oder Beton
   - Dachsanierung und Reparatur

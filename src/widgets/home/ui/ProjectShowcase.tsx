@@ -2,10 +2,11 @@ import React from 'react';
 import { tinaField } from 'tinacms/dist/react';
 
 export interface ProjectShowcaseProps {
+  projectsHeader?: any;
   projects?: any[];
 }
 
-export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) => {
+export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader, projects }) => {
   // Use projects from TinaCMS if available, otherwise fall back to hardcoded defaults
   const projectsList = projects || [
     {
@@ -24,14 +25,28 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projects }) =>
       image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop',
     },
   ];
+  
+  // Header data with fallbacks
+  const headerEyebrow = projectsHeader?.eyebrow || 'Referenzen';
+  const headerTitle = projectsHeader?.title || 'Ergebnisse, die zählen.';
 
   return (
     <section className="py-24 bg-white overflow-hidden">
          <div className="container mx-auto px-4">
             <div className="mb-12 flex justify-between items-end">
                 <div>
-                  <span className="text-primary font-bold uppercase tracking-wider text-sm">Referenzen</span>
-                  <h2 className="text-4xl font-bold text-slate-900 mt-2">Ergebnisse, die zählen.</h2>
+                  <span 
+                    className="text-primary font-bold uppercase tracking-wider text-sm"
+                    data-tina-field={projectsHeader && tinaField(projectsHeader, 'eyebrow')}
+                  >
+                    {headerEyebrow}
+                  </span>
+                  <h2 
+                    className="text-4xl font-bold text-slate-900 mt-2"
+                    data-tina-field={projectsHeader && tinaField(projectsHeader, 'title')}
+                  >
+                    {headerTitle}
+                  </h2>
                 </div>
             </div>
 

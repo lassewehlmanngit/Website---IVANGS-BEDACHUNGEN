@@ -328,6 +328,61 @@ query aboutPageConnection($before: String, $after: String, $first: Float, $last:
   }
 }
 
+query careerPage($relativePath: String!) {
+  careerPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CareerPageParts
+  }
+}
+
+query careerPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CareerPageFilter) {
+  careerPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CareerPageParts
+      }
+    }
+  }
+}
+
 query contactPage($relativePath: String!) {
   contactPage(relativePath: $relativePath) {
     ... on Document {
@@ -543,6 +598,61 @@ query footerConnection($before: String, $after: String, $first: Float, $last: Fl
           id
         }
         ...FooterParts
+      }
+    }
+  }
+}
+
+query legalPage($relativePath: String!) {
+  legalPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...LegalPageParts
+  }
+}
+
+query legalPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: LegalPageFilter) {
+  legalPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...LegalPageParts
       }
     }
   }

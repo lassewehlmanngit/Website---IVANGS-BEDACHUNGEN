@@ -19,6 +19,14 @@ const HOME_PAGE_QUERY = `
       servicesSection { eyebrow title description }
       ceoQuote { eyebrow name role quote text image buttonText buttonLink }
       projects { title description image }
+      trustIndicators {
+        eyebrow title description image
+        items { title description icon }
+      }
+      projectsHeader { eyebrow title }
+      faqHeader { title description }
+      faq { question answer }
+      faqCTA { title description phone buttonText buttonLink }
       finalCTA { title description buttonText buttonLink }
     }
   }

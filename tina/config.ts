@@ -145,12 +145,42 @@ export default defineConfig({
           },
           {
             type: 'object',
+            name: 'projectsHeader',
+            label: 'Projekt Showcase Header',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'faqHeader',
+            label: 'FAQ Bereich Header',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung' },
+            ],
+          },
+          {
+            type: 'object',
             list: true,
             name: 'faq',
             label: 'FAQ',
             fields: [
               { type: 'string', name: 'question', label: 'Frage', required: true },
               { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'faqCTA',
+            label: 'FAQ CTA Bereich',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'phone', label: 'Telefonnummer' },
+              { type: 'string', name: 'buttonText', label: 'Button Text' },
+              { type: 'string', name: 'buttonLink', label: 'Button Link' },
             ],
           },
           {
@@ -280,6 +310,18 @@ export default defineConfig({
             fields: [
               { type: 'image', name: 'image', label: 'Bild' },
               { type: 'string', name: 'caption', label: 'Bildunterschrift' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'uiText',
+            label: 'UI Texte',
+            fields: [
+              { type: 'string', name: 'introHeader', label: 'Intro Überschrift', required: true },
+              { type: 'string', name: 'contactButtonText', label: 'Kontakt Button Text' },
+              { type: 'string', name: 'careerCtaTitle', label: 'Karriere CTA Titel' },
+              { type: 'string', name: 'careerCtaDescription', label: 'Karriere CTA Beschreibung' },
+              { type: 'string', name: 'careerCtaButtonText', label: 'Karriere CTA Button Text' },
             ],
           },
         ],
@@ -526,6 +568,61 @@ export default defineConfig({
         ],
       },
       
+      // Career Page Collection (Single Document)
+      {
+        name: 'careerPage',
+        label: 'Karriere Seite',
+        path: 'content/career',
+        format: 'json',
+        ui: {
+          router: () => '/de/career',
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
+        fields: [
+          {
+            type: 'object',
+            name: 'seo',
+            label: 'SEO',
+            fields: [
+              { type: 'string', name: 'title', label: 'Seitentitel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'hero',
+            label: 'Hero Bereich',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung' },
+              { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'jobsSection',
+            label: 'Stellenangebote Bereich',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'emptyMessage', label: 'Keine Stellen Text' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'wizardSection',
+            label: 'Karriere Finder',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung' },
+            ],
+          },
+        ],
+      },
+      
       // Contact Page Collection (Single Document)
       {
         name: 'contactPage',
@@ -605,6 +702,28 @@ export default defineConfig({
           { type: 'string', name: 'gtmId', label: 'Google Tag Manager ID' },
           { type: 'string', name: 'gaId', label: 'Google Analytics ID' },
           { type: 'string', name: 'sentryDsn', label: 'Sentry DSN' },
+          {
+            type: 'object',
+            name: 'cookieBanner',
+            label: 'Cookie Banner',
+            fields: [
+              { type: 'string', name: 'message', label: 'Nachricht', ui: { component: 'textarea' } },
+              { type: 'string', name: 'privacyLinkText', label: 'Datenschutz Link Text' },
+              { type: 'string', name: 'cookieLinkText', label: 'Cookie-Einstellungen Link Text' },
+              { type: 'string', name: 'rejectButtonText', label: 'Ablehnen Button Text' },
+              { type: 'string', name: 'acceptButtonText', label: 'Akzeptieren Button Text' },
+            ],
+          },
+          {
+            type: 'object',
+            name: 'notFoundPage',
+            label: '404 Seite',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'buttonText', label: 'Button Text' },
+            ],
+          },
         ],
       },
       
@@ -619,6 +738,15 @@ export default defineConfig({
         },
         fields: [
           { type: 'image', name: 'logo', label: 'Logo' },
+          {
+            type: 'object',
+            name: 'ctaButton',
+            label: 'CTA Button',
+            fields: [
+              { type: 'string', name: 'text', label: 'Button Text', required: true },
+              { type: 'string', name: 'link', label: 'Button Link', required: true },
+            ],
+          },
           {
             type: 'object',
             list: true,
@@ -662,6 +790,46 @@ export default defineConfig({
               { type: 'string', name: 'platform', label: 'Platform', required: true },
               { type: 'string', name: 'url', label: 'URL', required: true },
             ],
+          },
+        ],
+      },
+      
+      // Legal Pages Collection
+      {
+        name: 'legalPage',
+        label: 'Rechtliche Seiten',
+        path: 'content/legal',
+        format: 'md',
+        ui: {
+          router: ({ document }) => {
+            const slugMap: Record<string, string> = {
+              'imprint': '/de/imprint',
+              'privacy': '/de/privacy',
+              'terms': '/de/terms',
+              'cookies': '/de/cookies',
+            };
+            return slugMap[document._sys.filename] || `/de/${document._sys.filename}`;
+          },
+        },
+        fields: [
+          { 
+            type: 'string', 
+            name: 'title', 
+            label: 'Titel', 
+            required: true,
+            isTitle: true 
+          },
+          { 
+            type: 'string', 
+            name: 'description', 
+            label: 'Meta Beschreibung', 
+            ui: { component: 'textarea' } 
+          },
+          { 
+            type: 'rich-text', 
+            name: 'body', 
+            label: 'Inhalt',
+            isBody: true 
           },
         ],
       },

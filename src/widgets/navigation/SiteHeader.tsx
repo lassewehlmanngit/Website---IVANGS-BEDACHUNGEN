@@ -20,6 +20,10 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
   const { data } = useNavigationData(lang);
   const nav = data?.navigation || { items: [] };
   const navigate = useNavigate();
+  
+  // CTA button data with fallbacks
+  const ctaText = nav.ctaButton?.text || 'Angebot anfragen';
+  const ctaLink = nav.ctaButton?.link || `/${lang}/contact`;
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
@@ -74,10 +78,11 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               </NavLink>
             ))}
             <Button 
-                onClick={() => navigate(`/${lang}/contact`)}
+                onClick={() => navigate(ctaLink)}
                 className="shadow-lg shadow-primary/20"
+                data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
             >
-                Angebot anfragen
+                {ctaText}
             </Button>
           </nav>
 
@@ -141,10 +146,16 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               </div>
 
                <div className="mt-8">
-                 <Button className="w-full py-6 text-lg" onClick={() => {
-                    navigate(`/${lang}/contact`);
-                    setMobileMenuOpen(false);
-                 }}>Angebot anfragen</Button>
+                 <Button 
+                   className="w-full py-6 text-lg" 
+                   onClick={() => {
+                     navigate(ctaLink);
+                     setMobileMenuOpen(false);
+                   }}
+                   data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
+                 >
+                   {ctaText}
+                 </Button>
                </div>
             </nav>
           </Drawer>

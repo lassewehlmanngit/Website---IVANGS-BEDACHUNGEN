@@ -3,6 +3,8 @@ import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
+import { useSettingsData } from '@/shared/lib/tina/useSettingsData';
+import { tinaField } from 'tinacms/dist/react';
 
 export type CookieConsentStatus = 'accepted' | 'rejected' | 'custom';
 
@@ -26,6 +28,17 @@ export interface CookieBannerProps {
 
 export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) => {
   const [show, setShow] = useState(false);
+  const { data } = useSettingsData();
+  
+  const settings = data?.settings || {};
+  const cookieBanner = settings.cookieBanner || {};
+  
+  // Default values with fallbacks
+  const message = cookieBanner.message || 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Einige sind technisch notwendig, andere helfen uns, die Website zu verbessern.';
+  const privacyLinkText = cookieBanner.privacyLinkText || 'Datenschutzerklärung';
+  const cookieLinkText = cookieBanner.cookieLinkText || 'Cookie-Einstellungen';
+  const rejectButtonText = cookieBanner.rejectButtonText || 'Nur notwendige';
+  const acceptButtonText = cookieBanner.acceptButtonText || 'Alle akzeptieren';
 
   useEffect(() => {
     const stored = localStorage.getItem(COOKIE_STORAGE_KEY);
@@ -64,23 +77,26 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
       <div className="container mx-auto">
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
           <div className="flex-1">
-            <p className="text-sm text-slate-600 mb-2">
-              {lang === 'de'
-                ? 'Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Einige sind technisch notwendig, andere helfen uns, die Website zu verbessern.' 
-                : 'We use cookies to ensure you get the best experience on our website. Some are technically necessary, others help us improve the site.'}
+            <p 
+              className="text-sm text-slate-600 mb-2"
+              data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'message')}
+            >
+              {message}
             </p>
             <div className="flex gap-4 text-xs">
               <Link 
                 to={`/${lang}/privacy`}
                 className="text-slate-500 hover:text-primary underline"
+                data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'privacyLinkText')}
               >
-                {lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy'}
+                {privacyLinkText}
               </Link>
               <Link 
                 to={`/${lang}/cookies`}
                 className="text-slate-500 hover:text-primary underline"
+                data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'cookieLinkText')}
               >
-                {lang === 'de' ? 'Cookie-Einstellungen' : 'Cookie Settings'}
+                {cookieLinkText}
               </Link>
             </div>
           </div>
@@ -89,14 +105,16 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
               variant="outline"
               onClick={handleRejectAll}
               className="flex-1 lg:flex-none text-slate-700 bg-white border-slate-300 hover:bg-slate-50"
+              data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'rejectButtonText')}
             >
-              {lang === 'de' ? 'Nur notwendige' : 'Essential only'}
+              {rejectButtonText}
             </Button>
             <Button 
               onClick={handleAcceptAll}
               className="flex-1 lg:flex-none text-white"
+              data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'acceptButtonText')}
             >
-              {lang === 'de' ? 'Alle akzeptieren' : 'Accept all'}
+              {acceptButtonText}
             </Button>
           </div>
         </div>

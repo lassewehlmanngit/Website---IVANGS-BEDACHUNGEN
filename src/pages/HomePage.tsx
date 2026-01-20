@@ -112,8 +112,8 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <ServicePreview lang={lang} servicesSection={home.servicesSection} />
       <TrustIndicators trustData={home.trustIndicators} />
       <CeoQuote lang={lang} ceoData={home.ceoQuote} />
-      <ProjectShowcase projects={home.projects} />
-      <HomeFAQ lang={lang} faqData={home.faq} />
+      <ProjectShowcase projectsHeader={home.projectsHeader} projects={home.projects} />
+      <HomeFAQ lang={lang} faqHeader={home.faqHeader} faqData={home.faq} faqCTA={home.faqCTA} />
       
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">

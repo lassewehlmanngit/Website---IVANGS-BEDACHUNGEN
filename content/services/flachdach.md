@@ -6,6 +6,12 @@ intro: Das moderne Flachdach ist ein Hochleistungsbauteil. Vergessen Sie die alt
 heroImage: /uploads/flachdach.avif
 icon: Layers
 expertTip: Ein Flachdach bietet Platz! Nutzen Sie es doppelt - Als Terrasse zum Entspannen oder als Gründach für besseres Klima.
+uiText:
+  introHeader: Worum es wirklich geht.
+  contactButtonText: Kontakt aufnehmen
+  careerCtaTitle: Karriere bei Ivangs
+  careerCtaDescription: Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.
+  careerCtaButtonText: Offene Stellen ansehen
 features:
   - Bitumen- und Kunststoffabdichtung
   - Flachdachsanierung

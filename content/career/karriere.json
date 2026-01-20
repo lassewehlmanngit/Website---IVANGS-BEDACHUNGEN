@@ -1,0 +1,20 @@
+{
+  "seo": {
+    "title": "Karriere bei Ivangs - Werde Teil des Teams",
+    "description": "Arbeite bei einem der führenden Dachdeckerbetriebe im Kreis Viersen. Faire Bezahlung, modernes Equipment, starkes Team."
+  },
+  "hero": {
+    "eyebrow": "Karriere bei Ivangs",
+    "title": "Bock auf Handwerk? Komm ins Team Ivangs.",
+    "description": "Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.",
+    "backgroundImage": ""
+  },
+  "jobsSection": {
+    "title": "Offene Stellen",
+    "emptyMessage": "Aktuell keine offenen Stellen verfügbar."
+  },
+  "wizardSection": {
+    "title": "Karriere Finder",
+    "description": "Unsicher welche Stelle passt? Beantworte 3 Fragen."
+  }
+}
