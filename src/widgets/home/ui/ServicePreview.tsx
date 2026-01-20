@@ -136,14 +136,14 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
       <div className="container mx-auto px-4">
         
         <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-          <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm" data-tina-field={homeData && tinaField(homeData, 'servicesEyebrow')}>
-            {homeData?.servicesEyebrow || 'Unsere Expertise'}
+          <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm" data-tina-field={homeData?.servicesSection && tinaField(homeData.servicesSection, 'eyebrow')}>
+            {homeData?.servicesSection?.eyebrow || 'Unsere Expertise'}
           </span>
-          <h2 className="text-h2 font-bold text-slate-900 mt-2 mb-4 md:mb-6" data-tina-field={homeData && tinaField(homeData, 'servicesTitle')}>
-            {homeData?.servicesTitle || 'Nicht nur dicht, sondern durchdacht.'}
+          <h2 className="text-h2 font-bold text-slate-900 mt-2 mb-4 md:mb-6" data-tina-field={homeData?.servicesSection && tinaField(homeData.servicesSection, 'title')}>
+            {homeData?.servicesSection?.title || 'Nicht nur dicht, sondern durchdacht.'}
           </h2>
-          <p className="text-slate-600 text-base md:text-lg" data-tina-field={homeData && tinaField(homeData, 'servicesDescription')}>
-            {homeData?.servicesDescription || 'Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.'}
+          <p className="text-slate-600 text-base md:text-lg" data-tina-field={homeData?.servicesSection && tinaField(homeData.servicesSection, 'description')}>
+            {homeData?.servicesSection?.description || 'Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.'}
           </p>
         </div>
 

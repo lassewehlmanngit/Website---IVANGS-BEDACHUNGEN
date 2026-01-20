@@ -91,14 +91,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
-             <SmartLink link={heroData?.primaryButtonLink || `/${lang}/contact`} className="w-full sm:w-auto">
-                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'primaryButtonText')}>
-                   {heroData?.primaryButtonText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
+             <SmartLink link={heroData?.buttons?.primaryLink || `/${lang}/contact`} className="w-full sm:w-auto">
+                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'primaryText')}>
+                   {heroData?.buttons?.primaryText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </SmartLink>
-             <SmartLink link={heroData?.secondaryButtonLink || `/${lang}/career`} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'secondaryButtonText')}>
-                   {heroData?.secondaryButtonText || 'Karriere starten'}
+             <SmartLink link={heroData?.buttons?.secondaryLink || `/${lang}/career`} className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'secondaryText')}>
+                   {heroData?.buttons?.secondaryText || 'Karriere starten'}
                 </Button>
              </SmartLink>
           </div>

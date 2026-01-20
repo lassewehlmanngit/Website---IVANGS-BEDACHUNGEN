@@ -3,12 +3,11 @@ import { tinaField } from 'tinacms/dist/react';
 
 export interface ProjectShowcaseProps {
   homeData?: any;
-  projects?: any[];
 }
 
-export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, projects }) => {
-  // Use projects from TinaCMS if available, otherwise fall back to hardcoded defaults
-  const projectsList = projects || [
+export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData }) => {
+  // Default projects fallback
+  const defaultProjects = [
     {
       title: 'Einfamilienhaus in Kempen',
       description: 'Sanierung',
@@ -25,10 +24,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, proj
       image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop',
     },
   ];
+
+  // Use projects from nested projectsSection if available
+  const projectsList = homeData?.projectsSection?.items || defaultProjects;
   
-  // Header data with fallbacks (using flattened fields)
-  const headerEyebrow = homeData?.projectsEyebrow || 'Referenzen';
-  const headerTitle = homeData?.projectsTitle || 'Ergebnisse, die zählen.';
+  // Header data with fallbacks (using nested projectsSection)
+  const headerEyebrow = homeData?.projectsSection?.eyebrow || 'Referenzen';
+  const headerTitle = homeData?.projectsSection?.title || 'Ergebnisse, die zählen.';
 
   // Dynamic grid classes based on number of projects
   const getGridClass = (count: number) => {
@@ -44,13 +46,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, proj
                 <div>
                   <span 
                     className="text-primary font-bold uppercase tracking-wider text-sm"
-                    data-tina-field={homeData && tinaField(homeData, 'projectsEyebrow')}
+                    data-tina-field={homeData?.projectsSection && tinaField(homeData.projectsSection, 'eyebrow')}
                   >
                     {headerEyebrow}
                   </span>
                   <h2 
                     className="text-4xl font-bold text-slate-900 mt-2"
-                    data-tina-field={homeData && tinaField(homeData, 'projectsTitle')}
+                    data-tina-field={homeData?.projectsSection && tinaField(homeData.projectsSection, 'title')}
                   >
                     {headerTitle}
                   </h2>
@@ -65,18 +67,18 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, proj
                          src={project.image}
                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
                          alt={project.title}
-                         data-tina-field={projects && tinaField(projects[index], 'image')}
+                         data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'image')}
                        />
                        <div 
                          className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-900 rounded-full"
-                         data-tina-field={projects && tinaField(projects[index], 'description')}
+                         data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'description')}
                        >
                          {project.description}
                        </div>
                     </div>
                     <h3 
                       className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors"
-                      data-tina-field={projects && tinaField(projects[index], 'title')}
+                      data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'title')}
                     >
                       {project.title}
                     </h3>

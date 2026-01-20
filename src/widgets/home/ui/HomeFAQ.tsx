@@ -58,19 +58,18 @@ const defaultHomeFAQ: FAQItem[] = [
 interface HomeFAQProps {
   lang: SupportedLang;
   homeData?: any;
-  faqData?: any[];
-  faqCTA?: any;
 }
 
-export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCTA }) => {
-  // Use faqData from TinaCMS if available, otherwise fall back to hardcoded defaults
-  const faqList = faqData || defaultHomeFAQ;
+export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData }) => {
+  // Use faqSection from TinaCMS if available, otherwise fall back to hardcoded defaults
+  const faqList = homeData?.faqSection?.questions || defaultHomeFAQ;
   
-  // Header data with fallbacks (using flattened fields)
-  const headerTitle = homeData?.faqTitle || 'Häufig gestellte Fragen';
-  const headerDescription = homeData?.faqDescription || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
+  // Header data with fallbacks (using nested faqSection)
+  const headerTitle = homeData?.faqSection?.title || 'Häufig gestellte Fragen';
+  const headerDescription = homeData?.faqSection?.description || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
   
-  // CTA data with fallbacks
+  // CTA data with fallbacks (using nested faqSection.cta)
+  const faqCTA = homeData?.faqSection?.cta;
   const ctaTitle = faqCTA?.title || 'Ihre Frage war nicht dabei?';
   const ctaDescription = faqCTA?.description || 'Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.';
   const ctaPhone = faqCTA?.phone || '02162 356666';
@@ -87,14 +86,14 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
               <HelpCircle className="text-primary" size={32} />
               <h2 
                 className="text-3xl md:text-4xl font-bold text-slate-900"
-                data-tina-field={homeData && tinaField(homeData, 'faqTitle')}
+                data-tina-field={homeData?.faqSection && tinaField(homeData.faqSection, 'title')}
               >
                 {headerTitle}
               </h2>
             </div>
             <p 
               className="text-slate-600 text-lg"
-              data-tina-field={homeData && tinaField(homeData, 'faqDescription')}
+              data-tina-field={homeData?.faqSection && tinaField(homeData.faqSection, 'description')}
             >
               {headerDescription}
             </p>
@@ -102,19 +101,19 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
 
           {/* FAQ Accordion */}
           <Accordion type="single" collapsible className="border-slate-200">
-            {faqList.map((item, index) => (
+            {faqList.map((item: FAQItem, index: number) => (
               <AccordionItem key={index} value={`faq-${index}`}>
                 <AccordionTrigger className="text-left hover:bg-slate-50/50">
                   <span 
                     className="text-base md:text-lg font-semibold text-slate-900 pr-4"
-                    data-tina-field={faqData && tinaField(faqData[index], 'question')}
+                    data-tina-field={homeData?.faqSection?.questions?.[index] && tinaField(homeData.faqSection.questions[index], 'question')}
                   >
                     {item.question || item.q}
                   </span>
                 </AccordionTrigger>
                 <AccordionContent 
                   className="text-slate-600 leading-relaxed"
-                  data-tina-field={faqData && tinaField(faqData[index], 'answer')}
+                  data-tina-field={homeData?.faqSection?.questions?.[index] && tinaField(homeData.faqSection.questions[index], 'answer')}
                 >
                   {item.answer || item.a}
                 </AccordionContent>
@@ -126,13 +125,13 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
           <div className="mt-12 text-center p-8 bg-slate-50 rounded-sm border border-slate-100">
             <p 
               className="text-slate-700 text-lg mb-4"
-              data-tina-field={faqCTA && tinaField(faqCTA, 'title')}
+              data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'title')}
             >
               {ctaTitle}
             </p>
             <p 
               className="text-slate-600 mb-6"
-              data-tina-field={faqCTA && tinaField(faqCTA, 'description')}
+              data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'description')}
             >
               {ctaDescription}
             </p>
@@ -140,7 +139,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
               <a 
                 href={`tel:+49${ctaPhone.replace(/\s/g, '').replace(/^0/, '')}`}
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-sm hover:bg-primary/90 transition-colors"
-                data-tina-field={faqCTA && tinaField(faqCTA, 'phone')}
+                data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'phone')}
               >
                 {ctaPhone}
               </a>
@@ -148,7 +147,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
                 link={ctaButtonLink}
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-bold rounded-sm border-2 border-primary hover:bg-primary/5 transition-colors"
               >
-                <span data-tina-field={faqCTA && tinaField(faqCTA, 'buttonText')}>
+                <span data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'buttonText')}>
                 {ctaButtonText}
                 </span>
               </SmartLink>

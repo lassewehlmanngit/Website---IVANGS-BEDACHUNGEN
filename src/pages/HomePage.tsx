@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { SmartLink } from '@/shared/ui/SmartLink';
 import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { tinaField } from 'tinacms/dist/react';
 import { useHomePageData } from '@/shared/lib/tina/useHomePageData';
 
 export interface HomePageProps {
@@ -113,8 +113,8 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <ServicePreview lang={lang} homeData={home} />
       <TrustIndicators trustData={home.trustIndicators} />
       <CeoQuote lang={lang} ceoData={home.ceoQuote} />
-      <ProjectShowcase homeData={home} projects={home.projects} />
-      <HomeFAQ lang={lang} homeData={home} faqData={home.faq} faqCTA={home.faqCTA} />
+      <ProjectShowcase homeData={home} />
+      <HomeFAQ lang={lang} homeData={home} />
       
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">

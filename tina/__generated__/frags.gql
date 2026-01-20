@@ -11,10 +11,13 @@ fragment HomePageParts on HomePage {
     title
     subtitle
     description
-    primaryButtonText
-    primaryButtonLink
-    secondaryButtonText
-    secondaryButtonLink
+    buttons {
+      __typename
+      primaryText
+      primaryLink
+      secondaryText
+      secondaryLink
+    }
     backgroundImage
     videoUrl
     showQuickForm
@@ -25,9 +28,12 @@ fragment HomePageParts on HomePage {
     label
     icon
   }
-  servicesEyebrow
-  servicesTitle
-  servicesDescription
+  servicesSection {
+    __typename
+    eyebrow
+    title
+    description
+  }
   ceoQuote {
     __typename
     eyebrow
@@ -39,11 +45,16 @@ fragment HomePageParts on HomePage {
     buttonText
     buttonLink
   }
-  projects {
+  projectsSection {
     __typename
+    eyebrow
     title
-    description
-    image
+    items {
+      __typename
+      title
+      description
+      image
+    }
   }
   trustIndicators {
     __typename
@@ -58,22 +69,23 @@ fragment HomePageParts on HomePage {
       icon
     }
   }
-  projectsEyebrow
-  projectsTitle
-  faqTitle
-  faqDescription
-  faq {
-    __typename
-    question
-    answer
-  }
-  faqCTA {
+  faqSection {
     __typename
     title
     description
-    phone
-    buttonText
-    buttonLink
+    questions {
+      __typename
+      question
+      answer
+    }
+    cta {
+      __typename
+      title
+      description
+      phone
+      buttonText
+      buttonLink
+    }
   }
   finalCTA {
     __typename

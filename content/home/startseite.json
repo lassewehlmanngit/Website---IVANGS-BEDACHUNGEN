@@ -8,10 +8,12 @@
     "title": "Dächer, die begeistern.",
     "subtitle": "",
     "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.",
-    "primaryButtonText": "Projekt anfragen",
-    "primaryButtonLink": "/de/contact",
-    "secondaryButtonText": "Karriere starten",
-    "secondaryButtonLink": "/de/career",
+    "buttons": {
+      "primaryText": "Projekt anfragen",
+      "primaryLink": "/de/contact",
+      "secondaryText": "Karriere starten",
+      "secondaryLink": "/de/career"
+    },
     "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
     "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
     "showQuickForm": true
@@ -38,9 +40,11 @@
       "icon": "Calendar"
     }
   ],
-  "servicesEyebrow": "Unsere Expertise",
-  "servicesTitle": "Nicht nur dicht, sondern durchdacht.",
-  "servicesDescription": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.",
+  "servicesSection": {
+    "eyebrow": "Unsere Expertise",
+    "title": "Nicht nur dicht, sondern durchdacht.",
+    "description": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik."
+  },
   "ceoQuote": {
     "eyebrow": "Ein Wort vom Chef",
     "name": "Marcus Ivangs",
@@ -51,23 +55,27 @@
     "buttonText": "Mehr über uns erfahren",
     "buttonLink": "/de/about"
   },
-  "projects": [
-    {
-      "title": "Einfamilienhaus in Kempen",
-      "description": "Sanierung",
-      "image": "https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-      "title": "Gewerbehalle Viersen",
-      "description": "Flachdach",
-      "image": "https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-      "title": "Neubau in Willich",
-      "description": "Solar",
-      "image": "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop"
-    }
-  ],
+  "projectsSection": {
+    "eyebrow": "Referenzen",
+    "title": "Ergebnisse, die zählen.",
+    "items": [
+      {
+        "title": "Einfamilienhaus in Kempen",
+        "description": "Sanierung",
+        "image": "https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        "title": "Gewerbehalle Viersen",
+        "description": "Flachdach",
+        "image": "https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        "title": "Neubau in Willich",
+        "description": "Solar",
+        "image": "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop"
+      }
+    ]
+  },
   "trustIndicators": {
     "eyebrow": "Prozess & Effizienz",
     "title": "Wir warten nicht auf Material. Wir haben es.",
@@ -86,59 +94,59 @@
       }
     ]
   },
-  "projectsEyebrow": "Referenzen",
-  "projectsTitle": "Ergebnisse, die zählen.",
-  "faqTitle": "Häufig gestellte Fragen",
-  "faqDescription": "Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet",
-  "faqCTA": {
-    "title": "Ihre Frage war nicht dabei?",
-    "description": "Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.",
-    "phone": "02162 356666",
-    "buttonText": "Nachricht senden",
-    "buttonLink": "/de/contact"
-  },
-  "faq": [
-    {
-      "question": "Was kostet eine professionelle Dachsanierung im Kreis Viersen?",
-      "answer": "Die Kosten variieren je nach Projekt: Eine Steildachsanierung kostet bei einem Einfamilienhaus etwa 15.000-35.000 Euro, eine Flachdachabdichtung 80-150 Euro pro m². Wir erstellen Ihnen ein kostenloses, transparentes Festpreis-Angebot nach Besichtigung vor Ort."
-    },
-    {
-      "question": "Wie lange dauern typische Dacharbeiten?",
-      "answer": "Ein Einfamilienhaus-Dach sanieren wir in ca. 2 Wochen, ein Dachfenster tauschen wir in 3-4 Stunden, eine Flachdachabdichtung dauert je nach Größe 3-7 Tage. Wir planen realistische Zeitfenster mit Wetterpuffer und halten Sie stets auf dem Laufenden."
-    },
-    {
-      "question": "Arbeitet Ivangs Bedachungen nur im Kreis Viersen?",
-      "answer": "Unser Hauptgebiet ist der Kreis Viersen, aber wir arbeiten auch in Mönchengladbach, Krefeld, Düsseldorf und dem gesamten Niederrhein. Bei größeren Projekten kommen wir auch weiter. Rufen Sie uns einfach an – wir finden eine Lösung."
-    },
-    {
-      "question": "Bieten Sie Notdienst bei Sturmschäden an?",
-      "answer": "Ja! Bei akuten Schadensfällen sind wir innerhalb von 24 Stunden vor Ort und sichern Ihr Dach provisorisch ab. Wir dokumentieren den Schaden für Ihre Versicherung und kümmern uns um die schnelle Reparatur. Notfall-Hotline: 02162 356666."
-    },
-    {
-      "question": "Welche Garantien geben Sie auf Ihre Arbeiten?",
-      "answer": "Wir geben 5 Jahre Gewährleistung auf alle Arbeiten gemäß VOB (Vergabe- und Vertragsordnung für Bauleistungen). Auf Materialien gelten die Herstellergarantien (z.B. VELUX 10 Jahre). Bei regelmäßiger Wartung verlängern viele Hersteller die Garantie."
-    },
-    {
-      "question": "Kann ich während der Bauarbeiten im Haus wohnen?",
-      "answer": "Ja, das ist kein Problem. Bei Dacharbeiten arbeiten wir von außen – Sie haben nur Geräusche, aber keine Beeinträchtigung im Wohnraum. Beim Dachfenstertausch wird kurz von innen gearbeitet. Wir decken alles staubdicht ab und hinterlassen saubere Baustellen."
-    },
-    {
-      "question": "Gibt es Förderungen für Dach- und Solararbeiten?",
-      "answer": "Ja! Für energetische Dachsanierung gibt es BAFA-Förderung (bis 20%) und KfW-Kredite mit Tilgungszuschuss. Photovoltaik wird über Einspeisevergütung gefördert und ist seit 2023 mehrwertsteuerfrei. Wir beraten Sie zu Fördermöglichkeiten und unterstützen bei Anträgen."
-    },
-    {
-      "question": "Was unterscheidet Ivangs von anderen Dachdeckerbetrieben?",
-      "answer": "Wir sind ein inhabergeführter Meisterbetrieb mit 28 Experten, eigenem Kran und 400 m² Lagerfläche. Das bedeutet: kurze Wege, schnelle Reaktion, keine Subunternehmer. Wir bilden aus (aktuell 5 Azubis) und setzen auf langfristige Kundenbeziehungen statt schnelles Geschäft."
-    },
-    {
-      "question": "Bieten Sie auch Wartungsverträge für Dächer an?",
-      "answer": "Ja, Wartungsverträge sind eine kluge Investition! Für 200-400 Euro pro Jahr kommen wir einmal jährlich vorbei, reinigen Rinnen, prüfen Dach und Abdichtung und erstellen ein Protokoll. Das verhindert teure Folgeschäden und viele Versicherungen gewähren Rabatte."
-    },
-    {
-      "question": "Wie bekomme ich ein Angebot von Ivangs Bedachungen?",
-      "answer": "Einfach anrufen (02162 356666), per E-Mail (bedachungen@ivangs.de) oder über unser Kontaktformular melden. Wir vereinbaren einen Termin zur kostenlosen Besichtigung, nehmen Maße auf und erstellen Ihnen ein detailliertes Festpreis-Angebot – transparent und verbindlich."
+  "faqSection": {
+    "title": "Häufig gestellte Fragen",
+    "description": "Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet",
+    "questions": [
+      {
+        "question": "Was kostet eine professionelle Dachsanierung im Kreis Viersen?",
+        "answer": "Die Kosten variieren je nach Projekt: Eine Steildachsanierung kostet bei einem Einfamilienhaus etwa 15.000-35.000 Euro, eine Flachdachabdichtung 80-150 Euro pro m². Wir erstellen Ihnen ein kostenloses, transparentes Festpreis-Angebot nach Besichtigung vor Ort."
+      },
+      {
+        "question": "Wie lange dauern typische Dacharbeiten?",
+        "answer": "Ein Einfamilienhaus-Dach sanieren wir in ca. 2 Wochen, ein Dachfenster tauschen wir in 3-4 Stunden, eine Flachdachabdichtung dauert je nach Größe 3-7 Tage. Wir planen realistische Zeitfenster mit Wetterpuffer und halten Sie stets auf dem Laufenden."
+      },
+      {
+        "question": "Arbeitet Ivangs Bedachungen nur im Kreis Viersen?",
+        "answer": "Unser Hauptgebiet ist der Kreis Viersen, aber wir arbeiten auch in Mönchengladbach, Krefeld, Düsseldorf und dem gesamten Niederrhein. Bei größeren Projekten kommen wir auch weiter. Rufen Sie uns einfach an – wir finden eine Lösung."
+      },
+      {
+        "question": "Bieten Sie Notdienst bei Sturmschäden an?",
+        "answer": "Ja! Bei akuten Schadensfällen sind wir innerhalb von 24 Stunden vor Ort und sichern Ihr Dach provisorisch ab. Wir dokumentieren den Schaden für Ihre Versicherung und kümmern uns um die schnelle Reparatur. Notfall-Hotline: 02162 356666."
+      },
+      {
+        "question": "Welche Garantien geben Sie auf Ihre Arbeiten?",
+        "answer": "Wir geben 5 Jahre Gewährleistung auf alle Arbeiten gemäß VOB (Vergabe- und Vertragsordnung für Bauleistungen). Auf Materialien gelten die Herstellergarantien (z.B. VELUX 10 Jahre). Bei regelmäßiger Wartung verlängern viele Hersteller die Garantie."
+      },
+      {
+        "question": "Kann ich während der Bauarbeiten im Haus wohnen?",
+        "answer": "Ja, das ist kein Problem. Bei Dacharbeiten arbeiten wir von außen – Sie haben nur Geräusche, aber keine Beeinträchtigung im Wohnraum. Beim Dachfenstertausch wird kurz von innen gearbeitet. Wir decken alles staubdicht ab und hinterlassen saubere Baustellen."
+      },
+      {
+        "question": "Gibt es Förderungen für Dach- und Solararbeiten?",
+        "answer": "Ja! Für energetische Dachsanierung gibt es BAFA-Förderung (bis 20%) und KfW-Kredite mit Tilgungszuschuss. Photovoltaik wird über Einspeisevergütung gefördert und ist seit 2023 mehrwertsteuerfrei. Wir beraten Sie zu Fördermöglichkeiten und unterstützen bei Anträgen."
+      },
+      {
+        "question": "Was unterscheidet Ivangs von anderen Dachdeckerbetrieben?",
+        "answer": "Wir sind ein inhabergeführter Meisterbetrieb mit 28 Experten, eigenem Kran und 400 m² Lagerfläche. Das bedeutet: kurze Wege, schnelle Reaktion, keine Subunternehmer. Wir bilden aus (aktuell 5 Azubis) und setzen auf langfristige Kundenbeziehungen statt schnelles Geschäft."
+      },
+      {
+        "question": "Bieten Sie auch Wartungsverträge für Dächer an?",
+        "answer": "Ja, Wartungsverträge sind eine kluge Investition! Für 200-400 Euro pro Jahr kommen wir einmal jährlich vorbei, reinigen Rinnen, prüfen Dach und Abdichtung und erstellen ein Protokoll. Das verhindert teure Folgeschäden und viele Versicherungen gewähren Rabatte."
+      },
+      {
+        "question": "Wie bekomme ich ein Angebot von Ivangs Bedachungen?",
+        "answer": "Einfach anrufen (02162 356666), per E-Mail (bedachungen@ivangs.de) oder über unser Kontaktformular melden. Wir vereinbaren einen Termin zur kostenlosen Besichtigung, nehmen Maße auf und erstellen Ihnen ein detailliertes Festpreis-Angebot – transparent und verbindlich."
+      }
+    ],
+    "cta": {
+      "title": "Ihre Frage war nicht dabei?",
+      "description": "Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.",
+      "phone": "02162 356666",
+      "buttonText": "Nachricht senden",
+      "buttonLink": "/de/contact"
     }
-  ],
+  },
   "finalCTA": {
     "title": "Planen Sie sicher. Planen Sie mit Ivangs.",
     "description": "Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.",

@@ -47,80 +47,118 @@ export default defineConfig({
           },
         },
         fields: [
+          // 1. SEO Section
           {
             type: 'object',
             name: 'seo',
-            label: 'SEO',
+            label: '🔍 SEO Einstellungen',
             fields: [
               { type: 'string', name: 'title', label: 'Seitentitel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Meta Beschreibung', ui: { component: 'textarea' } },
             ],
           },
+          // 2. Hero Section
           {
             type: 'object',
             name: 'hero',
-            label: 'Hero Bereich',
+            label: '✨ Hero Bereich',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein', required: true },
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
               { type: 'string', name: 'title', label: 'Haupttitel', required: true },
               { type: 'string', name: 'subtitle', label: 'Untertitel' },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-              { type: 'string', name: 'primaryButtonText', label: 'Button 1 Text' },
-              { type: 'string', name: 'primaryButtonLink', label: 'Button 1 Link', description: 'z.B. /de/contact, https://..., tel:02162..., mailto:..., #section' },
-              { type: 'string', name: 'secondaryButtonText', label: 'Button 2 Text' },
-              { type: 'string', name: 'secondaryButtonLink', label: 'Button 2 Link', description: 'z.B. /de/career, https://..., tel:..., mailto:..., #section' },
+              // Grouped buttons for cleaner form
+              {
+                type: 'object',
+                name: 'buttons',
+                label: 'Buttons',
+                fields: [
+                  { type: 'string', name: 'primaryText', label: 'Hauptbutton Text' },
+                  { type: 'string', name: 'primaryLink', label: 'Hauptbutton Link', description: 'z.B. /de/contact, https://..., tel:02162..., mailto:..., #section' },
+                  { type: 'string', name: 'secondaryText', label: 'Zweitbutton Text' },
+                  { type: 'string', name: 'secondaryLink', label: 'Zweitbutton Link', description: 'z.B. /de/career, https://..., tel:..., mailto:..., #section' },
+                ],
+              },
               { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
               { type: 'string', name: 'videoUrl', label: 'Video URL' },
-              { type: 'boolean', name: 'showQuickForm', label: 'Schnellkontakt-Formular anzeigen' },
+              { type: 'boolean', name: 'showQuickForm', label: 'Schnellkontakt anzeigen' },
             ],
           },
+          // 3. Stats Section (with itemProps for smart labels)
           {
             type: 'object',
             list: true,
             name: 'stats',
-            label: 'Statistiken',
-            ui: { max: 6 },
+            label: '📊 Statistiken',
+            ui: {
+              max: 6,
+              itemProps: (item) => {
+                return { label: item?.label || 'Neue Statistik' };
+              },
+            },
             fields: [
-              { type: 'string', name: 'value', label: 'Wert', required: true },
+              { type: 'string', name: 'value', label: 'Wert (z.B. 25+)', required: true },
               { type: 'string', name: 'label', label: 'Beschriftung', required: true },
               { type: 'string', name: 'icon', label: 'Icon Name (Lucide)' },
             ],
           },
-          // Leistungen Bereich (flattened)
-          { type: 'string', name: 'servicesEyebrow', label: 'Leistungen - Überschrift Klein' },
-          { type: 'string', name: 'servicesTitle', label: 'Leistungen - Titel' },
-          { type: 'string', name: 'servicesDescription', label: 'Leistungen - Beschreibung', ui: { component: 'textarea' } },
+          // 4. Services Section (grouped header)
+          {
+            type: 'object',
+            name: 'servicesSection',
+            label: '🔧 Leistungen (Header)',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'title', label: 'Titel' },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+            ],
+          },
+          // 5. CEO Quote
           {
             type: 'object',
             name: 'ceoQuote',
-            label: 'Geschäftsführer Zitat',
+            label: '💬 Geschäftsführer Zitat',
             fields: [
               { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
               { type: 'string', name: 'name', label: 'Name', required: true },
               { type: 'string', name: 'role', label: 'Position', required: true },
               { type: 'string', name: 'quote', label: 'Zitat', ui: { component: 'textarea' }, required: true },
-              { type: 'string', name: 'text', label: 'Text', ui: { component: 'textarea' } },
+              { type: 'string', name: 'text', label: 'Fließtext', ui: { component: 'textarea' } },
               { type: 'image', name: 'image', label: 'Bild' },
               { type: 'string', name: 'buttonText', label: 'Button Text' },
               { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/about' },
             ],
           },
+          // 6. Projects Section (grouped header + list with itemProps)
           {
             type: 'object',
-            list: true,
-            name: 'projects',
-            label: 'Projekt Showcase',
-            ui: { max: 6 },
+            name: 'projectsSection',
+            label: '🏗️ Projekte Showcase',
             fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung' },
-              { type: 'image', name: 'image', label: 'Bild', required: true },
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'title', label: 'Titel' },
+              {
+                type: 'object',
+                list: true,
+                name: 'items',
+                label: 'Projekt Liste',
+                ui: {
+                  max: 6,
+                  itemProps: (item) => ({ label: item?.title || 'Neues Projekt' }),
+                },
+                fields: [
+                  { type: 'string', name: 'title', label: 'Projekt Titel', required: true },
+                  { type: 'string', name: 'description', label: 'Beschreibung' },
+                  { type: 'image', name: 'image', label: 'Bild', required: true },
+                ],
+              },
             ],
           },
+          // 7. Trust Indicators (with itemProps)
           {
             type: 'object',
             name: 'trustIndicators',
-            label: 'Vertrauensindikatoren',
+            label: '🤝 Vertrauensindikatoren',
             fields: [
               { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
               { type: 'string', name: 'title', label: 'Titel', required: true },
@@ -131,7 +169,10 @@ export default defineConfig({
                 list: true,
                 name: 'items',
                 label: 'Punkte',
-                ui: { max: 4 },
+                ui: {
+                  max: 4,
+                  itemProps: (item) => ({ label: item?.title || 'Neuer Punkt' }),
+                },
                 fields: [
                   { type: 'string', name: 'title', label: 'Titel', required: true },
                   { type: 'string', name: 'description', label: 'Beschreibung' },
@@ -140,39 +181,47 @@ export default defineConfig({
               },
             ],
           },
-          // Projekt Showcase Header (flattened)
-          { type: 'string', name: 'projectsEyebrow', label: 'Projekte - Überschrift Klein' },
-          { type: 'string', name: 'projectsTitle', label: 'Projekte - Titel' },
-          // FAQ Bereich Header (flattened)
-          { type: 'string', name: 'faqTitle', label: 'FAQ - Titel' },
-          { type: 'string', name: 'faqDescription', label: 'FAQ - Beschreibung' },
+          // 8. FAQ Section (grouped header + questions list + CTA)
           {
             type: 'object',
-            list: true,
-            name: 'faq',
-            label: 'FAQ',
-            ui: { max: 10 },
+            name: 'faqSection',
+            label: '❓ FAQ Bereich',
             fields: [
-              { type: 'string', name: 'question', label: 'Frage', required: true },
-              { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+              { type: 'string', name: 'title', label: 'Titel' },
+              { type: 'string', name: 'description', label: 'Beschreibung' },
+              {
+                type: 'object',
+                list: true,
+                name: 'questions',
+                label: 'Fragen & Antworten',
+                ui: {
+                  max: 10,
+                  itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
+                },
+                fields: [
+                  { type: 'string', name: 'question', label: 'Frage', required: true },
+                  { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+                ],
+              },
+              {
+                type: 'object',
+                name: 'cta',
+                label: 'FAQ Call-to-Action',
+                fields: [
+                  { type: 'string', name: 'title', label: 'Titel' },
+                  { type: 'string', name: 'description', label: 'Text' },
+                  { type: 'string', name: 'phone', label: 'Telefon' },
+                  { type: 'string', name: 'buttonText', label: 'Button Text' },
+                  { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/contact' },
+                ],
+              },
             ],
           },
-          {
-            type: 'object',
-            name: 'faqCTA',
-            label: 'FAQ CTA Bereich',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-              { type: 'string', name: 'phone', label: 'Telefonnummer' },
-              { type: 'string', name: 'buttonText', label: 'Button Text' },
-              { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/contact' },
-            ],
-          },
+          // 9. Final CTA
           {
             type: 'object',
             name: 'finalCTA',
-            label: 'Abschluss CTA',
+            label: '📣 Abschluss CTA',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },

@@ -16,22 +16,30 @@ const HOME_PAGE_QUERY = `
       seo { title description }
       hero {
         eyebrow title subtitle description
-        primaryButtonText primaryButtonLink
-        secondaryButtonText secondaryButtonLink
+        buttons {
+          primaryText primaryLink
+          secondaryText secondaryLink
+        }
         backgroundImage videoUrl showQuickForm
       }
       stats { value label icon }
-      servicesEyebrow servicesTitle servicesDescription
+      servicesSection {
+        eyebrow title description
+      }
       ceoQuote { eyebrow name role quote text image buttonText buttonLink }
-      projects { title description image }
+      projectsSection {
+        eyebrow title
+        items { title description image }
+      }
       trustIndicators {
         eyebrow title description image
         items { title description icon }
       }
-      projectsEyebrow projectsTitle
-      faqTitle faqDescription
-      faq { question answer }
-      faqCTA { title description phone buttonText buttonLink }
+      faqSection {
+        title description
+        questions { question answer }
+        cta { title description phone buttonText buttonLink }
+      }
       finalCTA { title description buttonText buttonLink }
     }
   }

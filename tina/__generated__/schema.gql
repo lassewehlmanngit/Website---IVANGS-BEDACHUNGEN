@@ -122,15 +122,19 @@ type HomePageSeo {
   description: String
 }
 
+type HomePageHeroButtons {
+  primaryText: String
+  primaryLink: String
+  secondaryText: String
+  secondaryLink: String
+}
+
 type HomePageHero {
-  eyebrow: String!
+  eyebrow: String
   title: String!
   subtitle: String
   description: String
-  primaryButtonText: String
-  primaryButtonLink: String
-  secondaryButtonText: String
-  secondaryButtonLink: String
+  buttons: HomePageHeroButtons
   backgroundImage: String
   videoUrl: String
   showQuickForm: Boolean
@@ -140,6 +144,12 @@ type HomePageStats {
   value: String!
   label: String!
   icon: String
+}
+
+type HomePageServicesSection {
+  eyebrow: String
+  title: String
+  description: String
 }
 
 type HomePageCeoQuote {
@@ -153,10 +163,16 @@ type HomePageCeoQuote {
   buttonLink: String
 }
 
-type HomePageProjects {
+type HomePageProjectsSectionItems {
   title: String!
   description: String
   image: String!
+}
+
+type HomePageProjectsSection {
+  eyebrow: String
+  title: String
+  items: [HomePageProjectsSectionItems]
 }
 
 type HomePageTrustIndicatorsItems {
@@ -173,17 +189,24 @@ type HomePageTrustIndicators {
   items: [HomePageTrustIndicatorsItems]
 }
 
-type HomePageFaq {
+type HomePageFaqSectionQuestions {
   question: String!
   answer: String!
 }
 
-type HomePageFaqCTA {
-  title: String!
+type HomePageFaqSectionCta {
+  title: String
   description: String
   phone: String
   buttonText: String
   buttonLink: String
+}
+
+type HomePageFaqSection {
+  title: String
+  description: String
+  questions: [HomePageFaqSectionQuestions]
+  cta: HomePageFaqSectionCta
 }
 
 type HomePageFinalCTA {
@@ -197,18 +220,11 @@ type HomePage implements Node & Document {
   seo: HomePageSeo
   hero: HomePageHero
   stats: [HomePageStats]
-  servicesEyebrow: String
-  servicesTitle: String
-  servicesDescription: String
+  servicesSection: HomePageServicesSection
   ceoQuote: HomePageCeoQuote
-  projects: [HomePageProjects]
+  projectsSection: HomePageProjectsSection
   trustIndicators: HomePageTrustIndicators
-  projectsEyebrow: String
-  projectsTitle: String
-  faqTitle: String
-  faqDescription: String
-  faq: [HomePageFaq]
-  faqCTA: HomePageFaqCTA
+  faqSection: HomePageFaqSection
   finalCTA: HomePageFinalCTA
   id: ID!
   _sys: SystemInfo!
@@ -225,6 +241,13 @@ input StringFilter {
 input HomePageSeoFilter {
   title: StringFilter
   description: StringFilter
+}
+
+input HomePageHeroButtonsFilter {
+  primaryText: StringFilter
+  primaryLink: StringFilter
+  secondaryText: StringFilter
+  secondaryLink: StringFilter
 }
 
 input ImageFilter {
@@ -244,10 +267,7 @@ input HomePageHeroFilter {
   title: StringFilter
   subtitle: StringFilter
   description: StringFilter
-  primaryButtonText: StringFilter
-  primaryButtonLink: StringFilter
-  secondaryButtonText: StringFilter
-  secondaryButtonLink: StringFilter
+  buttons: HomePageHeroButtonsFilter
   backgroundImage: ImageFilter
   videoUrl: StringFilter
   showQuickForm: BooleanFilter
@@ -257,6 +277,12 @@ input HomePageStatsFilter {
   value: StringFilter
   label: StringFilter
   icon: StringFilter
+}
+
+input HomePageServicesSectionFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
 }
 
 input HomePageCeoQuoteFilter {
@@ -270,10 +296,16 @@ input HomePageCeoQuoteFilter {
   buttonLink: StringFilter
 }
 
-input HomePageProjectsFilter {
+input HomePageProjectsSectionItemsFilter {
   title: StringFilter
   description: StringFilter
   image: ImageFilter
+}
+
+input HomePageProjectsSectionFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  items: HomePageProjectsSectionItemsFilter
 }
 
 input HomePageTrustIndicatorsItemsFilter {
@@ -290,17 +322,24 @@ input HomePageTrustIndicatorsFilter {
   items: HomePageTrustIndicatorsItemsFilter
 }
 
-input HomePageFaqFilter {
+input HomePageFaqSectionQuestionsFilter {
   question: StringFilter
   answer: StringFilter
 }
 
-input HomePageFaqCTAFilter {
+input HomePageFaqSectionCtaFilter {
   title: StringFilter
   description: StringFilter
   phone: StringFilter
   buttonText: StringFilter
   buttonLink: StringFilter
+}
+
+input HomePageFaqSectionFilter {
+  title: StringFilter
+  description: StringFilter
+  questions: HomePageFaqSectionQuestionsFilter
+  cta: HomePageFaqSectionCtaFilter
 }
 
 input HomePageFinalCTAFilter {
@@ -314,18 +353,11 @@ input HomePageFilter {
   seo: HomePageSeoFilter
   hero: HomePageHeroFilter
   stats: HomePageStatsFilter
-  servicesEyebrow: StringFilter
-  servicesTitle: StringFilter
-  servicesDescription: StringFilter
+  servicesSection: HomePageServicesSectionFilter
   ceoQuote: HomePageCeoQuoteFilter
-  projects: HomePageProjectsFilter
+  projectsSection: HomePageProjectsSectionFilter
   trustIndicators: HomePageTrustIndicatorsFilter
-  projectsEyebrow: StringFilter
-  projectsTitle: StringFilter
-  faqTitle: StringFilter
-  faqDescription: StringFilter
-  faq: HomePageFaqFilter
-  faqCTA: HomePageFaqCTAFilter
+  faqSection: HomePageFaqSectionFilter
   finalCTA: HomePageFinalCTAFilter
 }
 
@@ -1060,15 +1092,19 @@ input HomePageSeoMutation {
   description: String
 }
 
+input HomePageHeroButtonsMutation {
+  primaryText: String
+  primaryLink: String
+  secondaryText: String
+  secondaryLink: String
+}
+
 input HomePageHeroMutation {
   eyebrow: String
   title: String
   subtitle: String
   description: String
-  primaryButtonText: String
-  primaryButtonLink: String
-  secondaryButtonText: String
-  secondaryButtonLink: String
+  buttons: HomePageHeroButtonsMutation
   backgroundImage: String
   videoUrl: String
   showQuickForm: Boolean
@@ -1078,6 +1114,12 @@ input HomePageStatsMutation {
   value: String
   label: String
   icon: String
+}
+
+input HomePageServicesSectionMutation {
+  eyebrow: String
+  title: String
+  description: String
 }
 
 input HomePageCeoQuoteMutation {
@@ -1091,10 +1133,16 @@ input HomePageCeoQuoteMutation {
   buttonLink: String
 }
 
-input HomePageProjectsMutation {
+input HomePageProjectsSectionItemsMutation {
   title: String
   description: String
   image: String
+}
+
+input HomePageProjectsSectionMutation {
+  eyebrow: String
+  title: String
+  items: [HomePageProjectsSectionItemsMutation]
 }
 
 input HomePageTrustIndicatorsItemsMutation {
@@ -1111,17 +1159,24 @@ input HomePageTrustIndicatorsMutation {
   items: [HomePageTrustIndicatorsItemsMutation]
 }
 
-input HomePageFaqMutation {
+input HomePageFaqSectionQuestionsMutation {
   question: String
   answer: String
 }
 
-input HomePageFaqCTAMutation {
+input HomePageFaqSectionCtaMutation {
   title: String
   description: String
   phone: String
   buttonText: String
   buttonLink: String
+}
+
+input HomePageFaqSectionMutation {
+  title: String
+  description: String
+  questions: [HomePageFaqSectionQuestionsMutation]
+  cta: HomePageFaqSectionCtaMutation
 }
 
 input HomePageFinalCTAMutation {
@@ -1135,18 +1190,11 @@ input HomePageMutation {
   seo: HomePageSeoMutation
   hero: HomePageHeroMutation
   stats: [HomePageStatsMutation]
-  servicesEyebrow: String
-  servicesTitle: String
-  servicesDescription: String
+  servicesSection: HomePageServicesSectionMutation
   ceoQuote: HomePageCeoQuoteMutation
-  projects: [HomePageProjectsMutation]
+  projectsSection: HomePageProjectsSectionMutation
   trustIndicators: HomePageTrustIndicatorsMutation
-  projectsEyebrow: String
-  projectsTitle: String
-  faqTitle: String
-  faqDescription: String
-  faq: [HomePageFaqMutation]
-  faqCTA: HomePageFaqCTAMutation
+  faqSection: HomePageFaqSectionMutation
   finalCTA: HomePageFinalCTAMutation
 }
 
