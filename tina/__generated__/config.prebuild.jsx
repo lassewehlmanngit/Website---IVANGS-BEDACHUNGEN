@@ -26,6 +26,7 @@ var config_default = defineConfig({
         path: "content/home",
         format: "json",
         ui: {
+          global: true,
           router: () => "/de",
           allowedActions: {
             create: false,
@@ -72,16 +73,10 @@ var config_default = defineConfig({
               { type: "string", name: "icon", label: "Icon Name (Lucide)" }
             ]
           },
-          {
-            type: "object",
-            name: "servicesSection",
-            label: "Leistungen Bereich",
-            fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
-              { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
-            ]
-          },
+          // Leistungen Bereich (flattened)
+          { type: "string", name: "servicesEyebrow", label: "Leistungen - \xDCberschrift Klein" },
+          { type: "string", name: "servicesTitle", label: "Leistungen - Titel" },
+          { type: "string", name: "servicesDescription", label: "Leistungen - Beschreibung", ui: { component: "textarea" } },
           {
             type: "object",
             name: "ceoQuote",
@@ -132,24 +127,12 @@ var config_default = defineConfig({
               }
             ]
           },
-          {
-            type: "object",
-            name: "projectsHeader",
-            label: "Projekt Showcase Header",
-            fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
-              { type: "string", name: "title", label: "Titel", required: true }
-            ]
-          },
-          {
-            type: "object",
-            name: "faqHeader",
-            label: "FAQ Bereich Header",
-            fields: [
-              { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "description", label: "Beschreibung" }
-            ]
-          },
+          // Projekt Showcase Header (flattened)
+          { type: "string", name: "projectsEyebrow", label: "Projekte - \xDCberschrift Klein" },
+          { type: "string", name: "projectsTitle", label: "Projekte - Titel" },
+          // FAQ Bereich Header (flattened)
+          { type: "string", name: "faqTitle", label: "FAQ - Titel" },
+          { type: "string", name: "faqDescription", label: "FAQ - Beschreibung" },
           {
             type: "object",
             list: true,
@@ -361,114 +344,6 @@ var config_default = defineConfig({
           { type: "boolean", name: "published", label: "Ver\xF6ffentlicht" }
         ]
       },
-      // Pages Collection
-      {
-        name: "page",
-        label: "Seiten",
-        path: "content/pages",
-        format: "md",
-        ui: {
-          router: ({ document }) => {
-            const lang = document._sys.breadcrumbs[0] || "de";
-            const slug = document._sys.filename;
-            if (slug === "home") {
-              return `/${lang}`;
-            }
-            return `/${lang}/${slug}`;
-          }
-        },
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Titel",
-            required: true,
-            isTitle: true
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Beschreibung",
-            ui: { component: "textarea" }
-          },
-          {
-            type: "object",
-            list: true,
-            name: "blocks",
-            label: "Inhaltsbl\xF6cke",
-            templates: [
-              {
-                name: "hero",
-                label: "Hero",
-                fields: [
-                  { type: "string", name: "title", label: "Titel" },
-                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
-                  { type: "image", name: "image", label: "Bild" },
-                  {
-                    type: "object",
-                    list: true,
-                    name: "actions",
-                    label: "Aktionen",
-                    fields: [
-                      { type: "string", name: "label", label: "Text", required: true },
-                      { type: "string", name: "href", label: "Link", required: true },
-                      {
-                        type: "string",
-                        name: "variant",
-                        label: "Variante",
-                        options: ["primary", "secondary", "outline"]
-                      }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: "features",
-                label: "Features",
-                fields: [
-                  { type: "string", name: "title", label: "Titel" },
-                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
-                  {
-                    type: "object",
-                    list: true,
-                    name: "items",
-                    label: "Elemente",
-                    fields: [
-                      { type: "string", name: "title", label: "Titel", required: true },
-                      { type: "string", name: "description", label: "Beschreibung" },
-                      { type: "string", name: "icon", label: "Icon (Lucide)" }
-                    ]
-                  }
-                ]
-              },
-              {
-                name: "testimonial",
-                label: "Testimonial",
-                fields: [
-                  { type: "string", name: "quote", label: "Zitat", required: true, ui: { component: "textarea" } },
-                  { type: "string", name: "author", label: "Autor", required: true },
-                  { type: "string", name: "role", label: "Position" }
-                ]
-              },
-              {
-                name: "contact",
-                label: "Kontakt",
-                fields: [
-                  { type: "string", name: "title", label: "Titel" },
-                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
-                ]
-              },
-              {
-                name: "content",
-                label: "Rich Text",
-                fields: [
-                  { type: "rich-text", name: "body", label: "Inhalt" }
-                ]
-              }
-            ]
-          }
-        ]
-      },
       // About Page Collection (Single Document)
       {
         name: "aboutPage",
@@ -476,6 +351,7 @@ var config_default = defineConfig({
         path: "content/about",
         format: "json",
         ui: {
+          global: true,
           router: () => "/de/about",
           allowedActions: {
             create: false,
@@ -560,6 +436,7 @@ var config_default = defineConfig({
         path: "content/career",
         format: "json",
         ui: {
+          global: true,
           router: () => "/de/career",
           allowedActions: {
             create: false,
@@ -614,6 +491,7 @@ var config_default = defineConfig({
         path: "content/contact",
         format: "json",
         ui: {
+          global: true,
           router: () => "/de/contact",
           allowedActions: {
             create: false,
@@ -673,6 +551,7 @@ var config_default = defineConfig({
         label: "Einstellungen",
         path: "content/globals",
         format: "json",
+        ui: { global: true },
         match: {
           include: "**/settings"
         },
@@ -715,6 +594,7 @@ var config_default = defineConfig({
         label: "Navigation",
         path: "content/globals",
         format: "json",
+        ui: { global: true },
         match: {
           include: "**/navigation"
         },
@@ -747,6 +627,7 @@ var config_default = defineConfig({
         label: "Footer",
         path: "content/globals",
         format: "json",
+        ui: { global: true },
         match: {
           include: "**/footer"
         },

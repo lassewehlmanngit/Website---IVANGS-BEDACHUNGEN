@@ -38,11 +38,9 @@
       "icon": "Calendar"
     }
   ],
-  "servicesSection": {
-    "eyebrow": "Unsere Expertise",
-    "title": "Nicht nur dicht, sondern durchdacht.",
-    "description": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik."
-  },
+  "servicesEyebrow": "Unsere Expertise",
+  "servicesTitle": "Nicht nur dicht, sondern durchdacht.",
+  "servicesDescription": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.",
   "ceoQuote": {
     "eyebrow": "Ein Wort vom Chef",
     "name": "Marcus Ivangs",
@@ -88,14 +86,10 @@
       }
     ]
   },
-  "projectsHeader": {
-    "eyebrow": "Referenzen",
-    "title": "Ergebnisse, die zählen."
-  },
-  "faqHeader": {
-    "title": "Häufig gestellte Fragen",
-    "description": "Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet"
-  },
+  "projectsEyebrow": "Referenzen",
+  "projectsTitle": "Ergebnisse, die zählen.",
+  "faqTitle": "Häufig gestellte Fragen",
+  "faqDescription": "Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet",
   "faqCTA": {
     "title": "Ihre Frage war nicht dabei?",
     "description": "Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.",

@@ -106,13 +106,12 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
 
 export interface ServicePreviewProps {
   lang: string;
-  servicesSection?: any;
+  homeData?: any;
 }
 
-export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSection }) => {
+export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }) => {
   const { data: cmsData, isLoading } = useServicesListData();
   const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'solar', 'fenster', 'sanierung'];
-  const section = servicesSection || {};
   
   // Extract services from CMS if available
   const cmsServices = cmsData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
@@ -137,14 +136,14 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSe
       <div className="container mx-auto px-4">
         
         <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-          <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm" data-tina-field={servicesSection && tinaField(servicesSection, 'eyebrow')}>
-            {section.eyebrow || 'Unsere Expertise'}
+          <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm" data-tina-field={homeData && tinaField(homeData, 'servicesEyebrow')}>
+            {homeData?.servicesEyebrow || 'Unsere Expertise'}
           </span>
-          <h2 className="text-h2 font-bold text-slate-900 mt-2 mb-4 md:mb-6" data-tina-field={servicesSection && tinaField(servicesSection, 'title')}>
-            {section.title || 'Nicht nur dicht, sondern durchdacht.'}
+          <h2 className="text-h2 font-bold text-slate-900 mt-2 mb-4 md:mb-6" data-tina-field={homeData && tinaField(homeData, 'servicesTitle')}>
+            {homeData?.servicesTitle || 'Nicht nur dicht, sondern durchdacht.'}
           </h2>
-          <p className="text-slate-600 text-base md:text-lg" data-tina-field={servicesSection && tinaField(servicesSection, 'description')}>
-            {section.description || 'Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.'}
+          <p className="text-slate-600 text-base md:text-lg" data-tina-field={homeData && tinaField(homeData, 'servicesDescription')}>
+            {homeData?.servicesDescription || 'Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.'}
           </p>
         </div>
 

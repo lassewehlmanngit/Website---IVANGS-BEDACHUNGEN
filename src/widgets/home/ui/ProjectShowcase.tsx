@@ -2,11 +2,11 @@ import React from 'react';
 import { tinaField } from 'tinacms/dist/react';
 
 export interface ProjectShowcaseProps {
-  projectsHeader?: any;
+  homeData?: any;
   projects?: any[];
 }
 
-export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader, projects }) => {
+export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, projects }) => {
   // Use projects from TinaCMS if available, otherwise fall back to hardcoded defaults
   const projectsList = projects || [
     {
@@ -26,9 +26,9 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader
     },
   ];
   
-  // Header data with fallbacks
-  const headerEyebrow = projectsHeader?.eyebrow || 'Referenzen';
-  const headerTitle = projectsHeader?.title || 'Ergebnisse, die zählen.';
+  // Header data with fallbacks (using flattened fields)
+  const headerEyebrow = homeData?.projectsEyebrow || 'Referenzen';
+  const headerTitle = homeData?.projectsTitle || 'Ergebnisse, die zählen.';
 
   // Dynamic grid classes based on number of projects
   const getGridClass = (count: number) => {
@@ -44,13 +44,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader
                 <div>
                   <span 
                     className="text-primary font-bold uppercase tracking-wider text-sm"
-                    data-tina-field={projectsHeader && tinaField(projectsHeader, 'eyebrow')}
+                    data-tina-field={homeData && tinaField(homeData, 'projectsEyebrow')}
                   >
                     {headerEyebrow}
                   </span>
                   <h2 
                     className="text-4xl font-bold text-slate-900 mt-2"
-                    data-tina-field={projectsHeader && tinaField(projectsHeader, 'title')}
+                    data-tina-field={homeData && tinaField(homeData, 'projectsTitle')}
                   >
                     {headerTitle}
                   </h2>

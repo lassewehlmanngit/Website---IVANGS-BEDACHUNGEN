@@ -57,18 +57,18 @@ const defaultHomeFAQ: FAQItem[] = [
 
 interface HomeFAQProps {
   lang: SupportedLang;
-  faqHeader?: any;
+  homeData?: any;
   faqData?: any[];
   faqCTA?: any;
 }
 
-export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqHeader, faqData, faqCTA }) => {
+export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCTA }) => {
   // Use faqData from TinaCMS if available, otherwise fall back to hardcoded defaults
   const faqList = faqData || defaultHomeFAQ;
   
-  // Header data with fallbacks
-  const headerTitle = faqHeader?.title || 'Häufig gestellte Fragen';
-  const headerDescription = faqHeader?.description || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
+  // Header data with fallbacks (using flattened fields)
+  const headerTitle = homeData?.faqTitle || 'Häufig gestellte Fragen';
+  const headerDescription = homeData?.faqDescription || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
   
   // CTA data with fallbacks
   const ctaTitle = faqCTA?.title || 'Ihre Frage war nicht dabei?';
@@ -87,14 +87,14 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqHeader, faqData, faqC
               <HelpCircle className="text-primary" size={32} />
               <h2 
                 className="text-3xl md:text-4xl font-bold text-slate-900"
-                data-tina-field={faqHeader && tinaField(faqHeader, 'title')}
+                data-tina-field={homeData && tinaField(homeData, 'faqTitle')}
               >
                 {headerTitle}
               </h2>
             </div>
             <p 
               className="text-slate-600 text-lg"
-              data-tina-field={faqHeader && tinaField(faqHeader, 'description')}
+              data-tina-field={homeData && tinaField(homeData, 'faqDescription')}
             >
               {headerDescription}
             </p>

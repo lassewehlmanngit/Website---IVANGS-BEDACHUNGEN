@@ -25,12 +25,9 @@ fragment HomePageParts on HomePage {
     label
     icon
   }
-  servicesSection {
-    __typename
-    eyebrow
-    title
-    description
-  }
+  servicesEyebrow
+  servicesTitle
+  servicesDescription
   ceoQuote {
     __typename
     eyebrow
@@ -61,16 +58,10 @@ fragment HomePageParts on HomePage {
       icon
     }
   }
-  projectsHeader {
-    __typename
-    eyebrow
-    title
-  }
-  faqHeader {
-    __typename
-    title
-    description
-  }
+  projectsEyebrow
+  projectsTitle
+  faqTitle
+  faqDescription
   faq {
     __typename
     question
@@ -161,48 +152,6 @@ fragment JobParts on Job {
   profile
   benefits
   published
-}
-
-fragment PageParts on Page {
-  __typename
-  title
-  description
-  blocks {
-    __typename
-    ... on PageBlocksHero {
-      title
-      description
-      image
-      actions {
-        __typename
-        label
-        href
-        variant
-      }
-    }
-    ... on PageBlocksFeatures {
-      title
-      description
-      items {
-        __typename
-        title
-        description
-        icon
-      }
-    }
-    ... on PageBlocksTestimonial {
-      quote
-      author
-      role
-    }
-    ... on PageBlocksContact {
-      title
-      description
-    }
-    ... on PageBlocksContent {
-      body
-    }
-  }
 }
 
 fragment AboutPageParts on AboutPage {
