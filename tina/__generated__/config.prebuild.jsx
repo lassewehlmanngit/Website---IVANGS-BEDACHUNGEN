@@ -26,10 +26,6 @@ var config_default = defineConfig({
         path: "content/home",
         format: "json",
         ui: {
-          filename: {
-            readonly: true,
-            slugify: () => "startseite"
-          },
           router: () => "/de",
           allowedActions: {
             create: false,
@@ -354,10 +350,6 @@ var config_default = defineConfig({
         path: "content/about",
         format: "json",
         ui: {
-          filename: {
-            readonly: true,
-            slugify: () => "ueber-uns"
-          },
           router: () => "/de/about",
           allowedActions: {
             create: false,
@@ -442,10 +434,6 @@ var config_default = defineConfig({
         path: "content/career",
         format: "json",
         ui: {
-          filename: {
-            readonly: true,
-            slugify: () => "karriere"
-          },
           router: () => "/de/career",
           allowedActions: {
             create: false,
@@ -500,10 +488,6 @@ var config_default = defineConfig({
         path: "content/contact",
         format: "json",
         ui: {
-          filename: {
-            readonly: true,
-            slugify: () => "kontakt"
-          },
           router: () => "/de/contact",
           allowedActions: {
             create: false,

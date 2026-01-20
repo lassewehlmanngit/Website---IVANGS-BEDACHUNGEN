@@ -38,6 +38,7 @@ lerna-debug.log*
 
 # TinaCMS
 .tina/
+public/admin/
 
 # Playwright
 test-results/

@@ -149,7 +149,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-bold rounded-sm border-2 border-primary hover:bg-primary/5 transition-colors"
               >
                 <span data-tina-field={faqCTA && tinaField(faqCTA, 'buttonText')}>
-                  {ctaButtonText}
+                {ctaButtonText}
                 </span>
               </SmartLink>
             </div>

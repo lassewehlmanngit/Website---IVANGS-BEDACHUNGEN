@@ -508,10 +508,6 @@ export default defineConfig({
         path: 'content/contact',
         format: 'json',
         ui: {
-          filename: {
-            readonly: true,
-            slugify: () => 'kontakt',
-          },
           router: () => '/de/contact',
           allowedActions: {
             create: false,

@@ -172,7 +172,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 };
                 
                 return (
-                  <div className="mb-16 md:mb-20">
+                 <div className="mb-16 md:mb-20">
                     <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8 flex items-center gap-2">
                       <ImageIcon size={24} className="text-primary" /> 
                       Ausgewählte Projekte
@@ -192,7 +192,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                         </div>
                       ))}
                     </div>
-                  </div>
+                 </div>
                 );
               })()}
 
