@@ -66,7 +66,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
             <span 
-              className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10"
+              className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/90 supports-[backdrop-filter]:bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10"
               data-tina-field={useTinaData && tinaField(data.service, 'subtitle')}
             >
               {service.subtitle}
@@ -80,7 +80,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
           </div>
           <Link 
             to={`/${lang}/services`}
-            className="absolute top-20 left-4 md:top-32 md:left-8 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-3 md:px-5 md:py-2.5 rounded-sm flex items-center gap-2 transition-colors font-medium text-sm md:text-base border border-white/20 z-10 min-h-[44px]"
+            className="absolute top-20 left-4 md:top-32 md:left-8 bg-slate-800/80 supports-[backdrop-filter]:bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-3 md:px-5 md:py-2.5 rounded-sm flex items-center gap-2 transition-colors font-medium text-sm md:text-base border border-white/20 z-10 min-h-[44px]"
           >
             <ArrowLeft size={18} className="shrink-0" /> 
             <span className="hidden xs:inline">Zur Übersicht</span>

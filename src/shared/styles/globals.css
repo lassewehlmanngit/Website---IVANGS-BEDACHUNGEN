@@ -48,6 +48,25 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* Cross-browser text handling for German compound words */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, label, span {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+  }
+
+  /* Safari-specific backdrop-filter fix */
+  @supports (-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px)) {
+    .backdrop-blur-sm,
+    .backdrop-blur-md,
+    .backdrop-blur-lg,
+    .backdrop-blur-xl {
+      -webkit-backdrop-filter: var(--tw-backdrop-blur);
+    }
+  }
+
   /* Minimum tap target sizing on touch devices (WCAG 2.5.5 Target Size) */
   @media (pointer: coarse) {
     button,

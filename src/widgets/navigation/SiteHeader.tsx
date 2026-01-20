@@ -47,7 +47,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
   return (
     <div className="sticky top-0 z-40 flex flex-col shadow-sm transition-all duration-300">
-      <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
+      <header className="w-full bg-white supports-[backdrop-filter]:bg-white/95 backdrop-blur-md border-b border-slate-100">
         <div className="container flex h-20 items-center justify-between py-2">
             {/* Logo */}
             <Link to={`/${lang}`} className="flex items-center gap-2 cursor-pointer group">

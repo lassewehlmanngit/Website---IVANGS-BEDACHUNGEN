@@ -46,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
   }, []);
 
   return (
-    <section className="relative min-h-[85dvh] flex flex-col bg-slate-900 overflow-hidden">
+    <section className="relative min-h-[85vh] min-h-[85dvh] flex flex-col bg-slate-900 overflow-hidden">
       {/* Background Media & Overlay */}
       <div className="absolute inset-0 z-0">
         {mediaType === 'video' ? (
@@ -107,7 +107,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
         {/* Right: Quick Inquiry Form (Conditional) */}
         {showQuickForm && (
           <div className="hidden md:block">
-            <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-sm shadow-2xl max-w-md ml-auto relative overflow-hidden animate-fade-in">
+            <div className="bg-slate-800/90 supports-[backdrop-filter]:bg-white/10 backdrop-blur-xl border border-white/20 p-8 rounded-sm shadow-2xl max-w-md ml-auto relative overflow-hidden animate-fade-in">
                {/* Decorative Blur */}
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>
 
@@ -139,7 +139,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       </div>
 
       {/* Bottom Glass Bar (Desktop) */}
-      <div className="relative z-20 border-t border-white/10 bg-white/5 backdrop-blur-md hidden md:block">
+      <div className="relative z-20 border-t border-white/10 bg-slate-900/80 supports-[backdrop-filter]:bg-white/5 backdrop-blur-md hidden md:block">
          <div className="container mx-auto px-4 py-6 md:py-8">
            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => {
@@ -171,7 +171,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       </div>
 
       {/* Stats Grid (Mobile) */}
-      <div className="relative z-20 md:hidden border-t border-white/10 bg-slate-900/80 backdrop-blur-md">
+      <div className="relative z-20 md:hidden border-t border-white/10 bg-slate-900/90 supports-[backdrop-filter]:bg-slate-900/80 backdrop-blur-md">
          <div className="container mx-auto px-4 py-8">
            <div className="grid grid-cols-2 gap-y-8 gap-x-4">
               {stats.map((stat, index) => {

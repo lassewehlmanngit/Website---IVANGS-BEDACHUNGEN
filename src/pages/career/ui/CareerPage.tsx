@@ -69,7 +69,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             <div className="container mx-auto px-4">
               <div className="text-center max-w-4xl mx-auto">
                 {/* Text container with semi-transparent background */}
-                <div className="bg-slate-900/60 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 rounded-sm border border-white/10">
+                <div className="bg-slate-900/80 supports-[backdrop-filter]:bg-slate-900/60 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 rounded-sm border border-white/10">
                   <span 
                     className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm mb-3 md:mb-4 block"
                     data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'eyebrow')}

@@ -101,7 +101,7 @@ export const Drawer: React.FC<DrawerProps> = ({
       {/* Backdrop */}
       <div
         className={cn(
-          'absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity duration-300',
+          'absolute inset-0 bg-background/95 supports-[backdrop-filter]:bg-background/80 backdrop-blur-sm transition-opacity duration-300',
           open ? 'opacity-100' : 'opacity-0',
         )}
         onClick={onClose}
