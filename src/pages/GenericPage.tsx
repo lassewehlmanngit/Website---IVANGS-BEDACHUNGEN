@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { useTina } from 'tinacms/dist/react';
+import { useTina, tinaField } from 'tinacms/dist/react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Markdown } from '@/shared/ui/Markdown';
@@ -23,46 +23,54 @@ const BlockRenderer: React.FC<{ block: PageBlock }> = ({ block }) => {
   switch (block._template) {
     case 'hero':
       return (
-        <Hero
-          title={block.title}
-          description={block.description}
-          media={block.image ? <Image src={block.image} alt={block.title} className="rounded-lg shadow-xl" /> : undefined}
-          actions={
-            block.actions?.map((action, i) => (
-              <ButtonLink key={i} to={action.href} variant={action.variant as any}>
-                {action.label}
-              </ButtonLink>
-            ))
-          }
-        />
+        <div data-tina-field={tinaField(block, 'title')}>
+          <Hero
+            title={<span data-tina-field={tinaField(block, 'title')}>{block.title}</span>}
+            description={<span data-tina-field={tinaField(block, 'description')}>{block.description}</span>}
+            media={block.image ? <Image src={block.image} alt={block.title} className="rounded-lg shadow-xl" data-tina-field={tinaField(block, 'image')} /> : undefined}
+            actions={
+              block.actions?.map((action, i) => (
+                <ButtonLink key={i} to={action.href} variant={action.variant as any} data-tina-field={tinaField(block, `actions.${i}.label`)}>
+                  {action.label}
+                </ButtonLink>
+              ))
+            }
+          />
+        </div>
       );
 
     case 'features':
       return (
-        <FeatureSection title={block.title} description={block.description}>
-          {block.items?.map((item, i) => {
-            const IconComponent = item.icon ? (Icons as any)[item.icon] : undefined;
-            return (
-              <FeatureCard
-                key={i}
-                title={item.title}
-                description={item.description}
-                icon={IconComponent ? <IconComponent /> : undefined}
-              />
-            );
-          })}
-        </FeatureSection>
+        <div data-tina-field={tinaField(block, 'title')}>
+          <FeatureSection 
+            title={<span data-tina-field={tinaField(block, 'title')}>{block.title}</span>} 
+            description={<span data-tina-field={tinaField(block, 'description')}>{block.description}</span>}
+          >
+            {block.items?.map((item, i) => {
+              const IconComponent = item.icon ? (Icons as any)[item.icon] : undefined;
+              return (
+                <div key={i} data-tina-field={tinaField(block, `items.${i}`)}>
+                  <FeatureCard
+                    title={<span data-tina-field={tinaField(block, `items.${i}.title`)}>{item.title}</span>}
+                    description={<span data-tina-field={tinaField(block, `items.${i}.description`)}>{item.description}</span>}
+                    icon={IconComponent ? <IconComponent /> : undefined}
+                  />
+                </div>
+              );
+            })}
+          </FeatureSection>
+        </div>
       );
 
     case 'testimonial':
       return (
         <Section>
-          <div className="container mx-auto max-w-4xl">
+          <div className="container mx-auto max-w-4xl" data-tina-field={tinaField(block, 'quote')}>
             <Testimonial
-              quote={block.quote}
+              quote={<span data-tina-field={tinaField(block, 'quote')}>{block.quote}</span>}
               author={{
-                name: block.author,
-                title: block.role,
+                name: <span data-tina-field={tinaField(block, 'author')}>{block.author}</span>,
+                title: <span data-tina-field={tinaField(block, 'role')}>{block.role}</span>,
               }}
             />
           </div>
@@ -73,8 +81,8 @@ const BlockRenderer: React.FC<{ block: PageBlock }> = ({ block }) => {
       return (
         <Section>
           <div className="container mx-auto max-w-xl">
-            {block.title && <h2 className="mb-4 text-3xl font-bold">{block.title}</h2>}
-            {block.description && <p className="mb-8 text-muted-foreground">{block.description}</p>}
+            {block.title && <h2 className="mb-4 text-3xl font-bold" data-tina-field={tinaField(block, 'title')}>{block.title}</h2>}
+            {block.description && <p className="mb-8 text-muted-foreground" data-tina-field={tinaField(block, 'description')}>{block.description}</p>}
             <ContactForm />
           </div>
         </Section>
@@ -83,7 +91,7 @@ const BlockRenderer: React.FC<{ block: PageBlock }> = ({ block }) => {
     case 'content':
       return (
         <Section>
-          <div className="container mx-auto max-w-3xl prose prose-lg dark:prose-invert">
+          <div className="container mx-auto max-w-3xl prose prose-lg dark:prose-invert" data-tina-field={tinaField(block, 'body')}>
             <Markdown>{block.body}</Markdown>
           </div>
         </Section>

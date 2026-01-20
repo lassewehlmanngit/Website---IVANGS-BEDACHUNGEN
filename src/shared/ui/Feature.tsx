@@ -5,8 +5,8 @@ import { Heading, Text } from './Typography';
 // Feature Card
 export interface FeatureCardProps {
   icon?: React.ReactNode;
-  title: string;
-  description: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
   link?: {
     href: string;
     label: string;
@@ -92,9 +92,9 @@ export const FeatureGrid: React.FC<FeatureGridProps> = ({
 
 // Feature Section (combines heading + grid)
 export interface FeatureSectionProps {
-  title?: string;
-  subtitle?: string;
-  description?: string;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  description?: React.ReactNode;
   columns?: FeatureGridColumns;
   centered?: boolean;
   children: React.ReactNode;

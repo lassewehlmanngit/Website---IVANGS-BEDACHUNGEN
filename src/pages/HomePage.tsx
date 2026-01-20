@@ -11,6 +11,8 @@ import { HomeFAQ } from '@/widgets/home/ui/HomeFAQ';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import { useHomePageData } from '@/shared/lib/tina/useHomePageData';
 
 export interface HomePageProps {
   lang: SupportedLang;
@@ -18,16 +20,86 @@ export interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
   const [settings, setSettings] = useState<SettingsData | null>(null);
+  
+  // Fetch home page data from TinaCMS
+  const homePageData = useHomePageData(lang);
+  
+  // Enable visual editing with useTina hook
+  const { data } = useTina({
+    query: homePageData.query,
+    variables: homePageData.variables,
+    data: homePageData.data,
+  });
 
   useEffect(() => {
     getSettings(lang).then(setSettings);
   }, [lang]);
+  
+  // Show loading state
+  if (homePageData.loading) {
+    return (
+      <div className="container py-12">
+        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
+      </div>
+    );
+  }
+  
+  // Show error state
+  if (homePageData.error || !data?.homePage) {
+    return (
+      <>
+        <Seo
+          title="Ivangs Bedachungen - Meisterbetrieb seit 1996"
+          description="Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+          ogLocale="de_DE"
+          ogSiteName="Ivangs Bedachungen"
+          localBusiness={{
+              name: "Ivangs Bedachungen GmbH & Co. KG",
+              telephone: "+49 2162 356666",
+              email: "bedachungen@ivangs.de",
+              address: {
+                  streetAddress: "Schmiedestraße 37",
+                  addressLocality: "Viersen - Süchteln",
+                  postalCode: "41749",
+                  addressCountry: "DE"
+              }
+          }}
+        />
+        <HeroSection lang={lang} settings={settings?.hero} />
+        <ServiceNavigationStrip lang={lang} />
+        <ServicePreview lang={lang} />
+        <TrustIndicators />
+        <CeoQuote lang={lang} />
+        <ProjectShowcase />
+        <HomeFAQ lang={lang} />
+        
+        {/* Final CTA */}
+        <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-h2 font-bold mb-4 md:mb-6">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
+            <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10">
+              Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.
+            </p>
+            <div className="flex justify-center gap-4">
+              <Link to={`/${lang}/contact`}>
+                  <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold">
+                    Beratungstermin vereinbaren
+                  </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      </>
+    );
+  }
+  
+  const home = data.homePage;
 
   return (
     <>
       <Seo
-        title="Ivangs Bedachungen - Meisterbetrieb seit 1996"
-        description="Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+        title={home.seo?.title || "Ivangs Bedachungen - Meisterbetrieb seit 1996"}
+        description={home.seo?.description || "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
         localBusiness={{
@@ -42,25 +114,27 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
             }
         }}
       />
-      <HeroSection lang={lang} settings={settings?.hero} />
+      <HeroSection lang={lang} settings={home.hero} homeData={home} />
       <ServiceNavigationStrip lang={lang} />
-      <ServicePreview lang={lang} />
+      <ServicePreview lang={lang} servicesSection={home.servicesSection} />
       <TrustIndicators />
-      <CeoQuote lang={lang} />
+      <CeoQuote lang={lang} ceoData={home.ceoQuote} />
       <ProjectShowcase />
       <HomeFAQ lang={lang} />
       
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-h2 font-bold mb-4 md:mb-6">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
-          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10">
-            Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.
+          <h2 className="text-h2 font-bold mb-4 md:mb-6" data-tina-field={tinaField(home, 'finalCTA.title')}>
+            {home.finalCTA?.title || 'Planen Sie sicher. Planen Sie mit Ivangs.'}
+          </h2>
+          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10" data-tina-field={tinaField(home, 'finalCTA.description')}>
+            {home.finalCTA?.description || 'Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.'}
           </p>
           <div className="flex justify-center gap-4">
-            <Link to={`/${lang}/contact`}>
-                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold">
-                  Beratungstermin vereinbaren
+            <Link to={home.finalCTA?.buttonLink || `/${lang}/contact`}>
+                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold" data-tina-field={tinaField(home, 'finalCTA.buttonText')}>
+                  {home.finalCTA?.buttonText || 'Beratungstermin vereinbaren'}
                 </Button>
             </Link>
           </div>

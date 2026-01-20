@@ -8,11 +8,31 @@ import { Accordion } from '@/shared/ui/Accordion';
 import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import { useJobsData } from '@/shared/lib/tina/useJobsData';
 
 const CAREER_HERO_IMG = "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop";
 
 export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
+  
+  // Fetch jobs data from TinaCMS
+  const jobsResponse = useJobsData(lang);
+  
+  // Enable visual editing with useTina hook
+  const { data } = useTina({
+    query: jobsResponse.query,
+    variables: jobsResponse.variables,
+    data: jobsResponse.data,
+  });
+  
+  // Use TinaCMS data if available, otherwise fall back to static data
+  // Filter for published jobs only
+  const jobs = data?.jobConnection?.edges
+    ? data.jobConnection.edges
+        .map((edge: any) => edge.node)
+        .filter((job: any) => job.published !== false)
+    : jobsData;
 
   return (
     <>
@@ -57,13 +77,17 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              {/* Left Column: Job Listings */}
              <div className="lg:col-span-7 order-2 lg:order-1">
                 <h2 className="text-h2 font-bold text-slate-900 mb-6 md:mb-8">Offene Stellen</h2>
-                <div className="space-y-4 md:space-y-6">
-                   <Accordion type="single" collapsible className="w-full border-none divide-y-0 rounded-none bg-transparent">
-                     {jobsData.map((job, i) => (
-                       <JobListing key={i} job={job} lang={lang} />
-                     ))}
-                   </Accordion>
-                </div>
+                {jobs.length > 0 ? (
+                  <div className="space-y-4 md:space-y-6">
+                     <Accordion type="single" collapsible className="w-full border-none divide-y-0 rounded-none bg-transparent">
+                       {jobs.map((job: any, i: number) => (
+                         <JobListing key={i} job={job} lang={lang} useTinaField={!!data?.jobConnection} />
+                       ))}
+                     </Accordion>
+                  </div>
+                ) : (
+                  <p className="text-slate-600">Aktuell keine offenen Stellen verfügbar.</p>
+                )}
              </div>
              
              {/* Right Column: Wizard & Sidebar */}

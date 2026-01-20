@@ -8,9 +8,9 @@ export type HeroSize = 'sm' | 'md' | 'lg';
 export interface HeroProps {
   variant?: HeroVariant;
   size?: HeroSize;
-  title: string;
-  subtitle?: string;
-  description?: string;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  description?: React.ReactNode;
   actions?: React.ReactNode;
   media?: React.ReactNode;
   backgroundImage?: string;

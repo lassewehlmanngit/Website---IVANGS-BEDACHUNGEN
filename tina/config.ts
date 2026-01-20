@@ -168,10 +168,14 @@ export default defineConfig({
         },
         fields: [
           { type: 'string', name: 'title', label: 'Titel', required: true, isTitle: true },
+          { type: 'string', name: 'subtitle', label: 'Untertitel' },
           { type: 'string', name: 'shortDescription', label: 'Kurzbeschreibung', ui: { component: 'textarea' } },
+          { type: 'string', name: 'intro', label: 'Einführungstext', ui: { component: 'textarea' } },
           { type: 'rich-text', name: 'body', label: 'Beschreibung (Lang)' },
           { type: 'image', name: 'image', label: 'Hauptbild' },
+          { type: 'image', name: 'heroImage', label: 'Hero Bild' },
           { type: 'string', name: 'icon', label: 'Icon Name (Lucide)' },
+          { type: 'string', name: 'expertTip', label: 'Experten-Tipp', ui: { component: 'textarea' } },
           {
             type: 'string',
             list: true,
@@ -183,6 +187,50 @@ export default defineConfig({
             list: true,
             name: 'benefits',
             label: 'Vorteile',
+          },
+          {
+            type: 'object',
+            list: true,
+            name: 'sections',
+            label: 'Detailsektionen',
+            fields: [
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'icon', label: 'Icon (Lucide)' },
+              { type: 'string', name: 'content', label: 'Inhalt', ui: { component: 'textarea' } },
+            ],
+          },
+          {
+            type: 'object',
+            list: true,
+            name: 'processSteps',
+            label: 'Prozessschritte',
+            fields: [
+              { type: 'number', name: 'step', label: 'Schritt Nr.' },
+              { type: 'string', name: 'title', label: 'Titel' },
+              { type: 'string', name: 'text', label: 'Beschreibung' },
+            ],
+          },
+          {
+            type: 'string',
+            list: true,
+            name: 'referenceImages',
+            label: 'Projektbilder (URLs)',
+          },
+          {
+            type: 'string',
+            list: true,
+            name: 'contactIds',
+            label: 'Ansprechpartner IDs',
+          },
+          {
+            type: 'object',
+            list: true,
+            name: 'faq',
+            label: 'FAQ',
+            fields: [
+              { type: 'string', name: 'question', label: 'Frage', required: true },
+              { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+            ],
           },
           {
             type: 'object',

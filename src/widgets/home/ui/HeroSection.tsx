@@ -3,20 +3,23 @@ import { ArrowRight, Users, Truck, Warehouse, Calendar, Mail } from 'lucide-reac
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
 import type { HeroSettings } from '@/shared/lib/content/globals';
+import { tinaField } from 'tinacms/dist/react';
 
 export interface HeroSectionProps {
   lang: string;
   settings?: HeroSettings;
+  homeData?: any;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeData }) => {
   const [loadVideo, setLoadVideo] = useState(false);
   
-  // Use settings or defaults
-  const mediaType = settings?.mediaType || 'video';
-  const backgroundImage = settings?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
-  const videoUrl = settings?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
-  const showQuickForm = settings?.showQuickForm ?? true;
+  // Use homeData from TinaCMS if available, otherwise fall back to settings
+  const heroData = homeData?.hero || settings;
+  const mediaType = heroData?.mediaType || 'video';
+  const backgroundImage = heroData?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
+  const videoUrl = heroData?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
+  const showQuickForm = heroData?.showQuickForm ?? true;
 
   useEffect(() => {
     // Delay video loading to prioritize initial page render
@@ -57,26 +60,25 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings }) => {
       <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow">
         {/* Left: Copy & Main Message */}
         <div className="text-white mt-8 md:mt-0">
-          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up">
-            Meisterbetrieb seit 1996
+          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.eyebrow')}>
+            {heroData?.eyebrow || 'Meisterbetrieb seit 1996'}
           </span>
-          <h1 className="text-h1 font-medium leading-tight tracking-tight mb-4 md:mb-6 animate-slide-up">
-            Dächer, die <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-400">begeistern.</span>
+          <h1 className="text-h1 font-medium leading-tight tracking-tight mb-4 md:mb-6 animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.title')}>
+            {heroData?.title || 'Dächer, die begeistern.'}
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-10 max-w-lg font-light leading-relaxed animate-slide-up">
-            Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.
+          <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-10 max-w-lg font-light leading-relaxed animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.description')}>
+            {heroData?.description || 'Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.'}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
-             <Link to={`/${lang}/contact`} className="w-full sm:w-auto">
-                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap">
-                   Projekt anfragen <ArrowRight size={18} className="ml-2 shrink-0" />
+             <Link to={heroData?.primaryButtonLink || `/${lang}/contact`} className="w-full sm:w-auto">
+                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData && tinaField(homeData, 'hero.primaryButtonText')}>
+                   {heroData?.primaryButtonText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </Link>
-             <Link to={`/${lang}/career`} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap">
-                   Karriere starten
+             <Link to={heroData?.secondaryButtonLink || `/${lang}/career`} className="w-full sm:w-auto">
+                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData && tinaField(homeData, 'hero.secondaryButtonText')}>
+                   {heroData?.secondaryButtonText || 'Karriere starten'}
                 </Button>
              </Link>
           </div>

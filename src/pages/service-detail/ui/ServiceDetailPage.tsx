@@ -12,6 +12,9 @@ import { ProcessTimeline } from '@/shared/ui/ProcessTimeline';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 import { TeamContactCard } from '@/features/service/ui/TeamContactCard';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import { useServiceData } from '@/shared/lib/tina/useServiceData';
+import { teamMembersLegacy } from '@/features/company/model/teamData';
 
 const iconMap: Record<string, React.ElementType> = {
   Hammer,
@@ -29,7 +32,29 @@ const iconMap: Record<string, React.ElementType> = {
 export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const service = id && id in servicesData ? servicesData[id as ServiceId] : null;
+  
+  // Fetch service data from TinaCMS
+  const serviceData = useServiceData(id || '', lang);
+  
+  // Enable visual editing with useTina hook
+  const { data } = useTina({
+    query: serviceData.query,
+    variables: serviceData.variables,
+    data: serviceData.data,
+  });
+  
+  // Show loading state
+  if (serviceData.loading) {
+    return (
+      <div className="container py-12">
+        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
+      </div>
+    );
+  }
+  
+  // Fallback to static data if TinaCMS data is not available
+  const service = data?.service || (id && id in servicesData ? servicesData[id as ServiceId] : null);
+  const useTinaData = !!data?.service;
 
   if (!service) return <NotFoundPage lang={lang} />;
 
@@ -37,7 +62,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
     <>
       <Seo 
         title={`${service.title} - Ivangs Bedachungen`}
-        description={service.intro}
+        description={service.intro || service.shortDescription}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />
@@ -46,19 +71,28 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
         {/* Hero Header */}
         <div className="relative h-[60vh] min-h-[500px]">
           <OptimizedImage 
-            src={service.img} 
+            src={service.heroImage || service.image || service.img} 
             className="w-full h-full object-cover" 
             alt={service.title}
-            srcSet={generateUnsplashSrcSet(service.img)}
+            srcSet={generateUnsplashSrcSet(service.heroImage || service.image || service.img)}
             sizes="100vw"
             priority
             containerClassName="absolute inset-0"
+            data-tina-field={useTinaData && tinaField(data.service, 'heroImage')}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
-            <span className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10">
+            <span 
+              className="text-primary font-bold uppercase tracking-widest text-sm mb-4 bg-slate-900/80 px-4 py-2 rounded-sm backdrop-blur-md border border-white/10"
+              data-tina-field={useTinaData && tinaField(data.service, 'subtitle')}
+            >
               {service.subtitle}
             </span>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg">{service.title}</h1>
+            <h1 
+              className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg"
+              data-tina-field={useTinaData && tinaField(data.service, 'title')}
+            >
+              {service.title}
+            </h1>
           </div>
           <Link 
             to={`/${lang}/services`}
@@ -88,48 +122,71 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               
               {/* Intro & Expert Tip */}
               <h2 className="text-h2 font-bold text-slate-900 mb-4 md:mb-6">Worum es wirklich geht.</h2>
-              <p className="text-xl text-slate-600 leading-relaxed mb-8">
+              <p 
+                className="text-xl text-slate-600 leading-relaxed mb-8"
+                data-tina-field={useTinaData && tinaField(data.service, 'intro')}
+              >
                 {service.intro}
               </p>
               
-              <ExpertTip className="mb-12">
-                {service.expertTip}
-              </ExpertTip>
+              {service.expertTip && (
+                <ExpertTip className="mb-12" data-tina-field={useTinaData && tinaField(data.service, 'expertTip')}>
+                  {service.expertTip}
+                </ExpertTip>
+              )}
 
               {/* Detailed Knowledge Sections */}
-              <div className="space-y-12 mb-20">
-                {service.sections.map((section, idx) => {
-                  const Icon = iconMap[section.icon] || Info;
-                  return (
-                    <div key={idx} className="flex gap-6 group">
-                      <div className="shrink-0 w-12 h-12 bg-white rounded-sm flex items-center justify-center border border-slate-200 shadow-sm group-hover:border-primary transition-colors">
-                        <Icon className="text-primary" size={24} />
+              {service.sections && service.sections.length > 0 && (
+                <div className="space-y-12 mb-20">
+                  {service.sections.map((section: any, idx: number) => {
+                    const Icon = iconMap[section.icon] || Info;
+                    return (
+                      <div key={idx} className="flex gap-6 group" data-tina-field={useTinaData && tinaField(data.service, `sections.${idx}`)}>
+                        <div className="shrink-0 w-12 h-12 bg-white rounded-sm flex items-center justify-center border border-slate-200 shadow-sm group-hover:border-primary transition-colors">
+                          <Icon className="text-primary" size={24} />
+                        </div>
+                        <div>
+                          <h3 
+                            className="text-xl font-bold text-slate-900 mb-2"
+                            data-tina-field={useTinaData && tinaField(data.service, `sections.${idx}.title`)}
+                          >
+                            {section.title}
+                          </h3>
+                          <p 
+                            className="text-slate-600 leading-relaxed whitespace-pre-line"
+                            data-tina-field={useTinaData && tinaField(data.service, `sections.${idx}.content`)}
+                          >
+                            {section.content}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-xl font-bold text-slate-900 mb-2">{section.title}</h3>
-                        <p className="text-slate-600 leading-relaxed whitespace-pre-line">{section.content}</p>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Process Steps Section */}
-              <div className="mb-16 md:mb-20">
-                 <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8">So läuft Ihr Projekt ab</h3>
-                 <ProcessTimeline steps={service.process} />
-              </div>
+              {(service.processSteps || service.process) && (
+                <div className="mb-16 md:mb-20">
+                   <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8">So läuft Ihr Projekt ab</h3>
+                   <ProcessTimeline steps={service.processSteps || service.process} />
+                </div>
+              )}
 
               {/* Project References Gallery */}
-              {service.references && service.references.length > 0 && (
+              {(service.referenceImages || service.references) && (service.referenceImages || service.references).length > 0 && (
                  <div className="mb-16 md:mb-20">
                     <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8 flex items-center gap-2">
                       <ImageIcon size={24} className="text-primary" /> 
                       Ausgewählte Projekte
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {service.references.map((img, idx) => (
-                        <div key={idx} className="rounded-sm overflow-hidden h-64 border border-slate-100 group">
+                      {(service.referenceImages || service.references).map((img: string, idx: number) => (
+                        <div 
+                          key={idx} 
+                          className="rounded-sm overflow-hidden h-64 border border-slate-100 group"
+                          data-tina-field={useTinaData && tinaField(data.service, `referenceImages.${idx}`)}
+                        >
                           <OptimizedImage 
                             src={img} 
                             alt={`Projektbeispiel ${service.title} ${idx + 1}`} 
@@ -142,38 +199,51 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               )}
 
               {/* Humanized Contact Section */}
-              <div className="bg-slate-50 border border-slate-100 rounded-md p-6 md:p-8 mb-16 md:mb-20">
-                 <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6">Ihre Ansprechpartner für {service.title}</h3>
-                 <p className="text-slate-600 mb-8">Kurze Wege zur richtigen Antwort. Bei uns landen Sie nicht im Callcenter, sondern beim Experten.</p>
-                 
-                 <div className="grid md:grid-cols-2 gap-6">
-                    {service.contacts?.map((person, idx) => (
-                      <TeamContactCard key={idx} member={person} />
-                    ))}
-                 </div>
-              </div>
+              {((service.contactIds && service.contactIds.length > 0) || (service.contacts && service.contacts.length > 0)) && (
+                <div className="bg-slate-50 border border-slate-100 rounded-md p-6 md:p-8 mb-16 md:mb-20">
+                   <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6">Ihre Ansprechpartner für {service.title}</h3>
+                   <p className="text-slate-600 mb-8">Kurze Wege zur richtigen Antwort. Bei uns landen Sie nicht im Callcenter, sondern beim Experten.</p>
+                   
+                   <div className="grid md:grid-cols-2 gap-6">
+                      {(service.contactIds 
+                        ? service.contactIds.map((id: string) => teamMembersLegacy[id as keyof typeof teamMembersLegacy]).filter(Boolean)
+                        : service.contacts
+                      )?.map((person: any, idx: number) => (
+                        <TeamContactCard key={idx} member={person} />
+                      ))}
+                   </div>
+                </div>
+              )}
 
               {/* FAQ Accordion Section */}
-              <div className="border-t border-slate-200 pt-8 md:pt-10 mb-10 md:mb-12">
-                <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
-                   <HelpCircle className="text-primary shrink-0" size={24} />
-                   <h3 className="text-h3 font-bold text-slate-900">Häufige Kundenfragen</h3>
+              {service.faq && service.faq.length > 0 && (
+                <div className="border-t border-slate-200 pt-8 md:pt-10 mb-10 md:mb-12">
+                  <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
+                     <HelpCircle className="text-primary shrink-0" size={24} />
+                     <h3 className="text-h3 font-bold text-slate-900">Häufige Kundenfragen</h3>
+                  </div>
+                  <Accordion type="single" collapsible>
+                    {service.faq.map((item: any, idx: number) => (
+                      <AccordionItem key={idx} value={`item-${idx}`} data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}`)}>
+                        <AccordionTrigger 
+                          className="text-lg font-bold text-slate-800 hover:text-primary"
+                          data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.question`)}
+                        >
+                          {item.question || item.q}
+                        </AccordionTrigger>
+                        <AccordionContent>
+                          <p 
+                            className="text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-sm border-l-2 border-primary/30"
+                            data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.answer`)}
+                          >
+                            {item.answer || item.a}
+                          </p>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
                 </div>
-                <Accordion type="single" collapsible>
-                  {service.faq.map((item, idx) => (
-                    <AccordionItem key={idx} value={`item-${idx}`}>
-                      <AccordionTrigger className="text-lg font-bold text-slate-800 hover:text-primary">
-                        {item.q}
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <p className="text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-sm border-l-2 border-primary/30">
-                          {item.a}
-                        </p>
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
+              )}
             </div>
 
             {/* Sidebar Navigation - top-40 (160px) clears header (80px) + service nav (48px) + padding */}

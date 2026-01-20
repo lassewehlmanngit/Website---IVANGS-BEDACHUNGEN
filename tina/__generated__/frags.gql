@@ -71,12 +71,35 @@ fragment TeamMemberParts on TeamMember {
 fragment ServiceParts on Service {
   __typename
   title
+  subtitle
   shortDescription
+  intro
   body
   image
+  heroImage
   icon
+  expertTip
   features
   benefits
+  sections {
+    __typename
+    title
+    icon
+    content
+  }
+  processSteps {
+    __typename
+    step
+    title
+    text
+  }
+  referenceImages
+  contactIds
+  faq {
+    __typename
+    question
+    answer
+  }
   gallery {
     __typename
     image

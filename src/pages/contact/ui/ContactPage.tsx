@@ -4,23 +4,47 @@ import { Seo } from '@/shared/ui/Seo';
 import { ContactForm } from '@/features/contact/ContactForm';
 import { MapPin, Phone, Mail, Clock, Globe, Facebook } from 'lucide-react';
 import { teamMembersLegacy } from '@/features/company/model/teamData';
+import { useTina, tinaField } from 'tinacms/dist/react';
+import { useContactPageData } from '@/shared/lib/tina/useContactPageData';
 
 export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
+  // Fetch contact page data from TinaCMS
+  const contactPageData = useContactPageData(lang);
+  
+  // Enable visual editing with useTina hook
+  const { data } = useTina({
+    query: contactPageData.query,
+    variables: contactPageData.variables,
+    data: contactPageData.data,
+  });
+  
+  // Show loading state
+  if (contactPageData.loading) {
+    return (
+      <div className="container py-12">
+        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
+      </div>
+    );
+  }
+  
+  // Fallback to defaults if no data
+  const contact = data?.contactPage || {};
+  
   return (
     <>
       <Seo 
-        title="Kontakt - Ivangs Bedachungen" 
-        description="Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten."
+        title={contact.seo?.title || "Kontakt - Ivangs Bedachungen"} 
+        description={contact.seo?.description || "Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten."}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
         localBusiness={{
-            name: "Ivangs Bedachungen GmbH & Co. KG",
+            name: contact.address?.company || "Ivangs Bedachungen GmbH & Co. KG",
             telephone: "+49 2162 356666",
-            email: "bedachungen@ivangs.de",
+            email: contact.email || "bedachungen@ivangs.de",
             address: {
-                streetAddress: "Schmiedestraße 37",
-                addressLocality: "Viersen - Süchteln",
-                postalCode: "41749",
+                streetAddress: contact.address?.street || "Schmiedestraße 37",
+                addressLocality: contact.address?.city || "Viersen - Süchteln",
+                postalCode: contact.address?.zip || "41749",
                 addressCountry: "DE"
             }
         }}
@@ -28,9 +52,11 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <div className="bg-white">
         <div className="container mx-auto px-4 py-16 md:py-20">
             <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-h1 font-bold mb-3 md:mb-4 text-slate-900">Der erste Schritt zum dichten Dach.</h1>
-            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto">
-                Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.
+            <h1 className="text-h1 font-bold mb-3 md:mb-4 text-slate-900" data-tina-field={data && tinaField(data.contactPage, 'title')}>
+              {contact.title || 'Der erste Schritt zum dichten Dach.'}
+            </h1>
+            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto" data-tina-field={data && tinaField(data.contactPage, 'description')}>
+                {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
             </p>
             </div>
 
@@ -46,11 +72,11 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Anschrift</span>
-                        <span className="text-slate-600">
-                          IVANGS<br/>
+                        <span className="text-slate-600" data-tina-field={data && tinaField(data.contactPage, 'address')}>
+                          {contact.address?.company || 'IVANGS'}<br/>
                           Bedachungen GmbH & Co. KG<br/>
-                          Schmiedestraße 37<br/>
-                          41749 Viersen - Süchteln
+                          {contact.address?.street || 'Schmiedestraße 37'}<br/>
+                          {contact.address?.zip || '41749'} {contact.address?.city || 'Viersen - Süchteln'}
                         </span>
                     </div>
                     </li>
@@ -60,8 +86,12 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Telefon</span>
-                        <a href="tel:+4921623566666" className="text-slate-600 hover:text-primary transition-colors">+49 (0) 21 62 – 35 66 66</a>
-                        <span className="block text-sm text-slate-400 mt-1">Fax: +49 (0) 21 62 - 35 66 67</span>
+                        <a href="tel:+4921623566666" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'phone')}>
+                          {contact.phone || '+49 (0) 21 62 – 35 66 66'}
+                        </a>
+                        <span className="block text-sm text-slate-400 mt-1" data-tina-field={data && tinaField(data.contactPage, 'fax')}>
+                          Fax: {contact.fax || '+49 (0) 21 62 - 35 66 67'}
+                        </span>
                     </div>
                     </li>
                     <li className="flex items-start gap-3 md:gap-4">
@@ -70,7 +100,9 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">E-Mail</span>
-                        <a href="mailto:bedachungen@ivangs.de" className="text-slate-600 hover:text-primary transition-colors">bedachungen@ivangs.de</a>
+                        <a href={`mailto:${contact.email || 'bedachungen@ivangs.de'}`} className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'email')}>
+                          {contact.email || 'bedachungen@ivangs.de'}
+                        </a>
                     </div>
                     </li>
                     <li className="flex items-start gap-3 md:gap-4">
@@ -79,7 +111,9 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Web</span>
-                        <a href="https://www.ivangs.de" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors">www.ivangs.de</a>
+                        <a href={`https://${contact.website || 'www.ivangs.de'}`} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'website')}>
+                          {contact.website || 'www.ivangs.de'}
+                        </a>
                     </div>
                     </li>
                     <li className="flex items-start gap-3 md:gap-4">
@@ -88,7 +122,9 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Social Media</span>
-                        <a href="https://www.facebook.com/ivangs.de" target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors">facebook.com/ivangs.de</a>
+                        <a href={contact.facebook || 'https://www.facebook.com/ivangs.de'} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'facebook')}>
+                          {contact.facebook ? new URL(contact.facebook).hostname + new URL(contact.facebook).pathname : 'facebook.com/ivangs.de'}
+                        </a>
                     </div>
                     </li>
                 </ul>

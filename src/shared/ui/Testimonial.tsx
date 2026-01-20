@@ -4,10 +4,10 @@ import { Text } from './Typography';
 
 // Single Testimonial Card
 export interface TestimonialProps {
-  quote: string;
+  quote: React.ReactNode;
   author: {
-    name: string;
-    title?: string;
+    name: React.ReactNode;
+    title?: React.ReactNode;
     company?: string;
     avatar?: string;
   };

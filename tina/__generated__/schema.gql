@@ -327,6 +327,23 @@ type TeamMemberConnection implements Connection {
   edges: [TeamMemberConnectionEdges]
 }
 
+type ServiceSections {
+  title: String!
+  icon: String
+  content: String
+}
+
+type ServiceProcessSteps {
+  step: Float
+  title: String
+  text: String
+}
+
+type ServiceFaq {
+  question: String!
+  answer: String!
+}
+
 type ServiceGallery {
   image: String
   caption: String
@@ -334,16 +351,42 @@ type ServiceGallery {
 
 type Service implements Node & Document {
   title: String!
+  subtitle: String
   shortDescription: String
+  intro: String
   body: JSON
   image: String
+  heroImage: String
   icon: String
+  expertTip: String
   features: [String]
   benefits: [String]
+  sections: [ServiceSections]
+  processSteps: [ServiceProcessSteps]
+  referenceImages: [String]
+  contactIds: [String]
+  faq: [ServiceFaq]
   gallery: [ServiceGallery]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input ServiceSectionsFilter {
+  title: StringFilter
+  icon: StringFilter
+  content: StringFilter
+}
+
+input ServiceProcessStepsFilter {
+  step: NumberFilter
+  title: StringFilter
+  text: StringFilter
+}
+
+input ServiceFaqFilter {
+  question: StringFilter
+  answer: StringFilter
 }
 
 input ServiceGalleryFilter {
@@ -353,12 +396,21 @@ input ServiceGalleryFilter {
 
 input ServiceFilter {
   title: StringFilter
+  subtitle: StringFilter
   shortDescription: StringFilter
+  intro: StringFilter
   body: RichTextFilter
   image: ImageFilter
+  heroImage: ImageFilter
   icon: StringFilter
+  expertTip: StringFilter
   features: StringFilter
   benefits: StringFilter
+  sections: ServiceSectionsFilter
+  processSteps: ServiceProcessStepsFilter
+  referenceImages: StringFilter
+  contactIds: StringFilter
+  faq: ServiceFaqFilter
   gallery: ServiceGalleryFilter
 }
 
@@ -967,6 +1019,23 @@ input TeamMemberMutation {
   order: Float
 }
 
+input ServiceSectionsMutation {
+  title: String
+  icon: String
+  content: String
+}
+
+input ServiceProcessStepsMutation {
+  step: Float
+  title: String
+  text: String
+}
+
+input ServiceFaqMutation {
+  question: String
+  answer: String
+}
+
 input ServiceGalleryMutation {
   image: String
   caption: String
@@ -974,12 +1043,21 @@ input ServiceGalleryMutation {
 
 input ServiceMutation {
   title: String
+  subtitle: String
   shortDescription: String
+  intro: String
   body: JSON
   image: String
+  heroImage: String
   icon: String
+  expertTip: String
   features: [String]
   benefits: [String]
+  sections: [ServiceSectionsMutation]
+  processSteps: [ServiceProcessStepsMutation]
+  referenceImages: [String]
+  contactIds: [String]
+  faq: [ServiceFaqMutation]
   gallery: [ServiceGalleryMutation]
 }
 

@@ -5,36 +5,51 @@ import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import type { JobOffer } from '@/features/career/model/jobsData';
 import { cn } from '@/shared/lib/cn';
+import { tinaField } from 'tinacms/dist/react';
 
 interface JobListingProps {
-  job: JobOffer;
+  job: JobOffer | any;
   lang: string;
+  useTinaField?: boolean;
 }
 
-export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
+export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField = false }) => {
   const navigate = useNavigate();
 
   return (
     <div className="bg-white border border-slate-200 rounded-sm hover:border-primary hover:shadow-lg transition-all group overflow-hidden">
-      <AccordionItem value={job.id} className="border-none">
+      <AccordionItem value={job.id || job._sys?.filename} className="border-none">
         <AccordionTrigger className="hover:no-underline hover:bg-slate-50/50 px-4 py-6 md:px-6 md:py-6 [&[data-state=open]]:bg-slate-50 items-start text-left">
           <div className="flex-1 min-w-0 pr-4">
             <div className="flex justify-between items-start gap-3 mb-3">
-              <h3 className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors flex-1">{job.title}</h3>
-              <span className={cn(
-                "px-3 py-1 rounded-sm text-xs font-bold shrink-0",
-                job.type === 'Ausbildung' ? 'bg-orange-100 text-orange-700' : 'bg-primary/10 text-primary'
-              )}>
+              <h3 
+                className="text-lg md:text-xl font-bold text-slate-900 group-hover:text-primary transition-colors flex-1"
+                data-tina-field={useTinaField && tinaField(job, 'title')}
+              >
+                {job.title}
+              </h3>
+              <span 
+                className={cn(
+                  "px-3 py-1 rounded-sm text-xs font-bold shrink-0",
+                  job.type === 'Ausbildung' ? 'bg-orange-100 text-orange-700' : 'bg-primary/10 text-primary'
+                )}
+                data-tina-field={useTinaField && tinaField(job, 'type')}
+              >
                 {job.type}
               </span>
             </div>
             
             <div className="flex flex-wrap gap-4 md:gap-6 text-xs md:text-sm text-slate-500 mb-3">
-              <span className="flex items-center gap-1"><MapPin size={14} className="md:w-4 md:h-4" /> {job.location}</span>
+              <span className="flex items-center gap-1" data-tina-field={useTinaField && tinaField(job, 'location')}>
+                <MapPin size={14} className="md:w-4 md:h-4" /> {job.location}
+              </span>
               <span className="flex items-center gap-1"><Clock size={14} className="md:w-4 md:h-4" /> Ab sofort</span>
             </div>
 
-            <p className="text-slate-600 text-sm leading-relaxed mb-3">
+            <p 
+              className="text-slate-600 text-sm leading-relaxed mb-3"
+              data-tina-field={useTinaField && tinaField(job, 'shortDesc')}
+            >
               {job.shortDesc}
             </p>
 
@@ -48,8 +63,12 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
             <div>
               <h4 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide">Deine Aufgaben</h4>
               <ul className="space-y-2 mb-6">
-                {job.tasks.map((task, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                {job.tasks?.map((task: string, idx: number) => (
+                  <li 
+                    key={idx} 
+                    className="flex items-start gap-2 text-sm text-slate-600"
+                    data-tina-field={useTinaField && tinaField(job, `tasks.${idx}`)}
+                  >
                     <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
                     <span>{task}</span>
                   </li>
@@ -58,8 +77,12 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
 
               <h4 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide">Das bringst du mit</h4>
                 <ul className="space-y-2">
-                {job.profile.map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                {job.profile?.map((item: string, idx: number) => (
+                  <li 
+                    key={idx} 
+                    className="flex items-start gap-2 text-sm text-slate-600"
+                    data-tina-field={useTinaField && tinaField(job, `profile.${idx}`)}
+                  >
                     <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
                     <span>{item}</span>
                   </li>
@@ -71,8 +94,12 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang }) => {
                 <div>
                   <h4 className="font-bold text-slate-900 mb-3 text-sm uppercase tracking-wide">Wir bieten dir</h4>
                   <ul className="space-y-2 mb-8">
-                  {job.benefits.map((item, idx) => (
-                    <li key={idx} className="flex items-start gap-2 text-sm text-slate-600">
+                  {job.benefits?.map((item: string, idx: number) => (
+                    <li 
+                      key={idx} 
+                      className="flex items-start gap-2 text-sm text-slate-600"
+                      data-tina-field={useTinaField && tinaField(job, `benefits.${idx}`)}
+                    >
                       <CheckCircle2 size={16} className="text-primary shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </li>

@@ -553,6 +553,26 @@ export type TeamMemberConnection = Connection & {
   edges?: Maybe<Array<Maybe<TeamMemberConnectionEdges>>>;
 };
 
+export type ServiceSections = {
+  __typename?: 'ServiceSections';
+  title: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<Scalars['String']['output']>;
+};
+
+export type ServiceProcessSteps = {
+  __typename?: 'ServiceProcessSteps';
+  step?: Maybe<Scalars['Float']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  text?: Maybe<Scalars['String']['output']>;
+};
+
+export type ServiceFaq = {
+  __typename?: 'ServiceFaq';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
 export type ServiceGallery = {
   __typename?: 'ServiceGallery';
   image?: Maybe<Scalars['String']['output']>;
@@ -562,16 +582,42 @@ export type ServiceGallery = {
 export type Service = Node & Document & {
   __typename?: 'Service';
   title: Scalars['String']['output'];
+  subtitle?: Maybe<Scalars['String']['output']>;
   shortDescription?: Maybe<Scalars['String']['output']>;
+  intro?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['JSON']['output']>;
   image?: Maybe<Scalars['String']['output']>;
+  heroImage?: Maybe<Scalars['String']['output']>;
   icon?: Maybe<Scalars['String']['output']>;
+  expertTip?: Maybe<Scalars['String']['output']>;
   features?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   benefits?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  sections?: Maybe<Array<Maybe<ServiceSections>>>;
+  processSteps?: Maybe<Array<Maybe<ServiceProcessSteps>>>;
+  referenceImages?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  contactIds?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  faq?: Maybe<Array<Maybe<ServiceFaq>>>;
   gallery?: Maybe<Array<Maybe<ServiceGallery>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
+};
+
+export type ServiceSectionsFilter = {
+  title?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+  content?: InputMaybe<StringFilter>;
+};
+
+export type ServiceProcessStepsFilter = {
+  step?: InputMaybe<NumberFilter>;
+  title?: InputMaybe<StringFilter>;
+  text?: InputMaybe<StringFilter>;
+};
+
+export type ServiceFaqFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
 };
 
 export type ServiceGalleryFilter = {
@@ -581,12 +627,21 @@ export type ServiceGalleryFilter = {
 
 export type ServiceFilter = {
   title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
   shortDescription?: InputMaybe<StringFilter>;
+  intro?: InputMaybe<StringFilter>;
   body?: InputMaybe<RichTextFilter>;
   image?: InputMaybe<ImageFilter>;
+  heroImage?: InputMaybe<ImageFilter>;
   icon?: InputMaybe<StringFilter>;
+  expertTip?: InputMaybe<StringFilter>;
   features?: InputMaybe<StringFilter>;
   benefits?: InputMaybe<StringFilter>;
+  sections?: InputMaybe<ServiceSectionsFilter>;
+  processSteps?: InputMaybe<ServiceProcessStepsFilter>;
+  referenceImages?: InputMaybe<StringFilter>;
+  contactIds?: InputMaybe<StringFilter>;
+  faq?: InputMaybe<ServiceFaqFilter>;
   gallery?: InputMaybe<ServiceGalleryFilter>;
 };
 
@@ -1393,6 +1448,23 @@ export type TeamMemberMutation = {
   order?: InputMaybe<Scalars['Float']['input']>;
 };
 
+export type ServiceSectionsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ServiceProcessStepsMutation = {
+  step?: InputMaybe<Scalars['Float']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  text?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ServiceFaqMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type ServiceGalleryMutation = {
   image?: InputMaybe<Scalars['String']['input']>;
   caption?: InputMaybe<Scalars['String']['input']>;
@@ -1400,12 +1472,21 @@ export type ServiceGalleryMutation = {
 
 export type ServiceMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
   shortDescription?: InputMaybe<Scalars['String']['input']>;
+  intro?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['JSON']['input']>;
   image?: InputMaybe<Scalars['String']['input']>;
+  heroImage?: InputMaybe<Scalars['String']['input']>;
   icon?: InputMaybe<Scalars['String']['input']>;
+  expertTip?: InputMaybe<Scalars['String']['input']>;
   features?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   benefits?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sections?: InputMaybe<Array<InputMaybe<ServiceSectionsMutation>>>;
+  processSteps?: InputMaybe<Array<InputMaybe<ServiceProcessStepsMutation>>>;
+  referenceImages?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  contactIds?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  faq?: InputMaybe<Array<InputMaybe<ServiceFaqMutation>>>;
   gallery?: InputMaybe<Array<InputMaybe<ServiceGalleryMutation>>>;
 };
 
@@ -1599,7 +1680,7 @@ export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename
 
 export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, email?: string | null, category: string, description?: any | null, image?: string | null, order?: number | null };
 
-export type ServicePartsFragment = { __typename: 'Service', title: string, shortDescription?: string | null, body?: any | null, image?: string | null, icon?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null };
+export type ServicePartsFragment = { __typename: 'Service', title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null };
 
 export type JobPartsFragment = { __typename: 'Job', title: string, location: string, type: string, shortDesc?: string | null, tasks?: Array<string | null> | null, profile?: Array<string | null> | null, benefits?: Array<string | null> | null, published?: boolean | null };
 
@@ -1658,7 +1739,7 @@ export type ServiceQueryVariables = Exact<{
 }>;
 
 
-export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', id: string, title: string, shortDescription?: string | null, body?: any | null, image?: string | null, icon?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } };
+export type ServiceQuery = { __typename?: 'Query', service: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } };
 
 export type ServiceConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1670,7 +1751,7 @@ export type ServiceConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ServiceConnectionQuery = { __typename?: 'Query', serviceConnection: { __typename?: 'ServiceConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServiceConnectionEdges', cursor: string, node?: { __typename: 'Service', id: string, title: string, shortDescription?: string | null, body?: any | null, image?: string | null, icon?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } | null } | null> | null } };
+export type ServiceConnectionQuery = { __typename?: 'Query', serviceConnection: { __typename?: 'ServiceConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ServiceConnectionEdges', cursor: string, node?: { __typename: 'Service', id: string, title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step?: number | null, title?: string | null, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image?: string | null, caption?: string | null } | null> | null } | null } | null> | null } };
 
 export type JobQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1881,12 +1962,35 @@ export const ServicePartsFragmentDoc = gql`
     fragment ServiceParts on Service {
   __typename
   title
+  subtitle
   shortDescription
+  intro
   body
   image
+  heroImage
   icon
+  expertTip
   features
   benefits
+  sections {
+    __typename
+    title
+    icon
+    content
+  }
+  processSteps {
+    __typename
+    step
+    title
+    text
+  }
+  referenceImages
+  contactIds
+  faq {
+    __typename
+    question
+    answer
+  }
   gallery {
     __typename
     image
