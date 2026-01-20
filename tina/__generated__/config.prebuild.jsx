@@ -22,11 +22,10 @@ var config_default = defineConfig({
       // Home Page Collection (Single Document)
       {
         name: "homePage",
-        label: "Startseite",
+        label: "\u{1F3E0} Startseite",
         path: "content/home",
         format: "json",
         ui: {
-          global: true,
           router: () => "/de",
           allowedActions: {
             create: false,
@@ -172,7 +171,7 @@ var config_default = defineConfig({
       // Team Members Collection
       {
         name: "teamMember",
-        label: "Team Mitglieder",
+        label: "\u{1F465} Team Mitglieder",
         path: "content/team",
         format: "md",
         ui: {
@@ -199,7 +198,7 @@ var config_default = defineConfig({
       // Services Collection
       {
         name: "service",
-        label: "Leistungen",
+        label: "\u{1F527} Leistungen",
         path: "content/services",
         format: "md",
         ui: {
@@ -304,7 +303,7 @@ var config_default = defineConfig({
       // Jobs Collection
       {
         name: "job",
-        label: "Stellenangebote",
+        label: "\u{1F4CB} Stellenangebote",
         path: "content/jobs",
         format: "md",
         ui: {
@@ -347,11 +346,10 @@ var config_default = defineConfig({
       // About Page Collection (Single Document)
       {
         name: "aboutPage",
-        label: "\xDCber Uns Seite",
+        label: "\u{1F4C4} \xDCber Uns",
         path: "content/about",
         format: "json",
         ui: {
-          global: true,
           router: () => "/de/about",
           allowedActions: {
             create: false,
@@ -432,11 +430,10 @@ var config_default = defineConfig({
       // Career Page Collection (Single Document)
       {
         name: "careerPage",
-        label: "Karriere Seite",
+        label: "\u{1F4BC} Karriere",
         path: "content/career",
         format: "json",
         ui: {
-          global: true,
           router: () => "/de/career",
           allowedActions: {
             create: false,
@@ -487,11 +484,10 @@ var config_default = defineConfig({
       // Contact Page Collection (Single Document)
       {
         name: "contactPage",
-        label: "Kontakt Seite",
+        label: "\u{1F4DE} Kontakt",
         path: "content/contact",
         format: "json",
         ui: {
-          global: true,
           router: () => "/de/contact",
           allowedActions: {
             create: false,
@@ -548,10 +544,9 @@ var config_default = defineConfig({
       // Settings (Global Config)
       {
         name: "settings",
-        label: "Einstellungen",
+        label: "\u2699\uFE0F Einstellungen",
         path: "content/globals",
         format: "json",
-        ui: { global: true },
         match: {
           include: "**/settings"
         },
@@ -591,10 +586,9 @@ var config_default = defineConfig({
       // Navigation
       {
         name: "navigation",
-        label: "Navigation",
+        label: "\u{1F9ED} Navigation",
         path: "content/globals",
         format: "json",
-        ui: { global: true },
         match: {
           include: "**/navigation"
         },
@@ -624,10 +618,9 @@ var config_default = defineConfig({
       // Footer
       {
         name: "footer",
-        label: "Footer",
+        label: "\u{1F9B6} Footer",
         path: "content/globals",
         format: "json",
-        ui: { global: true },
         match: {
           include: "**/footer"
         },
@@ -658,7 +651,7 @@ var config_default = defineConfig({
       // Legal Pages Collection
       {
         name: "legalPage",
-        label: "Rechtliche Seiten",
+        label: "\u2696\uFE0F Rechtliches",
         path: "content/legal",
         format: "md",
         ui: {
