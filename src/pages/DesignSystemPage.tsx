@@ -192,10 +192,7 @@ export const DesignSystemPage: React.FC = () => {
                     <Textarea placeholder="Tell us about yourself..." />
                   </FormField>
 
-                  <div className="flex items-center gap-2">
-                    <Checkbox id="terms" />
-                    <Label htmlFor="terms">I accept the terms and conditions</Label>
-                  </div>
+                  <Checkbox id="terms" label="I accept the terms and conditions" />
 
                   <div className="space-y-3">
                     <Label>Notifications</Label>
