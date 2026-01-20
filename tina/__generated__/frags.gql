@@ -48,6 +48,24 @@ fragment HomePageParts on HomePage {
     description
     image
   }
+  trustIndicators {
+    __typename
+    eyebrow
+    title
+    description
+    image
+    items {
+      __typename
+      title
+      description
+      icon
+    }
+  }
+  faq {
+    __typename
+    question
+    answer
+  }
   finalCTA {
     __typename
     title

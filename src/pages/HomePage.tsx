@@ -110,10 +110,10 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <HeroSection lang={lang} settings={home.hero} homeData={home} />
       <ServiceNavigationStrip lang={lang} />
       <ServicePreview lang={lang} servicesSection={home.servicesSection} />
-      <TrustIndicators />
+      <TrustIndicators trustData={home.trustIndicators} />
       <CeoQuote lang={lang} ceoData={home.ceoQuote} />
-      <ProjectShowcase />
-      <HomeFAQ lang={lang} />
+      <ProjectShowcase projects={home.projects} />
+      <HomeFAQ lang={lang} faqData={home.faq} />
       
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">

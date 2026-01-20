@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Menu, Hammer } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
-import { getNavigation, type NavigationData } from '@/shared/lib/content/globals';
 import { Drawer } from '@/shared/ui/Drawer';
 import { Button } from '@/shared/ui/Button';
+import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
+import { tinaField } from 'tinacms/dist/react';
 
 export interface SiteHeaderProps {
   lang: SupportedLang;
@@ -16,12 +17,9 @@ export interface SiteHeaderProps {
 
 export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, setMobileMenuOpen }) => {
   const { t } = useTranslation('common');
-  const [nav, setNav] = useState<NavigationData>({ items: [] });
+  const { data } = useNavigationData(lang);
+  const nav = data?.navigation || { items: [] };
   const navigate = useNavigate();
-
-  useEffect(() => {
-    getNavigation(lang).then(setNav);
-  }, [lang]);
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
@@ -65,8 +63,13 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             aria-label={t('navigation.mainNavigation')}
             className="hidden items-center gap-6 md:flex"
           >
-            {nav.items.map((item) => (
-              <NavLink key={item.href} to={`/${lang}${item.href}`} className={linkClassName}>
+            {nav.items.map((item: any, index: number) => (
+              <NavLink 
+                key={item.href} 
+                to={`/${lang}${item.href}`} 
+                className={linkClassName}
+                data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
+              >
                 {item.label}
               </NavLink>
             ))}
@@ -101,7 +104,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               aria-label={t('navigation.mobileNavigation')}
               className="flex flex-col gap-4 mt-4"
             >
-              {nav.items.map((item) => (
+              {nav.items.map((item: any, index: number) => (
                 <NavLink
                   key={item.href}
                   to={`/${lang}${item.href}`}
@@ -110,6 +113,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
                     isActive ? "text-primary" : "text-foreground"
                   )}
                   onClick={() => setMobileMenuOpen(false)}
+                  data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
                 >
                   {item.label}
                 </NavLink>

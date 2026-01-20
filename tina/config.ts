@@ -123,6 +123,38 @@ export default defineConfig({
           },
           {
             type: 'object',
+            name: 'trustIndicators',
+            label: 'Vertrauensindikatoren',
+            fields: [
+              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'image', name: 'image', label: 'Bild' },
+              {
+                type: 'object',
+                list: true,
+                name: 'items',
+                label: 'Punkte',
+                fields: [
+                  { type: 'string', name: 'title', label: 'Titel', required: true },
+                  { type: 'string', name: 'description', label: 'Beschreibung' },
+                  { type: 'string', name: 'icon', label: 'Icon (Lucide)' },
+                ],
+              },
+            ],
+          },
+          {
+            type: 'object',
+            list: true,
+            name: 'faq',
+            label: 'FAQ',
+            fields: [
+              { type: 'string', name: 'question', label: 'Frage', required: true },
+              { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+            ],
+          },
+          {
+            type: 'object',
             name: 'finalCTA',
             label: 'Abschluss CTA',
             fields: [

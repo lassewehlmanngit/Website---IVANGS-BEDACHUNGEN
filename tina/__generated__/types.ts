@@ -381,6 +381,28 @@ export type HomePageProjects = {
   image: Scalars['String']['output'];
 };
 
+export type HomePageTrustIndicatorsItems = {
+  __typename?: 'HomePageTrustIndicatorsItems';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type HomePageTrustIndicators = {
+  __typename?: 'HomePageTrustIndicators';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<HomePageTrustIndicatorsItems>>>;
+};
+
+export type HomePageFaq = {
+  __typename?: 'HomePageFaq';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
 export type HomePageFinalCta = {
   __typename?: 'HomePageFinalCTA';
   title: Scalars['String']['output'];
@@ -397,6 +419,8 @@ export type HomePage = Node & Document & {
   servicesSection?: Maybe<HomePageServicesSection>;
   ceoQuote?: Maybe<HomePageCeoQuote>;
   projects?: Maybe<Array<Maybe<HomePageProjects>>>;
+  trustIndicators?: Maybe<HomePageTrustIndicators>;
+  faq?: Maybe<Array<Maybe<HomePageFaq>>>;
   finalCTA?: Maybe<HomePageFinalCta>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -470,6 +494,25 @@ export type HomePageProjectsFilter = {
   image?: InputMaybe<ImageFilter>;
 };
 
+export type HomePageTrustIndicatorsItemsFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type HomePageTrustIndicatorsFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  items?: InputMaybe<HomePageTrustIndicatorsItemsFilter>;
+};
+
+export type HomePageFaqFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+};
+
 export type HomePageFinalCtaFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
@@ -484,6 +527,8 @@ export type HomePageFilter = {
   servicesSection?: InputMaybe<HomePageServicesSectionFilter>;
   ceoQuote?: InputMaybe<HomePageCeoQuoteFilter>;
   projects?: InputMaybe<HomePageProjectsFilter>;
+  trustIndicators?: InputMaybe<HomePageTrustIndicatorsFilter>;
+  faq?: InputMaybe<HomePageFaqFilter>;
   finalCTA?: InputMaybe<HomePageFinalCtaFilter>;
 };
 
@@ -1421,6 +1466,25 @@ export type HomePageProjectsMutation = {
   image?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HomePageTrustIndicatorsItemsMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type HomePageTrustIndicatorsMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<HomePageTrustIndicatorsItemsMutation>>>;
+};
+
+export type HomePageFaqMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomePageFinalCtaMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
@@ -1435,6 +1499,8 @@ export type HomePageMutation = {
   servicesSection?: InputMaybe<HomePageServicesSectionMutation>;
   ceoQuote?: InputMaybe<HomePageCeoQuoteMutation>;
   projects?: InputMaybe<Array<InputMaybe<HomePageProjectsMutation>>>;
+  trustIndicators?: InputMaybe<HomePageTrustIndicatorsMutation>;
+  faq?: InputMaybe<Array<InputMaybe<HomePageFaqMutation>>>;
   finalCTA?: InputMaybe<HomePageFinalCtaMutation>;
 };
 
@@ -1676,7 +1742,7 @@ export type FooterMutation = {
   social?: InputMaybe<Array<InputMaybe<FooterSocialMutation>>>;
 };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
+export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
 
 export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, email?: string | null, category: string, description?: any | null, image?: string | null, order?: number | null };
 
@@ -1701,7 +1767,7 @@ export type HomePageQueryVariables = Exact<{
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
+export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
 
 export type HomePageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -1713,7 +1779,7 @@ export type HomePageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
+export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow: string, title: string, subtitle?: string | null, description?: string | null, primaryButtonText?: string | null, primaryButtonLink?: string | null, secondaryButtonText?: string | null, secondaryButtonLink?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title: string, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projects?: Array<{ __typename: 'HomePageProjects', title: string, description?: string | null, image: string } | null> | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faq?: Array<{ __typename: 'HomePageFaq', question: string, answer: string } | null> | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
 
 export type TeamMemberQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -1936,6 +2002,24 @@ export const HomePagePartsFragmentDoc = gql`
     title
     description
     image
+  }
+  trustIndicators {
+    __typename
+    eyebrow
+    title
+    description
+    image
+    items {
+      __typename
+      title
+      description
+      icon
+    }
+  }
+  faq {
+    __typename
+    question
+    answer
   }
   finalCTA {
     __typename

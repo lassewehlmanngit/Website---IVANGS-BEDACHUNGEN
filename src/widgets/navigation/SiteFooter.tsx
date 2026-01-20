@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight, Twitter, Linkedin } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
-import { getFooter, type FooterData } from '@/shared/lib/content/globals';
+import { useFooterData } from '@/shared/lib/tina/useFooterData';
+import { tinaField } from 'tinacms/dist/react';
 
 export interface SiteFooterProps {
   lang: SupportedLang;
@@ -19,12 +20,8 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 };
 
 export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
-  const [footer, setFooter] = useState<FooterData>({ links: [], social: [] });
-
-  useEffect(() => {
-    getFooter(lang).then(setFooter);
-  }, [lang]);
-
+  const { data } = useFooterData(lang);
+  const footer = data?.footer || { links: [], social: [] };
   const year = new Date().getFullYear();
 
   return (
@@ -42,7 +39,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
             Ivangs Bedachungen GmbH & Co. KG – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
           </p>
           <div className="flex gap-4">
-            {footer.social.map((s) => {
+            {footer.social.map((s: any, index: number) => {
               const Icon = SocialIcon({ platform: s.platform });
               if (!Icon) return null;
               return (
@@ -53,6 +50,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
                   rel="noopener noreferrer"
                   className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white" 
                   aria-label={s.platform}
+                  data-tina-field={data?.footer?.social && tinaField(data.footer.social[index], 'url')}
                 >
                   {Icon}
                 </a>
@@ -89,9 +87,15 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           <h3 className="text-white font-semibold mb-6">Rechtliches</h3>
           <ul className="space-y-3 text-sm">
              {/* Use fetched links if available, otherwise hardcode common ones */}
-             {footer.links.length > 0 ? footer.links.map(link => (
+             {footer.links.length > 0 ? footer.links.map((link: any, index: number) => (
                  <li key={link.href}>
-                     <Link to={`/${lang}${link.href}`} className="hover:text-white transition-colors">{link.label}</Link>
+                     <Link 
+                       to={`/${lang}${link.href}`} 
+                       className="hover:text-white transition-colors"
+                       data-tina-field={data?.footer?.links && tinaField(data.footer.links[index], 'label')}
+                     >
+                       {link.label}
+                     </Link>
                  </li>
              )) : (
                  <>
@@ -120,7 +124,9 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
       </div>
 
       <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
-        {footer.copyright || `© ${year} Ivangs Bedachungen GmbH & Co. KG. Alle Rechte vorbehalten.`}
+        <span data-tina-field={data?.footer && tinaField(data.footer, 'copyright')}>
+          {footer.copyright || `© ${year} Ivangs Bedachungen GmbH & Co. KG. Alle Rechte vorbehalten.`}
+        </span>
       </div>
     </footer>
   );

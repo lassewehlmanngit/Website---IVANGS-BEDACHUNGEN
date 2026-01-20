@@ -2,13 +2,16 @@ import React from 'react';
 import { HelpCircle } from 'lucide-react';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 import type { SupportedLang } from '@/shared/config/i18n';
+import { tinaField } from 'tinacms/dist/react';
 
 interface FAQItem {
-  q: string;
-  a: string;
+  question?: string;
+  answer?: string;
+  q?: string;
+  a?: string;
 }
 
-const homeFAQ: FAQItem[] = [
+const defaultHomeFAQ: FAQItem[] = [
   {
     q: 'Was kostet eine professionelle Dachsanierung im Kreis Viersen?',
     a: 'Die Kosten variieren je nach Projekt: Eine Steildachsanierung kostet bei einem Einfamilienhaus etwa 15.000-35.000 Euro, eine Flachdachabdichtung 80-150 Euro pro m². Wir erstellen Ihnen ein kostenloses, transparentes Festpreis-Angebot nach Besichtigung vor Ort.'
@@ -53,9 +56,13 @@ const homeFAQ: FAQItem[] = [
 
 interface HomeFAQProps {
   lang: SupportedLang;
+  faqData?: any[];
 }
 
-export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang }) => {
+export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqData }) => {
+  // Use faqData from TinaCMS if available, otherwise fall back to hardcoded defaults
+  const faqList = faqData || defaultHomeFAQ;
+  
   return (
     <section className="py-20 bg-white border-t border-slate-100">
       <div className="container mx-auto px-4">
@@ -75,15 +82,21 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang }) => {
 
           {/* FAQ Accordion */}
           <Accordion type="single" collapsible className="border-slate-200">
-            {homeFAQ.map((item, index) => (
+            {faqList.map((item, index) => (
               <AccordionItem key={index} value={`faq-${index}`}>
                 <AccordionTrigger className="text-left hover:bg-slate-50/50">
-                  <span className="text-base md:text-lg font-semibold text-slate-900 pr-4">
-                    {item.q}
+                  <span 
+                    className="text-base md:text-lg font-semibold text-slate-900 pr-4"
+                    data-tina-field={faqData && tinaField(faqData[index], 'question')}
+                  >
+                    {item.question || item.q}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent className="text-slate-600 leading-relaxed">
-                  {item.a}
+                <AccordionContent 
+                  className="text-slate-600 leading-relaxed"
+                  data-tina-field={faqData && tinaField(faqData[index], 'answer')}
+                >
+                  {item.answer || item.a}
                 </AccordionContent>
               </AccordionItem>
             ))}
