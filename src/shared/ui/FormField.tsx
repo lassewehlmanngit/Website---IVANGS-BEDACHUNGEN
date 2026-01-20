@@ -34,6 +34,24 @@ export const FormField: React.FC<FormFieldProps> = ({
   const describedBy = [descriptionId, errorId].filter(Boolean).join(' ') || undefined;
   const invalid = Boolean(error);
 
+  // Clone child element to inject id and aria attributes if it's a single element
+  const renderChildren = () => {
+    if (typeof children === 'function') {
+      return children({ id, describedBy, invalid });
+    }
+    
+    // If children is a single React element, clone it with the id
+    if (React.isValidElement(children)) {
+      return React.cloneElement(children as React.ReactElement<{ id?: string; 'aria-describedby'?: string; 'aria-invalid'?: boolean }>, {
+        id,
+        'aria-describedby': describedBy,
+        'aria-invalid': invalid || undefined,
+      });
+    }
+    
+    return children;
+  };
+
   return (
     <div className={cn('space-y-2', className)}>
       <Label htmlFor={id} required={required}>
@@ -44,7 +62,7 @@ export const FormField: React.FC<FormFieldProps> = ({
           {description}
         </p>
       ) : null}
-      {typeof children === 'function' ? children({ id, describedBy, invalid }) : children}
+      {renderChildren()}
       {error ? (
         <p id={errorId} className="text-sm text-destructive" role="alert">
           {error}
