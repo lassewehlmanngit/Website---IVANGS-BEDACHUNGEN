@@ -34,7 +34,15 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       chunkSizeWarningLimit: 500,
-      sourcemap: true,
+      sourcemap: false,
+      minify: 'terser',
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true,
+          passes: 2,
+        },
+      },
       // Copy content/ to dist so it's available at runtime
       copyPublicDir: true,
       rollupOptions: {
@@ -46,6 +54,7 @@ export default defineConfig(({ mode }) => {
             'vendor-ui': ['lucide-react'],
             'vendor-helmet': ['react-helmet-async'],
             'vendor-markdown': ['react-markdown'],
+            'vendor-tina': ['tinacms/dist/react', 'tinacms/dist/client'],
           },
         },
       },

@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { tinaField } from 'tinacms/dist/react';
+import { OptimizedImage } from '@/shared/ui/Image';
 
 export interface CeoQuoteProps {
   lang: string;
@@ -50,10 +51,14 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
 
               <div className="relative order-1 lg:order-2">
                  <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-6 translate-y-6 rounded-sm -z-10"></div>
-                 <img 
-                   src={ceo.image || '/uploads/invangs-ceo-image.webp'} 
-                   className="rounded-sm w-full h-[650px] object-cover transition-all duration-700 shadow-xl" 
+                 <OptimizedImage
+                   src={ceo.image || '/uploads/invangs-ceo-image.webp'}
                    alt={ceo.name || 'Marcus Ivangs'}
+                   className="rounded-sm w-full h-[650px] object-cover transition-all duration-700 shadow-xl"
+                   width={800}
+                   height={1200}
+                   sizes="(max-width: 1024px) 100vw, 50vw"
+                   loading="lazy"
                    data-tina-field={ceoData && tinaField(ceoData, 'image')}
                  />
               </div>

@@ -57,6 +57,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             preload="none"
             className="w-full h-full object-cover"
             poster={backgroundImage}
+            fetchpriority="high"
           >
             {loadVideo && (
               <source src={videoUrl} type="video/mp4" />
@@ -67,6 +68,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             src={backgroundImage} 
             alt="Hero Background" 
             className="w-full h-full object-cover"
+            fetchpriority="high"
           />
         )}
         
