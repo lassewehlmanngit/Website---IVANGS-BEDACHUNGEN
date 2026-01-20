@@ -16,6 +16,7 @@ const SERVICE_QUERY = `
       referenceImages contactIds
       faq { question answer }
       gallery { image caption }
+      uiText { introHeader contactButtonText careerCtaTitle careerCtaDescription careerCtaButtonText }
     }
   }
 `;
