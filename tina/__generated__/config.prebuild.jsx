@@ -547,8 +547,14 @@ var config_default = defineConfig({
         label: "\u2699\uFE0F Einstellungen",
         path: "content/globals",
         format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          }
+        },
         match: {
-          include: "**/settings"
+          include: "settings"
         },
         fields: [
           { type: "string", name: "siteName", label: "Website Name", required: true },
@@ -589,8 +595,14 @@ var config_default = defineConfig({
         label: "\u{1F9ED} Navigation",
         path: "content/globals",
         format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          }
+        },
         match: {
-          include: "**/navigation"
+          include: "navigation"
         },
         fields: [
           { type: "image", name: "logo", label: "Logo" },
@@ -621,8 +633,14 @@ var config_default = defineConfig({
         label: "\u{1F9B6} Footer",
         path: "content/globals",
         format: "json",
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false
+          }
+        },
         match: {
-          include: "**/footer"
+          include: "footer"
         },
         fields: [
           { type: "string", name: "copyright", label: "Copyright Text" },

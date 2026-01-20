@@ -19,8 +19,8 @@ interface TinaPayload {
   variables: Record<string, any>;
 }
 
-export function useFooterData(lang: SupportedLang) {
-  const relativePath = `${lang}/footer.json`;
+export function useFooterData(_lang: SupportedLang) {
+  const relativePath = 'footer.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,7 +44,7 @@ export function useFooterData(lang: SupportedLang) {
 
       // Fallback: Load from static JSON file
       try {
-        const response = await fetch(`/content/globals/${lang}/footer.json`);
+        const response = await fetch('/content/globals/footer.json');
         const jsonData = await response.json();
         setPayload({
           data: { footer: jsonData },
@@ -64,7 +64,7 @@ export function useFooterData(lang: SupportedLang) {
     };
 
     loadData();
-  }, [lang, relativePath]);
+  }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({

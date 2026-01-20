@@ -568,8 +568,14 @@ export default defineConfig({
         label: '⚙️ Einstellungen',
         path: 'content/globals',
         format: 'json',
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
         match: {
-          include: '**/settings',
+          include: 'settings',
         },
         fields: [
           { type: 'string', name: 'siteName', label: 'Website Name', required: true },
@@ -611,8 +617,14 @@ export default defineConfig({
         label: '🧭 Navigation',
         path: 'content/globals',
         format: 'json',
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
         match: {
-          include: '**/navigation',
+          include: 'navigation',
         },
         fields: [
           { type: 'image', name: 'logo', label: 'Logo' },
@@ -644,8 +656,14 @@ export default defineConfig({
         label: '🦶 Footer',
         path: 'content/globals',
         format: 'json',
+        ui: {
+          allowedActions: {
+            create: false,
+            delete: false,
+          },
+        },
         match: {
-          include: '**/footer',
+          include: 'footer',
         },
         fields: [
           { type: 'string', name: 'copyright', label: 'Copyright Text' },

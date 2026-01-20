@@ -18,8 +18,8 @@ interface TinaPayload {
   variables: Record<string, any>;
 }
 
-export function useNavigationData(lang: SupportedLang) {
-  const relativePath = `${lang}/navigation.json`;
+export function useNavigationData(_lang: SupportedLang) {
+  const relativePath = 'navigation.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -43,7 +43,7 @@ export function useNavigationData(lang: SupportedLang) {
 
       // Fallback: Load from static JSON file
       try {
-        const response = await fetch(`/content/globals/${lang}/navigation.json`);
+        const response = await fetch('/content/globals/navigation.json');
         const jsonData = await response.json();
         setPayload({
           data: { navigation: jsonData },
@@ -63,7 +63,7 @@ export function useNavigationData(lang: SupportedLang) {
     };
 
     loadData();
-  }, [lang, relativePath]);
+  }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({

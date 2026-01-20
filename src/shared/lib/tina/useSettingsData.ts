@@ -32,7 +32,7 @@ interface TinaPayload {
 }
 
 export function useSettingsData() {
-  const relativePath = 'de/settings.json';
+  const relativePath = 'settings.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,7 +56,7 @@ export function useSettingsData() {
 
       // Fallback: Load from static JSON file
       try {
-        const response = await fetch('/content/globals/de/settings.json');
+        const response = await fetch('/content/globals/settings.json');
         const jsonData = await response.json();
         setPayload({
           data: { settings: jsonData },
