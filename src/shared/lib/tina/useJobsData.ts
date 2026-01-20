@@ -1,8 +1,8 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-// Default query for jobs - must match the TinaCMS schema
+// Fallback query for jobs - used when client response doesn't include query
 const JOBS_QUERY = `
   query JobsQuery {
     jobConnection {
@@ -17,37 +17,46 @@ const JOBS_QUERY = `
   }
 `;
 
+interface TinaPayload {
+  data: any;
+  query: string;
+  variables: Record<string, any>;
+}
+
 export function useJobsData() {
-  const variables = useMemo(() => ({}), []);
-  const [initialData, setInitialData] = useState<any>(null);
+  const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Skip fetching if TinaCMS client is not available
     if (!client) {
-      setInitialData(null);
+      setPayload(null);
       setIsLoading(false);
       return;
     }
 
-    // Fetch initial data using Tina client
+    // Fetch initial data using Tina client - keep full response for metadata
     client.queries.jobConnection()
       .then((response) => {
-        setInitialData(response.data);
+        setPayload({
+          data: response.data,
+          query: response.query,
+          variables: response.variables,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching jobs data:', error);
-        setInitialData(null);
+        setPayload(null);
         setIsLoading(false);
       });
   }, []);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({
-    query: JOBS_QUERY,
-    variables,
-    data: initialData || { jobConnection: null },
+    query: payload?.query || JOBS_QUERY,
+    variables: payload?.variables || {},
+    data: payload?.data || { jobConnection: null },
   });
 
   return { data, isLoading };

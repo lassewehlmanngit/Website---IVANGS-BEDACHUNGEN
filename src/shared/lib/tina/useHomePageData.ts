@@ -1,9 +1,9 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
 import type { SupportedLang } from '@/shared/config/i18n';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-// Default query for home page - must match the TinaCMS schema
+// Fallback query for home page - used when client response doesn't include query
 const HOME_PAGE_QUERY = `
   query HomePageQuery($relativePath: String!) {
     homePage(relativePath: $relativePath) {
@@ -24,39 +24,49 @@ const HOME_PAGE_QUERY = `
   }
 `;
 
+interface TinaPayload {
+  data: any;
+  query: string;
+  variables: Record<string, any>;
+}
+
 export function useHomePageData(lang: SupportedLang) {
   const relativePath = 'startseite.json';
-  const variables = useMemo(() => ({ relativePath }), [relativePath]);
-  const [initialData, setInitialData] = useState<any>(null);
+  const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Skip fetching if TinaCMS client is not available
     if (!client) {
-      setInitialData(null);
+      setPayload(null);
       setIsLoading(false);
       return;
     }
 
-    // Fetch initial data using Tina client
+    // Fetch initial data using Tina client - keep full response for metadata
     client.queries.homePage({ relativePath })
       .then((response) => {
-        setInitialData(response.data);
+        // Store the full response including query and variables for useTina
+        setPayload({
+          data: response.data,
+          query: response.query,
+          variables: response.variables,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching home page data:', error);
-        setInitialData(null);
+        setPayload(null);
         setIsLoading(false);
       });
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing
-  // The query must be provided even if data is null for the admin to set up the form
+  // useTina adds _content_source metadata needed for tinaField to work
   const { data } = useTina({
-    query: HOME_PAGE_QUERY,
-    variables,
-    data: initialData || { homePage: null },
+    query: payload?.query || HOME_PAGE_QUERY,
+    variables: payload?.variables || { relativePath },
+    data: payload?.data || { homePage: null },
   });
 
   return { data, isLoading };

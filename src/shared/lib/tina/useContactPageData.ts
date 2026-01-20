@@ -1,9 +1,9 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
 import type { SupportedLang } from '@/shared/config/i18n';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-// Default query for contact page - must match the TinaCMS schema
+// Fallback query for contact page - used when client response doesn't include query
 const CONTACT_PAGE_QUERY = `
   query ContactPageQuery($relativePath: String!) {
     contactPage(relativePath: $relativePath) {
@@ -18,38 +18,47 @@ const CONTACT_PAGE_QUERY = `
   }
 `;
 
+interface TinaPayload {
+  data: any;
+  query: string;
+  variables: Record<string, any>;
+}
+
 export function useContactPageData(lang: SupportedLang) {
   const relativePath = 'kontakt.json';
-  const variables = useMemo(() => ({ relativePath }), [relativePath]);
-  const [initialData, setInitialData] = useState<any>(null);
+  const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Skip fetching if TinaCMS client is not available
     if (!client) {
-      setInitialData(null);
+      setPayload(null);
       setIsLoading(false);
       return;
     }
 
-    // Fetch initial data using Tina client
+    // Fetch initial data using Tina client - keep full response for metadata
     client.queries.contactPage({ relativePath })
       .then((response) => {
-        setInitialData(response.data);
+        setPayload({
+          data: response.data,
+          query: response.query,
+          variables: response.variables,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching contact page data:', error);
-        setInitialData(null);
+        setPayload(null);
         setIsLoading(false);
       });
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({
-    query: CONTACT_PAGE_QUERY,
-    variables,
-    data: initialData || { contactPage: null },
+    query: payload?.query || CONTACT_PAGE_QUERY,
+    variables: payload?.variables || { relativePath },
+    data: payload?.data || { contactPage: null },
   });
 
   return { data, isLoading };

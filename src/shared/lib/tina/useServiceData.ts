@@ -1,8 +1,8 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
-// Default query for service - must match the TinaCMS schema
+// Fallback query for service - used when client response doesn't include query
 const SERVICE_QUERY = `
   query ServiceQuery($relativePath: String!) {
     service(relativePath: $relativePath) {
@@ -19,38 +19,47 @@ const SERVICE_QUERY = `
   }
 `;
 
+interface TinaPayload {
+  data: any;
+  query: string;
+  variables: Record<string, any>;
+}
+
 export function useServiceData(serviceId: string) {
   const relativePath = `${serviceId}.md`;
-  const variables = useMemo(() => ({ relativePath }), [relativePath]);
-  const [initialData, setInitialData] = useState<any>(null);
+  const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     // Skip fetching if TinaCMS client is not available
     if (!client) {
-      setInitialData(null);
+      setPayload(null);
       setIsLoading(false);
       return;
     }
 
-    // Fetch initial data using Tina client
+    // Fetch initial data using Tina client - keep full response for metadata
     client.queries.service({ relativePath })
       .then((response) => {
-        setInitialData(response.data);
+        setPayload({
+          data: response.data,
+          query: response.query,
+          variables: response.variables,
+        });
         setIsLoading(false);
       })
       .catch((error) => {
         console.error('Error fetching service data:', error);
-        setInitialData(null);
+        setPayload(null);
         setIsLoading(false);
       });
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({
-    query: SERVICE_QUERY,
-    variables,
-    data: initialData || { service: null },
+    query: payload?.query || SERVICE_QUERY,
+    variables: payload?.variables || { relativePath },
+    data: payload?.data || { service: null },
   });
 
   return { data, isLoading };
