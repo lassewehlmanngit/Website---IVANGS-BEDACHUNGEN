@@ -17,7 +17,16 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
   
   // Fetch jobs data from TinaCMS with visual editing support
-  const { data } = useJobsData();
+  const { data, isLoading } = useJobsData();
+  
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
   
   // Use TinaCMS data if available, otherwise fall back to static data
   // Filter for published jobs only

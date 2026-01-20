@@ -30,28 +30,45 @@ export function useContactPageData(lang: SupportedLang) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Skip fetching if TinaCMS client is not available
-    if (!client) {
-      setPayload(null);
-      setIsLoading(false);
-      return;
-    }
+    const loadData = async () => {
+      // Try to fetch from TinaCMS client first
+      if (client) {
+        try {
+          const response = await client.queries.contactPage({ relativePath });
+          setPayload({
+            data: response.data,
+            query: response.query,
+            variables: response.variables,
+          });
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error fetching contact page data from TinaCMS:', error);
+        }
+      }
 
-    // Fetch initial data using Tina client - keep full response for metadata
-    client.queries.contactPage({ relativePath })
-      .then((response) => {
+      // Fallback: Load from static JSON file
+      try {
+        const response = await fetch('/content/contact/kontakt.json');
+        const jsonData = await response.json();
         setPayload({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
+          data: { contactPage: jsonData },
+          query: CONTACT_PAGE_QUERY,
+          variables: { relativePath },
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching contact page data:', error);
-        setPayload(null);
-        setIsLoading(false);
-      });
+      } catch (error) {
+        console.error('Error loading static contact page data:', error);
+        // Last resort: empty structure
+        setPayload({
+          data: { contactPage: null },
+          query: CONTACT_PAGE_QUERY,
+          variables: { relativePath },
+        });
+      }
+      setIsLoading(false);
+    };
+
+    loadData();
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing

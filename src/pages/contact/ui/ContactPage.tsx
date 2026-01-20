@@ -9,7 +9,16 @@ import { useContactPageData } from '@/shared/lib/tina/useContactPageData';
 
 export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   // Fetch contact page data from TinaCMS with visual editing support
-  const { data } = useContactPageData(lang);
+  const { data, isLoading } = useContactPageData(lang);
+  
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
   
   // Fallback to defaults if no data
   const contact = data?.contactPage || {};
@@ -36,10 +45,10 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       <div className="bg-white">
         <div className="container mx-auto px-4 py-16 md:py-20">
             <div className="text-center mb-12 md:mb-16">
-            <h1 className="text-h1 font-bold mb-3 md:mb-4 text-slate-900" data-tina-field={data && tinaField(data.contactPage, 'title')}>
+            <h1 className="text-h1 font-bold mb-3 md:mb-4 text-slate-900" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'title')}>
               {contact.title || 'Der erste Schritt zum dichten Dach.'}
             </h1>
-            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto" data-tina-field={data && tinaField(data.contactPage, 'description')}>
+            <p className="text-slate-600 text-base md:text-lg max-w-2xl mx-auto" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'description')}>
                 {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
             </p>
             </div>
@@ -56,7 +65,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Anschrift</span>
-                        <span className="text-slate-600" data-tina-field={data && tinaField(data.contactPage, 'address')}>
+                        <span className="text-slate-600" data-tina-field={data?.contactPage?.address && tinaField(data.contactPage.address, 'company')}>
                           {contact.address?.company || 'IVANGS'}<br/>
                           Bedachungen GmbH & Co. KG<br/>
                           {contact.address?.street || 'Schmiedestraße 37'}<br/>
@@ -70,10 +79,10 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Telefon</span>
-                        <a href="tel:+4921623566666" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'phone')}>
+                        <a href="tel:+4921623566666" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'phone')}>
                           {contact.phone || '+49 (0) 21 62 – 35 66 66'}
                         </a>
-                        <span className="block text-sm text-slate-400 mt-1" data-tina-field={data && tinaField(data.contactPage, 'fax')}>
+                        <span className="block text-sm text-slate-400 mt-1" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'fax')}>
                           Fax: {contact.fax || '+49 (0) 21 62 - 35 66 67'}
                         </span>
                     </div>
@@ -84,7 +93,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">E-Mail</span>
-                        <a href={`mailto:${contact.email || 'bedachungen@ivangs.de'}`} className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'email')}>
+                        <a href={`mailto:${contact.email || 'bedachungen@ivangs.de'}`} className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'email')}>
                           {contact.email || 'bedachungen@ivangs.de'}
                         </a>
                     </div>
@@ -95,7 +104,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Web</span>
-                        <a href={`https://${contact.website || 'www.ivangs.de'}`} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'website')}>
+                        <a href={`https://${contact.website || 'www.ivangs.de'}`} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'website')}>
                           {contact.website || 'www.ivangs.de'}
                         </a>
                     </div>
@@ -106,7 +115,7 @@ export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                     </div>
                     <div>
                         <span className="block font-bold text-slate-900">Social Media</span>
-                        <a href={contact.facebook || 'https://www.facebook.com/ivangs.de'} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data && tinaField(data.contactPage, 'facebook')}>
+                        <a href={contact.facebook || 'https://www.facebook.com/ivangs.de'} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-primary transition-colors" data-tina-field={data?.contactPage && tinaField(data.contactPage, 'facebook')}>
                           {contact.facebook ? new URL(contact.facebook).hostname + new URL(contact.facebook).pathname : 'facebook.com/ivangs.de'}
                         </a>
                     </div>

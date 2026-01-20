@@ -31,28 +31,45 @@ export function useAboutPageData(lang: SupportedLang) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Skip fetching if TinaCMS client is not available
-    if (!client) {
-      setPayload(null);
-      setIsLoading(false);
-      return;
-    }
+    const loadData = async () => {
+      // Try to fetch from TinaCMS client first
+      if (client) {
+        try {
+          const response = await client.queries.aboutPage({ relativePath });
+          setPayload({
+            data: response.data,
+            query: response.query,
+            variables: response.variables,
+          });
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error fetching about page data from TinaCMS:', error);
+        }
+      }
 
-    // Fetch initial data using Tina client - keep full response for metadata
-    client.queries.aboutPage({ relativePath })
-      .then((response) => {
+      // Fallback: Load from static JSON file
+      try {
+        const response = await fetch('/content/about/ueber-uns.json');
+        const jsonData = await response.json();
         setPayload({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
+          data: { aboutPage: jsonData },
+          query: ABOUT_PAGE_QUERY,
+          variables: { relativePath },
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching about page data:', error);
-        setPayload(null);
-        setIsLoading(false);
-      });
+      } catch (error) {
+        console.error('Error loading static about page data:', error);
+        // Last resort: empty structure
+        setPayload({
+          data: { aboutPage: null },
+          query: ABOUT_PAGE_QUERY,
+          variables: { relativePath },
+        });
+      }
+      setIsLoading(false);
+    };
+
+    loadData();
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing

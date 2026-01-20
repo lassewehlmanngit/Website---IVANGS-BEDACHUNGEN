@@ -36,29 +36,45 @@ export function useHomePageData(lang: SupportedLang) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Skip fetching if TinaCMS client is not available
-    if (!client) {
-      setPayload(null);
-      setIsLoading(false);
-      return;
-    }
+    const loadData = async () => {
+      // Try to fetch from TinaCMS client first
+      if (client) {
+        try {
+          const response = await client.queries.homePage({ relativePath });
+          setPayload({
+            data: response.data,
+            query: response.query,
+            variables: response.variables,
+          });
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error fetching home page data from TinaCMS:', error);
+        }
+      }
 
-    // Fetch initial data using Tina client - keep full response for metadata
-    client.queries.homePage({ relativePath })
-      .then((response) => {
-        // Store the full response including query and variables for useTina
+      // Fallback: Load from static JSON file
+      try {
+        const response = await fetch('/content/home/startseite.json');
+        const jsonData = await response.json();
         setPayload({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
+          data: { homePage: jsonData },
+          query: HOME_PAGE_QUERY,
+          variables: { relativePath },
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching home page data:', error);
-        setPayload(null);
-        setIsLoading(false);
-      });
+      } catch (error) {
+        console.error('Error loading static home page data:', error);
+        // Last resort: empty structure
+        setPayload({
+          data: { homePage: null },
+          query: HOME_PAGE_QUERY,
+          variables: { relativePath },
+        });
+      }
+      setIsLoading(false);
+    };
+
+    loadData();
   }, [relativePath]);
 
   // Pass the fetched data to useTina for visual editing

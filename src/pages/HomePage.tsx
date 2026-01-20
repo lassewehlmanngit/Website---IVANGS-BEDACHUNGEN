@@ -22,11 +22,20 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
   const [settings, setSettings] = useState<SettingsData | null>(null);
   
   // Fetch home page data from TinaCMS with visual editing support
-  const { data } = useHomePageData(lang);
+  const { data, isLoading } = useHomePageData(lang);
 
   useEffect(() => {
     getSettings(lang).then(setSettings);
   }, [lang]);
+  
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
   
   // Show error state or fallback
   if (!data?.homePage) {
@@ -109,15 +118,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       {/* Final CTA */}
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-h2 font-bold mb-4 md:mb-6" data-tina-field={tinaField(home, 'finalCTA.title')}>
+          <h2 className="text-h2 font-bold mb-4 md:mb-6" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'title')}>
             {home.finalCTA?.title || 'Planen Sie sicher. Planen Sie mit Ivangs.'}
           </h2>
-          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10" data-tina-field={tinaField(home, 'finalCTA.description')}>
+          <p className="text-primary-foreground/80 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'description')}>
             {home.finalCTA?.description || 'Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.'}
           </p>
           <div className="flex justify-center gap-4">
             <Link to={home.finalCTA?.buttonLink || `/${lang}/contact`}>
-                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold" data-tina-field={tinaField(home, 'finalCTA.buttonText')}>
+                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}>
                   {home.finalCTA?.buttonText || 'Beratungstermin vereinbaren'}
                 </Button>
             </Link>

@@ -1,6 +1,7 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
 import { useEffect, useState } from 'react';
+import fm from 'front-matter';
 
 // Fallback query for jobs - used when client response doesn't include query
 const JOBS_QUERY = `
@@ -28,35 +29,73 @@ export function useJobsData() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Skip fetching if TinaCMS client is not available
-    if (!client) {
-      setPayload(null);
-      setIsLoading(false);
-      return;
-    }
+    const loadData = async () => {
+      // Try to fetch from TinaCMS client first
+      if (client) {
+        try {
+          const response = await client.queries.jobConnection();
+          setPayload({
+            data: response.data,
+            query: response.query,
+            variables: response.variables,
+          });
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error fetching jobs data from TinaCMS:', error);
+        }
+      }
 
-    // Fetch initial data using Tina client - keep full response for metadata
-    client.queries.jobConnection()
-      .then((response) => {
+      // Fallback: Load from static markdown files
+      try {
+        const jobFiles = ['dachdecker.md', 'ausbildung.md'];
+        const jobs = await Promise.all(
+          jobFiles.map(async (file) => {
+            try {
+              const response = await fetch(`/content/jobs/${file}`);
+              const text = await response.text();
+              const parsed = fm<any>(text);
+              return {
+                node: {
+                  ...parsed.attributes,
+                  _sys: { filename: file.replace('.md', '') },
+                },
+              };
+            } catch {
+              return null;
+            }
+          })
+        );
+
         setPayload({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
+          data: {
+            jobConnection: {
+              edges: jobs.filter(Boolean),
+            },
+          },
+          query: JOBS_QUERY,
+          variables: {},
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching jobs data:', error);
-        setPayload(null);
-        setIsLoading(false);
-      });
+      } catch (error) {
+        console.error('Error loading static jobs data:', error);
+        // Last resort: empty structure
+        setPayload({
+          data: { jobConnection: { edges: [] } },
+          query: JOBS_QUERY,
+          variables: {},
+        });
+      }
+      setIsLoading(false);
+    };
+
+    loadData();
   }, []);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({
     query: payload?.query || JOBS_QUERY,
     variables: payload?.variables || {},
-    data: payload?.data || { jobConnection: null },
+    data: payload?.data || { jobConnection: { edges: [] } },
   });
 
   return { data, isLoading };

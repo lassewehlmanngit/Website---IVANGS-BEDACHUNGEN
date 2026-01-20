@@ -60,24 +60,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow">
         {/* Left: Copy & Main Message */}
         <div className="text-white mt-8 md:mt-0">
-          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.eyebrow')}>
+          <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'eyebrow')}>
             {heroData?.eyebrow || 'Meisterbetrieb seit 1996'}
           </span>
-          <h1 className="text-h1 font-medium leading-tight tracking-tight mb-4 md:mb-6 animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.title')}>
+          <h1 className="text-h1 font-medium leading-tight tracking-tight mb-4 md:mb-6 animate-slide-up" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'title')}>
             {heroData?.title || 'Dächer, die begeistern.'}
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-10 max-w-lg font-light leading-relaxed animate-slide-up" data-tina-field={homeData && tinaField(homeData, 'hero.description')}>
+          <p className="text-lg md:text-xl text-slate-300 mb-8 md:mb-10 max-w-lg font-light leading-relaxed animate-slide-up" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'description')}>
             {heroData?.description || 'Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.'}
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
              <Link to={heroData?.primaryButtonLink || `/${lang}/contact`} className="w-full sm:w-auto">
-                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData && tinaField(homeData, 'hero.primaryButtonText')}>
+                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'primaryButtonText')}>
                    {heroData?.primaryButtonText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </Link>
              <Link to={heroData?.secondaryButtonLink || `/${lang}/career`} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData && tinaField(homeData, 'hero.secondaryButtonText')}>
+                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'secondaryButtonText')}>
                    {heroData?.secondaryButtonText || 'Karriere starten'}
                 </Button>
              </Link>

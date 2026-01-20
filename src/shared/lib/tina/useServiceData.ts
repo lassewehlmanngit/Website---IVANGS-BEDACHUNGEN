@@ -1,6 +1,7 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
 import { useEffect, useState } from 'react';
+import fm from 'front-matter';
 
 // Fallback query for service - used when client response doesn't include query
 const SERVICE_QUERY = `
@@ -31,29 +32,47 @@ export function useServiceData(serviceId: string) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Skip fetching if TinaCMS client is not available
-    if (!client) {
-      setPayload(null);
-      setIsLoading(false);
-      return;
-    }
+    const loadData = async () => {
+      // Try to fetch from TinaCMS client first
+      if (client) {
+        try {
+          const response = await client.queries.service({ relativePath });
+          setPayload({
+            data: response.data,
+            query: response.query,
+            variables: response.variables,
+          });
+          setIsLoading(false);
+          return;
+        } catch (error) {
+          console.error('Error fetching service data from TinaCMS:', error);
+        }
+      }
 
-    // Fetch initial data using Tina client - keep full response for metadata
-    client.queries.service({ relativePath })
-      .then((response) => {
+      // Fallback: Load from static markdown file
+      try {
+        const response = await fetch(`/content/services/${serviceId}.md`);
+        const text = await response.text();
+        const parsed = fm<any>(text);
         setPayload({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
+          data: { service: { ...parsed.attributes, body: parsed.body } },
+          query: SERVICE_QUERY,
+          variables: { relativePath },
         });
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching service data:', error);
-        setPayload(null);
-        setIsLoading(false);
-      });
-  }, [relativePath]);
+      } catch (error) {
+        console.error('Error loading static service data:', error);
+        // Last resort: empty structure
+        setPayload({
+          data: { service: null },
+          query: SERVICE_QUERY,
+          variables: { relativePath },
+        });
+      }
+      setIsLoading(false);
+    };
+
+    loadData();
+  }, [relativePath, serviceId]);
 
   // Pass the fetched data to useTina for visual editing
   const { data } = useTina({
