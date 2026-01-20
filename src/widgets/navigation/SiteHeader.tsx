@@ -20,7 +20,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
   const { data } = useNavigationData(lang);
   const nav = data?.navigation || { items: [] };
   const navigate = useNavigate();
-  
+
   // CTA button data with fallbacks
   const ctaText = nav.ctaButton?.text || 'Angebot anfragen';
   const ctaLink = nav.ctaButton?.link || `/${lang}/contact`;
@@ -150,7 +150,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
                    className="w-full py-6 text-lg" 
                    onClick={() => {
                      navigate(ctaLink);
-                     setMobileMenuOpen(false);
+                    setMobileMenuOpen(false);
                    }}
                    data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
                  >

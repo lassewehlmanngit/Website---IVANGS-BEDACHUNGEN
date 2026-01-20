@@ -12,6 +12,7 @@ interface ServiceSectionProps {
   id: ServiceId;
   lang: string;
   reverse?: boolean;
+  cmsService?: any;
 }
 
 const serviceIcons: Record<ServiceId, React.ElementType> = {
@@ -38,10 +39,15 @@ const ctaTexts: Record<ServiceId, string> = {
   sanierung: 'Sanierung besprechen',
 };
 
-const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = false }) => {
-  const service = servicesData[id];
+const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = false, cmsService }) => {
+  const fallbackService = servicesData[id];
   const Icon = serviceIcons[id];
-  const img = serviceImages[id];
+  
+  // Use CMS data with fallbacks
+  const title = cmsService?.title || fallbackService.title;
+  const description = cmsService?.shortDescription || fallbackService.description;
+  const img = cmsService?.heroImage || serviceImages[id];
+  const checkpoints = cmsService?.benefits || fallbackService.checkpoints;
   const ctaText = ctaTexts[id];
 
   return (
@@ -54,29 +60,30 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
         <Link to={`/${lang}/services/${id}`} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block">
           <OptimizedImage
             src={img}
-            alt={service.title}
+            alt={title}
             className="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 1024px) 100vw, 50vw"
+            data-tina-field={cmsService && tinaField(cmsService, 'heroImage')}
           />
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
           {/* Service label overlay */}
           <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm flex items-center gap-2 shadow-sm">
             <Icon size={18} className="text-primary" />
-            <span className="font-bold text-sm text-slate-900">{service.title}</span>
+            <span className="font-bold text-sm text-slate-900" data-tina-field={cmsService && tinaField(cmsService, 'title')}>{title}</span>
           </div>
         </Link>
       </div>
 
       {/* Content */}
       <div className="w-full lg:w-1/2">
-        <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6">{service.title}</h3>
-        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8">
-          {service.description}
+        <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6" data-tina-field={cmsService && tinaField(cmsService, 'title')}>{title}</h3>
+        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8" data-tina-field={cmsService && tinaField(cmsService, 'shortDescription')}>
+          {description}
         </p>
 
-        {service.checkpoints && (
-          <ul className="space-y-3 mb-8">
-            {service.checkpoints.map((point, idx) => (
+        {checkpoints && checkpoints.length > 0 && (
+          <ul className="space-y-3 mb-8" data-tina-field={cmsService && tinaField(cmsService, 'benefits')}>
+            {checkpoints.map((point: string, idx: number) => (
               <li key={idx} className="flex items-center gap-3 text-slate-700 font-medium">
                 <CheckCircle2 className="text-primary shrink-0" size={20} />
                 <span>{point}</span>
@@ -142,14 +149,19 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSe
         </div>
 
         <div className="space-y-24 lg:space-y-32">
-          {displayOrder.map((id, index) => (
-            <ServiceSection 
-              key={id}
-              id={id as ServiceId}
-              lang={lang}
-              reverse={index % 2 === 1}
-            />
-          ))}
+          {displayOrder.map((id, index) => {
+            // Find the matching CMS service
+            const cmsService = cmsServices.find((s: any) => s._sys.filename === id);
+            return (
+              <ServiceSection 
+                key={id}
+                id={id as ServiceId}
+                lang={lang}
+                reverse={index % 2 === 1}
+                cmsService={cmsService}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

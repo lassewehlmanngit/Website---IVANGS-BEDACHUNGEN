@@ -20,7 +20,7 @@ const iconMap: Record<string, React.ElementType> = {
 export const ServiceNavigationStrip: React.FC<ServiceNavigationStripProps> = ({ lang }) => {
   const navigate = useNavigate();
   const { data: servicesData, isLoading } = useServicesListData();
-  
+
   // Fallback services
   const fallbackServices: { id: ServiceId; label: string; Icon: React.ElementType }[] = [
     { id: 'steildach', label: 'Steildach', Icon: HomeIcon },

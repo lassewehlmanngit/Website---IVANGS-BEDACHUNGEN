@@ -143,10 +143,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                 const Icon = getIcon(stat.icon || 'Users');
                 return (
                   <div key={index} className="flex items-center gap-4">
-                     <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
+                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-primary">
                         <Icon size={24} />
-                     </div>
-                     <div>
+                 </div>
+                 <div>
                         <h3 
                           className="text-2xl font-medium text-white leading-none mb-1"
                           data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
@@ -159,8 +159,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                         >
                           {stat.label}
                         </p>
-                     </div>
-                  </div>
+                 </div>
+              </div>
                 );
               })}
            </div>
@@ -176,7 +176,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                 return (
                   <div key={index} className="flex flex-col items-center text-center gap-2">
                      <Icon size={20} className="text-primary" />
-                     <div>
+                 <div>
                         <h3 
                           className="text-xl font-bold text-white leading-none mb-1"
                           data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
@@ -189,8 +189,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                         >
                           {stat.label}
                         </p>
-                     </div>
-                  </div>
+                 </div>
+              </div>
                 );
               })}
            </div>

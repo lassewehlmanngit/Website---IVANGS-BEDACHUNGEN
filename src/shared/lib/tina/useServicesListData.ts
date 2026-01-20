@@ -14,6 +14,7 @@ const SERVICES_LIST_QUERY = `
           shortDescription
           icon
           heroImage
+          benefits
         }
       }
     }

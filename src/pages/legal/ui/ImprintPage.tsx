@@ -43,7 +43,7 @@ export const ImprintPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
           >
             {page.title}
           </h1>
-          
+
           <div 
             className="prose prose-slate max-w-none text-slate-600"
             data-tina-field={data?.legalPage && tinaField(data.legalPage, 'body')}
