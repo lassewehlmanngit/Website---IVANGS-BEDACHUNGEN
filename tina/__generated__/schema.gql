@@ -125,27 +125,15 @@ type HomePageSeo {
   description: String
 }
 
-type HomePageHeroPrimaryButtonLink {
-  linkType: String!
-  url: String!
-  openInNewTab: Boolean
-}
-
-type HomePageHeroSecondaryButtonLink {
-  linkType: String!
-  url: String!
-  openInNewTab: Boolean
-}
-
 type HomePageHero {
   eyebrow: String!
   title: String!
   subtitle: String
   description: String
   primaryButtonText: String
-  primaryButtonLink: HomePageHeroPrimaryButtonLink
+  primaryButtonLink: String
   secondaryButtonText: String
-  secondaryButtonLink: HomePageHeroSecondaryButtonLink
+  secondaryButtonLink: String
   backgroundImage: String
   videoUrl: String
   showQuickForm: Boolean
@@ -163,12 +151,6 @@ type HomePageServicesSection {
   description: String
 }
 
-type HomePageCeoQuoteButtonLink {
-  linkType: String!
-  url: String!
-  openInNewTab: Boolean
-}
-
 type HomePageCeoQuote {
   eyebrow: String
   name: String!
@@ -177,7 +159,7 @@ type HomePageCeoQuote {
   text: String
   image: String
   buttonText: String
-  buttonLink: HomePageCeoQuoteButtonLink
+  buttonLink: String
 }
 
 type HomePageProjects {
@@ -215,31 +197,19 @@ type HomePageFaq {
   answer: String!
 }
 
-type HomePageFaqCTAButtonLink {
-  linkType: String!
-  url: String!
-  openInNewTab: Boolean
-}
-
 type HomePageFaqCTA {
   title: String!
   description: String
   phone: String
   buttonText: String
-  buttonLink: HomePageFaqCTAButtonLink
-}
-
-type HomePageFinalCTAButtonLink {
-  linkType: String!
-  url: String!
-  openInNewTab: Boolean
+  buttonLink: String
 }
 
 type HomePageFinalCTA {
   title: String!
   description: String
   buttonText: String
-  buttonLink: HomePageFinalCTAButtonLink
+  buttonLink: String
 }
 
 type HomePage implements Node & Document {
@@ -272,28 +242,16 @@ input HomePageSeoFilter {
   description: StringFilter
 }
 
-input BooleanFilter {
-  eq: Boolean
-  exists: Boolean
-}
-
-input HomePageHeroPrimaryButtonLinkFilter {
-  linkType: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
-}
-
-input HomePageHeroSecondaryButtonLinkFilter {
-  linkType: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
-}
-
 input ImageFilter {
   startsWith: String
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
 }
 
 input HomePageHeroFilter {
@@ -302,9 +260,9 @@ input HomePageHeroFilter {
   subtitle: StringFilter
   description: StringFilter
   primaryButtonText: StringFilter
-  primaryButtonLink: HomePageHeroPrimaryButtonLinkFilter
+  primaryButtonLink: StringFilter
   secondaryButtonText: StringFilter
-  secondaryButtonLink: HomePageHeroSecondaryButtonLinkFilter
+  secondaryButtonLink: StringFilter
   backgroundImage: ImageFilter
   videoUrl: StringFilter
   showQuickForm: BooleanFilter
@@ -322,12 +280,6 @@ input HomePageServicesSectionFilter {
   description: StringFilter
 }
 
-input HomePageCeoQuoteButtonLinkFilter {
-  linkType: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
-}
-
 input HomePageCeoQuoteFilter {
   eyebrow: StringFilter
   name: StringFilter
@@ -336,7 +288,7 @@ input HomePageCeoQuoteFilter {
   text: StringFilter
   image: ImageFilter
   buttonText: StringFilter
-  buttonLink: HomePageCeoQuoteButtonLinkFilter
+  buttonLink: StringFilter
 }
 
 input HomePageProjectsFilter {
@@ -374,31 +326,19 @@ input HomePageFaqFilter {
   answer: StringFilter
 }
 
-input HomePageFaqCTAButtonLinkFilter {
-  linkType: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
-}
-
 input HomePageFaqCTAFilter {
   title: StringFilter
   description: StringFilter
   phone: StringFilter
   buttonText: StringFilter
-  buttonLink: HomePageFaqCTAButtonLinkFilter
-}
-
-input HomePageFinalCTAButtonLinkFilter {
-  linkType: StringFilter
-  url: StringFilter
-  openInNewTab: BooleanFilter
+  buttonLink: StringFilter
 }
 
 input HomePageFinalCTAFilter {
   title: StringFilter
   description: StringFilter
   buttonText: StringFilter
-  buttonLink: HomePageFinalCTAButtonLinkFilter
+  buttonLink: StringFilter
 }
 
 input HomePageFilter {
@@ -432,18 +372,12 @@ type TeamMember implements Node & Document {
   role: String!
   email: String
   category: String!
-  description: JSON
+  description: String
   image: String
   order: Float
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
-}
-
-input RichTextFilter {
-  startsWith: String
-  eq: String
-  exists: Boolean
 }
 
 input NumberFilter {
@@ -461,7 +395,7 @@ input TeamMemberFilter {
   role: StringFilter
   email: StringFilter
   category: StringFilter
-  description: RichTextFilter
+  description: StringFilter
   image: ImageFilter
   order: NumberFilter
 }
@@ -529,6 +463,12 @@ type Service implements Node & Document {
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
 }
 
 input ServiceSectionsFilter {
@@ -1267,27 +1207,15 @@ input HomePageSeoMutation {
   description: String
 }
 
-input HomePageHeroPrimaryButtonLinkMutation {
-  linkType: String
-  url: String
-  openInNewTab: Boolean
-}
-
-input HomePageHeroSecondaryButtonLinkMutation {
-  linkType: String
-  url: String
-  openInNewTab: Boolean
-}
-
 input HomePageHeroMutation {
   eyebrow: String
   title: String
   subtitle: String
   description: String
   primaryButtonText: String
-  primaryButtonLink: HomePageHeroPrimaryButtonLinkMutation
+  primaryButtonLink: String
   secondaryButtonText: String
-  secondaryButtonLink: HomePageHeroSecondaryButtonLinkMutation
+  secondaryButtonLink: String
   backgroundImage: String
   videoUrl: String
   showQuickForm: Boolean
@@ -1305,12 +1233,6 @@ input HomePageServicesSectionMutation {
   description: String
 }
 
-input HomePageCeoQuoteButtonLinkMutation {
-  linkType: String
-  url: String
-  openInNewTab: Boolean
-}
-
 input HomePageCeoQuoteMutation {
   eyebrow: String
   name: String
@@ -1319,7 +1241,7 @@ input HomePageCeoQuoteMutation {
   text: String
   image: String
   buttonText: String
-  buttonLink: HomePageCeoQuoteButtonLinkMutation
+  buttonLink: String
 }
 
 input HomePageProjectsMutation {
@@ -1357,31 +1279,19 @@ input HomePageFaqMutation {
   answer: String
 }
 
-input HomePageFaqCTAButtonLinkMutation {
-  linkType: String
-  url: String
-  openInNewTab: Boolean
-}
-
 input HomePageFaqCTAMutation {
   title: String
   description: String
   phone: String
   buttonText: String
-  buttonLink: HomePageFaqCTAButtonLinkMutation
-}
-
-input HomePageFinalCTAButtonLinkMutation {
-  linkType: String
-  url: String
-  openInNewTab: Boolean
+  buttonLink: String
 }
 
 input HomePageFinalCTAMutation {
   title: String
   description: String
   buttonText: String
-  buttonLink: HomePageFinalCTAButtonLinkMutation
+  buttonLink: String
 }
 
 input HomePageMutation {
@@ -1404,7 +1314,7 @@ input TeamMemberMutation {
   role: String
   email: String
   category: String
-  description: JSON
+  description: String
   image: String
   order: Float
 }

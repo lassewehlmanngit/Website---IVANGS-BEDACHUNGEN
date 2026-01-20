@@ -3,40 +3,6 @@ import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.RENDER_GIT_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var clientId = process.env.TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_CLIENT_ID || null;
 var token = process.env.TINA_TOKEN || process.env.VITE_TINA_TOKEN || null;
-var createLinkField = (name, label) => ({
-  type: "object",
-  name,
-  label,
-  fields: [
-    {
-      type: "string",
-      name: "linkType",
-      label: "Link Type",
-      options: [
-        { label: "Internal Page", value: "internal" },
-        { label: "External URL", value: "external" },
-        { label: "Download File", value: "download" },
-        { label: "Page Section (#anchor)", value: "section" },
-        { label: "Phone Number", value: "phone" },
-        { label: "Email Address", value: "email" }
-      ],
-      required: true
-    },
-    {
-      type: "string",
-      name: "url",
-      label: "URL / Value",
-      description: "Enter the URL, phone number, email, or anchor name",
-      required: true
-    },
-    {
-      type: "boolean",
-      name: "openInNewTab",
-      label: "Open in New Tab",
-      description: "Only applies to external links"
-    }
-  ]
-});
 var config_default = defineConfig({
   branch,
   clientId,
@@ -86,9 +52,9 @@ var config_default = defineConfig({
               { type: "string", name: "subtitle", label: "Untertitel" },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
               { type: "string", name: "primaryButtonText", label: "Button 1 Text" },
-              createLinkField("primaryButtonLink", "Button 1 Link"),
+              { type: "string", name: "primaryButtonLink", label: "Button 1 Link", description: "z.B. /de/contact, https://..., tel:02162..., mailto:..., #section" },
               { type: "string", name: "secondaryButtonText", label: "Button 2 Text" },
-              createLinkField("secondaryButtonLink", "Button 2 Link"),
+              { type: "string", name: "secondaryButtonLink", label: "Button 2 Link", description: "z.B. /de/career, https://..., tel:..., mailto:..., #section" },
               { type: "image", name: "backgroundImage", label: "Hintergrundbild" },
               { type: "string", name: "videoUrl", label: "Video URL" },
               { type: "boolean", name: "showQuickForm", label: "Schnellkontakt-Formular anzeigen" }
@@ -99,6 +65,7 @@ var config_default = defineConfig({
             list: true,
             name: "stats",
             label: "Statistiken",
+            ui: { max: 6 },
             fields: [
               { type: "string", name: "value", label: "Wert", required: true },
               { type: "string", name: "label", label: "Beschriftung", required: true },
@@ -127,7 +94,7 @@ var config_default = defineConfig({
               { type: "string", name: "text", label: "Text", ui: { component: "textarea" } },
               { type: "image", name: "image", label: "Bild" },
               { type: "string", name: "buttonText", label: "Button Text" },
-              createLinkField("buttonLink", "Button Link")
+              { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/about" }
             ]
           },
           {
@@ -135,6 +102,7 @@ var config_default = defineConfig({
             list: true,
             name: "projects",
             label: "Projekt Showcase",
+            ui: { max: 6 },
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung" },
@@ -155,6 +123,7 @@ var config_default = defineConfig({
                 list: true,
                 name: "items",
                 label: "Punkte",
+                ui: { max: 4 },
                 fields: [
                   { type: "string", name: "title", label: "Titel", required: true },
                   { type: "string", name: "description", label: "Beschreibung" },
@@ -186,6 +155,7 @@ var config_default = defineConfig({
             list: true,
             name: "faq",
             label: "FAQ",
+            ui: { max: 10 },
             fields: [
               { type: "string", name: "question", label: "Frage", required: true },
               { type: "string", name: "answer", label: "Antwort", ui: { component: "textarea" }, required: true }
@@ -200,7 +170,7 @@ var config_default = defineConfig({
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
               { type: "string", name: "phone", label: "Telefonnummer" },
               { type: "string", name: "buttonText", label: "Button Text" },
-              createLinkField("buttonLink", "Button Link")
+              { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/contact" }
             ]
           },
           {
@@ -211,7 +181,7 @@ var config_default = defineConfig({
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
               { type: "string", name: "buttonText", label: "Button Text" },
-              createLinkField("buttonLink", "Button Link")
+              { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/contact" }
             ]
           }
         ]
@@ -238,7 +208,7 @@ var config_default = defineConfig({
             required: true,
             options: ["leadership", "office", "craftsmen"]
           },
-          { type: "rich-text", name: "description", label: "Beschreibung" },
+          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
           { type: "image", name: "image", label: "Foto" },
           { type: "number", name: "order", label: "Reihenfolge" }
         ]
@@ -281,6 +251,7 @@ var config_default = defineConfig({
             list: true,
             name: "sections",
             label: "Detailsektionen",
+            ui: { max: 6 },
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "icon", label: "Icon (Lucide)" },
@@ -292,6 +263,7 @@ var config_default = defineConfig({
             list: true,
             name: "processSteps",
             label: "Prozessschritte",
+            ui: { max: 8 },
             fields: [
               { type: "number", name: "step", label: "Schritt Nr." },
               { type: "string", name: "title", label: "Titel" },
@@ -315,6 +287,7 @@ var config_default = defineConfig({
             list: true,
             name: "faq",
             label: "FAQ",
+            ui: { max: 8 },
             fields: [
               { type: "string", name: "question", label: "Frage", required: true },
               { type: "string", name: "answer", label: "Antwort", ui: { component: "textarea" }, required: true }
@@ -325,6 +298,7 @@ var config_default = defineConfig({
             list: true,
             name: "gallery",
             label: "Galerie",
+            ui: { max: 12 },
             fields: [
               { type: "image", name: "image", label: "Bild" },
               { type: "string", name: "caption", label: "Bildunterschrift" }
