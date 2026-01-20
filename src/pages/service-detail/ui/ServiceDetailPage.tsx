@@ -33,24 +33,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   
-  // Fetch service data from TinaCMS
-  const serviceData = useServiceData(id || '', lang);
-  
-  // Enable visual editing with useTina hook
-  const { data } = useTina({
-    query: serviceData.query,
-    variables: serviceData.variables,
-    data: serviceData.data,
-  });
-  
-  // Show loading state
-  if (serviceData.loading) {
-    return (
-      <div className="container py-12">
-        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
-      </div>
-    );
-  }
+  // Fetch service data from TinaCMS with visual editing support
+  const { data } = useServiceData(id || '');
   
   // Fallback to static data if TinaCMS data is not available
   const service = data?.service || (id && id in servicesData ? servicesData[id as ServiceId] : null);

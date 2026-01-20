@@ -1,39 +1,46 @@
-import { useState, useEffect } from 'react';
-import { tinaClient } from './client';
-import type { SupportedLang } from '@/shared/config/i18n';
+import { useTina } from 'tinacms/dist/react';
 
-export function useServiceData(serviceId: string, lang: SupportedLang) {
-  const [state, setState] = useState({
+export function useServiceData(serviceId: string) {
+  const relativePath = `${serviceId}.md`;
+
+  return useTina({
+    query: `
+      query ServiceQuery($relativePath: String!) {
+        service(relativePath: $relativePath) {
+          title
+          subtitle
+          shortDescription
+          intro
+          heroImage
+          image
+          icon
+          expertTip
+          features
+          benefits
+          sections {
+            title
+            icon
+            content
+          }
+          processSteps {
+            step
+            title
+            text
+          }
+          referenceImages
+          contactIds
+          faq {
+            question
+            answer
+          }
+          gallery {
+            image
+            caption
+          }
+        }
+      }
+    `,
+    variables: { relativePath },
     data: null,
-    query: '',
-    variables: {},
-    loading: true,
-    error: null,
   });
-
-  useEffect(() => {
-    const relativePath = `${serviceId}.md`;
-
-    tinaClient.queries.service({ relativePath })
-      .then((response) => {
-        setState({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
-          loading: false,
-          error: null,
-        });
-      })
-      .catch((error) => {
-        setState({
-          data: null,
-          query: '',
-          variables: {},
-          loading: false,
-          error: error.message,
-        });
-      });
-  }, [serviceId, lang]);
-
-  return state;
 }

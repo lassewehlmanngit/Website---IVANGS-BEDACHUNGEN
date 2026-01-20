@@ -1,9 +1,15 @@
 import React from 'react';
 
 /**
- * TinaProvider wrapper for future extensibility.
- * Visual editing is enabled through the useTina hook in individual components.
- * The useTina hook automatically detects edit mode and enables real-time updates.
+ * TinaProvider wrapper for TinaCMS integration.
+ * 
+ * In TinaCMS v2, visual editing is automatically enabled when:
+ * 1. Pages use the useTina hook with proper query/variables
+ * 2. The page is loaded in the TinaCMS admin iframe
+ * 3. tinaField attributes are added to editable elements
+ * 
+ * No additional provider wrapping is needed - the useTina hook
+ * handles the connection to the TinaCMS backend automatically.
  */
 export const TinaProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return <>{children}</>;

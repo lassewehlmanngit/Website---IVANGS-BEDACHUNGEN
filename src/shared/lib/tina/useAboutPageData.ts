@@ -1,39 +1,49 @@
-import { useState, useEffect } from 'react';
-import { tinaClient } from './client';
+import { useTina } from 'tinacms/dist/react';
 import type { SupportedLang } from '@/shared/config/i18n';
 
 export function useAboutPageData(lang: SupportedLang) {
-  const [state, setState] = useState({
+  const relativePath = 'ueber-uns.json';
+
+  return useTina({
+    query: `
+      query AboutPageQuery($relativePath: String!) {
+        aboutPage(relativePath: $relativePath) {
+          seo {
+            title
+            description
+          }
+          hero {
+            eyebrow
+            title
+            description
+          }
+          story {
+            title
+            text1
+            text2
+            image
+          }
+          values {
+            text
+          }
+          equipment {
+            title
+            description
+          }
+          teamSection {
+            title
+            description
+          }
+          cta {
+            title
+            description
+            buttonText
+            email
+          }
+        }
+      }
+    `,
+    variables: { relativePath },
     data: null,
-    query: '',
-    variables: {},
-    loading: true,
-    error: null,
   });
-
-  useEffect(() => {
-    const relativePath = 'ueber-uns.json';
-
-    tinaClient.queries.aboutPage({ relativePath })
-      .then((response) => {
-        setState({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
-          loading: false,
-          error: null,
-        });
-      })
-      .catch((error) => {
-        setState({
-          data: null,
-          query: '',
-          variables: {},
-          loading: false,
-          error: error.message,
-        });
-      });
-  }, [lang]);
-
-  return state;
 }

@@ -1,5 +1,6 @@
-# Disable admin panel in production until Tina Cloud is set up
-/admin/index.html /404 404
+# TinaCMS admin panel
+/admin /admin/index.html 200
+/admin/* /admin/:splat 200
 
 # SPA fallback
 /*  /index.html  200

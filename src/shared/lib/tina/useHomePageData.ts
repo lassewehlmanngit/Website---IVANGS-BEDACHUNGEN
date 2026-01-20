@@ -1,39 +1,68 @@
-import { useState, useEffect } from 'react';
-import { tinaClient } from './client';
+import { useTina } from 'tinacms/dist/react';
+import { client } from './client';
 import type { SupportedLang } from '@/shared/config/i18n';
 
 export function useHomePageData(lang: SupportedLang) {
-  const [state, setState] = useState({
+  const relativePath = 'startseite.json';
+
+  // Use useTina hook for visual editing support
+  return useTina({
+    query: `
+      query HomePageQuery($relativePath: String!) {
+        homePage(relativePath: $relativePath) {
+          seo {
+            title
+            description
+          }
+          hero {
+            eyebrow
+            title
+            subtitle
+            description
+            primaryButtonText
+            primaryButtonLink
+            secondaryButtonText
+            secondaryButtonLink
+            backgroundImage
+            videoUrl
+            showQuickForm
+          }
+          stats {
+            value
+            label
+            icon
+          }
+          servicesSection {
+            eyebrow
+            title
+            description
+          }
+          ceoQuote {
+            eyebrow
+            name
+            role
+            quote
+            text
+            image
+            buttonText
+            buttonLink
+          }
+          projects {
+            title
+            description
+            image
+            link
+          }
+          finalCTA {
+            title
+            description
+            buttonText
+            buttonLink
+          }
+        }
+      }
+    `,
+    variables: { relativePath },
     data: null,
-    query: '',
-    variables: {},
-    loading: true,
-    error: null,
   });
-
-  useEffect(() => {
-    const relativePath = 'startseite.json';
-
-    tinaClient.queries.homePage({ relativePath })
-      .then((response) => {
-        setState({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
-          loading: false,
-          error: null,
-        });
-      })
-      .catch((error) => {
-        setState({
-          data: null,
-          query: '',
-          variables: {},
-          loading: false,
-          error: error.message,
-        });
-      });
-  }, [lang]);
-
-  return state;
 }

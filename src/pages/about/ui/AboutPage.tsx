@@ -12,24 +12,8 @@ export const AboutPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const officeTeam = getOfficeTeam();
   const craftsmen = getCraftsmen();
   
-  // Fetch about page data from TinaCMS
-  const aboutPageData = useAboutPageData(lang);
-  
-  // Enable visual editing with useTina hook
-  const { data } = useTina({
-    query: aboutPageData.query,
-    variables: aboutPageData.variables,
-    data: aboutPageData.data,
-  });
-  
-  // Show loading state
-  if (aboutPageData.loading) {
-    return (
-      <div className="container py-12">
-        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
-      </div>
-    );
-  }
+  // Fetch about page data from TinaCMS with visual editing support
+  const { data } = useAboutPageData(lang);
   
   // Fallback to defaults if no data
   const about = data?.aboutPage || {};

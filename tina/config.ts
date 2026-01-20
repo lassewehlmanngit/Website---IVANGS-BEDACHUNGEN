@@ -7,8 +7,15 @@ const branch =
   process.env.HEAD ||
   'main';
 
-const clientId = process.env.TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_CLIENT_ID || null;
-const token = process.env.TINA_TOKEN || process.env.VITE_TINA_TOKEN || null;
+const clientId = 
+  process.env.TINA_PUBLIC_CLIENT_ID || 
+  process.env.VITE_TINA_PUBLIC_CLIENT_ID || 
+  process.env.VITE_TINA_CLIENT_ID || 
+  null;
+const token = 
+  process.env.TINA_TOKEN || 
+  process.env.VITE_TINA_TOKEN || 
+  null;
 
 export default defineConfig({
   branch,
@@ -33,6 +40,7 @@ export default defineConfig({
         path: 'content/home',
         format: 'json',
         ui: {
+          router: () => '/de',
           allowedActions: {
             create: false,
             delete: false,
@@ -408,6 +416,7 @@ export default defineConfig({
         path: 'content/about',
         format: 'json',
         ui: {
+          router: () => '/de/about',
           allowedActions: {
             create: false,
             delete: false,
@@ -492,6 +501,7 @@ export default defineConfig({
         path: 'content/contact',
         format: 'json',
         ui: {
+          router: () => '/de/contact',
           allowedActions: {
             create: false,
             delete: false,

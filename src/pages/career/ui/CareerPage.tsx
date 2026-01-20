@@ -16,15 +16,8 @@ const CAREER_HERO_IMG = "https://images.unsplash.com/photo-1504307651254-35680f3
 export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
   
-  // Fetch jobs data from TinaCMS
-  const jobsResponse = useJobsData(lang);
-  
-  // Enable visual editing with useTina hook
-  const { data } = useTina({
-    query: jobsResponse.query,
-    variables: jobsResponse.variables,
-    data: jobsResponse.data,
-  });
+  // Fetch jobs data from TinaCMS with visual editing support
+  const { data } = useJobsData();
   
   // Use TinaCMS data if available, otherwise fall back to static data
   // Filter for published jobs only

@@ -21,31 +21,15 @@ export interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
   const [settings, setSettings] = useState<SettingsData | null>(null);
   
-  // Fetch home page data from TinaCMS
-  const homePageData = useHomePageData(lang);
-  
-  // Enable visual editing with useTina hook
-  const { data } = useTina({
-    query: homePageData.query,
-    variables: homePageData.variables,
-    data: homePageData.data,
-  });
+  // Fetch home page data from TinaCMS with visual editing support
+  const { data } = useHomePageData(lang);
 
   useEffect(() => {
     getSettings(lang).then(setSettings);
   }, [lang]);
   
-  // Show loading state
-  if (homePageData.loading) {
-    return (
-      <div className="container py-12">
-        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
-      </div>
-    );
-  }
-  
-  // Show error state
-  if (homePageData.error || !data?.homePage) {
+  // Show error state or fallback
+  if (!data?.homePage) {
     return (
       <>
         <Seo

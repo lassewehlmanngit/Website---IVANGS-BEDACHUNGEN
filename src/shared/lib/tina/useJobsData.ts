@@ -1,38 +1,30 @@
-import { useState, useEffect } from 'react';
-import { tinaClient } from './client';
-import type { SupportedLang } from '@/shared/config/i18n';
+import { useTina } from 'tinacms/dist/react';
 
-export function useJobsData(lang: SupportedLang) {
-  const [state, setState] = useState({
-    data: null,
-    query: '',
+export function useJobsData() {
+  return useTina({
+    query: `
+      query JobsQuery {
+        jobConnection {
+          edges {
+            node {
+              id
+              _sys {
+                filename
+              }
+              title
+              location
+              type
+              shortDesc
+              published
+              tasks
+              profile
+              benefits
+            }
+          }
+        }
+      }
+    `,
     variables: {},
-    loading: true,
-    error: null,
+    data: null,
   });
-
-  useEffect(() => {
-    // Fetch all jobs - TinaCMS will return a collection
-    tinaClient.queries.jobConnection()
-      .then((response) => {
-        setState({
-          data: response.data,
-          query: response.query,
-          variables: response.variables,
-          loading: false,
-          error: null,
-        });
-      })
-      .catch((error) => {
-        setState({
-          data: null,
-          query: '',
-          variables: {},
-          loading: false,
-          error: error.message,
-        });
-      });
-  }, [lang]);
-
-  return state;
 }

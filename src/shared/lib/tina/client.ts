@@ -11,7 +11,7 @@ const branch =
 export const client = createClient({
   url: import.meta.env.DEV
     ? 'http://localhost:4001/graphql'
-    : `https://content.tinajs.io/content/${import.meta.env.VITE_TINA_CLIENT_ID}/github/${branch}`,
+    : `https://content.tinajs.io/content/${import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID}/github/${branch}`,
   token: import.meta.env.VITE_TINA_TOKEN,
 });
 

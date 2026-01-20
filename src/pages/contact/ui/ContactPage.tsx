@@ -8,24 +8,8 @@ import { useTina, tinaField } from 'tinacms/dist/react';
 import { useContactPageData } from '@/shared/lib/tina/useContactPageData';
 
 export const ContactPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
-  // Fetch contact page data from TinaCMS
-  const contactPageData = useContactPageData(lang);
-  
-  // Enable visual editing with useTina hook
-  const { data } = useTina({
-    query: contactPageData.query,
-    variables: contactPageData.variables,
-    data: contactPageData.data,
-  });
-  
-  // Show loading state
-  if (contactPageData.loading) {
-    return (
-      <div className="container py-12">
-        <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
-      </div>
-    );
-  }
+  // Fetch contact page data from TinaCMS with visual editing support
+  const { data } = useContactPageData(lang);
   
   // Fallback to defaults if no data
   const contact = data?.contactPage || {};

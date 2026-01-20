@@ -1,7 +1,7 @@
 // tina/config.ts
 import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.RENDER_GIT_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
-var clientId = process.env.TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_CLIENT_ID || null;
+var clientId = process.env.TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_PUBLIC_CLIENT_ID || process.env.VITE_TINA_CLIENT_ID || null;
 var token = process.env.TINA_TOKEN || process.env.VITE_TINA_TOKEN || null;
 var config_default = defineConfig({
   branch,
@@ -26,6 +26,7 @@ var config_default = defineConfig({
         path: "content/home",
         format: "json",
         ui: {
+          router: () => "/de",
           allowedActions: {
             create: false,
             delete: false
@@ -393,6 +394,7 @@ var config_default = defineConfig({
         path: "content/about",
         format: "json",
         ui: {
+          router: () => "/de/about",
           allowedActions: {
             create: false,
             delete: false
@@ -476,6 +478,7 @@ var config_default = defineConfig({
         path: "content/contact",
         format: "json",
         ui: {
+          router: () => "/de/contact",
           allowedActions: {
             create: false,
             delete: false
