@@ -1,7 +1,10 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import fm from 'front-matter';
+
+// Stable constant for empty data
+const EMPTY_DATA = { service: null };
 
 // Fallback query for service - used when client response doesn't include query
 const SERVICE_QUERY = `
@@ -31,6 +34,9 @@ export function useServiceData(serviceId: string) {
   const relativePath = `${serviceId}.md`;
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Memoize the default variables based on serviceId
+  const defaultVariables = useMemo(() => ({ relativePath }), [relativePath]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -64,7 +70,7 @@ export function useServiceData(serviceId: string) {
         console.error('Error loading static service data:', error);
         // Last resort: empty structure
         setPayload({
-          data: { service: null },
+          data: EMPTY_DATA,
           query: SERVICE_QUERY,
           variables: { relativePath },
         });
@@ -75,11 +81,21 @@ export function useServiceData(serviceId: string) {
     loadData();
   }, [relativePath, serviceId]);
 
+  // Memoize the variables to ensure stability
+  const tinaVariables = useMemo(() => {
+    return payload?.variables || defaultVariables;
+  }, [payload?.variables, defaultVariables]);
+
+  // Memoize the data structure
+  const tinaData = useMemo(() => {
+    return payload?.data || EMPTY_DATA;
+  }, [payload?.data]);
+
   // Pass the fetched data to useTinaOptional for visual editing
   const { data } = useTinaOptional({
     query: payload?.query || SERVICE_QUERY,
-    variables: payload?.variables || { relativePath },
-    data: payload?.data || { service: null },
+    variables: tinaVariables,
+    data: tinaData,
   });
 
   return { data, isLoading };

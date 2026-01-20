@@ -1,6 +1,9 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+
+// Stable constant for empty data
+const EMPTY_DATA = { legalPage: null };
 
 // Fallback query for legal page
 const LEGAL_PAGE_QUERY = `
@@ -24,6 +27,9 @@ export function useLegalPageData(slug: string) {
   const relativePath = `${slug}.md`;
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Memoize the default variables based on slug
+  const defaultVariables = useMemo(() => ({ relativePath }), [relativePath]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -78,11 +84,17 @@ export function useLegalPageData(slug: string) {
             query: LEGAL_PAGE_QUERY,
             variables: { relativePath },
           });
+        } else {
+          setPayload({
+            data: EMPTY_DATA,
+            query: LEGAL_PAGE_QUERY,
+            variables: { relativePath },
+          });
         }
       } catch (error) {
         console.error('Error loading static legal page data:', error);
         setPayload({
-          data: { legalPage: null },
+          data: EMPTY_DATA,
           query: LEGAL_PAGE_QUERY,
           variables: { relativePath },
         });
@@ -93,11 +105,21 @@ export function useLegalPageData(slug: string) {
     loadData();
   }, [relativePath, slug]);
 
+  // Memoize the variables to ensure stability
+  const tinaVariables = useMemo(() => {
+    return payload?.variables || defaultVariables;
+  }, [payload?.variables, defaultVariables]);
+
+  // Memoize the data structure
+  const tinaData = useMemo(() => {
+    return payload?.data || EMPTY_DATA;
+  }, [payload?.data]);
+
   // Pass the fetched data to useTinaOptional for visual editing
   const { data } = useTinaOptional({
     query: payload?.query || LEGAL_PAGE_QUERY,
-    variables: payload?.variables || { relativePath },
-    data: payload?.data || { legalPage: null },
+    variables: tinaVariables,
+    data: tinaData,
   });
 
   return { data, isLoading };

@@ -1,13 +1,19 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
+
+// Stable constants defined outside the component
+const RELATIVE_PATH = 'navigation.json';
+const EMPTY_DATA = { navigation: { items: [] } };
+const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 const NAVIGATION_QUERY = `
   query NavigationQuery($relativePath: String!) {
     navigation(relativePath: $relativePath) {
       logo
       items { label href }
+      ctaButton { text link }
     }
   }
 `;
@@ -19,7 +25,6 @@ interface TinaPayload {
 }
 
 export function useNavigationData(_lang: SupportedLang) {
-  const relativePath = 'navigation.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,7 +33,7 @@ export function useNavigationData(_lang: SupportedLang) {
       // Try to fetch from TinaCMS client first
       if (client) {
         try {
-          const response = await client.queries.navigation({ relativePath });
+          const response = await client.queries.navigation({ relativePath: RELATIVE_PATH });
           setPayload({
             data: response.data,
             query: response.query,
@@ -48,28 +53,38 @@ export function useNavigationData(_lang: SupportedLang) {
         setPayload({
           data: { navigation: jsonData },
           query: NAVIGATION_QUERY,
-          variables: { relativePath },
+          variables: DEFAULT_VARIABLES,
         });
       } catch (error) {
         console.error('Error loading static navigation data:', error);
         // Last resort: empty structure
         setPayload({
-          data: { navigation: { items: [] } },
+          data: EMPTY_DATA,
           query: NAVIGATION_QUERY,
-          variables: { relativePath },
+          variables: DEFAULT_VARIABLES,
         });
       }
       setIsLoading(false);
     };
 
     loadData();
-  }, [relativePath]);
+  }, []);
+
+  // Memoize the variables to ensure stability
+  const tinaVariables = useMemo(() => {
+    return payload?.variables || DEFAULT_VARIABLES;
+  }, [payload?.variables]);
+
+  // Memoize the data structure
+  const tinaData = useMemo(() => {
+    return payload?.data || EMPTY_DATA;
+  }, [payload?.data]);
 
   // Pass the fetched data to useTinaOptional for visual editing
   const { data } = useTinaOptional({
     query: payload?.query || NAVIGATION_QUERY,
-    variables: payload?.variables || { relativePath },
-    data: payload?.data || { navigation: { items: [] } },
+    variables: tinaVariables,
+    data: tinaData,
   });
 
   return { data, isLoading };

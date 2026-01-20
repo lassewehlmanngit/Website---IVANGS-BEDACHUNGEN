@@ -1,7 +1,12 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
+
+// Stable constants defined outside the component
+const RELATIVE_PATH = 'footer.json';
+const EMPTY_DATA = { footer: { links: [], social: [] } };
+const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 const FOOTER_QUERY = `
   query FooterQuery($relativePath: String!) {
@@ -20,7 +25,6 @@ interface TinaPayload {
 }
 
 export function useFooterData(_lang: SupportedLang) {
-  const relativePath = 'footer.json';
   const [payload, setPayload] = useState<TinaPayload | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -29,7 +33,7 @@ export function useFooterData(_lang: SupportedLang) {
       // Try to fetch from TinaCMS client first
       if (client) {
         try {
-          const response = await client.queries.footer({ relativePath });
+          const response = await client.queries.footer({ relativePath: RELATIVE_PATH });
           setPayload({
             data: response.data,
             query: response.query,
@@ -49,28 +53,38 @@ export function useFooterData(_lang: SupportedLang) {
         setPayload({
           data: { footer: jsonData },
           query: FOOTER_QUERY,
-          variables: { relativePath },
+          variables: DEFAULT_VARIABLES,
         });
       } catch (error) {
         console.error('Error loading static footer data:', error);
         // Last resort: empty structure
         setPayload({
-          data: { footer: { links: [], social: [] } },
+          data: EMPTY_DATA,
           query: FOOTER_QUERY,
-          variables: { relativePath },
+          variables: DEFAULT_VARIABLES,
         });
       }
       setIsLoading(false);
     };
 
     loadData();
-  }, [relativePath]);
+  }, []);
+
+  // Memoize the variables to ensure stability
+  const tinaVariables = useMemo(() => {
+    return payload?.variables || DEFAULT_VARIABLES;
+  }, [payload?.variables]);
+
+  // Memoize the data structure
+  const tinaData = useMemo(() => {
+    return payload?.data || EMPTY_DATA;
+  }, [payload?.data]);
 
   // Pass the fetched data to useTinaOptional for visual editing
   const { data } = useTinaOptional({
     query: payload?.query || FOOTER_QUERY,
-    variables: payload?.variables || { relativePath },
-    data: payload?.data || { footer: { links: [], social: [] } },
+    variables: tinaVariables,
+    data: tinaData,
   });
 
   return { data, isLoading };

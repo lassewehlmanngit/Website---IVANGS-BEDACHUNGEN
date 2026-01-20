@@ -1,6 +1,10 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
+
+// Stable constants defined outside the component
+const EMPTY_DATA = { serviceConnection: { edges: [] } };
+const EMPTY_VARIABLES = {};
 
 // Query to fetch all services
 const SERVICES_LIST_QUERY = `
@@ -40,7 +44,7 @@ export function useServicesListData() {
           setPayload({
             data: response.data,
             query: response.query,
-            variables: response.variables || {},
+            variables: response.variables || EMPTY_VARIABLES,
           });
           setIsLoading(false);
           return;
@@ -51,9 +55,9 @@ export function useServicesListData() {
 
       // Fallback: Return empty structure
       setPayload({
-        data: { serviceConnection: { edges: [] } },
+        data: EMPTY_DATA,
         query: SERVICES_LIST_QUERY,
-        variables: {},
+        variables: EMPTY_VARIABLES,
       });
       setIsLoading(false);
     };
@@ -61,11 +65,21 @@ export function useServicesListData() {
     loadData();
   }, []);
 
+  // Memoize the variables to ensure stability
+  const tinaVariables = useMemo(() => {
+    return payload?.variables || EMPTY_VARIABLES;
+  }, [payload?.variables]);
+
+  // Memoize the data structure
+  const tinaData = useMemo(() => {
+    return payload?.data || EMPTY_DATA;
+  }, [payload?.data]);
+
   // Pass the fetched data to useTinaOptional for visual editing
   const { data } = useTinaOptional({
     query: payload?.query || SERVICES_LIST_QUERY,
-    variables: payload?.variables || {},
-    data: payload?.data || { serviceConnection: { edges: [] } },
+    variables: tinaVariables,
+    data: tinaData,
   });
 
   return { data, isLoading };
