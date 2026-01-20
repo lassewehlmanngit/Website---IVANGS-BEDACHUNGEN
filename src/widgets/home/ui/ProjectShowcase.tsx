@@ -30,6 +30,13 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader
   const headerEyebrow = projectsHeader?.eyebrow || 'Referenzen';
   const headerTitle = projectsHeader?.title || 'Ergebnisse, die zählen.';
 
+  // Dynamic grid classes based on number of projects
+  const getGridClass = (count: number) => {
+    if (count === 1) return 'grid md:grid-cols-1 gap-8';
+    if (count === 2) return 'grid md:grid-cols-2 gap-8';
+    return 'grid md:grid-cols-3 gap-8';
+  };
+
   return (
     <section className="py-24 bg-white overflow-hidden">
          <div className="container mx-auto px-4">
@@ -50,7 +57,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ projectsHeader
                 </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
+            <div className={getGridClass(projectsList.length)}>
                {projectsList.map((project: any, index: number) => (
                  <div key={index} className="group cursor-pointer">
                     <div className="relative h-72 overflow-hidden rounded-sm mb-4">

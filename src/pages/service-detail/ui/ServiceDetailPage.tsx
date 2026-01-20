@@ -163,14 +163,22 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               )}
 
               {/* Project References Gallery */}
-              {(service.referenceImages || service.references) && (service.referenceImages || service.references).length > 0 && (
-                 <div className="mb-16 md:mb-20">
+              {(service.referenceImages || service.references) && (service.referenceImages || service.references).length > 0 && (() => {
+                const images = service.referenceImages || service.references;
+                const getGridClass = (count: number) => {
+                  if (count === 1) return 'grid grid-cols-1 gap-4';
+                  if (count === 2) return 'grid grid-cols-1 md:grid-cols-2 gap-4';
+                  return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
+                };
+                
+                return (
+                  <div className="mb-16 md:mb-20">
                     <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8 flex items-center gap-2">
                       <ImageIcon size={24} className="text-primary" /> 
                       Ausgewählte Projekte
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {(service.referenceImages || service.references).map((img: string, idx: number) => (
+                    <div className={getGridClass(images.length)}>
+                      {images.map((img: string, idx: number) => (
                         <div 
                           key={idx} 
                           className="rounded-sm overflow-hidden h-64 border border-slate-100 group"
@@ -184,8 +192,9 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                         </div>
                       ))}
                     </div>
-                 </div>
-              )}
+                  </div>
+                );
+              })()}
 
               {/* Humanized Contact Section */}
               {((service.contactIds && service.contactIds.length > 0) || (service.contacts && service.contacts.length > 0)) && (

@@ -5,6 +5,7 @@ import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
 import type { HeroSettings } from '@/shared/lib/content/globals';
 import { tinaField } from 'tinacms/dist/react';
+import { SmartLink } from '@/shared/ui/SmartLink';
 
 export interface HeroSectionProps {
   lang: string;
@@ -90,16 +91,16 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
           </p>
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
-             <Link to={heroData?.primaryButtonLink || `/${lang}/contact`} className="w-full sm:w-auto">
+             <SmartLink link={heroData?.primaryButtonLink || `/${lang}/contact`} className="w-full sm:w-auto">
                 <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'primaryButtonText')}>
                    {heroData?.primaryButtonText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
-             </Link>
-             <Link to={heroData?.secondaryButtonLink || `/${lang}/career`} className="w-full sm:w-auto">
+             </SmartLink>
+             <SmartLink link={heroData?.secondaryButtonLink || `/${lang}/career`} className="w-full sm:w-auto">
                 <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'secondaryButtonText')}>
                    {heroData?.secondaryButtonText || 'Karriere starten'}
                 </Button>
-             </Link>
+             </SmartLink>
           </div>
         </div>
 

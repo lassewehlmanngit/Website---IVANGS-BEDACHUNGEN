@@ -3,6 +3,7 @@ import { HelpCircle } from 'lucide-react';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { tinaField } from 'tinacms/dist/react';
+import { SmartLink } from '@/shared/ui/SmartLink';
 
 interface FAQItem {
   question?: string;
@@ -143,13 +144,14 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, faqHeader, faqData, faqC
               >
                 {ctaPhone}
               </a>
-              <a 
-                href={ctaButtonLink}
+              <SmartLink 
+                link={ctaButtonLink}
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-bold rounded-sm border-2 border-primary hover:bg-primary/5 transition-colors"
-                data-tina-field={faqCTA && tinaField(faqCTA, 'buttonText')}
               >
-                {ctaButtonText}
-              </a>
+                <span data-tina-field={faqCTA && tinaField(faqCTA, 'buttonText')}>
+                  {ctaButtonText}
+                </span>
+              </SmartLink>
             </div>
           </div>
         </div>

@@ -12,9 +12,19 @@ fragment HomePageParts on HomePage {
     subtitle
     description
     primaryButtonText
-    primaryButtonLink
+    primaryButtonLink {
+      __typename
+      linkType
+      url
+      openInNewTab
+    }
     secondaryButtonText
-    secondaryButtonLink
+    secondaryButtonLink {
+      __typename
+      linkType
+      url
+      openInNewTab
+    }
     backgroundImage
     videoUrl
     showQuickForm
@@ -40,7 +50,12 @@ fragment HomePageParts on HomePage {
     text
     image
     buttonText
-    buttonLink
+    buttonLink {
+      __typename
+      linkType
+      url
+      openInNewTab
+    }
   }
   projects {
     __typename
@@ -82,14 +97,24 @@ fragment HomePageParts on HomePage {
     description
     phone
     buttonText
-    buttonLink
+    buttonLink {
+      __typename
+      linkType
+      url
+      openInNewTab
+    }
   }
   finalCTA {
     __typename
     title
     description
     buttonText
-    buttonLink
+    buttonLink {
+      __typename
+      linkType
+      url
+      openInNewTab
+    }
   }
 }
 

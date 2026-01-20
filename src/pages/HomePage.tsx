@@ -10,6 +10,7 @@ import { ProjectShowcase } from '@/widgets/home/ui/ProjectShowcase';
 import { HomeFAQ } from '@/widgets/home/ui/HomeFAQ';
 import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
+import { SmartLink } from '@/shared/ui/SmartLink';
 import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
 import { useTina, tinaField } from 'tinacms/dist/react';
 import { useHomePageData } from '@/shared/lib/tina/useHomePageData';
@@ -125,11 +126,11 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
             {home.finalCTA?.description || 'Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.'}
           </p>
           <div className="flex justify-center gap-4">
-            <Link to={home.finalCTA?.buttonLink || `/${lang}/contact`}>
+            <SmartLink link={home.finalCTA?.buttonLink || `/${lang}/contact`}>
                 <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}>
                   {home.finalCTA?.buttonText || 'Beratungstermin vereinbaren'}
                 </Button>
-            </Link>
+            </SmartLink>
           </div>
         </div>
       </section>
