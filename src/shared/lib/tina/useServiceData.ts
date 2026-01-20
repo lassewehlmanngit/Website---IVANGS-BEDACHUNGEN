@@ -1,46 +1,27 @@
 import { useTina } from 'tinacms/dist/react';
+import { client } from './client';
+import { useEffect, useState } from 'react';
 
 export function useServiceData(serviceId: string) {
   const relativePath = `${serviceId}.md`;
+  const [payload, setPayload] = useState<any>(null);
 
+  useEffect(() => {
+    // Fetch initial data using Tina client
+    client.queries.service({ relativePath })
+      .then((response) => {
+        setPayload(response);
+      })
+      .catch((error) => {
+        console.error('Error fetching service data:', error);
+        setPayload({ data: null, query: '', variables: { relativePath } });
+      });
+  }, [relativePath]);
+
+  // Pass the fetched data to useTina for visual editing
   return useTina({
-    query: `
-      query ServiceQuery($relativePath: String!) {
-        service(relativePath: $relativePath) {
-          title
-          subtitle
-          shortDescription
-          intro
-          heroImage
-          image
-          icon
-          expertTip
-          features
-          benefits
-          sections {
-            title
-            icon
-            content
-          }
-          processSteps {
-            step
-            title
-            text
-          }
-          referenceImages
-          contactIds
-          faq {
-            question
-            answer
-          }
-          gallery {
-            image
-            caption
-          }
-        }
-      }
-    `,
-    variables: { relativePath },
-    data: null,
+    query: payload?.query || '',
+    variables: payload?.variables || { relativePath },
+    data: payload?.data || null,
   });
 }

@@ -1,68 +1,28 @@
 import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
 import type { SupportedLang } from '@/shared/config/i18n';
+import { useEffect, useState } from 'react';
 
 export function useHomePageData(lang: SupportedLang) {
   const relativePath = 'startseite.json';
+  const [payload, setPayload] = useState<any>(null);
 
-  // Use useTina hook for visual editing support
+  useEffect(() => {
+    // Fetch initial data using Tina client
+    client.queries.homePage({ relativePath })
+      .then((response) => {
+        setPayload(response);
+      })
+      .catch((error) => {
+        console.error('Error fetching home page data:', error);
+        setPayload({ data: null, query: '', variables: { relativePath } });
+      });
+  }, [relativePath]);
+
+  // Pass the fetched data to useTina for visual editing
   return useTina({
-    query: `
-      query HomePageQuery($relativePath: String!) {
-        homePage(relativePath: $relativePath) {
-          seo {
-            title
-            description
-          }
-          hero {
-            eyebrow
-            title
-            subtitle
-            description
-            primaryButtonText
-            primaryButtonLink
-            secondaryButtonText
-            secondaryButtonLink
-            backgroundImage
-            videoUrl
-            showQuickForm
-          }
-          stats {
-            value
-            label
-            icon
-          }
-          servicesSection {
-            eyebrow
-            title
-            description
-          }
-          ceoQuote {
-            eyebrow
-            name
-            role
-            quote
-            text
-            image
-            buttonText
-            buttonLink
-          }
-          projects {
-            title
-            description
-            image
-            link
-          }
-          finalCTA {
-            title
-            description
-            buttonText
-            buttonLink
-          }
-        }
-      }
-    `,
-    variables: { relativePath },
-    data: null,
+    query: payload?.query || '',
+    variables: payload?.variables || { relativePath },
+    data: payload?.data || null,
   });
 }
