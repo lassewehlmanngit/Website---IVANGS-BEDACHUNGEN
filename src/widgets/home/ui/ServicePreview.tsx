@@ -110,12 +110,12 @@ export interface ServicePreviewProps {
 }
 
 export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, servicesSection }) => {
-  const { data: servicesData, isLoading } = useServicesListData();
+  const { data: cmsData, isLoading } = useServicesListData();
   const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'solar', 'fenster', 'sanierung'];
   const section = servicesSection || {};
   
   // Extract services from CMS if available
-  const cmsServices = servicesData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
+  const cmsServices = cmsData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
   
   // If we have CMS services, use them; otherwise fall back to hardcoded order
   const displayOrder = cmsServices.length > 0 
