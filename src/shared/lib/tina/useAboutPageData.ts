@@ -8,6 +8,12 @@ export function useAboutPageData(lang: SupportedLang) {
   const [payload, setPayload] = useState<any>(null);
 
   useEffect(() => {
+    // Skip fetching if TinaCMS client is not available
+    if (!client) {
+      setPayload({ data: null, query: '', variables: { relativePath } });
+      return;
+    }
+
     // Fetch initial data using Tina client
     client.queries.aboutPage({ relativePath })
       .then((response) => {

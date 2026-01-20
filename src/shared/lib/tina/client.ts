@@ -8,11 +8,35 @@ const branch =
   import.meta.env.VITE_HEAD ||
   'main';
 
-export const client = createClient({
-  url: import.meta.env.DEV
-    ? 'http://localhost:4001/graphql'
-    : `https://content.tinajs.io/content/${import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID}/github/${branch}`,
-  token: import.meta.env.VITE_TINA_TOKEN,
-});
+// Check if TinaCMS credentials are configured
+const clientId = import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID;
+const token = import.meta.env.VITE_TINA_TOKEN;
+const isTinaConfigured = !!(clientId && token);
 
-export { client as tinaClient };
+// Only create the client if we're in dev mode OR have proper credentials
+// In production without credentials, we'll use static content fallback
+let client: ReturnType<typeof createClient> | null = null;
+
+if (import.meta.env.DEV) {
+  // In development, always try to connect to local Tina server
+  try {
+    client = createClient({
+      url: 'http://localhost:4001/graphql',
+      token: token || '',
+    });
+  } catch (error) {
+    console.warn('TinaCMS client initialization failed in dev mode:', error);
+  }
+} else if (isTinaConfigured) {
+  // In production, only create client if credentials are available
+  try {
+    client = createClient({
+      url: `https://content.tinajs.io/content/${clientId}/github/${branch}`,
+      token: token,
+    });
+  } catch (error) {
+    console.warn('TinaCMS client initialization failed:', error);
+  }
+}
+
+export { client, client as tinaClient };

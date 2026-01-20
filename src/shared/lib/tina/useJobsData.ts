@@ -6,6 +6,12 @@ export function useJobsData() {
   const [payload, setPayload] = useState<any>(null);
 
   useEffect(() => {
+    // Skip fetching if TinaCMS client is not available
+    if (!client) {
+      setPayload({ data: null, query: '', variables: {} });
+      return;
+    }
+
     // Fetch initial data using Tina client
     client.queries.jobConnection()
       .then((response) => {
