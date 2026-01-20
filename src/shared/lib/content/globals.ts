@@ -49,42 +49,27 @@ export interface FooterData {
 
 /**
  * Fetch settings data for a given language
+ * Note: Currently content is not localized, so we load from the root globals folder
  */
-export async function getSettings(lang: SupportedLang): Promise<SettingsData> {
-  try {
-    const data = await import(`../../../../content/globals/${lang}/settings.json`);
-    return (data.default || data) as SettingsData;
-  } catch {
-    // Fallback to German if language file not found
-    const data = await import(`../../../../content/globals/de/settings.json`);
-    return (data.default || data) as SettingsData;
-  }
+export async function getSettings(_lang: SupportedLang): Promise<SettingsData> {
+  const data = await import(`../../../../content/globals/settings.json`);
+  return (data.default || data) as SettingsData;
 }
 
 /**
  * Fetch navigation data for a given language
+ * Note: Currently content is not localized, so we load from the root globals folder
  */
-export async function getNavigation(lang: SupportedLang): Promise<NavigationData> {
-  try {
-    const data = await import(`../../../../content/globals/${lang}/navigation.json`);
-    return data.default || data;
-  } catch {
-    // Fallback to German if language file not found
-    const data = await import(`../../../../content/globals/de/navigation.json`);
-    return data.default || data;
-  }
+export async function getNavigation(_lang: SupportedLang): Promise<NavigationData> {
+  const data = await import(`../../../../content/globals/navigation.json`);
+  return data.default || data;
 }
 
 /**
  * Fetch footer data for a given language
+ * Note: Currently content is not localized, so we load from the root globals folder
  */
-export async function getFooter(lang: SupportedLang): Promise<FooterData> {
-  try {
-    const data = await import(`../../../../content/globals/${lang}/footer.json`);
-    return data.default || data;
-  } catch {
-    // Fallback to German if language file not found
-    const data = await import(`../../../../content/globals/de/footer.json`);
-    return data.default || data;
-  }
+export async function getFooter(_lang: SupportedLang): Promise<FooterData> {
+  const data = await import(`../../../../content/globals/footer.json`);
+  return data.default || data;
 }

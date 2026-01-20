@@ -46,7 +46,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
   }, []);
 
   return (
-    <section className="relative min-h-[85vh] flex flex-col justify-center bg-slate-900 overflow-hidden">
+    <section className="relative min-h-[85dvh] flex flex-col bg-slate-900 overflow-hidden">
       {/* Background Media & Overlay */}
       <div className="absolute inset-0 z-0">
         {mediaType === 'video' ? (
@@ -77,7 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10 z-10"></div>
       </div>
 
-      <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow">
+      <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow content-center">
         {/* Left: Copy & Main Message */}
         <div className="text-white mt-8 md:mt-0">
           <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'eyebrow')}>
