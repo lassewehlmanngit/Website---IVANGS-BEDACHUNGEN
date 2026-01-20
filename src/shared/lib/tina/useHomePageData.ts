@@ -1,5 +1,5 @@
-import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
+import { useTinaOptional } from './useTinaOptional';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { useEffect, useState } from 'react';
 
@@ -85,9 +85,9 @@ export function useHomePageData(lang: SupportedLang) {
     loadData();
   }, [relativePath]);
 
-  // Pass the fetched data to useTina for visual editing
-  // useTina adds _content_source metadata needed for tinaField to work
-  const { data } = useTina({
+  // Pass the fetched data to useTinaOptional for visual editing
+  // Only enables live subscriptions when inside TinaCMS admin iframe
+  const { data } = useTinaOptional({
     query: payload?.query || HOME_PAGE_QUERY,
     variables: payload?.variables || { relativePath },
     data: payload?.data || { homePage: null },

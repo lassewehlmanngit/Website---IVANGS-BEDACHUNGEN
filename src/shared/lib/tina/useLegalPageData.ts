@@ -1,5 +1,5 @@
-import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
+import { useTinaOptional } from './useTinaOptional';
 import { useEffect, useState } from 'react';
 
 // Fallback query for legal page
@@ -93,8 +93,8 @@ export function useLegalPageData(slug: string) {
     loadData();
   }, [relativePath, slug]);
 
-  // Pass the fetched data to useTina for visual editing
-  const { data } = useTina({
+  // Pass the fetched data to useTinaOptional for visual editing
+  const { data } = useTinaOptional({
     query: payload?.query || LEGAL_PAGE_QUERY,
     variables: payload?.variables || { relativePath },
     data: payload?.data || { legalPage: null },

@@ -1,5 +1,5 @@
-import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
+import { useTinaOptional } from './useTinaOptional';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { useEffect, useState } from 'react';
 
@@ -71,8 +71,8 @@ export function useContactPageData(lang: SupportedLang) {
     loadData();
   }, [relativePath]);
 
-  // Pass the fetched data to useTina for visual editing
-  const { data } = useTina({
+  // Pass the fetched data to useTinaOptional for visual editing
+  const { data } = useTinaOptional({
     query: payload?.query || CONTACT_PAGE_QUERY,
     variables: payload?.variables || { relativePath },
     data: payload?.data || { contactPage: null },

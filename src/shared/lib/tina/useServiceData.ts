@@ -1,5 +1,5 @@
-import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
+import { useTinaOptional } from './useTinaOptional';
 import { useEffect, useState } from 'react';
 import fm from 'front-matter';
 
@@ -75,8 +75,8 @@ export function useServiceData(serviceId: string) {
     loadData();
   }, [relativePath, serviceId]);
 
-  // Pass the fetched data to useTina for visual editing
-  const { data } = useTina({
+  // Pass the fetched data to useTinaOptional for visual editing
+  const { data } = useTinaOptional({
     query: payload?.query || SERVICE_QUERY,
     variables: payload?.variables || { relativePath },
     data: payload?.data || { service: null },

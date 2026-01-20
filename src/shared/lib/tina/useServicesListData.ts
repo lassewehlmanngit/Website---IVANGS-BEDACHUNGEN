@@ -1,5 +1,5 @@
-import { useTina } from 'tinacms/dist/react';
 import { client } from './client';
+import { useTinaOptional } from './useTinaOptional';
 import { useEffect, useState } from 'react';
 
 // Query to fetch all services
@@ -61,8 +61,8 @@ export function useServicesListData() {
     loadData();
   }, []);
 
-  // Pass the fetched data to useTina for visual editing
-  const { data } = useTina({
+  // Pass the fetched data to useTinaOptional for visual editing
+  const { data } = useTinaOptional({
     query: payload?.query || SERVICES_LIST_QUERY,
     variables: payload?.variables || {},
     data: payload?.data || { serviceConnection: { edges: [] } },

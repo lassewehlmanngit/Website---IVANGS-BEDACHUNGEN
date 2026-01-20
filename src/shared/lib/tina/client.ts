@@ -39,4 +39,25 @@ if (import.meta.env.DEV) {
   }
 }
 
+/**
+ * Check if visual editing mode is enabled (inside TinaCMS admin iframe)
+ * This is used to conditionally enable useTina subscriptions only when needed,
+ * preventing performance issues from multiple concurrent subscriptions in production.
+ */
+export function isVisualEditingEnabled(): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  // Check if we're inside an iframe (TinaCMS admin embeds the site in an iframe)
+  const isInIframe = window.self !== window.top;
+  
+  // Check for Tina-specific URL parameters
+  const hasTinaParam = window.location.search.includes('tinaPreview') || 
+                       window.location.search.includes('tina-iframe');
+  
+  // Check if we're on the /admin path
+  const isAdminPath = window.location.pathname.includes('/admin');
+  
+  return isInIframe || hasTinaParam || isAdminPath;
+}
+
 export { client, client as tinaClient };
