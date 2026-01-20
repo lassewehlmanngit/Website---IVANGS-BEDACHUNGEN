@@ -1,10 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTina } from 'tinacms/dist/react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Markdown } from '@/shared/ui/Markdown';
-import type { ContentPage, PageBlock } from '@/shared/lib/content/types';
-import { loadPageBySlug } from '@/shared/lib/content/pages';
+import type { PageBlock } from '@/shared/lib/content/types';
+import { usePageData } from '@/shared/lib/tina/usePageData';
 import { Hero } from '@/shared/ui/Hero';
 import { FeatureSection, FeatureCard } from '@/shared/ui/Feature';
 import { Testimonial } from '@/shared/ui/Testimonial';
@@ -97,41 +98,17 @@ export const GenericPage: React.FC<GenericPageProps> = ({ lang }) => {
   const { slug } = useParams<{ slug: string }>();
   const normalizedSlug = useMemo(() => (slug && slug.trim().length > 0 ? slug.trim() : 'home'), [slug]);
 
-  const [page, setPage] = useState<ContentPage | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  // Fetch data using Tina's GraphQL client
+  const pageData = usePageData(lang, normalizedSlug);
 
-  useEffect(() => {
-    let cancelled = false;
+  // Enable visual editing with useTina hook
+  const { data } = useTina({
+    query: pageData.query,
+    variables: pageData.variables,
+    data: pageData.data,
+  });
 
-    loadPageBySlug(lang, normalizedSlug)
-      .then((data) => {
-        if (cancelled) return;
-        setPage(data);
-        setError(null);
-      })
-      .catch((e: unknown) => {
-        if (cancelled) return;
-        const message = e instanceof Error ? e.message : 'Failed to load page';
-        setError(message);
-        setPage(null);
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, [lang, normalizedSlug]);
-
-  if (error) {
-    return (
-      <div className="container py-12">
-        <Seo title="Not found" />
-        <h1 className="text-2xl font-semibold">{lang === 'de' ? 'Nicht gefunden' : 'Not found'}</h1>
-        <p className="mt-2 text-white/75">{error}</p>
-      </div>
-    );
-  }
-
-  if (!page) {
+  if (pageData.loading) {
     return (
       <div className="container py-12">
         <p className="text-white/70">{lang === 'de' ? 'Laden…' : 'Loading…'}</p>
@@ -139,10 +116,28 @@ export const GenericPage: React.FC<GenericPageProps> = ({ lang }) => {
     );
   }
 
+  if (pageData.error) {
+    return (
+      <div className="container py-12">
+        <Seo title="Not found" />
+        <h1 className="text-2xl font-semibold">{lang === 'de' ? 'Nicht gefunden' : 'Not found'}</h1>
+        <p className="mt-2 text-white/75">{pageData.error}</p>
+      </div>
+    );
+  }
+
+  if (!data?.page) {
+    return (
+      <div className="container py-12">
+        <p className="text-white/70">{lang === 'de' ? 'Keine Daten' : 'No data'}</p>
+      </div>
+    );
+  }
+
   return (
     <>
-      <Seo title={page.meta.title} description={page.meta.description} />
-      {page.blocks?.map((block, i) => (
+      <Seo title={data.page.title} description={data.page.description} />
+      {data.page.blocks?.map((block: PageBlock, i: number) => (
         <BlockRenderer key={i} block={block} />
       ))}
     </>

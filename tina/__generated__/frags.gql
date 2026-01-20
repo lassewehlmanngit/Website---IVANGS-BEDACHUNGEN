@@ -96,6 +96,48 @@ fragment JobParts on Job {
   published
 }
 
+fragment PageParts on Page {
+  __typename
+  title
+  description
+  blocks {
+    __typename
+    ... on PageBlocksHero {
+      title
+      description
+      image
+      actions {
+        __typename
+        label
+        href
+        variant
+      }
+    }
+    ... on PageBlocksFeatures {
+      title
+      description
+      items {
+        __typename
+        title
+        description
+        icon
+      }
+    }
+    ... on PageBlocksTestimonial {
+      quote
+      author
+      role
+    }
+    ... on PageBlocksContact {
+      title
+      description
+    }
+    ... on PageBlocksContent {
+      body
+    }
+  }
+}
+
 fragment AboutPageParts on AboutPage {
   __typename
   seo {

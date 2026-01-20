@@ -125,6 +125,11 @@ var config_default = defineConfig({
         label: "Team Mitglieder",
         path: "content/team",
         format: "md",
+        ui: {
+          router: ({ document }) => {
+            return `/de/about#team-${document._sys.filename}`;
+          }
+        },
         fields: [
           { type: "string", name: "name", label: "Name", required: true, isTitle: true },
           { type: "string", name: "role", label: "Position", required: true },
@@ -147,6 +152,11 @@ var config_default = defineConfig({
         label: "Leistungen",
         path: "content/services",
         format: "md",
+        ui: {
+          router: ({ document }) => {
+            return `/de/services/${document._sys.filename}`;
+          }
+        },
         fields: [
           { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
           { type: "string", name: "shortDescription", label: "Kurzbeschreibung", ui: { component: "textarea" } },
@@ -183,6 +193,11 @@ var config_default = defineConfig({
         label: "Stellenangebote",
         path: "content/jobs",
         format: "md",
+        ui: {
+          router: ({ document }) => {
+            return `/de/career#${document._sys.filename}`;
+          }
+        },
         fields: [
           { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
           { type: "string", name: "location", label: "Standort", required: true },
@@ -213,6 +228,114 @@ var config_default = defineConfig({
             label: "Wir bieten"
           },
           { type: "boolean", name: "published", label: "Ver\xF6ffentlicht" }
+        ]
+      },
+      // Pages Collection
+      {
+        name: "page",
+        label: "Seiten",
+        path: "content/pages",
+        format: "md",
+        ui: {
+          router: ({ document }) => {
+            const lang = document._sys.breadcrumbs[0] || "de";
+            const slug = document._sys.filename;
+            if (slug === "home") {
+              return `/${lang}`;
+            }
+            return `/${lang}/${slug}`;
+          }
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Titel",
+            required: true,
+            isTitle: true
+          },
+          {
+            type: "string",
+            name: "description",
+            label: "Beschreibung",
+            ui: { component: "textarea" }
+          },
+          {
+            type: "object",
+            list: true,
+            name: "blocks",
+            label: "Inhaltsbl\xF6cke",
+            templates: [
+              {
+                name: "hero",
+                label: "Hero",
+                fields: [
+                  { type: "string", name: "title", label: "Titel" },
+                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+                  { type: "image", name: "image", label: "Bild" },
+                  {
+                    type: "object",
+                    list: true,
+                    name: "actions",
+                    label: "Aktionen",
+                    fields: [
+                      { type: "string", name: "label", label: "Text", required: true },
+                      { type: "string", name: "href", label: "Link", required: true },
+                      {
+                        type: "string",
+                        name: "variant",
+                        label: "Variante",
+                        options: ["primary", "secondary", "outline"]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: "features",
+                label: "Features",
+                fields: [
+                  { type: "string", name: "title", label: "Titel" },
+                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+                  {
+                    type: "object",
+                    list: true,
+                    name: "items",
+                    label: "Elemente",
+                    fields: [
+                      { type: "string", name: "title", label: "Titel", required: true },
+                      { type: "string", name: "description", label: "Beschreibung" },
+                      { type: "string", name: "icon", label: "Icon (Lucide)" }
+                    ]
+                  }
+                ]
+              },
+              {
+                name: "testimonial",
+                label: "Testimonial",
+                fields: [
+                  { type: "string", name: "quote", label: "Zitat", required: true, ui: { component: "textarea" } },
+                  { type: "string", name: "author", label: "Autor", required: true },
+                  { type: "string", name: "role", label: "Position" }
+                ]
+              },
+              {
+                name: "contact",
+                label: "Kontakt",
+                fields: [
+                  { type: "string", name: "title", label: "Titel" },
+                  { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+                ]
+              },
+              {
+                name: "content",
+                label: "Rich Text",
+                fields: [
+                  { type: "rich-text", name: "body", label: "Inhalt" }
+                ]
+              }
+            ]
+          }
         ]
       },
       // About Page Collection (Single Document)
