@@ -11,7 +11,11 @@ const LEGAL_PAGE_QUERY = `
     legalPage(relativePath: $relativePath) {
       _sys { filename }
       title
-      description
+      seo {
+        title
+        description
+        ogImage
+      }
       body
     }
   }
@@ -77,7 +81,11 @@ export function useLegalPageData(slug: string) {
             data: { 
               legalPage: {
                 title: metadata.title || '',
-                description: metadata.description || '',
+                seo: {
+                  title: metadata.title || '',
+                  description: metadata.description || '',
+                  ogImage: null
+                },
                 body: body
               }
             },

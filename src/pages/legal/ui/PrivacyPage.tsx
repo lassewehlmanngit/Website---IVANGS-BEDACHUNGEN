@@ -19,15 +19,18 @@ export const PrivacyPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   
   const page = data?.legalPage || {
     title: 'Datenschutzerklärung',
-    description: 'Datenschutzerklärung der Ivangs Bedachungen GmbH & Co. KG. Informationen zur Verarbeitung Ihrer personenbezogenen Daten.',
+    seo: {
+      title: 'Datenschutzerklärung',
+      description: 'Datenschutzerklärung der Ivangs Bedachungen GmbH & Co. KG. Informationen zur Verarbeitung Ihrer personenbezogenen Daten.',
+    },
     body: ''
   };
   
   return (
     <>
       <Seo 
-        title={`${page.title} - Ivangs Bedachungen`}
-        description={page.description}
+        title={`${page.seo?.title || page.title} - Ivangs Bedachungen`}
+        description={page.seo?.description}
         ogLocale="de_DE"
       />
       <div className="animate-fade-in bg-white pt-12 pb-24">

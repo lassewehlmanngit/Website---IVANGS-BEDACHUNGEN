@@ -19,15 +19,18 @@ export const ImprintPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   
   const page = data?.legalPage || {
     title: 'Impressum',
-    description: 'Impressum und rechtliche Angaben der Ivangs Bedachungen GmbH & Co. KG in Geilenkirchen.',
+    seo: {
+      title: 'Impressum',
+      description: 'Impressum und rechtliche Angaben der Ivangs Bedachungen GmbH & Co. KG in Geilenkirchen.',
+    },
     body: ''
   };
   
   return (
     <>
       <Seo 
-        title={`${page.title} - Ivangs Bedachungen`}
-        description={page.description}
+        title={`${page.seo?.title || page.title} - Ivangs Bedachungen`}
+        description={page.seo?.description}
         ogLocale="de_DE"
       />
       <div className="animate-fade-in bg-white pt-12 pb-24">

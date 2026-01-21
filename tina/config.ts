@@ -883,15 +883,7 @@ export default defineConfig({
           allowedActions: { create: false, delete: false },
         },
         fields: [
-          {
-            type: 'object',
-            name: 'seo',
-            label: '🔍 SEO',
-            fields: [
-              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
+          seoFields,
           { type: 'string', name: 'title', label: 'Haupttitel' },
           { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
           {
@@ -971,8 +963,8 @@ export default defineConfig({
           router: ({ document }) => getRouteForDocument(document._sys.filename),
         },
         fields: [
-          { type: 'string', name: 'title', label: 'Seitentitel', required: true, isTitle: true },
-          { type: 'string', name: 'description', label: 'Meta Beschreibung', ui: { component: 'textarea' } },
+          { type: 'string', name: 'title', label: 'Seitentitel (Intern)', required: true, isTitle: true },
+          seoFields,
           { type: 'rich-text', name: 'body', label: 'Inhalt', isBody: true },
         ],
       },

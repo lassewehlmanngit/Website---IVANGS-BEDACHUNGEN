@@ -5,32 +5,25 @@ import { Seo } from '@/shared/ui/Seo';
 import { BlockRenderer } from '@/widgets/blocks';
 import { usePageBuilderData } from '@/shared/lib/tina/usePageBuilderData';
 
-export interface PageBuilderProps {
+export interface DynamicPageProps {
   lang: SupportedLang;
   slug?: string;
 }
 
-export const PageBuilder: React.FC<PageBuilderProps> = ({ lang, slug: propSlug }) => {
-  const { slug: paramSlug } = useParams<{ slug: string }>();
-  const slug = propSlug || paramSlug;
+export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }) => {
+  const params = useParams();
+  const splat = params['*'];
+  
+  // Use prop slug if available, otherwise use the catch-all splat
+  const slug = propSlug || splat;
 
   if (!slug) {
     return <Navigate to={`/${lang}`} replace />;
   }
 
-  return <PageBuilderContent lang={lang} slug={slug} />;
-};
-
-interface PageBuilderContentProps {
-  lang: SupportedLang;
-  slug: string;
-}
-
-const PageBuilderContent: React.FC<PageBuilderContentProps> = ({ lang, slug }) => {
   const { data, isLoading, error } = usePageBuilderData(lang, slug);
   const page = data?.page;
 
-  // Loading state
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -39,8 +32,8 @@ const PageBuilderContent: React.FC<PageBuilderContentProps> = ({ lang, slug }) =
     );
   }
 
-  // Error state - redirect to 404
   if (error || !page) {
+    // If we can't find the page, redirect to 404
     return <Navigate to={`/${lang}/404`} replace />;
   }
 
@@ -59,5 +52,3 @@ const PageBuilderContent: React.FC<PageBuilderContentProps> = ({ lang, slug }) =
     </>
   );
 };
-
-export default PageBuilder;

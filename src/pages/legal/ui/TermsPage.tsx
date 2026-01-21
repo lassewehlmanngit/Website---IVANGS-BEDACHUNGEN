@@ -19,15 +19,18 @@ export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   
   const page = data?.legalPage || {
     title: 'Allgemeine Geschäftsbedingungen (AGB)',
-    description: 'Allgemeine Geschäftsbedingungen der Ivangs Bedachungen GmbH & Co. KG für Dachdeckerarbeiten und Bedachungen.',
+    seo: {
+      title: 'Allgemeine Geschäftsbedingungen (AGB)',
+      description: 'Allgemeine Geschäftsbedingungen der Ivangs Bedachungen GmbH & Co. KG für Dachdeckerarbeiten und Bedachungen.',
+    },
     body: ''
   };
   
   return (
     <>
       <Seo 
-        title={`${page.title} - Ivangs Bedachungen`}
-        description={page.description}
+        title={`${page.seo?.title || page.title} - Ivangs Bedachungen`}
+        description={page.seo?.description}
         ogLocale="de_DE"
       />
       <div className="animate-fade-in bg-white pt-12 pb-24">

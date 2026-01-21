@@ -4,11 +4,10 @@ import { ScrollHandler } from './ScrollHandler';
 import { SUPPORTED_LANGS, type SupportedLang } from '@/shared/config/i18n';
 import { MarketingLayout } from '@/widgets/layout/MarketingLayout';
 import { HomePage } from '@/pages/HomePage';
-import { GenericPage } from '@/pages/GenericPage';
+import { DynamicPage } from '@/pages/DynamicPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/DesignSystemPage';
 import { ServiceDetailPage } from '@/pages/service-detail/ui/ServiceDetailPage';
-import { PageBuilder } from '@/pages/PageBuilder';
 import { ImprintPage } from '@/pages/legal/ui/ImprintPage';
 import { PrivacyPage } from '@/pages/legal/ui/PrivacyPage';
 import { TermsPage } from '@/pages/legal/ui/TermsPage';
@@ -48,9 +47,9 @@ const LanguageWrapper: React.FC = () => {
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
         
         {/* Page Builder pages (about, career, contact) */}
-        <Route path="/about" element={<PageBuilder lang={safeLang} slug="about" />} />
-        <Route path="/career" element={<PageBuilder lang={safeLang} slug="career" />} />
-        <Route path="/contact" element={<PageBuilder lang={safeLang} slug="contact" />} />
+        <Route path="/about" element={<DynamicPage lang={safeLang} slug="about" />} />
+        <Route path="/career" element={<DynamicPage lang={safeLang} slug="career" />} />
+        <Route path="/contact" element={<DynamicPage lang={safeLang} slug="contact" />} />
         
         {/* Legal pages */}
         <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
@@ -58,11 +57,11 @@ const LanguageWrapper: React.FC = () => {
         <Route path="/terms" element={<TermsPage lang={safeLang} />} />
         <Route path="/cookies" element={<CookieSettingsPage lang={safeLang} />} />
         
-        {/* Generic page fallback */}
-        <Route path="/:slug" element={<GenericPage lang={safeLang} />} />
-        
-        {/* 404 */}
-        <Route path="*" element={<NotFoundPage lang={safeLang} />} />
+        {/* 404 Page */}
+        <Route path="/404" element={<NotFoundPage lang={safeLang} />} />
+
+        {/* Dynamic catch-all for any other page slugs */}
+        <Route path="*" element={<DynamicPage lang={safeLang} />} />
       </Routes>
     </MarketingLayout>
   );

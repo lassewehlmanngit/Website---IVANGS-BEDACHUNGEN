@@ -1038,6 +1038,7 @@ type NavigationConnection implements Connection {
 type ContactPageSeo {
   title: String!
   description: String
+  ogImage: String
 }
 
 type ContactPageAddress {
@@ -1076,6 +1077,7 @@ type ContactPage implements Node & Document {
 input ContactPageSeoFilter {
   title: StringFilter
   description: StringFilter
+  ogImage: ImageFilter
 }
 
 input ContactPageAddressFilter {
@@ -1165,18 +1167,30 @@ type FooterConnection implements Connection {
   edges: [FooterConnectionEdges]
 }
 
-type LegalPage implements Node & Document {
+type LegalPageSeo {
   title: String!
   description: String
+  ogImage: String
+}
+
+type LegalPage implements Node & Document {
+  title: String!
+  seo: LegalPageSeo
   body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
 
-input LegalPageFilter {
+input LegalPageSeoFilter {
   title: StringFilter
   description: StringFilter
+  ogImage: ImageFilter
+}
+
+input LegalPageFilter {
+  title: StringFilter
+  seo: LegalPageSeoFilter
   body: RichTextFilter
 }
 
@@ -1649,6 +1663,7 @@ input NavigationMutation {
 input ContactPageSeoMutation {
   title: String
   description: String
+  ogImage: String
 }
 
 input ContactPageAddressMutation {
@@ -1697,9 +1712,15 @@ input FooterMutation {
   social: [FooterSocialMutation]
 }
 
-input LegalPageMutation {
+input LegalPageSeoMutation {
   title: String
   description: String
+  ogImage: String
+}
+
+input LegalPageMutation {
+  title: String
+  seo: LegalPageSeoMutation
   body: JSON
 }
 

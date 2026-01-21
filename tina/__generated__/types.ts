@@ -1318,6 +1318,7 @@ export type ContactPageSeo = {
   __typename?: 'ContactPageSeo';
   title: Scalars['String']['output'];
   description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
 };
 
 export type ContactPageAddress = {
@@ -1360,6 +1361,7 @@ export type ContactPage = Node & Document & {
 export type ContactPageSeoFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
 };
 
 export type ContactPageAddressFilter = {
@@ -1456,19 +1458,32 @@ export type FooterConnection = Connection & {
   edges?: Maybe<Array<Maybe<FooterConnectionEdges>>>;
 };
 
+export type LegalPageSeo = {
+  __typename?: 'LegalPageSeo';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
+};
+
 export type LegalPage = Node & Document & {
   __typename?: 'LegalPage';
   title: Scalars['String']['output'];
-  description?: Maybe<Scalars['String']['output']>;
+  seo?: Maybe<LegalPageSeo>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
 
-export type LegalPageFilter = {
+export type LegalPageSeoFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
+};
+
+export type LegalPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<LegalPageSeoFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -2097,6 +2112,7 @@ export type NavigationMutation = {
 export type ContactPageSeoMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ContactPageAddressMutation = {
@@ -2145,9 +2161,15 @@ export type FooterMutation = {
   social?: InputMaybe<Array<InputMaybe<FooterSocialMutation>>>;
 };
 
-export type LegalPageMutation = {
+export type LegalPageSeoMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type LegalPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  seo?: InputMaybe<LegalPageSeoMutation>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -2165,11 +2187,11 @@ export type SettingsPartsFragment = { __typename: 'Settings', siteName: string, 
 
 export type NavigationPartsFragment = { __typename: 'Navigation', logo?: string | null, ctaButton?: { __typename: 'NavigationCtaButton', text: string, link: string } | null, items?: Array<{ __typename: 'NavigationItems', label: string, href: string } | null> | null };
 
-export type ContactPagePartsFragment = { __typename: 'ContactPage', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null };
+export type ContactPagePartsFragment = { __typename: 'ContactPage', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null };
 
 export type FooterPartsFragment = { __typename: 'Footer', copyright?: string | null, links?: Array<{ __typename: 'FooterLinks', label: string, href: string } | null> | null, social?: Array<{ __typename: 'FooterSocial', platform: string, url: string } | null> | null };
 
-export type LegalPagePartsFragment = { __typename: 'LegalPage', title: string, description?: string | null, body?: any | null };
+export type LegalPagePartsFragment = { __typename: 'LegalPage', title: string, body?: any | null, seo?: { __typename: 'LegalPageSeo', title: string, description?: string | null, ogImage?: string | null } | null };
 
 export type HomePageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2309,7 +2331,7 @@ export type ContactPageQueryVariables = Exact<{
 }>;
 
 
-export type ContactPageQuery = { __typename?: 'Query', contactPage: { __typename: 'ContactPage', id: string, title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null } };
+export type ContactPageQuery = { __typename?: 'Query', contactPage: { __typename: 'ContactPage', id: string, title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null } };
 
 export type ContactPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2321,7 +2343,7 @@ export type ContactPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type ContactPageConnectionQuery = { __typename?: 'Query', contactPageConnection: { __typename?: 'ContactPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactPageConnectionEdges', cursor: string, node?: { __typename: 'ContactPage', id: string, title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null } | null } | null> | null } };
+export type ContactPageConnectionQuery = { __typename?: 'Query', contactPageConnection: { __typename?: 'ContactPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactPageConnectionEdges', cursor: string, node?: { __typename: 'ContactPage', id: string, title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, facebook?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, address?: { __typename: 'ContactPageAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactPageOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactPageRepairHours', tueThu: string, fri: string } | null } | null } | null> | null } };
 
 export type FooterQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2347,7 +2369,7 @@ export type LegalPageQueryVariables = Exact<{
 }>;
 
 
-export type LegalPageQuery = { __typename?: 'Query', legalPage: { __typename: 'LegalPage', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type LegalPageQuery = { __typename?: 'Query', legalPage: { __typename: 'LegalPage', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'LegalPageSeo', title: string, description?: string | null, ogImage?: string | null } | null } };
 
 export type LegalPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2359,7 +2381,7 @@ export type LegalPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type LegalPageConnectionQuery = { __typename?: 'Query', legalPageConnection: { __typename?: 'LegalPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'LegalPageConnectionEdges', cursor: string, node?: { __typename: 'LegalPage', id: string, title: string, description?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type LegalPageConnectionQuery = { __typename?: 'Query', legalPageConnection: { __typename?: 'LegalPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'LegalPageConnectionEdges', cursor: string, node?: { __typename: 'LegalPage', id: string, title: string, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'LegalPageSeo', title: string, description?: string | null, ogImage?: string | null } | null } | null } | null> | null } };
 
 export const HomePagePartsFragmentDoc = gql`
     fragment HomePageParts on HomePage {
@@ -2725,6 +2747,7 @@ export const ContactPagePartsFragmentDoc = gql`
     __typename
     title
     description
+    ogImage
   }
   title
   description
@@ -2771,7 +2794,12 @@ export const LegalPagePartsFragmentDoc = gql`
     fragment LegalPageParts on LegalPage {
   __typename
   title
-  description
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
   body
 }
     `;

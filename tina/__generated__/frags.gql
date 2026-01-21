@@ -354,6 +354,7 @@ fragment ContactPageParts on ContactPage {
     __typename
     title
     description
+    ogImage
   }
   title
   description
@@ -398,6 +399,11 @@ fragment FooterParts on Footer {
 fragment LegalPageParts on LegalPage {
   __typename
   title
-  description
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
   body
 }
