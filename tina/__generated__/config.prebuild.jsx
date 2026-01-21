@@ -322,7 +322,8 @@ var config_default = defineConfig({
         },
         ui: {
           router: () => "/de",
-          allowedActions: { create: false, delete: false }
+          allowedActions: { create: false, delete: false },
+          group: "\u{1F5A5}\uFE0F Seiten"
         },
         fields: [
           seoFields,
@@ -517,7 +518,8 @@ var config_default = defineConfig({
         path: "content/pages",
         format: "json",
         ui: {
-          router: ({ document }) => getRouteForDocument(document._sys.filename)
+          router: ({ document }) => getRouteForDocument(document._sys.filename),
+          group: "\u{1F5A5}\uFE0F Seiten"
         },
         fields: [
           { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
@@ -553,7 +555,8 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/about#team-${document._sys.filename}`;
-          }
+          },
+          group: "\u{1F4DD} Inhalte"
         },
         fields: [
           { type: "string", name: "name", label: "Vor- & Nachname", required: true, isTitle: true },
@@ -584,7 +587,8 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/services/${document._sys.filename}`;
-          }
+          },
+          group: "\u{1F4DD} Inhalte"
         },
         fields: [
           { type: "string", name: "title", label: "Name der Leistung", required: true, isTitle: true },
@@ -710,7 +714,8 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/career#${document._sys.filename}`;
-          }
+          },
+          group: "\u{1F4DD} Inhalte"
         },
         fields: [
           { type: "string", name: "title", label: "Jobtitel", required: true, isTitle: true },
@@ -750,7 +755,10 @@ var config_default = defineConfig({
         label: "\u2699\uFE0F Grundeinstellungen",
         path: "content/globals",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          allowedActions: { create: false, delete: false },
+          group: "\u2699\uFE0F Einstellungen"
+        },
         match: { include: "settings" },
         fields: [
           { type: "string", name: "siteName", label: "Website Name", required: true },
@@ -791,7 +799,10 @@ var config_default = defineConfig({
         label: "\u{1F9ED} Men\xFC / Navigation",
         path: "content/globals",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          allowedActions: { create: false, delete: false },
+          group: "\u2699\uFE0F Einstellungen"
+        },
         match: { include: "navigation" },
         fields: [
           { type: "image", name: "logo", label: "Logo" },
@@ -823,7 +834,10 @@ var config_default = defineConfig({
         label: "\u{1F9B6} Footer",
         path: "content/globals",
         format: "json",
-        ui: { allowedActions: { create: false, delete: false } },
+        ui: {
+          allowedActions: { create: false, delete: false },
+          group: "\u2699\uFE0F Einstellungen"
+        },
         match: { include: "footer" },
         fields: [
           { type: "string", name: "copyright", label: "Copyright Text" },
@@ -856,7 +870,8 @@ var config_default = defineConfig({
         path: "content/legal",
         format: "md",
         ui: {
-          router: ({ document }) => getRouteForDocument(document._sys.filename)
+          router: ({ document }) => getRouteForDocument(document._sys.filename),
+          group: "\u2696\uFE0F Rechtliches"
         },
         fields: [
           { type: "string", name: "title", label: "Seitentitel (Intern)", required: true, isTitle: true },
@@ -865,28 +880,6 @@ var config_default = defineConfig({
         ]
       }
     ]
-  },
-  ui: {
-    sidebar: () => {
-      return [
-        {
-          label: "\u{1F5A5}\uFE0F Seiten",
-          items: ["homePage", "page"]
-        },
-        {
-          label: "\u{1F4DD} Inhalte",
-          items: ["service", "teamMember", "job"]
-        },
-        {
-          label: "\u2696\uFE0F Rechtliches",
-          items: ["legalPage"]
-        },
-        {
-          label: "\u2699\uFE0F Einstellungen",
-          items: ["navigation", "footer", "settings"]
-        }
-      ];
-    }
   }
 });
 export {
