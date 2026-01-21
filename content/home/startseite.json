@@ -18,6 +18,13 @@
     "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
     "showQuickForm": true
   },
+  "quickForm": {
+    "title": "Schnellanfrage",
+    "nameLabel": "Ihr Name",
+    "contactLabel": "Telefon oder E-Mail",
+    "buttonText": "Kostenlos anfragen",
+    "disclaimer": "Wir melden uns innerhalb von 24h. Unverbindlich & kostenlos."
+  },
   "stats": [
     {
       "value": "28",

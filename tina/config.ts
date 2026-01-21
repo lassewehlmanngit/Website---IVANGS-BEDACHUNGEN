@@ -33,7 +33,7 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      // Home Page Collection (Single Document)
+      // 🏠 STARTSEITE
       {
         name: 'homePage',
         label: '🏠 Startseite',
@@ -41,214 +41,208 @@ export default defineConfig({
         format: 'json',
         ui: {
           router: () => '/de',
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
         },
         fields: [
-          // 1. SEO Section
+          // 1. SEO
           {
             type: 'object',
             name: 'seo',
-            label: '🔍 SEO Einstellungen',
+            label: '🔍 SEO & Google',
             fields: [
-              { type: 'string', name: 'title', label: 'Seitentitel', required: true },
-              { type: 'string', name: 'description', label: 'Meta Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'title', label: 'Browser-Titel', required: true, description: 'Titel im Browser-Tab' },
+              { type: 'string', name: 'description', label: 'Suchbeschreibung', ui: { component: 'textarea' }, description: 'Text in Google-Ergebnissen' },
             ],
           },
-          // 2. Hero Section
+          // 2. HERO
           {
             type: 'object',
             name: 'hero',
-            label: '✨ Hero Bereich',
+            label: '👋 Oberer Bereich (Intro)',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
-              { type: 'string', name: 'title', label: 'Haupttitel', required: true },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift', description: 'z.B. "MEISTERBETRIEB"' },
+              { type: 'string', name: 'title', label: 'Haupttitel (H1)', required: true },
               { type: 'string', name: 'subtitle', label: 'Untertitel' },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-              // Grouped buttons for cleaner form
-              {
-                type: 'object',
-                name: 'buttons',
-                label: 'Buttons',
+              { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
+              { 
+                type: 'object', 
+                name: 'buttons', 
+                label: 'Buttons', 
                 fields: [
-                  { type: 'string', name: 'primaryText', label: 'Hauptbutton Text' },
-                  { type: 'string', name: 'primaryLink', label: 'Hauptbutton Link', description: 'z.B. /de/contact, https://..., tel:02162..., mailto:..., #section' },
-                  { type: 'string', name: 'secondaryText', label: 'Zweitbutton Text' },
-                  { type: 'string', name: 'secondaryLink', label: 'Zweitbutton Link', description: 'z.B. /de/career, https://..., tel:..., mailto:..., #section' },
-                ],
+                  { type: 'string', name: 'primaryText', label: 'Haupt-Button Text' },
+                  { type: 'string', name: 'primaryLink', label: 'Haupt-Button Link' },
+                  { type: 'string', name: 'secondaryText', label: 'Zweit-Button Text' },
+                  { type: 'string', name: 'secondaryLink', label: 'Zweit-Button Link' },
+                ] 
               },
               { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
               { type: 'string', name: 'videoUrl', label: 'Video URL' },
-              { type: 'boolean', name: 'showQuickForm', label: 'Schnellkontakt anzeigen' },
+              { type: 'boolean', name: 'showQuickForm', label: 'Kontaktformular anzeigen?' },
             ],
           },
-          // 2.5. Quick Form Section
+          // 3. QUICK FORM
           {
             type: 'object',
             name: 'quickForm',
-            label: '⚡ Schnellanfrage Formular',
+            label: '⚡ Schnellanfrage-Box',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'nameLabel', label: 'Label: Name' },
-              { type: 'string', name: 'contactLabel', label: 'Label: Kontakt' },
+              { type: 'string', name: 'nameLabel', label: 'Platzhalter Name' },
+              { type: 'string', name: 'contactLabel', label: 'Platzhalter Kontakt' },
               { type: 'string', name: 'buttonText', label: 'Button Text' },
-              { type: 'string', name: 'disclaimer', label: 'Kleingedrucktes (unter Button)' },
+              { type: 'string', name: 'disclaimer', label: 'Hinweistext' },
             ],
           },
-          // 3. Stats Section (with itemProps for smart labels)
+          // 4. STATS
           {
             type: 'object',
             list: true,
             name: 'stats',
-            label: '📊 Statistiken',
-            ui: {
+            label: '📊 Statistiken (Zahlen)',
+            ui: { 
               max: 6,
-              itemProps: (item) => {
-                return { label: item?.label || 'Neue Statistik' };
-              },
+              itemProps: (item) => ({ label: item?.label || 'Neue Statistik' }) 
             },
             fields: [
-              { type: 'string', name: 'value', label: 'Wert (z.B. 25+)', required: true },
-              { type: 'string', name: 'label', label: 'Beschriftung', required: true },
-              { type: 'string', name: 'icon', label: 'Icon Name (Lucide)' },
+              { type: 'string', name: 'value', label: 'Zahl (z.B. 28)', required: true },
+              { type: 'string', name: 'label', label: 'Einheit (z.B. Experten)', required: true },
+              { type: 'string', name: 'icon', label: 'Icon Name (Englisch)' },
             ],
           },
-          // 4. Services Section (grouped header)
+          // 5. SERVICES
           {
             type: 'object',
             name: 'servicesSection',
-            label: '🔧 Leistungen (Header)',
+            label: '🛠️ Leistungen (Vorschau)',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel' },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
             ],
           },
-          // 5. CEO Quote
+          // 6. CEO QUOTE
           {
             type: 'object',
             name: 'ceoQuote',
-            label: '💬 Geschäftsführer Zitat',
+            label: '💬 Zitat / Über Uns',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'name', label: 'Name', required: true },
               { type: 'string', name: 'role', label: 'Position', required: true },
-              { type: 'string', name: 'quote', label: 'Zitat', ui: { component: 'textarea' }, required: true },
+              { type: 'string', name: 'quote', label: 'Zitat (Groß)', ui: { component: 'textarea' }, required: true },
               { type: 'string', name: 'text', label: 'Fließtext', ui: { component: 'textarea' } },
-              { type: 'image', name: 'image', label: 'Bild' },
+              { type: 'image', name: 'image', label: 'Foto' },
               { type: 'string', name: 'buttonText', label: 'Button Text' },
-              { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/about' },
+              { type: 'string', name: 'buttonLink', label: 'Button Link' },
             ],
           },
-          // 6. Projects Section (grouped header + list with itemProps)
+          // 7. PROJECTS
           {
             type: 'object',
             name: 'projectsSection',
-            label: '🏗️ Projekte Showcase',
+            label: '🏗️ Projekte & Referenzen',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel' },
               {
                 type: 'object',
                 list: true,
                 name: 'items',
-                label: 'Projekt Liste',
-                ui: {
+                label: 'Projekte',
+                ui: { 
                   max: 6,
-                  itemProps: (item) => ({ label: item?.title || 'Neues Projekt' }),
+                  itemProps: (item) => ({ label: item?.title || 'Neues Projekt' }) 
                 },
                 fields: [
-                  { type: 'string', name: 'title', label: 'Projekt Titel', required: true },
-                  { type: 'string', name: 'description', label: 'Beschreibung' },
+                  { type: 'string', name: 'title', label: 'Projektname', required: true },
+                  { type: 'string', name: 'description', label: 'Art der Arbeit' },
                   { type: 'image', name: 'image', label: 'Bild', required: true },
-                ],
-              },
+                ]
+              }
             ],
           },
-          // 7. Trust Indicators (with itemProps)
+          // 8. TRUST
           {
             type: 'object',
             name: 'trustIndicators',
-            label: '🤝 Vertrauensindikatoren',
+            label: '🤝 Vertrauens-Elemente',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
               { type: 'image', name: 'image', label: 'Bild' },
               {
                 type: 'object',
                 list: true,
                 name: 'items',
-                label: 'Punkte',
-                ui: {
+                label: 'Listenpunkte',
+                ui: { 
                   max: 4,
-                  itemProps: (item) => ({ label: item?.title || 'Neuer Punkt' }),
+                  itemProps: (item) => ({ label: item?.title || 'Neuer Punkt' }) 
                 },
                 fields: [
                   { type: 'string', name: 'title', label: 'Titel', required: true },
-                  { type: 'string', name: 'description', label: 'Beschreibung' },
+                  { type: 'string', name: 'description', label: 'Text' },
                   { type: 'string', name: 'icon', label: 'Icon (Lucide)' },
-                ],
-              },
+                ]
+              }
             ],
           },
-          // 8. FAQ Section (grouped header + questions list + CTA)
+          // 9. FAQ
           {
             type: 'object',
             name: 'faqSection',
-            label: '❓ FAQ Bereich',
+            label: '❓ Häufige Fragen (FAQ)',
             fields: [
               { type: 'string', name: 'title', label: 'Titel' },
-              { type: 'string', name: 'description', label: 'Beschreibung' },
+              { type: 'string', name: 'description', label: 'Text' },
               {
                 type: 'object',
                 list: true,
                 name: 'questions',
-                label: 'Fragen & Antworten',
-                ui: {
+                label: 'Fragen',
+                ui: { 
                   max: 10,
-                  itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
+                  itemProps: (item) => ({ label: item?.question || 'Neue Frage' }) 
                 },
                 fields: [
                   { type: 'string', name: 'question', label: 'Frage', required: true },
                   { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
-                ],
+                ]
               },
               {
                 type: 'object',
                 name: 'cta',
-                label: 'FAQ Call-to-Action',
+                label: 'Kontaktbox (unter FAQ)',
                 fields: [
                   { type: 'string', name: 'title', label: 'Titel' },
                   { type: 'string', name: 'description', label: 'Text' },
                   { type: 'string', name: 'phone', label: 'Telefon' },
                   { type: 'string', name: 'buttonText', label: 'Button Text' },
-                  { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/contact' },
-                ],
-              },
+                  { type: 'string', name: 'buttonLink', label: 'Link' },
+                ]
+              }
             ],
           },
-          // 9. Final CTA
+          // 10. FINAL CTA
           {
             type: 'object',
             name: 'finalCTA',
-            label: '📣 Abschluss CTA',
+            label: '📣 Abschluss-Bereich',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
               { type: 'string', name: 'buttonText', label: 'Button Text' },
-              { type: 'string', name: 'buttonLink', label: 'Button Link', description: 'z.B. /de/contact' },
+              { type: 'string', name: 'buttonLink', label: 'Button Link' },
             ],
           },
         ],
       },
-      
-      // Team Members Collection
+
+      // 👥 TEAM MITGLIEDER
       {
         name: 'teamMember',
-        label: '👥 Team Mitglieder',
+        label: '👥 Mitarbeiter',
         path: 'content/team',
         format: 'md',
         ui: {
@@ -257,15 +251,19 @@ export default defineConfig({
           },
         },
         fields: [
-          { type: 'string', name: 'name', label: 'Name', required: true, isTitle: true },
-          { type: 'string', name: 'role', label: 'Position', required: true },
+          { type: 'string', name: 'name', label: 'Vor- & Nachname', required: true, isTitle: true },
+          { type: 'string', name: 'role', label: 'Position / Jobtitel', required: true },
           { type: 'string', name: 'email', label: 'E-Mail' },
           {
             type: 'string',
             name: 'category',
-            label: 'Kategorie',
+            label: 'Abteilung',
             required: true,
-            options: ['leadership', 'office', 'craftsmen'],
+            options: [
+              { label: 'Geschäftsführung', value: 'leadership' },
+              { label: 'Büro', value: 'office' },
+              { label: 'Dachdecker', value: 'craftsmen' }
+            ],
           },
           { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
           { type: 'image', name: 'image', label: 'Foto' },
@@ -273,10 +271,10 @@ export default defineConfig({
         ],
       },
       
-      // Services Collection
+      // 🔧 DIENSTLEISTUNGEN
       {
         name: 'service',
-        label: '🔧 Leistungen',
+        label: '🔧 Dienstleistungen',
         path: 'content/services',
         format: 'md',
         ui: {
@@ -285,26 +283,26 @@ export default defineConfig({
           },
         },
         fields: [
-          { type: 'string', name: 'title', label: 'Titel', required: true, isTitle: true },
-          { type: 'string', name: 'subtitle', label: 'Untertitel' },
+          { type: 'string', name: 'title', label: 'Name der Leistung', required: true, isTitle: true },
+          { type: 'string', name: 'subtitle', label: 'Kleiner Untertitel' },
           { type: 'string', name: 'shortDescription', label: 'Kurzbeschreibung', ui: { component: 'textarea' } },
-          { type: 'string', name: 'intro', label: 'Einführungstext', ui: { component: 'textarea' } },
+          { type: 'string', name: 'intro', label: 'Einleitungstext', ui: { component: 'textarea' } },
           { type: 'rich-text', name: 'body', label: 'Beschreibung (Lang)' },
           { type: 'image', name: 'image', label: 'Hauptbild' },
-          { type: 'image', name: 'heroImage', label: 'Hero Bild' },
+          { type: 'image', name: 'heroImage', label: 'Großes Titelbild' },
           { type: 'string', name: 'icon', label: 'Icon Name (Lucide)' },
           { type: 'string', name: 'expertTip', label: 'Experten-Tipp', ui: { component: 'textarea' } },
           {
             type: 'string',
             list: true,
             name: 'features',
-            label: 'Merkmale',
+            label: 'Merkmale (Liste)',
           },
           {
             type: 'string',
             list: true,
             name: 'benefits',
-            label: 'Vorteile',
+            label: 'Vorteile (Liste)',
           },
           {
             type: 'object',
@@ -379,10 +377,10 @@ export default defineConfig({
         ],
       },
       
-      // Jobs Collection
+      // 💼 STELLENANZEIGEN
       {
         name: 'job',
-        label: '📋 Stellenangebote',
+        label: '💼 Stellenanzeigen',
         path: 'content/jobs',
         format: 'md',
         ui: {
@@ -391,12 +389,12 @@ export default defineConfig({
           },
         },
         fields: [
-          { type: 'string', name: 'title', label: 'Titel', required: true, isTitle: true },
+          { type: 'string', name: 'title', label: 'Jobtitel', required: true, isTitle: true },
           { type: 'string', name: 'location', label: 'Standort', required: true },
           {
             type: 'string',
             name: 'type',
-            label: 'Typ',
+            label: 'Anstellungsart',
             required: true,
             options: ['Vollzeit', 'Teilzeit', 'Ausbildung'],
           },
@@ -419,47 +417,44 @@ export default defineConfig({
             name: 'benefits',
             label: 'Wir bieten',
           },
-          { type: 'boolean', name: 'published', label: 'Veröffentlicht' },
+          { type: 'boolean', name: 'published', label: 'Veröffentlicht?' },
         ],
       },
       
-      // About Page Collection (Single Document)
+      // 📄 ÜBER UNS SEITE
       {
         name: 'aboutPage',
-        label: '📄 Über Uns',
+        label: '📄 Über Uns Seite',
         path: 'content/about',
         format: 'json',
         ui: {
           router: () => '/de/about',
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
         },
         fields: [
           {
             type: 'object',
             name: 'seo',
-            label: 'SEO',
+            label: '🔍 SEO',
             fields: [
-              { type: 'string', name: 'title', label: 'Seitentitel', required: true },
+              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
             ],
           },
           {
             type: 'object',
             name: 'hero',
-            label: 'Hero Bereich',
+            label: '👋 Intro Bereich',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
             ],
           },
           {
             type: 'object',
             name: 'story',
-            label: 'Unternehmensgeschichte',
+            label: '📖 Die Geschichte',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'text1', label: 'Absatz 1', ui: { component: 'textarea' } },
@@ -471,15 +466,13 @@ export default defineConfig({
             type: 'object',
             list: true,
             name: 'values',
-            label: 'Werte',
-            fields: [
-              { type: 'string', name: 'text', label: 'Text', required: true },
-            ],
+            label: '⭐ Werte (Liste)',
+            fields: [{ type: 'string', name: 'text', label: 'Wert', required: true }],
           },
           {
             type: 'object',
             name: 'equipment',
-            label: 'Ausstattung',
+            label: '🔧 Ausstattung',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
@@ -488,7 +481,7 @@ export default defineConfig({
           {
             type: 'object',
             name: 'teamSection',
-            label: 'Team Bereich',
+            label: '👥 Team Bereich',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
@@ -497,7 +490,7 @@ export default defineConfig({
           {
             type: 'object',
             name: 'cta',
-            label: 'Abschluss CTA',
+            label: '📣 Abschluss CTA',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
@@ -508,35 +501,32 @@ export default defineConfig({
         ],
       },
       
-      // Career Page Collection (Single Document)
+      // 💼 KARRIERE SEITE
       {
         name: 'careerPage',
-        label: '💼 Karriere',
+        label: '💼 Karriere Seite',
         path: 'content/career',
         format: 'json',
         ui: {
           router: () => '/de/career',
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
         },
         fields: [
           {
             type: 'object',
             name: 'seo',
-            label: 'SEO',
+            label: '🔍 SEO',
             fields: [
-              { type: 'string', name: 'title', label: 'Seitentitel', required: true },
+              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
             ],
           },
           {
             type: 'object',
             name: 'hero',
-            label: 'Hero Bereich',
+            label: '👋 Intro Bereich',
             fields: [
-              { type: 'string', name: 'eyebrow', label: 'Überschrift Klein' },
+              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung' },
               { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
@@ -545,16 +535,16 @@ export default defineConfig({
           {
             type: 'object',
             name: 'jobsSection',
-            label: 'Stellenangebote Bereich',
+            label: '📋 Stellenangebote Bereich',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'emptyMessage', label: 'Keine Stellen Text' },
+              { type: 'string', name: 'emptyMessage', label: 'Text wenn keine Stellen' },
             ],
           },
           {
             type: 'object',
             name: 'wizardSection',
-            label: 'Karriere Finder',
+            label: '🧙 Karriere Finder',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung' },
@@ -563,35 +553,32 @@ export default defineConfig({
         ],
       },
       
-      // Contact Page Collection (Single Document)
+      // 📞 KONTAKT SEITE
       {
         name: 'contactPage',
-        label: '📞 Kontakt',
+        label: '📞 Kontakt Seite',
         path: 'content/contact',
         format: 'json',
         ui: {
           router: () => '/de/contact',
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
+          allowedActions: { create: false, delete: false },
         },
         fields: [
           {
             type: 'object',
             name: 'seo',
-            label: 'SEO',
+            label: '🔍 SEO',
             fields: [
-              { type: 'string', name: 'title', label: 'Seitentitel', required: true },
+              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
             ],
           },
-          { type: 'string', name: 'title', label: 'Titel', required: true },
-          { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+          { type: 'string', name: 'title', label: 'Haupttitel', required: true },
+          { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
           {
             type: 'object',
             name: 'address',
-            label: 'Adresse',
+            label: '📍 Adressdaten',
             fields: [
               { type: 'string', name: 'company', label: 'Firmenname', required: true },
               { type: 'string', name: 'street', label: 'Straße', required: true },
@@ -607,63 +594,54 @@ export default defineConfig({
           {
             type: 'object',
             name: 'officeHours',
-            label: 'Büro Öffnungszeiten',
-            fields: [
-              { type: 'string', name: 'weekdays', label: 'Mo-Fr', required: true },
-            ],
+            label: '🕒 Büro Öffnungszeiten',
+            fields: [{ type: 'string', name: 'weekdays', label: 'Mo-Fr Text', required: true }],
           },
           {
             type: 'object',
             name: 'repairHours',
-            label: 'Reparaturplanung Öffnungszeiten',
+            label: '🔧 Reparaturplanung Zeiten',
             fields: [
-              { type: 'string', name: 'tueThu', label: 'Di-Do', required: true },
-              { type: 'string', name: 'fri', label: 'Fr', required: true },
+              { type: 'string', name: 'tueThu', label: 'Di-Do Text', required: true },
+              { type: 'string', name: 'fri', label: 'Fr Text', required: true },
             ],
           },
         ],
       },
       
-      // Settings (Global Config)
+      // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: 'settings',
-        label: '⚙️ Einstellungen',
+        label: '⚙️ Grundeinstellungen',
         path: 'content/globals',
         format: 'json',
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-        },
-        match: {
-          include: 'settings',
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: 'settings' },
         fields: [
           { type: 'string', name: 'siteName', label: 'Website Name', required: true },
           { type: 'string', name: 'siteDescription', label: 'Website Beschreibung' },
           { type: 'image', name: 'favicon', label: 'Favicon' },
           { type: 'image', name: 'logo', label: 'Logo' },
-          { type: 'image', name: 'defaultOgImage', label: 'Standard OG Bild' },
+          { type: 'image', name: 'defaultOgImage', label: 'Standard Social Bild' },
           { type: 'string', name: 'gtmId', label: 'Google Tag Manager ID' },
           { type: 'string', name: 'gaId', label: 'Google Analytics ID' },
           { type: 'string', name: 'sentryDsn', label: 'Sentry DSN' },
           {
             type: 'object',
             name: 'cookieBanner',
-            label: 'Cookie Banner',
+            label: '🍪 Cookie Banner',
             fields: [
-              { type: 'string', name: 'message', label: 'Nachricht', ui: { component: 'textarea' } },
+              { type: 'string', name: 'message', label: 'Text', ui: { component: 'textarea' } },
               { type: 'string', name: 'privacyLinkText', label: 'Datenschutz Link Text' },
               { type: 'string', name: 'cookieLinkText', label: 'Cookie-Einstellungen Link Text' },
               { type: 'string', name: 'rejectButtonText', label: 'Ablehnen Button Text' },
-              { type: 'string', name: 'acceptButtonText', label: 'Akzeptieren Button Text' },
+              { type: 'string', name: 'acceptButtonText', label: 'Annehmen Button Text' },
             ],
           },
           {
             type: 'object',
             name: 'notFoundPage',
-            label: '404 Seite',
+            label: '🔍 404 Seite',
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
@@ -673,30 +651,23 @@ export default defineConfig({
         ],
       },
       
-      // Navigation
+      // 🧭 NAVIGATION
       {
         name: 'navigation',
-        label: '🧭 Navigation',
+        label: '🧭 Menü / Navigation',
         path: 'content/globals',
         format: 'json',
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-        },
-        match: {
-          include: 'navigation',
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: 'navigation' },
         fields: [
           { type: 'image', name: 'logo', label: 'Logo' },
           {
             type: 'object',
             name: 'ctaButton',
-            label: 'CTA Button',
+            label: 'Button oben rechts',
             fields: [
-              { type: 'string', name: 'text', label: 'Button Text', required: true },
-              { type: 'string', name: 'link', label: 'Button Link', required: true },
+              { type: 'string', name: 'text', label: 'Text', required: true },
+              { type: 'string', name: 'link', label: 'Link', required: true },
             ],
           },
           {
@@ -704,29 +675,23 @@ export default defineConfig({
             list: true,
             name: 'items',
             label: 'Menüpunkte',
+            ui: { itemProps: (item) => ({ label: item?.label || 'Neuer Link' }) },
             fields: [
-              { type: 'string', name: 'label', label: 'Bezeichnung', required: true },
-              { type: 'string', name: 'href', label: 'Link', required: true },
+              { type: 'string', name: 'label', label: 'Name (z.B. Leistungen)', required: true },
+              { type: 'string', name: 'href', label: 'Link (z.B. /services)', required: true },
             ],
           },
         ],
       },
       
-      // Footer
+      // 🦶 FOOTER
       {
         name: 'footer',
         label: '🦶 Footer',
         path: 'content/globals',
         format: 'json',
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false,
-          },
-        },
-        match: {
-          include: 'footer',
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: 'footer' },
         fields: [
           { type: 'string', name: 'copyright', label: 'Copyright Text' },
           {
@@ -745,17 +710,17 @@ export default defineConfig({
             name: 'social',
             label: 'Social Media',
             fields: [
-              { type: 'string', name: 'platform', label: 'Platform', required: true },
+              { type: 'string', name: 'platform', label: 'Plattform', required: true },
               { type: 'string', name: 'url', label: 'URL', required: true },
             ],
           },
         ],
       },
       
-      // Legal Pages Collection
+      // ⚖️ RECHTSTEXTE
       {
         name: 'legalPage',
-        label: '⚖️ Rechtliches',
+        label: '⚖️ Rechtstexte',
         path: 'content/legal',
         format: 'md',
         ui: {
@@ -770,25 +735,9 @@ export default defineConfig({
           },
         },
         fields: [
-          { 
-            type: 'string', 
-            name: 'title', 
-            label: 'Titel', 
-            required: true,
-            isTitle: true 
-          },
-          { 
-            type: 'string', 
-            name: 'description', 
-            label: 'Meta Beschreibung', 
-            ui: { component: 'textarea' } 
-          },
-          { 
-            type: 'rich-text', 
-            name: 'body', 
-            label: 'Inhalt',
-            isBody: true 
-          },
+          { type: 'string', name: 'title', label: 'Seitentitel', required: true, isTitle: true },
+          { type: 'string', name: 'description', label: 'Meta Beschreibung', ui: { component: 'textarea' } },
+          { type: 'rich-text', name: 'body', label: 'Inhalt', isBody: true },
         ],
       },
     ],

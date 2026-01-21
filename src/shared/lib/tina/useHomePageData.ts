@@ -9,6 +9,7 @@ const EMPTY_DATA = { homePage: null };
 const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 // Fallback query for home page - used when client response doesn't include query
+// Matches the nested structure in tina/config.ts
 const HOME_PAGE_QUERY = `
   query HomePageQuery($relativePath: String!) {
     homePage(relativePath: $relativePath) {
@@ -16,11 +17,11 @@ const HOME_PAGE_QUERY = `
       seo { title description }
       hero {
         eyebrow title subtitle description
-        buttons {
-          primaryText primaryLink
-          secondaryText secondaryLink
-        }
+        buttons { primaryText primaryLink secondaryText secondaryLink }
         backgroundImage videoUrl showQuickForm
+      }
+      quickForm {
+        title nameLabel contactLabel buttonText disclaimer
       }
       stats { value label icon }
       servicesSection {

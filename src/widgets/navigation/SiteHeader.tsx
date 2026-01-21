@@ -20,6 +20,16 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
   const nav = data?.navigation || { items: [] };
   const navigate = useNavigate();
 
+  // Lock body scroll when menu is open
+  React.useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
+
   // CTA button data with fallbacks
   const ctaText = nav.ctaButton?.text || 'Angebot anfragen';
   const ctaLink = nav.ctaButton?.link || `/${lang}/contact`;
@@ -50,7 +60,11 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
         {/* Increased vertical padding (py-5 to py-6) for cleaner look */}
         <div className="container flex items-center justify-between py-5 md:py-6">
             {/* Logo Section */}
-            <Link to={`/${lang}`} className="flex items-center gap-3 cursor-pointer group relative z-50">
+            <Link 
+              to={`/${lang}`} 
+              className="flex items-center gap-3 cursor-pointer group relative z-50"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
                 <Hammer size={24} />
               </div>

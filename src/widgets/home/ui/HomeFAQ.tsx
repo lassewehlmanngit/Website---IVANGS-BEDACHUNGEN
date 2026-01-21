@@ -58,18 +58,20 @@ const defaultHomeFAQ: FAQItem[] = [
 interface HomeFAQProps {
   lang: SupportedLang;
   homeData?: any;
+  faqData?: any[];
+  faqCTA?: any;
 }
 
-export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData }) => {
-  // Use faqSection from TinaCMS if available, otherwise fall back to hardcoded defaults
-  const faqList = homeData?.faqSection?.questions || defaultHomeFAQ;
+export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCTA: faqCTAProp }) => {
+  // Use direct props first, then faqSection from homeData, then fallback to defaults
+  const faqList = faqData || homeData?.faqSection?.questions || defaultHomeFAQ;
   
   // Header data with fallbacks (using nested faqSection)
   const headerTitle = homeData?.faqSection?.title || 'Häufig gestellte Fragen';
   const headerDescription = homeData?.faqSection?.description || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
   
-  // CTA data with fallbacks (using nested faqSection.cta)
-  const faqCTA = homeData?.faqSection?.cta;
+  // CTA data with fallbacks (using nested faqSection.cta or direct prop)
+  const faqCTA = faqCTAProp || homeData?.faqSection?.cta;
   const ctaTitle = faqCTA?.title || 'Ihre Frage war nicht dabei?';
   const ctaDescription = faqCTA?.description || 'Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.';
   const ctaPhone = faqCTA?.phone || '02162 356666';

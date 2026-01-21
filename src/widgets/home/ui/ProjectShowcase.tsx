@@ -3,9 +3,10 @@ import { tinaField } from 'tinacms/dist/react';
 
 export interface ProjectShowcaseProps {
   homeData?: any;
+  projects?: any[];
 }
 
-export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData }) => {
+export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, projects }) => {
   // Default projects fallback
   const defaultProjects = [
     {
@@ -25,8 +26,8 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData }) =>
     },
   ];
 
-  // Use projects from nested projectsSection if available
-  const projectsList = homeData?.projectsSection?.items || defaultProjects;
+  // Use direct projects prop first, then nested projectsSection, then defaults
+  const projectsList = projects || homeData?.projectsSection?.items || defaultProjects;
   
   // Header data with fallbacks (using nested projectsSection)
   const headerEyebrow = homeData?.projectsSection?.eyebrow || 'Referenzen';

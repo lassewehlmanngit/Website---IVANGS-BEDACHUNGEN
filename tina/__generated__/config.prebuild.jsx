@@ -19,7 +19,7 @@ var config_default = defineConfig({
   },
   schema: {
     collections: [
-      // Home Page Collection (Single Document)
+      // 🏠 STARTSEITE
       {
         name: "homePage",
         label: "\u{1F3E0} Startseite",
@@ -27,172 +27,166 @@ var config_default = defineConfig({
         format: "json",
         ui: {
           router: () => "/de",
-          allowedActions: {
-            create: false,
-            delete: false
-          }
+          allowedActions: { create: false, delete: false }
         },
         fields: [
-          // 1. SEO Section
+          // 1. SEO
           {
             type: "object",
             name: "seo",
-            label: "\u{1F50D} SEO Einstellungen",
+            label: "\u{1F50D} SEO & Google",
             fields: [
-              { type: "string", name: "title", label: "Seitentitel", required: true },
-              { type: "string", name: "description", label: "Meta Beschreibung", ui: { component: "textarea" } }
+              { type: "string", name: "title", label: "Browser-Titel", required: true, description: "Titel im Browser-Tab" },
+              { type: "string", name: "description", label: "Suchbeschreibung", ui: { component: "textarea" }, description: "Text in Google-Ergebnissen" }
             ]
           },
-          // 2. Hero Section
+          // 2. HERO
           {
             type: "object",
             name: "hero",
-            label: "\u2728 Hero Bereich",
+            label: "\u{1F44B} Oberer Bereich (Intro)",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
-              { type: "string", name: "title", label: "Haupttitel", required: true },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift", description: 'z.B. "MEISTERBETRIEB"' },
+              { type: "string", name: "title", label: "Haupttitel (H1)", required: true },
               { type: "string", name: "subtitle", label: "Untertitel" },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
-              // Grouped buttons for cleaner form
+              { type: "string", name: "description", label: "Einleitungstext", ui: { component: "textarea" } },
               {
                 type: "object",
                 name: "buttons",
                 label: "Buttons",
                 fields: [
-                  { type: "string", name: "primaryText", label: "Hauptbutton Text" },
-                  { type: "string", name: "primaryLink", label: "Hauptbutton Link", description: "z.B. /de/contact, https://..., tel:02162..., mailto:..., #section" },
-                  { type: "string", name: "secondaryText", label: "Zweitbutton Text" },
-                  { type: "string", name: "secondaryLink", label: "Zweitbutton Link", description: "z.B. /de/career, https://..., tel:..., mailto:..., #section" }
+                  { type: "string", name: "primaryText", label: "Haupt-Button Text" },
+                  { type: "string", name: "primaryLink", label: "Haupt-Button Link" },
+                  { type: "string", name: "secondaryText", label: "Zweit-Button Text" },
+                  { type: "string", name: "secondaryLink", label: "Zweit-Button Link" }
                 ]
               },
               { type: "image", name: "backgroundImage", label: "Hintergrundbild" },
               { type: "string", name: "videoUrl", label: "Video URL" },
-              { type: "boolean", name: "showQuickForm", label: "Schnellkontakt anzeigen" }
+              { type: "boolean", name: "showQuickForm", label: "Kontaktformular anzeigen?" }
             ]
           },
-          // 2.5. Quick Form Section
+          // 3. QUICK FORM
           {
             type: "object",
             name: "quickForm",
-            label: "\u26A1 Schnellanfrage Formular",
+            label: "\u26A1 Schnellanfrage-Box",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "nameLabel", label: "Label: Name" },
-              { type: "string", name: "contactLabel", label: "Label: Kontakt" },
+              { type: "string", name: "nameLabel", label: "Platzhalter Name" },
+              { type: "string", name: "contactLabel", label: "Platzhalter Kontakt" },
               { type: "string", name: "buttonText", label: "Button Text" },
-              { type: "string", name: "disclaimer", label: "Kleingedrucktes (unter Button)" }
+              { type: "string", name: "disclaimer", label: "Hinweistext" }
             ]
           },
-          // 3. Stats Section (with itemProps for smart labels)
+          // 4. STATS
           {
             type: "object",
             list: true,
             name: "stats",
-            label: "\u{1F4CA} Statistiken",
+            label: "\u{1F4CA} Statistiken (Zahlen)",
             ui: {
               max: 6,
-              itemProps: (item) => {
-                return { label: item?.label || "Neue Statistik" };
-              }
+              itemProps: (item) => ({ label: item?.label || "Neue Statistik" })
             },
             fields: [
-              { type: "string", name: "value", label: "Wert (z.B. 25+)", required: true },
-              { type: "string", name: "label", label: "Beschriftung", required: true },
-              { type: "string", name: "icon", label: "Icon Name (Lucide)" }
+              { type: "string", name: "value", label: "Zahl (z.B. 28)", required: true },
+              { type: "string", name: "label", label: "Einheit (z.B. Experten)", required: true },
+              { type: "string", name: "icon", label: "Icon Name (Englisch)" }
             ]
           },
-          // 4. Services Section (grouped header)
+          // 5. SERVICES
           {
             type: "object",
             name: "servicesSection",
-            label: "\u{1F527} Leistungen (Header)",
+            label: "\u{1F6E0}\uFE0F Leistungen (Vorschau)",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "title", label: "Titel" },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+              { type: "string", name: "description", label: "Text", ui: { component: "textarea" } }
             ]
           },
-          // 5. CEO Quote
+          // 6. CEO QUOTE
           {
             type: "object",
             name: "ceoQuote",
-            label: "\u{1F4AC} Gesch\xE4ftsf\xFChrer Zitat",
+            label: "\u{1F4AC} Zitat / \xDCber Uns",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "name", label: "Name", required: true },
               { type: "string", name: "role", label: "Position", required: true },
-              { type: "string", name: "quote", label: "Zitat", ui: { component: "textarea" }, required: true },
+              { type: "string", name: "quote", label: "Zitat (Gro\xDF)", ui: { component: "textarea" }, required: true },
               { type: "string", name: "text", label: "Flie\xDFtext", ui: { component: "textarea" } },
-              { type: "image", name: "image", label: "Bild" },
+              { type: "image", name: "image", label: "Foto" },
               { type: "string", name: "buttonText", label: "Button Text" },
-              { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/about" }
+              { type: "string", name: "buttonLink", label: "Button Link" }
             ]
           },
-          // 6. Projects Section (grouped header + list with itemProps)
+          // 7. PROJECTS
           {
             type: "object",
             name: "projectsSection",
-            label: "\u{1F3D7}\uFE0F Projekte Showcase",
+            label: "\u{1F3D7}\uFE0F Projekte & Referenzen",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "title", label: "Titel" },
               {
                 type: "object",
                 list: true,
                 name: "items",
-                label: "Projekt Liste",
+                label: "Projekte",
                 ui: {
                   max: 6,
                   itemProps: (item) => ({ label: item?.title || "Neues Projekt" })
                 },
                 fields: [
-                  { type: "string", name: "title", label: "Projekt Titel", required: true },
-                  { type: "string", name: "description", label: "Beschreibung" },
+                  { type: "string", name: "title", label: "Projektname", required: true },
+                  { type: "string", name: "description", label: "Art der Arbeit" },
                   { type: "image", name: "image", label: "Bild", required: true }
                 ]
               }
             ]
           },
-          // 7. Trust Indicators (with itemProps)
+          // 8. TRUST
           {
             type: "object",
             name: "trustIndicators",
-            label: "\u{1F91D} Vertrauensindikatoren",
+            label: "\u{1F91D} Vertrauens-Elemente",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "description", label: "Text", ui: { component: "textarea" } },
               { type: "image", name: "image", label: "Bild" },
               {
                 type: "object",
                 list: true,
                 name: "items",
-                label: "Punkte",
+                label: "Listenpunkte",
                 ui: {
                   max: 4,
                   itemProps: (item) => ({ label: item?.title || "Neuer Punkt" })
                 },
                 fields: [
                   { type: "string", name: "title", label: "Titel", required: true },
-                  { type: "string", name: "description", label: "Beschreibung" },
+                  { type: "string", name: "description", label: "Text" },
                   { type: "string", name: "icon", label: "Icon (Lucide)" }
                 ]
               }
             ]
           },
-          // 8. FAQ Section (grouped header + questions list + CTA)
+          // 9. FAQ
           {
             type: "object",
             name: "faqSection",
-            label: "\u2753 FAQ Bereich",
+            label: "\u2753 H\xE4ufige Fragen (FAQ)",
             fields: [
               { type: "string", name: "title", label: "Titel" },
-              { type: "string", name: "description", label: "Beschreibung" },
+              { type: "string", name: "description", label: "Text" },
               {
                 type: "object",
                 list: true,
                 name: "questions",
-                label: "Fragen & Antworten",
+                label: "Fragen",
                 ui: {
                   max: 10,
                   itemProps: (item) => ({ label: item?.question || "Neue Frage" })
@@ -205,35 +199,35 @@ var config_default = defineConfig({
               {
                 type: "object",
                 name: "cta",
-                label: "FAQ Call-to-Action",
+                label: "Kontaktbox (unter FAQ)",
                 fields: [
                   { type: "string", name: "title", label: "Titel" },
                   { type: "string", name: "description", label: "Text" },
                   { type: "string", name: "phone", label: "Telefon" },
                   { type: "string", name: "buttonText", label: "Button Text" },
-                  { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/contact" }
+                  { type: "string", name: "buttonLink", label: "Link" }
                 ]
               }
             ]
           },
-          // 9. Final CTA
+          // 10. FINAL CTA
           {
             type: "object",
             name: "finalCTA",
-            label: "\u{1F4E3} Abschluss CTA",
+            label: "\u{1F4E3} Abschluss-Bereich",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "description", label: "Text", ui: { component: "textarea" } },
               { type: "string", name: "buttonText", label: "Button Text" },
-              { type: "string", name: "buttonLink", label: "Button Link", description: "z.B. /de/contact" }
+              { type: "string", name: "buttonLink", label: "Button Link" }
             ]
           }
         ]
       },
-      // Team Members Collection
+      // 👥 TEAM MITGLIEDER
       {
         name: "teamMember",
-        label: "\u{1F465} Team Mitglieder",
+        label: "\u{1F465} Mitarbeiter",
         path: "content/team",
         format: "md",
         ui: {
@@ -242,25 +236,29 @@ var config_default = defineConfig({
           }
         },
         fields: [
-          { type: "string", name: "name", label: "Name", required: true, isTitle: true },
-          { type: "string", name: "role", label: "Position", required: true },
+          { type: "string", name: "name", label: "Vor- & Nachname", required: true, isTitle: true },
+          { type: "string", name: "role", label: "Position / Jobtitel", required: true },
           { type: "string", name: "email", label: "E-Mail" },
           {
             type: "string",
             name: "category",
-            label: "Kategorie",
+            label: "Abteilung",
             required: true,
-            options: ["leadership", "office", "craftsmen"]
+            options: [
+              { label: "Gesch\xE4ftsf\xFChrung", value: "leadership" },
+              { label: "B\xFCro", value: "office" },
+              { label: "Dachdecker", value: "craftsmen" }
+            ]
           },
           { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
           { type: "image", name: "image", label: "Foto" },
           { type: "number", name: "order", label: "Reihenfolge" }
         ]
       },
-      // Services Collection
+      // 🔧 DIENSTLEISTUNGEN
       {
         name: "service",
-        label: "\u{1F527} Leistungen",
+        label: "\u{1F527} Dienstleistungen",
         path: "content/services",
         format: "md",
         ui: {
@@ -269,26 +267,26 @@ var config_default = defineConfig({
           }
         },
         fields: [
-          { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
-          { type: "string", name: "subtitle", label: "Untertitel" },
+          { type: "string", name: "title", label: "Name der Leistung", required: true, isTitle: true },
+          { type: "string", name: "subtitle", label: "Kleiner Untertitel" },
           { type: "string", name: "shortDescription", label: "Kurzbeschreibung", ui: { component: "textarea" } },
-          { type: "string", name: "intro", label: "Einf\xFChrungstext", ui: { component: "textarea" } },
+          { type: "string", name: "intro", label: "Einleitungstext", ui: { component: "textarea" } },
           { type: "rich-text", name: "body", label: "Beschreibung (Lang)" },
           { type: "image", name: "image", label: "Hauptbild" },
-          { type: "image", name: "heroImage", label: "Hero Bild" },
+          { type: "image", name: "heroImage", label: "Gro\xDFes Titelbild" },
           { type: "string", name: "icon", label: "Icon Name (Lucide)" },
           { type: "string", name: "expertTip", label: "Experten-Tipp", ui: { component: "textarea" } },
           {
             type: "string",
             list: true,
             name: "features",
-            label: "Merkmale"
+            label: "Merkmale (Liste)"
           },
           {
             type: "string",
             list: true,
             name: "benefits",
-            label: "Vorteile"
+            label: "Vorteile (Liste)"
           },
           {
             type: "object",
@@ -362,10 +360,10 @@ var config_default = defineConfig({
           }
         ]
       },
-      // Jobs Collection
+      // 💼 STELLENANZEIGEN
       {
         name: "job",
-        label: "\u{1F4CB} Stellenangebote",
+        label: "\u{1F4BC} Stellenanzeigen",
         path: "content/jobs",
         format: "md",
         ui: {
@@ -374,12 +372,12 @@ var config_default = defineConfig({
           }
         },
         fields: [
-          { type: "string", name: "title", label: "Titel", required: true, isTitle: true },
+          { type: "string", name: "title", label: "Jobtitel", required: true, isTitle: true },
           { type: "string", name: "location", label: "Standort", required: true },
           {
             type: "string",
             name: "type",
-            label: "Typ",
+            label: "Anstellungsart",
             required: true,
             options: ["Vollzeit", "Teilzeit", "Ausbildung"]
           },
@@ -402,46 +400,43 @@ var config_default = defineConfig({
             name: "benefits",
             label: "Wir bieten"
           },
-          { type: "boolean", name: "published", label: "Ver\xF6ffentlicht" }
+          { type: "boolean", name: "published", label: "Ver\xF6ffentlicht?" }
         ]
       },
-      // About Page Collection (Single Document)
+      // 📄 ÜBER UNS SEITE
       {
         name: "aboutPage",
-        label: "\u{1F4C4} \xDCber Uns",
+        label: "\u{1F4C4} \xDCber Uns Seite",
         path: "content/about",
         format: "json",
         ui: {
           router: () => "/de/about",
-          allowedActions: {
-            create: false,
-            delete: false
-          }
+          allowedActions: { create: false, delete: false }
         },
         fields: [
           {
             type: "object",
             name: "seo",
-            label: "SEO",
+            label: "\u{1F50D} SEO",
             fields: [
-              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "title", label: "Browser-Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
             ]
           },
           {
             type: "object",
             name: "hero",
-            label: "Hero Bereich",
+            label: "\u{1F44B} Intro Bereich",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+              { type: "string", name: "description", label: "Text", ui: { component: "textarea" } }
             ]
           },
           {
             type: "object",
             name: "story",
-            label: "Unternehmensgeschichte",
+            label: "\u{1F4D6} Die Geschichte",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "text1", label: "Absatz 1", ui: { component: "textarea" } },
@@ -453,15 +448,13 @@ var config_default = defineConfig({
             type: "object",
             list: true,
             name: "values",
-            label: "Werte",
-            fields: [
-              { type: "string", name: "text", label: "Text", required: true }
-            ]
+            label: "\u2B50 Werte (Liste)",
+            fields: [{ type: "string", name: "text", label: "Wert", required: true }]
           },
           {
             type: "object",
             name: "equipment",
-            label: "Ausstattung",
+            label: "\u{1F527} Ausstattung",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
@@ -470,7 +463,7 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "teamSection",
-            label: "Team Bereich",
+            label: "\u{1F465} Team Bereich",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
@@ -479,7 +472,7 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "cta",
-            label: "Abschluss CTA",
+            label: "\u{1F4E3} Abschluss CTA",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
@@ -489,35 +482,32 @@ var config_default = defineConfig({
           }
         ]
       },
-      // Career Page Collection (Single Document)
+      // 💼 KARRIERE SEITE
       {
         name: "careerPage",
-        label: "\u{1F4BC} Karriere",
+        label: "\u{1F4BC} Karriere Seite",
         path: "content/career",
         format: "json",
         ui: {
           router: () => "/de/career",
-          allowedActions: {
-            create: false,
-            delete: false
-          }
+          allowedActions: { create: false, delete: false }
         },
         fields: [
           {
             type: "object",
             name: "seo",
-            label: "SEO",
+            label: "\u{1F50D} SEO",
             fields: [
-              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "title", label: "Browser-Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
             ]
           },
           {
             type: "object",
             name: "hero",
-            label: "Hero Bereich",
+            label: "\u{1F44B} Intro Bereich",
             fields: [
-              { type: "string", name: "eyebrow", label: "\xDCberschrift Klein" },
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung" },
               { type: "image", name: "backgroundImage", label: "Hintergrundbild" }
@@ -526,16 +516,16 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "jobsSection",
-            label: "Stellenangebote Bereich",
+            label: "\u{1F4CB} Stellenangebote Bereich",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
-              { type: "string", name: "emptyMessage", label: "Keine Stellen Text" }
+              { type: "string", name: "emptyMessage", label: "Text wenn keine Stellen" }
             ]
           },
           {
             type: "object",
             name: "wizardSection",
-            label: "Karriere Finder",
+            label: "\u{1F9D9} Karriere Finder",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung" }
@@ -543,35 +533,32 @@ var config_default = defineConfig({
           }
         ]
       },
-      // Contact Page Collection (Single Document)
+      // 📞 KONTAKT SEITE
       {
         name: "contactPage",
-        label: "\u{1F4DE} Kontakt",
+        label: "\u{1F4DE} Kontakt Seite",
         path: "content/contact",
         format: "json",
         ui: {
           router: () => "/de/contact",
-          allowedActions: {
-            create: false,
-            delete: false
-          }
+          allowedActions: { create: false, delete: false }
         },
         fields: [
           {
             type: "object",
             name: "seo",
-            label: "SEO",
+            label: "\u{1F50D} SEO",
             fields: [
-              { type: "string", name: "title", label: "Seitentitel", required: true },
+              { type: "string", name: "title", label: "Browser-Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
             ]
           },
-          { type: "string", name: "title", label: "Titel", required: true },
-          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+          { type: "string", name: "title", label: "Haupttitel", required: true },
+          { type: "string", name: "description", label: "Einleitungstext", ui: { component: "textarea" } },
           {
             type: "object",
             name: "address",
-            label: "Adresse",
+            label: "\u{1F4CD} Adressdaten",
             fields: [
               { type: "string", name: "company", label: "Firmenname", required: true },
               { type: "string", name: "street", label: "Stra\xDFe", required: true },
@@ -587,62 +574,53 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "officeHours",
-            label: "B\xFCro \xD6ffnungszeiten",
-            fields: [
-              { type: "string", name: "weekdays", label: "Mo-Fr", required: true }
-            ]
+            label: "\u{1F552} B\xFCro \xD6ffnungszeiten",
+            fields: [{ type: "string", name: "weekdays", label: "Mo-Fr Text", required: true }]
           },
           {
             type: "object",
             name: "repairHours",
-            label: "Reparaturplanung \xD6ffnungszeiten",
+            label: "\u{1F527} Reparaturplanung Zeiten",
             fields: [
-              { type: "string", name: "tueThu", label: "Di-Do", required: true },
-              { type: "string", name: "fri", label: "Fr", required: true }
+              { type: "string", name: "tueThu", label: "Di-Do Text", required: true },
+              { type: "string", name: "fri", label: "Fr Text", required: true }
             ]
           }
         ]
       },
-      // Settings (Global Config)
+      // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: "settings",
-        label: "\u2699\uFE0F Einstellungen",
+        label: "\u2699\uFE0F Grundeinstellungen",
         path: "content/globals",
         format: "json",
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false
-          }
-        },
-        match: {
-          include: "settings"
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: "settings" },
         fields: [
           { type: "string", name: "siteName", label: "Website Name", required: true },
           { type: "string", name: "siteDescription", label: "Website Beschreibung" },
           { type: "image", name: "favicon", label: "Favicon" },
           { type: "image", name: "logo", label: "Logo" },
-          { type: "image", name: "defaultOgImage", label: "Standard OG Bild" },
+          { type: "image", name: "defaultOgImage", label: "Standard Social Bild" },
           { type: "string", name: "gtmId", label: "Google Tag Manager ID" },
           { type: "string", name: "gaId", label: "Google Analytics ID" },
           { type: "string", name: "sentryDsn", label: "Sentry DSN" },
           {
             type: "object",
             name: "cookieBanner",
-            label: "Cookie Banner",
+            label: "\u{1F36A} Cookie Banner",
             fields: [
-              { type: "string", name: "message", label: "Nachricht", ui: { component: "textarea" } },
+              { type: "string", name: "message", label: "Text", ui: { component: "textarea" } },
               { type: "string", name: "privacyLinkText", label: "Datenschutz Link Text" },
               { type: "string", name: "cookieLinkText", label: "Cookie-Einstellungen Link Text" },
               { type: "string", name: "rejectButtonText", label: "Ablehnen Button Text" },
-              { type: "string", name: "acceptButtonText", label: "Akzeptieren Button Text" }
+              { type: "string", name: "acceptButtonText", label: "Annehmen Button Text" }
             ]
           },
           {
             type: "object",
             name: "notFoundPage",
-            label: "404 Seite",
+            label: "\u{1F50D} 404 Seite",
             fields: [
               { type: "string", name: "title", label: "Titel", required: true },
               { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
@@ -651,30 +629,23 @@ var config_default = defineConfig({
           }
         ]
       },
-      // Navigation
+      // 🧭 NAVIGATION
       {
         name: "navigation",
-        label: "\u{1F9ED} Navigation",
+        label: "\u{1F9ED} Men\xFC / Navigation",
         path: "content/globals",
         format: "json",
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false
-          }
-        },
-        match: {
-          include: "navigation"
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: "navigation" },
         fields: [
           { type: "image", name: "logo", label: "Logo" },
           {
             type: "object",
             name: "ctaButton",
-            label: "CTA Button",
+            label: "Button oben rechts",
             fields: [
-              { type: "string", name: "text", label: "Button Text", required: true },
-              { type: "string", name: "link", label: "Button Link", required: true }
+              { type: "string", name: "text", label: "Text", required: true },
+              { type: "string", name: "link", label: "Link", required: true }
             ]
           },
           {
@@ -682,28 +653,22 @@ var config_default = defineConfig({
             list: true,
             name: "items",
             label: "Men\xFCpunkte",
+            ui: { itemProps: (item) => ({ label: item?.label || "Neuer Link" }) },
             fields: [
-              { type: "string", name: "label", label: "Bezeichnung", required: true },
-              { type: "string", name: "href", label: "Link", required: true }
+              { type: "string", name: "label", label: "Name (z.B. Leistungen)", required: true },
+              { type: "string", name: "href", label: "Link (z.B. /services)", required: true }
             ]
           }
         ]
       },
-      // Footer
+      // 🦶 FOOTER
       {
         name: "footer",
         label: "\u{1F9B6} Footer",
         path: "content/globals",
         format: "json",
-        ui: {
-          allowedActions: {
-            create: false,
-            delete: false
-          }
-        },
-        match: {
-          include: "footer"
-        },
+        ui: { allowedActions: { create: false, delete: false } },
+        match: { include: "footer" },
         fields: [
           { type: "string", name: "copyright", label: "Copyright Text" },
           {
@@ -722,16 +687,16 @@ var config_default = defineConfig({
             name: "social",
             label: "Social Media",
             fields: [
-              { type: "string", name: "platform", label: "Platform", required: true },
+              { type: "string", name: "platform", label: "Plattform", required: true },
               { type: "string", name: "url", label: "URL", required: true }
             ]
           }
         ]
       },
-      // Legal Pages Collection
+      // ⚖️ RECHTSTEXTE
       {
         name: "legalPage",
-        label: "\u2696\uFE0F Rechtliches",
+        label: "\u2696\uFE0F Rechtstexte",
         path: "content/legal",
         format: "md",
         ui: {
@@ -746,25 +711,9 @@ var config_default = defineConfig({
           }
         },
         fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Titel",
-            required: true,
-            isTitle: true
-          },
-          {
-            type: "string",
-            name: "description",
-            label: "Meta Beschreibung",
-            ui: { component: "textarea" }
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Inhalt",
-            isBody: true
-          }
+          { type: "string", name: "title", label: "Seitentitel", required: true, isTitle: true },
+          { type: "string", name: "description", label: "Meta Beschreibung", ui: { component: "textarea" } },
+          { type: "rich-text", name: "body", label: "Inhalt", isBody: true }
         ]
       }
     ]
