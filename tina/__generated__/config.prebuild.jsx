@@ -544,114 +544,6 @@ var config_default = defineConfig({
           }
         ]
       },
-      // 📖 ABOUT PAGE (Singleton)
-      {
-        name: "aboutPage",
-        label: "\u{1F4D6} \xDCber Uns",
-        path: "content/pages",
-        format: "json",
-        match: { include: "about" },
-        ui: {
-          router: () => "/de/about",
-          allowedActions: { create: false, delete: false }
-        },
-        fields: [
-          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
-          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "about" f\xFCr /de/about' },
-          seoFields,
-          {
-            type: "object",
-            list: true,
-            name: "blocks",
-            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
-            templates: [
-              heroBlock,
-              contentBlock,
-              storyBlock,
-              featuresBlock,
-              equipmentBlock,
-              teamGridBlock,
-              jobsListBlock,
-              formBlock,
-              contactInfoBlock,
-              ctaBlock,
-              faqBlock
-            ]
-          }
-        ]
-      },
-      // 💼 CAREER PAGE (Singleton)
-      {
-        name: "careerPage",
-        label: "\u{1F4BC} Karriere",
-        path: "content/pages",
-        format: "json",
-        match: { include: "career" },
-        ui: {
-          router: () => "/de/career",
-          allowedActions: { create: false, delete: false }
-        },
-        fields: [
-          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
-          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "career" f\xFCr /de/career' },
-          seoFields,
-          {
-            type: "object",
-            list: true,
-            name: "blocks",
-            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
-            templates: [
-              heroBlock,
-              contentBlock,
-              storyBlock,
-              featuresBlock,
-              equipmentBlock,
-              teamGridBlock,
-              jobsListBlock,
-              formBlock,
-              contactInfoBlock,
-              ctaBlock,
-              faqBlock
-            ]
-          }
-        ]
-      },
-      // 📬 CONTACT PAGE (Singleton - Page Builder)
-      {
-        name: "contactBuilderPage",
-        label: "\u{1F4EC} Kontakt Seite",
-        path: "content/pages",
-        format: "json",
-        match: { include: "contact" },
-        ui: {
-          router: () => "/de/contact",
-          allowedActions: { create: false, delete: false }
-        },
-        fields: [
-          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
-          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "contact" f\xFCr /de/contact' },
-          seoFields,
-          {
-            type: "object",
-            list: true,
-            name: "blocks",
-            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
-            templates: [
-              heroBlock,
-              contentBlock,
-              storyBlock,
-              featuresBlock,
-              equipmentBlock,
-              teamGridBlock,
-              jobsListBlock,
-              formBlock,
-              contactInfoBlock,
-              ctaBlock,
-              faqBlock
-            ]
-          }
-        ]
-      },
       // 👥 TEAM MITGLIEDER
       {
         name: "teamMember",
@@ -925,53 +817,6 @@ var config_default = defineConfig({
           }
         ]
       },
-      // 📞 KONTAKTDATEN (Global - für Footer etc.)
-      {
-        name: "contactPage",
-        label: "\u{1F4DE} Kontaktdaten (Global)",
-        path: "content/contact",
-        format: "json",
-        match: { include: "kontakt" },
-        ui: {
-          allowedActions: { create: false, delete: false }
-        },
-        fields: [
-          seoFields,
-          { type: "string", name: "title", label: "Haupttitel" },
-          { type: "string", name: "description", label: "Einleitungstext", ui: { component: "textarea" } },
-          {
-            type: "object",
-            name: "address",
-            label: "\u{1F4CD} Adressdaten",
-            fields: [
-              { type: "string", name: "company", label: "Firmenname", required: true },
-              { type: "string", name: "street", label: "Stra\xDFe", required: true },
-              { type: "string", name: "city", label: "Stadt", required: true },
-              { type: "string", name: "zip", label: "PLZ", required: true }
-            ]
-          },
-          { type: "string", name: "phone", label: "Telefon", required: true },
-          { type: "string", name: "fax", label: "Fax" },
-          { type: "string", name: "email", label: "E-Mail", required: true },
-          { type: "string", name: "website", label: "Website" },
-          { type: "string", name: "facebook", label: "Facebook URL" },
-          {
-            type: "object",
-            name: "officeHours",
-            label: "\u{1F552} B\xFCro \xD6ffnungszeiten",
-            fields: [{ type: "string", name: "weekdays", label: "Mo-Fr Text", required: true }]
-          },
-          {
-            type: "object",
-            name: "repairHours",
-            label: "\u{1F527} Reparaturplanung Zeiten",
-            fields: [
-              { type: "string", name: "tueThu", label: "Di-Do Text", required: true },
-              { type: "string", name: "fri", label: "Fr Text", required: true }
-            ]
-          }
-        ]
-      },
       // 🦶 FOOTER
       {
         name: "footer",
@@ -1020,6 +865,28 @@ var config_default = defineConfig({
         ]
       }
     ]
+  },
+  ui: {
+    sidebar: () => {
+      return [
+        {
+          label: "\u{1F5A5}\uFE0F Seiten",
+          items: ["homePage", "page"]
+        },
+        {
+          label: "\u{1F4DD} Inhalte",
+          items: ["service", "teamMember", "job"]
+        },
+        {
+          label: "\u2696\uFE0F Rechtliches",
+          items: ["legalPage"]
+        },
+        {
+          label: "\u2699\uFE0F Einstellungen",
+          items: ["navigation", "footer", "settings"]
+        }
+      ];
+    }
   }
 });
 export {

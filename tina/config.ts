@@ -924,4 +924,26 @@ export default defineConfig({
       },
     ],
   },
+  ui: {
+    sidebar: () => {
+      return [
+        {
+          label: '🖥️ Seiten',
+          items: ['homePage', 'page'],
+        },
+        {
+          label: '📝 Inhalte',
+          items: ['service', 'teamMember', 'job'],
+        },
+        {
+          label: '⚖️ Rechtliches',
+          items: ['legalPage'],
+        },
+        {
+          label: '⚙️ Einstellungen',
+          items: ['navigation', 'footer', 'settings'],
+        },
+      ];
+    },
+  },
 });
