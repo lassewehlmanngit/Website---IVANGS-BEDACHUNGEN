@@ -140,6 +140,14 @@ type HomePageHero {
   showQuickForm: Boolean
 }
 
+type HomePageQuickForm {
+  title: String!
+  nameLabel: String
+  contactLabel: String
+  buttonText: String
+  disclaimer: String
+}
+
 type HomePageStats {
   value: String!
   label: String!
@@ -219,6 +227,7 @@ type HomePageFinalCTA {
 type HomePage implements Node & Document {
   seo: HomePageSeo
   hero: HomePageHero
+  quickForm: HomePageQuickForm
   stats: [HomePageStats]
   servicesSection: HomePageServicesSection
   ceoQuote: HomePageCeoQuote
@@ -271,6 +280,14 @@ input HomePageHeroFilter {
   backgroundImage: ImageFilter
   videoUrl: StringFilter
   showQuickForm: BooleanFilter
+}
+
+input HomePageQuickFormFilter {
+  title: StringFilter
+  nameLabel: StringFilter
+  contactLabel: StringFilter
+  buttonText: StringFilter
+  disclaimer: StringFilter
 }
 
 input HomePageStatsFilter {
@@ -352,6 +369,7 @@ input HomePageFinalCTAFilter {
 input HomePageFilter {
   seo: HomePageSeoFilter
   hero: HomePageHeroFilter
+  quickForm: HomePageQuickFormFilter
   stats: HomePageStatsFilter
   servicesSection: HomePageServicesSectionFilter
   ceoQuote: HomePageCeoQuoteFilter
@@ -1110,6 +1128,14 @@ input HomePageHeroMutation {
   showQuickForm: Boolean
 }
 
+input HomePageQuickFormMutation {
+  title: String
+  nameLabel: String
+  contactLabel: String
+  buttonText: String
+  disclaimer: String
+}
+
 input HomePageStatsMutation {
   value: String
   label: String
@@ -1189,6 +1215,7 @@ input HomePageFinalCTAMutation {
 input HomePageMutation {
   seo: HomePageSeoMutation
   hero: HomePageHeroMutation
+  quickForm: HomePageQuickFormMutation
   stats: [HomePageStatsMutation]
   servicesSection: HomePageServicesSectionMutation
   ceoQuote: HomePageCeoQuoteMutation

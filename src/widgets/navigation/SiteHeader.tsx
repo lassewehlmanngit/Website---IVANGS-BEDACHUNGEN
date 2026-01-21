@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Menu, Hammer } from 'lucide-react';
+import { Menu, Hammer, X } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { cn } from '@/shared/lib/cn';
-import { Drawer } from '@/shared/ui/Drawer';
 import { Button } from '@/shared/ui/Button';
 import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
 import { tinaField } from 'tinacms/dist/react';
@@ -47,11 +46,12 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
   return (
     <div className="sticky top-0 z-40 flex flex-col shadow-sm transition-all duration-300">
-      <header className="w-full bg-white supports-[backdrop-filter]:bg-white/95 backdrop-blur-md border-b border-slate-100">
-        <div className="container flex h-20 items-center justify-between py-2">
-            {/* Logo */}
-            <Link to={`/${lang}`} className="flex items-center gap-2 cursor-pointer group">
-              <div className="bg-primary p-2 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+      <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
+        {/* Increased vertical padding (py-5 to py-6) for cleaner look */}
+        <div className="container flex items-center justify-between py-5 md:py-6">
+            {/* Logo Section */}
+            <Link to={`/${lang}`} className="flex items-center gap-3 cursor-pointer group relative z-50">
+              <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
                 <Hammer size={24} />
               </div>
               <div>
@@ -65,7 +65,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
           {/* Desktop navigation */}
           <nav
             aria-label={t('navigation.mainNavigation')}
-            className="hidden items-center gap-6 md:flex"
+            className="hidden items-center gap-8 md:flex"
           >
             {nav.items.map((item: any, index: number) => (
               <NavLink 
@@ -86,79 +86,71 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             </Button>
           </nav>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button - Z-Index 50 to sit above full screen menu */}
+          <div className="md:hidden z-50">
              <button
-                onClick={() => setMobileMenuOpen(true)}
-                className="p-2 text-slate-600 hover:text-primary transition-colors"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-slate-900 hover:text-primary transition-colors"
                 aria-label={t('navigation.menu')}
              >
-                <Menu size={28} />
+                {/* Switch icon based on state */}
+                {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
              </button>
           </div>
 
-          {/* Mobile drawer */}
-          <Drawer
-            open={mobileMenuOpen}
-            onClose={() => setMobileMenuOpen(false)}
-            side="right"
-            title={t('navigation.menu')}
-            fullWidth={true}
+          {/* Full Page Mobile Menu Overlay */}
+          <div 
+            className={cn(
+              "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-300 ease-out md:hidden overflow-y-auto",
+              mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
+            )}
           >
-            <nav
-              aria-label={t('navigation.mobileNavigation')}
-              className="flex flex-col gap-4 mt-4"
-            >
+            <nav className="flex flex-col gap-6 text-center">
               {nav.items.map((item: any, index: number) => (
                 <NavLink
                   key={item.href}
                   to={`/${lang}${item.href}`}
-                  className={({ isActive }) => cn(
-                    "block w-full text-left text-3xl font-bold py-2 border-b border-border/50",
-                    isActive ? "text-primary" : "text-foreground"
-                  )}
                   onClick={() => setMobileMenuOpen(false)}
+                  className={({ isActive }) => cn(
+                    "text-3xl font-bold tracking-tight transition-colors",
+                    isActive ? "text-primary" : "text-slate-900"
+                  )}
                   data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
                 >
                   {item.label}
                 </NavLink>
               ))}
               
-              <div className="mt-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground block mb-2">Leistungen</span>
-                <div className="grid grid-cols-1 gap-2">
-                  {serviceLinks.map((service) => (
-                     <NavLink
-                        key={service.id}
-                        to={`/${lang}/services/${service.id}`}
-                        className={({ isActive }) => cn(
-                          "p-3 rounded-xl border text-left text-lg font-medium transition-colors flex items-center justify-between",
-                          isActive
-                          ? "bg-primary/10 border-primary/20 text-primary"
-                          : "bg-background border-border text-muted-foreground"
-                        )}
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        {service.label}
-                      </NavLink>
-                  ))}
-                </div>
+              <hr className="border-slate-100 my-4" />
+              
+              <div className="grid grid-cols-2 gap-3">
+                 {serviceLinks.map((service) => (
+                    <Link
+                      key={service.id}
+                      to={`/${lang}/services/${service.id}`}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="bg-slate-50 p-4 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-100 hover:text-primary transition-colors border border-slate-100"
+                    >
+                      {service.label}
+                    </Link>
+                 ))}
               </div>
 
-               <div className="mt-8">
+              <div className="mt-auto pt-8">
                  <Button 
-                   className="w-full py-6 text-lg" 
+                   className="w-full py-6 text-lg font-bold shadow-xl shadow-primary/20" 
                    onClick={() => {
                      navigate(ctaLink);
-                    setMobileMenuOpen(false);
+                     setMobileMenuOpen(false);
                    }}
                    data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
                  >
                    {ctaText}
                  </Button>
-               </div>
+              </div>
             </nav>
-          </Drawer>
+          </div>
+
         </div>
       </header>
       

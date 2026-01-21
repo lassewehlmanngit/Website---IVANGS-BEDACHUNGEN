@@ -70,6 +70,19 @@ var config_default = defineConfig({
               { type: "boolean", name: "showQuickForm", label: "Schnellkontakt anzeigen" }
             ]
           },
+          // 2.5. Quick Form Section
+          {
+            type: "object",
+            name: "quickForm",
+            label: "\u26A1 Schnellanfrage Formular",
+            fields: [
+              { type: "string", name: "title", label: "Titel", required: true },
+              { type: "string", name: "nameLabel", label: "Label: Name" },
+              { type: "string", name: "contactLabel", label: "Label: Kontakt" },
+              { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "disclaimer", label: "Kleingedrucktes (unter Button)" }
+            ]
+          },
           // 3. Stats Section (with itemProps for smart labels)
           {
             type: "object",

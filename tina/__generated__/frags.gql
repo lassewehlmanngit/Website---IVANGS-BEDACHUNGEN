@@ -22,6 +22,14 @@ fragment HomePageParts on HomePage {
     videoUrl
     showQuickForm
   }
+  quickForm {
+    __typename
+    title
+    nameLabel
+    contactLabel
+    buttonText
+    disclaimer
+  }
   stats {
     __typename
     value

@@ -22,6 +22,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
   const backgroundImage = heroData?.backgroundImage || '/uploads/ivangs-dachdecker-einsatz.avif';
   const videoUrl = heroData?.videoUrl || 'https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4';
   const showQuickForm = heroData?.showQuickForm ?? true;
+  
+  // Quick form data from CMS
+  const formData = homeData?.quickForm || {};
 
   // Stats data from CMS or fallback
   const stats = homeData?.stats || [
@@ -111,26 +114,26 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                {/* Decorative Blur */}
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>
 
-              <h3 className="text-h4 font-bold text-white mb-4 md:mb-6 flex items-center gap-2 relative z-10">
-                <Mail size={20} className="text-primary shrink-0" /> Schnellanfrage
+              <h3 className="text-h4 font-bold text-white mb-4 md:mb-6 flex items-center gap-2 relative z-10" data-tina-field={formData && tinaField(formData, 'title')}>
+                <Mail size={20} className="text-primary shrink-0" /> {formData.title || 'Schnellanfrage'}
               </h3>
               <div className="space-y-4 relative z-10">
                 <div>
-                   <label htmlFor="hero-name" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block">Ihr Name</label>
+                   <label htmlFor="hero-name" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block" data-tina-field={formData && tinaField(formData, 'nameLabel')}>{formData.nameLabel || 'Ihr Name'}</label>
                    <input id="hero-name" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Max Mustermann" />
                 </div>
                 <div>
-                   <label htmlFor="hero-contact" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block">E-Mail oder Telefon</label>
+                   <label htmlFor="hero-contact" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block" data-tina-field={formData && tinaField(formData, 'contactLabel')}>{formData.contactLabel || 'E-Mail oder Telefon'}</label>
                    <input id="hero-contact" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Kontaktmöglichkeit" />
                 </div>
                 
                 <Link to={`/${lang}/contact`} className="block">
-                  <button className="bg-white text-slate-900 hover:bg-slate-200 px-6 py-4 rounded-sm font-bold transition-all w-full flex items-center justify-center gap-2 shadow-lg mt-2">
-                    Kostenlos anfragen <ArrowRight size={18} />
+                  <button className="bg-white text-slate-900 hover:bg-slate-200 px-6 py-4 rounded-sm font-bold transition-all w-full flex items-center justify-center gap-2 shadow-lg mt-2" data-tina-field={formData && tinaField(formData, 'buttonText')}>
+                    {formData.buttonText || 'Kostenlos anfragen'} <ArrowRight size={18} />
                   </button>
                 </Link>
-                <p className="text-[10px] text-slate-400 text-center">
-                   Wir melden uns innerhalb von 24h. Unverbindlich.
+                <p className="text-[10px] text-slate-400 text-center" data-tina-field={formData && tinaField(formData, 'disclaimer')}>
+                   {formData.disclaimer || 'Wir melden uns innerhalb von 24h. Unverbindlich.'}
                 </p>
               </div>
             </div>
