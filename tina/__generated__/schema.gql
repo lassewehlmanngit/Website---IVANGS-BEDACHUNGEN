@@ -56,14 +56,20 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   homePage(relativePath: String): HomePage!
   homePageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: HomePageFilter): HomePageConnection!
+  aboutPage(relativePath: String): AboutPage!
+  aboutPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: AboutPageFilter): AboutPageConnection!
+  careerPage(relativePath: String): CareerPage!
+  careerPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: CareerPageFilter): CareerPageConnection!
+  contactPage(relativePath: String): ContactPage!
+  contactPageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ContactPageFilter): ContactPageConnection!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
-  teamMember(relativePath: String): TeamMember!
-  teamMemberConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TeamMemberFilter): TeamMemberConnection!
   service(relativePath: String): Service!
   serviceConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: ServiceFilter): ServiceConnection!
   job(relativePath: String): Job!
   jobConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: JobFilter): JobConnection!
+  teamMember(relativePath: String): TeamMember!
+  teamMemberConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: TeamMemberFilter): TeamMemberConnection!
   settings(relativePath: String): Settings!
   settingsConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: SettingsFilter): SettingsConnection!
   navigation(relativePath: String): Navigation!
@@ -76,10 +82,13 @@ type Query {
 
 input DocumentFilter {
   homePage: HomePageFilter
+  aboutPage: AboutPageFilter
+  careerPage: CareerPageFilter
+  contactPage: ContactPageFilter
   page: PageFilter
-  teamMember: TeamMemberFilter
   service: ServiceFilter
   job: JobFilter
+  teamMember: TeamMemberFilter
   settings: SettingsFilter
   navigation: NavigationFilter
   footer: FooterFilter
@@ -109,7 +118,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = HomePage | Page | TeamMember | Service | Job | Settings | Navigation | Footer | LegalPage | Folder
+union DocumentNode = HomePage | AboutPage | CareerPage | ContactPage | Page | Service | Job | TeamMember | Settings | Navigation | Footer | LegalPage | Folder
 
 type HomePageSeo {
   title: String!
@@ -384,6 +393,282 @@ type HomePageConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [HomePageConnectionEdges]
+}
+
+type AboutPageSeo {
+  title: String!
+  description: String
+  ogImage: String
+}
+
+type AboutPageHero {
+  eyebrow: String
+  title: String!
+  description: String
+}
+
+type AboutPageStory {
+  title: String
+  text1: String
+  text2: String
+  image: String
+}
+
+type AboutPageValues {
+  text: String!
+  icon: String
+}
+
+type AboutPageEquipment {
+  title: String
+  description: String
+}
+
+type AboutPageTeamSection {
+  title: String
+  description: String
+}
+
+type AboutPageCta {
+  title: String
+  description: String
+  buttonText: String
+  email: String
+}
+
+type AboutPage implements Node & Document {
+  seo: AboutPageSeo
+  hero: AboutPageHero
+  story: AboutPageStory
+  values: [AboutPageValues]
+  equipment: AboutPageEquipment
+  teamSection: AboutPageTeamSection
+  cta: AboutPageCta
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input AboutPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  ogImage: ImageFilter
+}
+
+input AboutPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageStoryFilter {
+  title: StringFilter
+  text1: StringFilter
+  text2: StringFilter
+  image: ImageFilter
+}
+
+input AboutPageValuesFilter {
+  text: StringFilter
+  icon: StringFilter
+}
+
+input AboutPageEquipmentFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageTeamSectionFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input AboutPageCtaFilter {
+  title: StringFilter
+  description: StringFilter
+  buttonText: StringFilter
+  email: StringFilter
+}
+
+input AboutPageFilter {
+  seo: AboutPageSeoFilter
+  hero: AboutPageHeroFilter
+  story: AboutPageStoryFilter
+  values: AboutPageValuesFilter
+  equipment: AboutPageEquipmentFilter
+  teamSection: AboutPageTeamSectionFilter
+  cta: AboutPageCtaFilter
+}
+
+type AboutPageConnectionEdges {
+  cursor: String!
+  node: AboutPage
+}
+
+type AboutPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [AboutPageConnectionEdges]
+}
+
+type CareerPageSeo {
+  title: String!
+  description: String
+  ogImage: String
+}
+
+type CareerPageHero {
+  eyebrow: String
+  title: String!
+  description: String
+  backgroundImage: String
+}
+
+type CareerPageJobsSection {
+  title: String
+  emptyMessage: String
+}
+
+type CareerPageWizardSection {
+  title: String
+  description: String
+}
+
+type CareerPage implements Node & Document {
+  seo: CareerPageSeo
+  hero: CareerPageHero
+  jobsSection: CareerPageJobsSection
+  wizardSection: CareerPageWizardSection
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input CareerPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  ogImage: ImageFilter
+}
+
+input CareerPageHeroFilter {
+  eyebrow: StringFilter
+  title: StringFilter
+  description: StringFilter
+  backgroundImage: ImageFilter
+}
+
+input CareerPageJobsSectionFilter {
+  title: StringFilter
+  emptyMessage: StringFilter
+}
+
+input CareerPageWizardSectionFilter {
+  title: StringFilter
+  description: StringFilter
+}
+
+input CareerPageFilter {
+  seo: CareerPageSeoFilter
+  hero: CareerPageHeroFilter
+  jobsSection: CareerPageJobsSectionFilter
+  wizardSection: CareerPageWizardSectionFilter
+}
+
+type CareerPageConnectionEdges {
+  cursor: String!
+  node: CareerPage
+}
+
+type CareerPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [CareerPageConnectionEdges]
+}
+
+type ContactPageSeo {
+  title: String!
+  description: String
+  ogImage: String
+}
+
+type ContactPageAddress {
+  company: String!
+  street: String!
+  city: String!
+  zip: String!
+}
+
+type ContactPageOfficeHours {
+  weekdays: String!
+}
+
+type ContactPageRepairHours {
+  tueThu: String!
+  fri: String!
+}
+
+type ContactPage implements Node & Document {
+  seo: ContactPageSeo
+  title: String
+  description: String
+  address: ContactPageAddress
+  phone: String!
+  fax: String
+  email: String!
+  website: String
+  facebook: String
+  officeHours: ContactPageOfficeHours
+  repairHours: ContactPageRepairHours
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input ContactPageSeoFilter {
+  title: StringFilter
+  description: StringFilter
+  ogImage: ImageFilter
+}
+
+input ContactPageAddressFilter {
+  company: StringFilter
+  street: StringFilter
+  city: StringFilter
+  zip: StringFilter
+}
+
+input ContactPageOfficeHoursFilter {
+  weekdays: StringFilter
+}
+
+input ContactPageRepairHoursFilter {
+  tueThu: StringFilter
+  fri: StringFilter
+}
+
+input ContactPageFilter {
+  seo: ContactPageSeoFilter
+  title: StringFilter
+  description: StringFilter
+  address: ContactPageAddressFilter
+  phone: StringFilter
+  fax: StringFilter
+  email: StringFilter
+  website: StringFilter
+  facebook: StringFilter
+  officeHours: ContactPageOfficeHoursFilter
+  repairHours: ContactPageRepairHoursFilter
+}
+
+type ContactPageConnectionEdges {
+  cursor: String!
+  node: ContactPage
+}
+
+type ContactPageConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [ContactPageConnectionEdges]
 }
 
 type PageSeo {
@@ -722,50 +1007,6 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
-type TeamMember implements Node & Document {
-  name: String!
-  role: String!
-  email: String
-  category: String!
-  description: String
-  image: String
-  order: Float
-  id: ID!
-  _sys: SystemInfo!
-  _values: JSON!
-}
-
-input NumberFilter {
-  lt: Float
-  lte: Float
-  gte: Float
-  gt: Float
-  eq: Float
-  exists: Boolean
-  in: [Float]
-}
-
-input TeamMemberFilter {
-  name: StringFilter
-  role: StringFilter
-  email: StringFilter
-  category: StringFilter
-  description: StringFilter
-  image: ImageFilter
-  order: NumberFilter
-}
-
-type TeamMemberConnectionEdges {
-  cursor: String!
-  node: TeamMember
-}
-
-type TeamMemberConnection implements Connection {
-  pageInfo: PageInfo!
-  totalCount: Float!
-  edges: [TeamMemberConnectionEdges]
-}
-
 type ServiceSections {
   title: String!
   icon: String
@@ -824,6 +1065,16 @@ input ServiceSectionsFilter {
   title: StringFilter
   icon: StringFilter
   content: StringFilter
+}
+
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
 }
 
 input ServiceProcessStepsFilter {
@@ -916,6 +1167,40 @@ type JobConnection implements Connection {
   pageInfo: PageInfo!
   totalCount: Float!
   edges: [JobConnectionEdges]
+}
+
+type TeamMember implements Node & Document {
+  name: String!
+  role: String!
+  email: String
+  category: String!
+  description: String
+  image: String
+  order: Float
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input TeamMemberFilter {
+  name: StringFilter
+  role: StringFilter
+  email: StringFilter
+  category: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  order: NumberFilter
+}
+
+type TeamMemberConnectionEdges {
+  cursor: String!
+  node: TeamMember
+}
+
+type TeamMemberConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [TeamMemberConnectionEdges]
 }
 
 type SettingsCookieBanner {
@@ -1124,14 +1409,20 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updateHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
   createHomePage(relativePath: String!, params: HomePageMutation!): HomePage!
+  updateAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  createAboutPage(relativePath: String!, params: AboutPageMutation!): AboutPage!
+  updateCareerPage(relativePath: String!, params: CareerPageMutation!): CareerPage!
+  createCareerPage(relativePath: String!, params: CareerPageMutation!): CareerPage!
+  updateContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
+  createContactPage(relativePath: String!, params: ContactPageMutation!): ContactPage!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
-  updateTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
-  createTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
   updateService(relativePath: String!, params: ServiceMutation!): Service!
   createService(relativePath: String!, params: ServiceMutation!): Service!
   updateJob(relativePath: String!, params: JobMutation!): Job!
   createJob(relativePath: String!, params: JobMutation!): Job!
+  updateTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
+  createTeamMember(relativePath: String!, params: TeamMemberMutation!): TeamMember!
   updateSettings(relativePath: String!, params: SettingsMutation!): Settings!
   createSettings(relativePath: String!, params: SettingsMutation!): Settings!
   updateNavigation(relativePath: String!, params: NavigationMutation!): Navigation!
@@ -1144,10 +1435,13 @@ type Mutation {
 
 input DocumentUpdateMutation {
   homePage: HomePageMutation
+  aboutPage: AboutPageMutation
+  careerPage: CareerPageMutation
+  contactPage: ContactPageMutation
   page: PageMutation
-  teamMember: TeamMemberMutation
   service: ServiceMutation
   job: JobMutation
+  teamMember: TeamMemberMutation
   settings: SettingsMutation
   navigation: NavigationMutation
   footer: FooterMutation
@@ -1157,10 +1451,13 @@ input DocumentUpdateMutation {
 
 input DocumentMutation {
   homePage: HomePageMutation
+  aboutPage: AboutPageMutation
+  careerPage: CareerPageMutation
+  contactPage: ContactPageMutation
   page: PageMutation
-  teamMember: TeamMemberMutation
   service: ServiceMutation
   job: JobMutation
+  teamMember: TeamMemberMutation
   settings: SettingsMutation
   navigation: NavigationMutation
   footer: FooterMutation
@@ -1286,6 +1583,123 @@ input HomePageMutation {
   trustIndicators: HomePageTrustIndicatorsMutation
   faqSection: HomePageFaqSectionMutation
   finalCTA: HomePageFinalCTAMutation
+}
+
+input AboutPageSeoMutation {
+  title: String
+  description: String
+  ogImage: String
+}
+
+input AboutPageHeroMutation {
+  eyebrow: String
+  title: String
+  description: String
+}
+
+input AboutPageStoryMutation {
+  title: String
+  text1: String
+  text2: String
+  image: String
+}
+
+input AboutPageValuesMutation {
+  text: String
+  icon: String
+}
+
+input AboutPageEquipmentMutation {
+  title: String
+  description: String
+}
+
+input AboutPageTeamSectionMutation {
+  title: String
+  description: String
+}
+
+input AboutPageCtaMutation {
+  title: String
+  description: String
+  buttonText: String
+  email: String
+}
+
+input AboutPageMutation {
+  seo: AboutPageSeoMutation
+  hero: AboutPageHeroMutation
+  story: AboutPageStoryMutation
+  values: [AboutPageValuesMutation]
+  equipment: AboutPageEquipmentMutation
+  teamSection: AboutPageTeamSectionMutation
+  cta: AboutPageCtaMutation
+}
+
+input CareerPageSeoMutation {
+  title: String
+  description: String
+  ogImage: String
+}
+
+input CareerPageHeroMutation {
+  eyebrow: String
+  title: String
+  description: String
+  backgroundImage: String
+}
+
+input CareerPageJobsSectionMutation {
+  title: String
+  emptyMessage: String
+}
+
+input CareerPageWizardSectionMutation {
+  title: String
+  description: String
+}
+
+input CareerPageMutation {
+  seo: CareerPageSeoMutation
+  hero: CareerPageHeroMutation
+  jobsSection: CareerPageJobsSectionMutation
+  wizardSection: CareerPageWizardSectionMutation
+}
+
+input ContactPageSeoMutation {
+  title: String
+  description: String
+  ogImage: String
+}
+
+input ContactPageAddressMutation {
+  company: String
+  street: String
+  city: String
+  zip: String
+}
+
+input ContactPageOfficeHoursMutation {
+  weekdays: String
+}
+
+input ContactPageRepairHoursMutation {
+  tueThu: String
+  fri: String
+}
+
+input ContactPageMutation {
+  seo: ContactPageSeoMutation
+  title: String
+  description: String
+  address: ContactPageAddressMutation
+  phone: String
+  fax: String
+  email: String
+  website: String
+  facebook: String
+  officeHours: ContactPageOfficeHoursMutation
+  repairHours: ContactPageRepairHoursMutation
 }
 
 input PageSeoMutation {
@@ -1452,16 +1866,6 @@ input PageMutation {
   blocks: [PageBlocksMutation]
 }
 
-input TeamMemberMutation {
-  name: String
-  role: String
-  email: String
-  category: String
-  description: String
-  image: String
-  order: Float
-}
-
 input ServiceSectionsMutation {
   title: String
   icon: String
@@ -1522,6 +1926,16 @@ input JobMutation {
   profile: [String]
   benefits: [String]
   published: Boolean
+}
+
+input TeamMemberMutation {
+  name: String
+  role: String
+  email: String
+  category: String
+  description: String
+  image: String
+  order: Float
 }
 
 input SettingsCookieBannerMutation {

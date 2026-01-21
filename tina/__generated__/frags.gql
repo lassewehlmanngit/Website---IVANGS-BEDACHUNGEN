@@ -105,6 +105,111 @@ fragment HomePageParts on HomePage {
   }
 }
 
+fragment AboutPageParts on AboutPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    description
+  }
+  story {
+    __typename
+    title
+    text1
+    text2
+    image
+  }
+  values {
+    __typename
+    text
+    icon
+  }
+  equipment {
+    __typename
+    title
+    description
+  }
+  teamSection {
+    __typename
+    title
+    description
+  }
+  cta {
+    __typename
+    title
+    description
+    buttonText
+    email
+  }
+}
+
+fragment CareerPageParts on CareerPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  hero {
+    __typename
+    eyebrow
+    title
+    description
+    backgroundImage
+  }
+  jobsSection {
+    __typename
+    title
+    emptyMessage
+  }
+  wizardSection {
+    __typename
+    title
+    description
+  }
+}
+
+fragment ContactPageParts on ContactPage {
+  __typename
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  title
+  description
+  address {
+    __typename
+    company
+    street
+    city
+    zip
+  }
+  phone
+  fax
+  email
+  website
+  facebook
+  officeHours {
+    __typename
+    weekdays
+  }
+  repairHours {
+    __typename
+    tueThu
+    fri
+  }
+}
+
 fragment PageParts on Page {
   __typename
   title
@@ -237,17 +342,6 @@ fragment PageParts on Page {
   }
 }
 
-fragment TeamMemberParts on TeamMember {
-  __typename
-  name
-  role
-  email
-  category
-  description
-  image
-  order
-}
-
 fragment ServiceParts on Service {
   __typename
   title
@@ -305,6 +399,17 @@ fragment JobParts on Job {
   profile
   benefits
   published
+}
+
+fragment TeamMemberParts on TeamMember {
+  __typename
+  name
+  role
+  email
+  category
+  description
+  image
+  order
 }
 
 fragment SettingsParts on Settings {

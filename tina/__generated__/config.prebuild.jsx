@@ -311,15 +311,16 @@ var config_default = defineConfig({
   },
   schema: {
     collections: [
-      // 🏠 STARTSEITE (Singleton)
+      // =========================================================================
+      // 🏠 HAUPTSEITEN (Singletons)
+      // =========================================================================
+      // 1. 🏠 STARTSEITE (Singleton)
       {
         name: "homePage",
         label: "\u{1F3E0} Startseite",
         path: "content/home",
         format: "json",
-        match: {
-          include: "startseite"
-        },
+        match: { include: "startseite" },
         ui: {
           router: () => "/de",
           allowedActions: { create: false, delete: false }
@@ -510,10 +511,197 @@ var config_default = defineConfig({
           }
         ]
       },
-      // 📄 PAGE BUILDER (Block-based pages)
+      // 2. 📄 ÜBER UNS (Singleton)
+      {
+        name: "aboutPage",
+        label: "\u{1F4C4} \xDCber Uns",
+        path: "content/about",
+        format: "json",
+        match: { include: "about" },
+        ui: {
+          router: () => "/de/about",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          seoFields,
+          // HERO
+          {
+            type: "object",
+            name: "hero",
+            label: "\u{1F44B} Hero Bereich",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
+              { type: "string", name: "title", label: "Haupttitel (H1)", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          // STORY
+          {
+            type: "object",
+            name: "story",
+            label: "\u{1F4D6} Geschichte",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "text1", label: "Absatz 1", ui: { component: "textarea" } },
+              { type: "string", name: "text2", label: "Absatz 2", ui: { component: "textarea" } },
+              { type: "image", name: "image", label: "Bild" }
+            ]
+          },
+          // VALUES
+          {
+            type: "object",
+            list: true,
+            name: "values",
+            label: "\u2705 Werte / Highlights",
+            ui: {
+              max: 6,
+              itemProps: (item) => ({ label: item?.text || "Neuer Wert" })
+            },
+            fields: [
+              { type: "string", name: "text", label: "Text", required: true },
+              { type: "string", name: "icon", label: "Icon (Lucide)" }
+            ]
+          },
+          // EQUIPMENT
+          {
+            type: "object",
+            name: "equipment",
+            label: "\u{1F527} Ausstattung",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          // TEAM SECTION
+          {
+            type: "object",
+            name: "teamSection",
+            label: "\u{1F465} Team Bereich",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          },
+          // CTA
+          {
+            type: "object",
+            name: "cta",
+            label: "\u{1F4E3} Call-to-Action",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "string", name: "buttonText", label: "Button Text" },
+              { type: "string", name: "email", label: "E-Mail" }
+            ]
+          }
+        ]
+      },
+      // 3. 💼 KARRIERE (Singleton)
+      {
+        name: "careerPage",
+        label: "\u{1F4BC} Karriere",
+        path: "content/career",
+        format: "json",
+        match: { include: "career" },
+        ui: {
+          router: () => "/de/career",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          seoFields,
+          // HERO
+          {
+            type: "object",
+            name: "hero",
+            label: "\u{1F44B} Hero Bereich",
+            fields: [
+              { type: "string", name: "eyebrow", label: "Kleine \xDCberschrift" },
+              { type: "string", name: "title", label: "Haupttitel (H1)", required: true },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              { type: "image", name: "backgroundImage", label: "Hintergrundbild" }
+            ]
+          },
+          // JOBS SECTION
+          {
+            type: "object",
+            name: "jobsSection",
+            label: "\u{1F4BC} Stellenangebote Bereich",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "emptyMessage", label: "Text wenn keine Stellen" }
+            ]
+          },
+          // WIZARD SECTION
+          {
+            type: "object",
+            name: "wizardSection",
+            label: "\u{1F9D9} Karriere Finder",
+            fields: [
+              { type: "string", name: "title", label: "Titel" },
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+            ]
+          }
+        ]
+      },
+      // 4. 📬 KONTAKT (Singleton - Company Data)
+      {
+        name: "contactPage",
+        label: "\u{1F4EC} Kontakt",
+        path: "content/contact",
+        format: "json",
+        match: { include: "contact" },
+        ui: {
+          router: () => "/de/contact",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          seoFields,
+          { type: "string", name: "title", label: "Seitentitel" },
+          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+          // ADDRESS
+          {
+            type: "object",
+            name: "address",
+            label: "\u{1F4CD} Adresse",
+            fields: [
+              { type: "string", name: "company", label: "Firmenname", required: true },
+              { type: "string", name: "street", label: "Stra\xDFe", required: true },
+              { type: "string", name: "city", label: "Stadt", required: true },
+              { type: "string", name: "zip", label: "PLZ", required: true }
+            ]
+          },
+          { type: "string", name: "phone", label: "Telefon", required: true },
+          { type: "string", name: "fax", label: "Fax" },
+          { type: "string", name: "email", label: "E-Mail", required: true },
+          { type: "string", name: "website", label: "Website" },
+          { type: "string", name: "facebook", label: "Facebook URL" },
+          // OFFICE HOURS
+          {
+            type: "object",
+            name: "officeHours",
+            label: "\u{1F550} \xD6ffnungszeiten B\xFCro",
+            fields: [
+              { type: "string", name: "weekdays", label: "Mo-Fr Text", required: true }
+            ]
+          },
+          // REPAIR HOURS
+          {
+            type: "object",
+            name: "repairHours",
+            label: "\u{1F527} Reparaturplanung Zeiten",
+            fields: [
+              { type: "string", name: "tueThu", label: "Di-Do Text", required: true },
+              { type: "string", name: "fri", label: "Fr Text", required: true }
+            ]
+          }
+        ]
+      },
+      // =========================================================================
+      // 🧱 PAGE BUILDER (Generic Block-based Pages)
+      // =========================================================================
       {
         name: "page",
-        label: "\u{1F4C4} Seiten",
+        label: "\u2795 Weitere Seiten",
         path: "content/pages",
         format: "json",
         ui: {
@@ -544,37 +732,9 @@ var config_default = defineConfig({
           }
         ]
       },
-      // 👥 TEAM MITGLIEDER
-      {
-        name: "teamMember",
-        label: "\u{1F465} Mitarbeiter",
-        path: "content/team",
-        format: "md",
-        ui: {
-          router: ({ document }) => {
-            return `/de/about#team-${document._sys.filename}`;
-          }
-        },
-        fields: [
-          { type: "string", name: "name", label: "Vor- & Nachname", required: true, isTitle: true },
-          { type: "string", name: "role", label: "Position / Jobtitel", required: true },
-          { type: "string", name: "email", label: "E-Mail" },
-          {
-            type: "string",
-            name: "category",
-            label: "Abteilung",
-            required: true,
-            options: [
-              { label: "Gesch\xE4ftsf\xFChrung", value: "leadership" },
-              { label: "B\xFCro", value: "office" },
-              { label: "Dachdecker", value: "craftsmen" }
-            ]
-          },
-          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
-          { type: "image", name: "image", label: "Foto" },
-          { type: "number", name: "order", label: "Reihenfolge" }
-        ]
-      },
+      // =========================================================================
+      // 📚 RESSOURCEN
+      // =========================================================================
       // 🔧 DIENSTLEISTUNGEN
       {
         name: "service",
@@ -582,9 +742,7 @@ var config_default = defineConfig({
         path: "content/services",
         format: "md",
         ui: {
-          router: ({ document }) => {
-            return `/de/services/${document._sys.filename}`;
-          }
+          router: ({ document }) => `/de/services/${document._sys.filename}`
         },
         fields: [
           { type: "string", name: "title", label: "Name der Leistung", required: true, isTitle: true },
@@ -701,16 +859,14 @@ var config_default = defineConfig({
           }
         ]
       },
-      // 💼 STELLENANZEIGEN
+      // 📋 STELLENANGEBOTE
       {
         name: "job",
-        label: "\u{1F4BC} Stellenanzeigen",
+        label: "\u{1F4CB} Stellenangebote",
         path: "content/jobs",
         format: "md",
         ui: {
-          router: ({ document }) => {
-            return `/de/career#${document._sys.filename}`;
-          }
+          router: ({ document }) => `/de/career#${document._sys.filename}`
         },
         fields: [
           { type: "string", name: "title", label: "Jobtitel", required: true, isTitle: true },
@@ -744,16 +900,48 @@ var config_default = defineConfig({
           { type: "boolean", name: "published", label: "Ver\xF6ffentlicht?" }
         ]
       },
+      // 👥 TEAM MITGLIEDER
+      {
+        name: "teamMember",
+        label: "\u{1F465} Team",
+        path: "content/team",
+        format: "md",
+        ui: {
+          router: ({ document }) => `/de/about#team-${document._sys.filename}`
+        },
+        fields: [
+          { type: "string", name: "name", label: "Vor- & Nachname", required: true, isTitle: true },
+          { type: "string", name: "role", label: "Position / Jobtitel", required: true },
+          { type: "string", name: "email", label: "E-Mail" },
+          {
+            type: "string",
+            name: "category",
+            label: "Abteilung",
+            required: true,
+            options: [
+              { label: "Gesch\xE4ftsf\xFChrung", value: "leadership" },
+              { label: "B\xFCro", value: "office" },
+              { label: "Dachdecker", value: "craftsmen" }
+            ]
+          },
+          { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+          { type: "image", name: "image", label: "Foto" },
+          { type: "number", name: "order", label: "Reihenfolge" }
+        ]
+      },
+      // =========================================================================
+      // ⚙️ GLOBALE EINSTELLUNGEN
+      // =========================================================================
       // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: "settings",
-        label: "\u2699\uFE0F Grundeinstellungen",
+        label: "\u2699\uFE0F Einstellungen",
         path: "content/globals",
         format: "json",
+        match: { include: "settings" },
         ui: {
           allowedActions: { create: false, delete: false }
         },
-        match: { include: "settings" },
         fields: [
           { type: "string", name: "siteName", label: "Website Name", required: true },
           { type: "string", name: "siteDescription", label: "Website Beschreibung" },
@@ -790,13 +978,13 @@ var config_default = defineConfig({
       // 🧭 NAVIGATION
       {
         name: "navigation",
-        label: "\u{1F9ED} Men\xFC / Navigation",
+        label: "\u{1F9ED} Men\xFC",
         path: "content/globals",
         format: "json",
+        match: { include: "navigation" },
         ui: {
           allowedActions: { create: false, delete: false }
         },
-        match: { include: "navigation" },
         fields: [
           { type: "image", name: "logo", label: "Logo" },
           {
@@ -827,10 +1015,10 @@ var config_default = defineConfig({
         label: "\u{1F9B6} Footer",
         path: "content/globals",
         format: "json",
+        match: { include: "footer" },
         ui: {
           allowedActions: { create: false, delete: false }
         },
-        match: { include: "footer" },
         fields: [
           { type: "string", name: "copyright", label: "Copyright Text" },
           {

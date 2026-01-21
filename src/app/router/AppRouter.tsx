@@ -4,6 +4,9 @@ import { ScrollHandler } from './ScrollHandler';
 import { SUPPORTED_LANGS, type SupportedLang } from '@/shared/config/i18n';
 import { MarketingLayout } from '@/widgets/layout/MarketingLayout';
 import { HomePage } from '@/pages/HomePage';
+import { AboutPage } from '@/pages/AboutPage';
+import { CareerPage } from '@/pages/CareerPage';
+import { ContactPage } from '@/pages/ContactPage';
 import { DynamicPage } from '@/pages/DynamicPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/DesignSystemPage';
@@ -46,10 +49,10 @@ const LanguageWrapper: React.FC = () => {
         {/* Service detail pages */}
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
         
-        {/* Page Builder pages (about, career, contact) */}
-        <Route path="/about" element={<DynamicPage lang={safeLang} slug="about" />} />
-        <Route path="/career" element={<DynamicPage lang={safeLang} slug="career" />} />
-        <Route path="/contact" element={<DynamicPage lang={safeLang} slug="contact" />} />
+        {/* Singleton pages (about, career, contact) */}
+        <Route path="/about" element={<AboutPage lang={safeLang} />} />
+        <Route path="/career" element={<CareerPage lang={safeLang} />} />
+        <Route path="/contact" element={<ContactPage lang={safeLang} />} />
         
         {/* Legal pages */}
         <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
