@@ -66,7 +66,13 @@ export function isVisualEditingEnabled(): boolean {
   // Check if we're on the /admin path
   const isAdminPath = window.location.pathname.includes('/admin');
   
-  return isInIframe || hasTinaParam || isAdminPath;
+  const result = isInIframe || hasTinaParam || isAdminPath;
+  
+  // #region agent log
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'client.ts:isVisualEditingEnabled',message:'Visual editing check',data:{isInIframe,hasTinaParam,isAdminPath,result,pathname:window.location.pathname,search:window.location.search},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+  // #endregion
+  
+  return result;
 }
 
 export { client, client as tinaClient };

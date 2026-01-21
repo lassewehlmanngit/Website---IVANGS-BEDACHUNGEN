@@ -8,9 +8,7 @@ import { GenericPage } from '@/pages/GenericPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { DesignSystemPage } from '@/pages/DesignSystemPage';
 import { ServiceDetailPage } from '@/pages/service-detail/ui/ServiceDetailPage';
-import { CareerPage } from '@/pages/career/ui/CareerPage';
-import { AboutPage } from '@/pages/about/ui/AboutPage';
-import { ContactPage } from '@/pages/contact/ui/ContactPage';
+import { PageBuilder } from '@/pages/PageBuilder';
 import { ImprintPage } from '@/pages/legal/ui/ImprintPage';
 import { PrivacyPage } from '@/pages/legal/ui/PrivacyPage';
 import { TermsPage } from '@/pages/legal/ui/TermsPage';
@@ -43,16 +41,27 @@ const LanguageWrapper: React.FC = () => {
   return (
     <MarketingLayout lang={safeLang}>
       <Routes>
+        {/* Home page */}
         <Route path="/" element={<HomePage lang={safeLang} />} />
+        
+        {/* Service detail pages */}
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
-        <Route path="/career" element={<CareerPage lang={safeLang} />} />
-        <Route path="/about" element={<AboutPage lang={safeLang} />} />
-        <Route path="/contact" element={<ContactPage lang={safeLang} />} />
+        
+        {/* Page Builder pages (about, career, contact) */}
+        <Route path="/about" element={<PageBuilder lang={safeLang} slug="about" />} />
+        <Route path="/career" element={<PageBuilder lang={safeLang} slug="career" />} />
+        <Route path="/contact" element={<PageBuilder lang={safeLang} slug="contact" />} />
+        
+        {/* Legal pages */}
         <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
         <Route path="/privacy" element={<PrivacyPage lang={safeLang} />} />
         <Route path="/terms" element={<TermsPage lang={safeLang} />} />
         <Route path="/cookies" element={<CookieSettingsPage lang={safeLang} />} />
+        
+        {/* Generic page fallback */}
         <Route path="/:slug" element={<GenericPage lang={safeLang} />} />
+        
+        {/* 404 */}
         <Route path="*" element={<NotFoundPage lang={safeLang} />} />
       </Routes>
     </MarketingLayout>

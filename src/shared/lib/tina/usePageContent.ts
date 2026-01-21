@@ -53,70 +53,6 @@ const PAGE_CONFIGS: Record<string, PageConfig> = {
       }
     `,
   },
-  about: {
-    collectionName: 'aboutPage',
-    relativePath: 'ueber-uns.json',
-    contentPath: '/content/about/ueber-uns.json',
-    query: `
-      query AboutPageQuery($relativePath: String!) {
-        aboutPage(relativePath: $relativePath) {
-          _sys { filename }
-          seo { title description }
-          hero { eyebrow title description }
-          story { title text1 text2 image }
-          values { text }
-          equipment { title description }
-          teamSection { title description }
-          cta { title description buttonText email }
-        }
-      }
-    `,
-  },
-  career: {
-    collectionName: 'careerPage',
-    relativePath: 'karriere.json',
-    contentPath: '/content/career/karriere.json',
-    query: `
-      query CareerPageQuery($relativePath: String!) {
-        careerPage(relativePath: $relativePath) {
-          _sys { filename }
-          seo { title description }
-          hero {
-            eyebrow
-            title
-            description
-            backgroundImage
-          }
-          jobsSection {
-            title
-            emptyMessage
-          }
-          wizardSection {
-            title
-            description
-          }
-        }
-      }
-    `,
-  },
-  contact: {
-    collectionName: 'contactPage',
-    relativePath: 'kontakt.json',
-    contentPath: '/content/contact/kontakt.json',
-    query: `
-      query ContactPageQuery($relativePath: String!) {
-        contactPage(relativePath: $relativePath) {
-          _sys { filename }
-          seo { title description }
-          title description
-          address { company street city zip }
-          phone fax email website facebook
-          officeHours { weekdays }
-          repairHours { tueThu fri }
-        }
-      }
-    `,
-  },
 };
 
 // Global content queries
@@ -208,14 +144,14 @@ interface UsePageContentResult {
  * - Loads global content (navigation, footer, settings) with caching
  * - Integrates with TinaCMS for visual editing
  * 
- * @param pageKey - The page identifier ('home', 'about', 'career', 'contact')
+ * @param pageKey - The page identifier ('home')
  * @returns { page, global, isLoading }
  */
 export function usePageContent(pageKey: string): UsePageContentResult {
   const config = PAGE_CONFIGS[pageKey];
   
   if (!config) {
-    console.error(`usePageContent: Unknown page key "${pageKey}"`);
+    console.error(`usePageContent: Unknown page key "${pageKey}". Use 'home' or switch to usePageBuilderData for block-based pages.`);
   }
 
   const [pagePayload, setPagePayload] = useState<TinaPayload | null>(null);

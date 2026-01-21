@@ -1,4 +1,4 @@
-import { defineConfig } from 'tinacms';
+import { defineConfig, type Template } from 'tinacms';
 
 // =============================================================================
 // Environment Variables (standardized naming per TinaCMS guide)
@@ -27,14 +27,13 @@ const token =
 
 // =============================================================================
 // Route Mapping for Visual Editing
-// Maps content filenames to their frontend routes
 // =============================================================================
 const ROUTE_MAP: Record<string, string> = {
   // Pages
   'startseite': '/de',
-  'ueber-uns': '/de/about',
-  'karriere': '/de/career',
-  'kontakt': '/de/contact',
+  'about': '/de/about',
+  'career': '/de/career',
+  'contact': '/de/contact',
   // Legal pages
   'imprint': '/de/imprint',
   'privacy': '/de/privacy',
@@ -42,13 +41,308 @@ const ROUTE_MAP: Record<string, string> = {
   'cookies': '/de/cookies',
 };
 
-/**
- * Get the frontend route for a document based on its filename
- */
 function getRouteForDocument(filename: string, fallbackPath?: string): string {
   return ROUTE_MAP[filename] || fallbackPath || `/de/${filename}`;
 }
 
+// =============================================================================
+// Reusable Field Definitions
+// =============================================================================
+const seoFields = {
+  type: 'object' as const,
+  name: 'seo',
+  label: '🔍 SEO & Google',
+  fields: [
+    { type: 'string' as const, name: 'title', label: 'Browser-Titel', required: true, description: 'Titel im Browser-Tab' },
+    { type: 'string' as const, name: 'description', label: 'Suchbeschreibung', ui: { component: 'textarea' }, description: 'Text in Google-Ergebnissen' },
+    { type: 'image' as const, name: 'ogImage', label: 'Social Media Bild', description: 'Bild für Facebook/Twitter Vorschau' },
+  ],
+};
+
+const buttonFields = [
+  { type: 'string' as const, name: 'text', label: 'Button Text', required: true },
+  { type: 'string' as const, name: 'link', label: 'Link', required: true },
+  { 
+    type: 'string' as const, 
+    name: 'variant', 
+    label: 'Stil',
+    options: [
+      { label: 'Primär', value: 'primary' },
+      { label: 'Sekundär', value: 'secondary' },
+      { label: 'Outline', value: 'outline' },
+    ],
+  },
+];
+
+// =============================================================================
+// Block Templates for Page Builder
+// =============================================================================
+const heroBlock: Template = {
+  name: 'hero',
+  label: '👋 Hero Banner',
+  fields: [
+    { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift', description: 'z.B. "MEISTERBETRIEB"' },
+    { type: 'string', name: 'title', label: 'Haupttitel (H1)' },
+    { type: 'string', name: 'subtitle', label: 'Untertitel' },
+    { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
+    { 
+      type: 'object', 
+      name: 'primaryButton', 
+      label: 'Haupt-Button',
+      fields: buttonFields,
+    },
+    { 
+      type: 'object', 
+      name: 'secondaryButton', 
+      label: 'Zweit-Button',
+      fields: buttonFields,
+    },
+    { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
+    { 
+      type: 'string', 
+      name: 'variant', 
+      label: 'Stil Variante',
+      options: [
+        { label: 'Standard (dunkel)', value: 'dark' },
+        { label: 'Hell', value: 'light' },
+        { label: 'Mit Überlagerung', value: 'overlay' },
+      ],
+    },
+  ],
+};
+
+const contentBlock: Template = {
+  name: 'content',
+  label: '📝 Text/Inhalt',
+  fields: [
+    { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'rich-text', name: 'body', label: 'Inhalt' },
+    { type: 'image', name: 'image', label: 'Bild (optional)' },
+    { 
+      type: 'string', 
+      name: 'imagePosition', 
+      label: 'Bild Position',
+      options: [
+        { label: 'Links', value: 'left' },
+        { label: 'Rechts', value: 'right' },
+        { label: 'Oben', value: 'top' },
+        { label: 'Unten', value: 'bottom' },
+      ],
+    },
+  ],
+};
+
+const featuresBlock: Template = {
+  name: 'features',
+  label: '⭐ Features/Merkmale',
+  fields: [
+    { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+    {
+      type: 'object',
+      list: true,
+      name: 'items',
+      label: 'Features',
+      ui: { 
+        max: 8,
+        itemProps: (item) => ({ label: item?.title || 'Neues Feature' }),
+      },
+      fields: [
+        { type: 'string', name: 'icon', label: 'Icon (Lucide)', description: 'z.B. CheckCircle, Star, Shield' },
+        { type: 'string', name: 'title', label: 'Titel', required: true },
+        { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+      ],
+    },
+    {
+      type: 'string',
+      name: 'columns',
+      label: 'Spalten',
+      options: [
+        { label: '2 Spalten', value: '2' },
+        { label: '3 Spalten', value: '3' },
+        { label: '4 Spalten', value: '4' },
+      ],
+    },
+  ],
+};
+
+const teamGridBlock: Template = {
+  name: 'teamGrid',
+  label: '👥 Team Übersicht',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+    {
+      type: 'string',
+      name: 'categories',
+      label: 'Angezeigte Kategorien',
+      list: true,
+      options: [
+        { label: 'Geschäftsführung', value: 'leadership' },
+        { label: 'Büro', value: 'office' },
+        { label: 'Dachdecker', value: 'craftsmen' },
+      ],
+    },
+    { type: 'boolean', name: 'showEmail', label: 'E-Mails anzeigen?' },
+  ],
+};
+
+const formBlock: Template = {
+  name: 'form',
+  label: '📋 Kontaktformular',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+    {
+      type: 'string',
+      name: 'formType',
+      label: 'Formular-Typ',
+      required: true,
+      options: [
+        { label: 'Kontaktformular (vollständig)', value: 'contact' },
+        { label: 'Schnellanfrage', value: 'quick' },
+        { label: 'Bewerbungsformular', value: 'application' },
+      ],
+    },
+    { type: 'string', name: 'submitButtonText', label: 'Absenden-Button Text' },
+    { type: 'string', name: 'successMessage', label: 'Erfolgsmeldung', ui: { component: 'textarea' } },
+  ],
+};
+
+const ctaBlock: Template = {
+  name: 'cta',
+  label: '📣 Call-to-Action',
+  fields: [
+    { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+    { 
+      type: 'object', 
+      name: 'button', 
+      label: 'Button',
+      fields: buttonFields,
+    },
+    {
+      type: 'string',
+      name: 'variant',
+      label: 'Stil',
+      options: [
+        { label: 'Dunkel', value: 'dark' },
+        { label: 'Hell', value: 'light' },
+        { label: 'Primärfarbe', value: 'primary' },
+      ],
+    },
+  ],
+};
+
+const faqBlock: Template = {
+  name: 'faq',
+  label: '❓ FAQ',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung' },
+    {
+      type: 'object',
+      list: true,
+      name: 'questions',
+      label: 'Fragen',
+      ui: { 
+        max: 15,
+        itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
+      },
+      fields: [
+        { type: 'string', name: 'question', label: 'Frage', required: true },
+        { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
+      ],
+    },
+  ],
+};
+
+const storyBlock: Template = {
+  name: 'story',
+  label: '📖 Geschichte/Story',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'text1', label: 'Absatz 1', ui: { component: 'textarea' } },
+    { type: 'string', name: 'text2', label: 'Absatz 2', ui: { component: 'textarea' } },
+    { type: 'image', name: 'image', label: 'Bild' },
+    {
+      type: 'object',
+      list: true,
+      name: 'highlights',
+      label: 'Highlights/Werte',
+      ui: { max: 6 },
+      fields: [
+        { type: 'string', name: 'text', label: 'Text', required: true },
+        { type: 'string', name: 'icon', label: 'Icon (Lucide)' },
+      ],
+    },
+  ],
+};
+
+const equipmentBlock: Template = {
+  name: 'equipment',
+  label: '🔧 Ausstattung/Info',
+  fields: [
+    { type: 'string', name: 'icon', label: 'Icon (Lucide)', description: 'z.B. Hammer, Wrench, Truck' },
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+  ],
+};
+
+const jobsListBlock: Template = {
+  name: 'jobsList',
+  label: '💼 Stellenangebote',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'emptyMessage', label: 'Text wenn keine Stellen' },
+  ],
+};
+
+const contactInfoBlock: Template = {
+  name: 'contactInfo',
+  label: '📍 Kontaktdaten',
+  fields: [
+    { type: 'string', name: 'title', label: 'Titel' },
+    { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+    {
+      type: 'object',
+      name: 'address',
+      label: 'Adresse',
+      fields: [
+        { type: 'string', name: 'company', label: 'Firmenname', required: true },
+        { type: 'string', name: 'street', label: 'Straße', required: true },
+        { type: 'string', name: 'city', label: 'Stadt', required: true },
+        { type: 'string', name: 'zip', label: 'PLZ', required: true },
+      ],
+    },
+    { type: 'string', name: 'phone', label: 'Telefon', required: true },
+    { type: 'string', name: 'fax', label: 'Fax' },
+    { type: 'string', name: 'email', label: 'E-Mail', required: true },
+    { type: 'string', name: 'website', label: 'Website' },
+    {
+      type: 'object',
+      name: 'officeHours',
+      label: 'Öffnungszeiten Büro',
+      fields: [{ type: 'string', name: 'weekdays', label: 'Mo-Fr Text', required: true }],
+    },
+    {
+      type: 'object',
+      name: 'repairHours',
+      label: 'Reparaturplanung Zeiten',
+      fields: [
+        { type: 'string', name: 'tueThu', label: 'Di-Do Text', required: true },
+        { type: 'string', name: 'fri', label: 'Fr Text', required: true },
+      ],
+    },
+  ],
+};
+
+// =============================================================================
+// TinaCMS Configuration
+// =============================================================================
 export default defineConfig({
   branch,
   clientId,
@@ -65,7 +359,7 @@ export default defineConfig({
   },
   schema: {
     collections: [
-      // 🏠 STARTSEITE
+      // 🏠 STARTSEITE (Singleton)
       {
         name: 'homePage',
         label: '🏠 Startseite',
@@ -79,17 +373,8 @@ export default defineConfig({
           allowedActions: { create: false, delete: false },
         },
         fields: [
-          // 1. SEO
-          {
-            type: 'object',
-            name: 'seo',
-            label: '🔍 SEO & Google',
-            fields: [
-              { type: 'string', name: 'title', label: 'Browser-Titel', required: true, description: 'Titel im Browser-Tab' },
-              { type: 'string', name: 'description', label: 'Suchbeschreibung', ui: { component: 'textarea' }, description: 'Text in Google-Ergebnissen' },
-            ],
-          },
-          // 2. HERO
+          seoFields,
+          // HERO
           {
             type: 'object',
             name: 'hero',
@@ -115,7 +400,7 @@ export default defineConfig({
               { type: 'boolean', name: 'showQuickForm', label: 'Kontaktformular anzeigen?' },
             ],
           },
-          // 3. QUICK FORM
+          // QUICK FORM
           {
             type: 'object',
             name: 'quickForm',
@@ -128,7 +413,7 @@ export default defineConfig({
               { type: 'string', name: 'disclaimer', label: 'Hinweistext' },
             ],
           },
-          // 4. STATS
+          // STATS
           {
             type: 'object',
             list: true,
@@ -144,7 +429,7 @@ export default defineConfig({
               { type: 'string', name: 'icon', label: 'Icon Name (Englisch)' },
             ],
           },
-          // 5. SERVICES
+          // SERVICES
           {
             type: 'object',
             name: 'servicesSection',
@@ -155,7 +440,7 @@ export default defineConfig({
               { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
             ],
           },
-          // 6. CEO QUOTE
+          // CEO QUOTE
           {
             type: 'object',
             name: 'ceoQuote',
@@ -171,7 +456,7 @@ export default defineConfig({
               { type: 'string', name: 'buttonLink', label: 'Button Link' },
             ],
           },
-          // 7. PROJECTS
+          // PROJECTS
           {
             type: 'object',
             name: 'projectsSection',
@@ -196,7 +481,7 @@ export default defineConfig({
               }
             ],
           },
-          // 8. TRUST
+          // TRUST
           {
             type: 'object',
             name: 'trustIndicators',
@@ -223,7 +508,7 @@ export default defineConfig({
               }
             ],
           },
-          // 9. FAQ
+          // FAQ
           {
             type: 'object',
             name: 'faqSection',
@@ -259,7 +544,7 @@ export default defineConfig({
               }
             ],
           },
-          // 10. FINAL CTA
+          // FINAL CTA
           {
             type: 'object',
             name: 'finalCTA',
@@ -269,6 +554,41 @@ export default defineConfig({
               { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
               { type: 'string', name: 'buttonText', label: 'Button Text' },
               { type: 'string', name: 'buttonLink', label: 'Button Link' },
+            ],
+          },
+        ],
+      },
+
+      // 📄 PAGE BUILDER (Block-based pages)
+      {
+        name: 'page',
+        label: '📄 Seiten',
+        path: 'content/pages',
+        format: 'json',
+        ui: {
+          router: ({ document }) => getRouteForDocument(document._sys.filename),
+        },
+        fields: [
+          { type: 'string', name: 'title', label: 'Seitentitel (intern)', required: true, isTitle: true },
+          { type: 'string', name: 'slug', label: 'URL-Pfad', required: true, description: 'z.B. "about" für /de/about' },
+          seoFields,
+          {
+            type: 'object',
+            list: true,
+            name: 'blocks',
+            label: '🧱 Seiteninhalt (Blöcke)',
+            templates: [
+              heroBlock,
+              contentBlock,
+              storyBlock,
+              featuresBlock,
+              equipmentBlock,
+              teamGridBlock,
+              jobsListBlock,
+              formBlock,
+              contactInfoBlock,
+              ctaBlock,
+              faqBlock,
             ],
           },
         ],
@@ -477,203 +797,6 @@ export default defineConfig({
         ],
       },
       
-      // 📄 ÜBER UNS SEITE
-      {
-        name: 'aboutPage',
-        label: '📄 Über Uns Seite',
-        path: 'content/about',
-        format: 'json',
-        match: {
-          include: 'ueber-uns',
-        },
-        ui: {
-          router: () => '/de/about',
-          allowedActions: { create: false, delete: false },
-        },
-        fields: [
-          {
-            type: 'object',
-            name: 'seo',
-            label: '🔍 SEO',
-            fields: [
-              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'hero',
-            label: '👋 Intro Bereich',
-            fields: [
-              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'story',
-            label: '📖 Die Geschichte',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'text1', label: 'Absatz 1', ui: { component: 'textarea' } },
-              { type: 'string', name: 'text2', label: 'Absatz 2', ui: { component: 'textarea' } },
-              { type: 'image', name: 'image', label: 'Bild' },
-            ],
-          },
-          {
-            type: 'object',
-            list: true,
-            name: 'values',
-            label: '⭐ Werte (Liste)',
-            fields: [{ type: 'string', name: 'text', label: 'Wert', required: true }],
-          },
-          {
-            type: 'object',
-            name: 'equipment',
-            label: '🔧 Ausstattung',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'teamSection',
-            label: '👥 Team Bereich',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'cta',
-            label: '📣 Abschluss CTA',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-              { type: 'string', name: 'buttonText', label: 'Button Text' },
-              { type: 'string', name: 'email', label: 'E-Mail' },
-            ],
-          },
-        ],
-      },
-      
-      // 💼 KARRIERE SEITE
-      {
-        name: 'careerPage',
-        label: '💼 Karriere Seite',
-        path: 'content/career',
-        format: 'json',
-        match: {
-          include: 'karriere',
-        },
-        ui: {
-          router: () => '/de/career',
-          allowedActions: { create: false, delete: false },
-        },
-        fields: [
-          {
-            type: 'object',
-            name: 'seo',
-            label: '🔍 SEO',
-            fields: [
-              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'hero',
-            label: '👋 Intro Bereich',
-            fields: [
-              { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung' },
-              { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'jobsSection',
-            label: '📋 Stellenangebote Bereich',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'emptyMessage', label: 'Text wenn keine Stellen' },
-            ],
-          },
-          {
-            type: 'object',
-            name: 'wizardSection',
-            label: '🧙 Karriere Finder',
-            fields: [
-              { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung' },
-            ],
-          },
-        ],
-      },
-      
-      // 📞 KONTAKT SEITE
-      {
-        name: 'contactPage',
-        label: '📞 Kontakt Seite',
-        path: 'content/contact',
-        format: 'json',
-        match: {
-          include: 'kontakt',
-        },
-        ui: {
-          router: () => '/de/contact',
-          allowedActions: { create: false, delete: false },
-        },
-        fields: [
-          {
-            type: 'object',
-            name: 'seo',
-            label: '🔍 SEO',
-            fields: [
-              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
-              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-            ],
-          },
-          { type: 'string', name: 'title', label: 'Haupttitel', required: true },
-          { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
-          {
-            type: 'object',
-            name: 'address',
-            label: '📍 Adressdaten',
-            fields: [
-              { type: 'string', name: 'company', label: 'Firmenname', required: true },
-              { type: 'string', name: 'street', label: 'Straße', required: true },
-              { type: 'string', name: 'city', label: 'Stadt', required: true },
-              { type: 'string', name: 'zip', label: 'PLZ', required: true },
-            ],
-          },
-          { type: 'string', name: 'phone', label: 'Telefon', required: true },
-          { type: 'string', name: 'fax', label: 'Fax' },
-          { type: 'string', name: 'email', label: 'E-Mail', required: true },
-          { type: 'string', name: 'website', label: 'Website' },
-          { type: 'string', name: 'facebook', label: 'Facebook URL' },
-          {
-            type: 'object',
-            name: 'officeHours',
-            label: '🕒 Büro Öffnungszeiten',
-            fields: [{ type: 'string', name: 'weekdays', label: 'Mo-Fr Text', required: true }],
-          },
-          {
-            type: 'object',
-            name: 'repairHours',
-            label: '🔧 Reparaturplanung Zeiten',
-            fields: [
-              { type: 'string', name: 'tueThu', label: 'Di-Do Text', required: true },
-              { type: 'string', name: 'fri', label: 'Fr Text', required: true },
-            ],
-          },
-        ],
-      },
-      
       // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: 'settings',
@@ -749,6 +872,62 @@ export default defineConfig({
         ],
       },
       
+      // 📞 KONTAKTDATEN (Global - für Footer etc.)
+      {
+        name: 'contactPage',
+        label: '📞 Kontaktdaten (Global)',
+        path: 'content/contact',
+        format: 'json',
+        match: { include: 'kontakt' },
+        ui: {
+          allowedActions: { create: false, delete: false },
+        },
+        fields: [
+          {
+            type: 'object',
+            name: 'seo',
+            label: '🔍 SEO',
+            fields: [
+              { type: 'string', name: 'title', label: 'Browser-Titel', required: true },
+              { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+            ],
+          },
+          { type: 'string', name: 'title', label: 'Haupttitel' },
+          { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
+          {
+            type: 'object',
+            name: 'address',
+            label: '📍 Adressdaten',
+            fields: [
+              { type: 'string', name: 'company', label: 'Firmenname', required: true },
+              { type: 'string', name: 'street', label: 'Straße', required: true },
+              { type: 'string', name: 'city', label: 'Stadt', required: true },
+              { type: 'string', name: 'zip', label: 'PLZ', required: true },
+            ],
+          },
+          { type: 'string', name: 'phone', label: 'Telefon', required: true },
+          { type: 'string', name: 'fax', label: 'Fax' },
+          { type: 'string', name: 'email', label: 'E-Mail', required: true },
+          { type: 'string', name: 'website', label: 'Website' },
+          { type: 'string', name: 'facebook', label: 'Facebook URL' },
+          {
+            type: 'object',
+            name: 'officeHours',
+            label: '🕒 Büro Öffnungszeiten',
+            fields: [{ type: 'string', name: 'weekdays', label: 'Mo-Fr Text', required: true }],
+          },
+          {
+            type: 'object',
+            name: 'repairHours',
+            label: '🔧 Reparaturplanung Zeiten',
+            fields: [
+              { type: 'string', name: 'tueThu', label: 'Di-Do Text', required: true },
+              { type: 'string', name: 'fri', label: 'Fr Text', required: true },
+            ],
+          },
+        ],
+      },
+
       // 🦶 FOOTER
       {
         name: 'footer',

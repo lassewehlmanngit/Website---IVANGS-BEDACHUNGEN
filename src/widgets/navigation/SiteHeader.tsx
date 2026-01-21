@@ -36,13 +36,13 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
-      'rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors',
+      'rounded-md px-3 py-2 text-sm font-medium text-slate-600 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       isActive && 'text-primary',
     );
 
   const mobileLinkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
-      'block rounded-md px-3 py-3 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-muted',
+      'block rounded-md px-3 py-3 text-base font-medium text-foreground/80 hover:text-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
       isActive && 'bg-muted text-foreground',
     );
 
@@ -105,8 +105,9 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             <div className="md:hidden z-50">
                <button
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="p-2 text-slate-900 hover:text-primary transition-colors"
+                  className="p-2 text-slate-900 hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   aria-label={t('navigation.menu')}
+                  aria-expanded={mobileMenuOpen}
                >
                   {/* Switch icon based on state */}
                   {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}

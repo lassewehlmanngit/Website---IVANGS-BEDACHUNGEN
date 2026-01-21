@@ -43,6 +43,10 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
   const fallbackService = servicesData[id];
   const Icon = serviceIcons[id];
   
+  // #region agent log
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicePreview.tsx:ServiceSection',message:'Service section render',data:{id,hasCmsService:!!cmsService,cmsServiceKeys:cmsService?Object.keys(cmsService):[],hasSys:cmsService?._sys?true:false,sysFilename:cmsService?._sys?.filename},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+  // #endregion
+  
   // Use CMS data with fallbacks - handle both string arrays and potential nested objects
   const title = cmsService?.title || fallbackService.title;
   const description = cmsService?.shortDescription || cmsService?.intro || fallbackService.description;
@@ -54,6 +58,12 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
     ? rawBenefits.map((item: any) => typeof item === 'string' ? item : item?.text || item)
     : [];
   const ctaText = ctaTexts[id];
+
+  // Note: tinaField is NOT used on service data from connection queries because
+  // connection queries don't provide proper document metadata for visual editing.
+  // To edit individual services, navigate to the service detail page (/de/services/{id}).
+  // The service preview section header (eyebrow, title, description) IS editable
+  // via the home page document's servicesSection field.
 
   return (
     <div className={cn(
@@ -68,26 +78,25 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
             alt={title}
             className="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 1024px) 100vw, 50vw"
-            data-tina-field={cmsService && tinaField(cmsService, 'heroImage')}
           />
           <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
           {/* Service label overlay */}
           <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm flex items-center gap-2 shadow-sm">
             <Icon size={18} className="text-primary" />
-            <span className="font-bold text-sm text-slate-900" data-tina-field={cmsService && tinaField(cmsService, 'title')}>{title}</span>
+            <span className="font-bold text-sm text-slate-900">{title}</span>
           </div>
         </Link>
       </div>
 
       {/* Content */}
       <div className="w-full lg:w-1/2">
-        <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6" data-tina-field={cmsService && tinaField(cmsService, 'title')}>{title}</h3>
-        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8" data-tina-field={cmsService && tinaField(cmsService, 'shortDescription')}>
+        <h3 className="text-h3 font-bold text-slate-900 mb-4 md:mb-6">{title}</h3>
+        <p className="text-slate-600 text-base md:text-lg leading-relaxed mb-6 md:mb-8">
           {description}
         </p>
 
         {checkpoints && checkpoints.length > 0 && (
-          <ul className="space-y-3 mb-8" data-tina-field={cmsService && tinaField(cmsService, 'benefits')}>
+          <ul className="space-y-3 mb-8">
             {checkpoints.map((point: string, idx: number) => (
               <li key={idx} className="flex items-center gap-3 text-slate-700 font-medium">
                 <CheckCircle2 className="text-primary shrink-0" size={20} />
@@ -120,6 +129,10 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
   
   // Extract services from CMS if available
   const cmsServices = cmsData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
+  
+  // #region agent log
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicePreview.tsx:ServicePreview',message:'ServicePreview render',data:{hasHomeData:!!homeData,homeDataKeys:homeData?Object.keys(homeData):[],cmsServicesCount:cmsServices.length,firstServiceSys:cmsServices[0]?._sys},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+  // #endregion
   
   // If we have CMS services, use them; otherwise fall back to hardcoded order
   const displayOrder = cmsServices.length > 0 

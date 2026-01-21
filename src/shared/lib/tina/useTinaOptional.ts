@@ -32,6 +32,10 @@ function getIsVisualEditingEnabled(): boolean {
 export function useTinaOptional<T = any>(props: TinaProps): { data: T } {
   const isEditingEnabled = getIsVisualEditingEnabled();
   
+  // #region agent log
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useTinaOptional.ts:33',message:'useTinaOptional called',data:{isEditingEnabled,hasQuery:!!props.query,hasData:!!props.data,dataKeys:props.data?Object.keys(props.data):[]},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+  // #endregion
+  
   // Store the initial data as a stable reference to prevent re-render cycles
   const stableDataRef = useRef(props.data);
   

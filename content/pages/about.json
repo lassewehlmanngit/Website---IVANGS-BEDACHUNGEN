@@ -1,0 +1,53 @@
+{
+  "title": "Über Uns",
+  "slug": "about",
+  "seo": {
+    "title": "Über Uns - Ivangs Bedachungen",
+    "description": "Seit 1996: Ein Familienbetrieb, der hoch hinaus will. 28 Mitarbeiter, eigener Kran und modernste Technik."
+  },
+  "blocks": [
+    {
+      "__typename": "PageBlocksHero",
+      "eyebrow": "Das Unternehmen",
+      "title": "Seit 1996: Ein Familienbetrieb, der hoch hinaus will.",
+      "description": "Vom Ein-Mann-Betrieb zum 28-köpfigen Kompetenz-Team. Wir verbinden Tradition mit modernster Technik.",
+      "variant": "dark"
+    },
+    {
+      "__typename": "PageBlocksStory",
+      "title": "Qualität ist bei uns Familiensache.",
+      "text1": "Was 1996 als Vision von Dachdeckermeister Marcus Ivangs begann, ist heute eine feste Größe im Kreis Viersen und darüber hinaus. Doch trotz unseres Wachstums auf 28 Mitarbeiter und 8 LKWs haben wir eines nie verloren: Den persönlichen Draht zu unseren Kunden.",
+      "text2": "Bei uns sind Sie keine Nummer, sondern ein Partner. Wir setzen auf langfristige Beziehungen und handwerkliche Ehrlichkeit.",
+      "image": "https://images.unsplash.com/photo-1621251939103-6f59c8821035?q=80&w=2070&auto=format&fit=crop",
+      "highlights": [
+        { "text": "Inhabergeführt seit über 25 Jahren", "icon": "CheckCircle" },
+        { "text": "Ausbildungsbetrieb (derzeit 5 Azubis)", "icon": "CheckCircle" },
+        { "text": "Modernster Maschinenpark & eigener Kran", "icon": "CheckCircle" }
+      ]
+    },
+    {
+      "__typename": "PageBlocksEquipment",
+      "icon": "Hammer",
+      "title": "Wir warten nicht auf Material. Wir haben es.",
+      "description": "Mit eigenen Lagerräumen, einem modernen Maschinenpark und dem firmeneigenen Autokran (IVANGS Bauservice) sind wir unabhängig von Mietfirmen und Lieferengpässen. Das bedeutet für Sie: Keine unnötigen Verzögerungen auf der Baustelle."
+    },
+    {
+      "__typename": "PageBlocksTeamGrid",
+      "title": "Unser Team",
+      "description": "Hinter jedem dichten Dach steht ein starkes Team. Jeder Handgriff sitzt, weil wir aufeinander eingespielt sind.",
+      "categories": ["leadership", "office", "craftsmen"],
+      "showEmail": true
+    },
+    {
+      "__typename": "PageBlocksCta",
+      "title": "Lernen Sie uns kennen",
+      "description": "Sie planen ein Neubauprojekt oder eine Sanierung? Lassen Sie uns darüber sprechen. Wir beraten Sie gerne unverbindlich vor Ort.",
+      "button": {
+        "text": "Kontakt aufnehmen",
+        "link": "/de/contact",
+        "variant": "primary"
+      },
+      "variant": "dark"
+    }
+  ]
+}

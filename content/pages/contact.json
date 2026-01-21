@@ -1,0 +1,66 @@
+{
+  "title": "Kontakt",
+  "slug": "contact",
+  "seo": {
+    "title": "Kontakt - Ivangs Bedachungen",
+    "description": "Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten."
+  },
+  "blocks": [
+    {
+      "__typename": "PageBlocksHero",
+      "eyebrow": "Kontakt",
+      "title": "Der erste Schritt zum dichten Dach.",
+      "description": "Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.",
+      "variant": "dark"
+    },
+    {
+      "__typename": "PageBlocksContactInfo",
+      "title": "So erreichen Sie uns",
+      "description": "Wir sind für Sie da – telefonisch, per E-Mail oder persönlich.",
+      "address": {
+        "company": "IVANGS Bedachungen GmbH & Co. KG",
+        "street": "Schmiedestraße 37",
+        "city": "Viersen - Süchteln",
+        "zip": "41749"
+      },
+      "phone": "+49 (0) 21 62 – 35 66 66",
+      "fax": "+49 (0) 21 62 - 35 66 67",
+      "email": "bedachungen@ivangs.de",
+      "website": "www.ivangs.de",
+      "officeHours": {
+        "weekdays": "Mo – Fr: 07.00 – 17.00 Uhr"
+      },
+      "repairHours": {
+        "tueThu": "Di – Do: 8.00 – 13.00 Uhr",
+        "fri": "Fr: 11.00 – 16.00 Uhr"
+      }
+    },
+    {
+      "__typename": "PageBlocksForm",
+      "title": "Nachricht senden",
+      "description": "Schreiben Sie uns eine Nachricht und wir melden uns schnellstmöglich bei Ihnen.",
+      "formType": "contact",
+      "submitButtonText": "Nachricht absenden",
+      "successMessage": "Vielen Dank für Ihre Nachricht! Wir melden uns in Kürze bei Ihnen."
+    },
+    {
+      "__typename": "PageBlocksFaq",
+      "title": "Häufige Fragen",
+      "description": "Hier finden Sie Antworten auf die häufigsten Fragen.",
+      "questions": [
+        {
+          "question": "Wie schnell können Sie einen Termin machen?",
+          "answer": "In der Regel können wir innerhalb von 1-2 Wochen einen Besichtigungstermin vereinbaren. Bei dringenden Reparaturen auch kurzfristiger."
+        },
+        {
+          "question": "Bieten Sie kostenlose Beratung an?",
+          "answer": "Ja, wir beraten Sie gerne unverbindlich vor Ort. Erst nach der Besichtigung erstellen wir Ihnen ein detailliertes Angebot."
+        },
+        {
+          "question": "In welchem Umkreis sind Sie tätig?",
+          "answer": "Unser Einzugsgebiet umfasst den Kreis Viersen und die umliegenden Regionen. Sprechen Sie uns einfach an!"
+        }
+      ]
+    }
+  ]
+}

@@ -76,7 +76,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
           />
         )}
         
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-slate-900/40 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/70 to-slate-900/50 z-10"></div>
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10 z-10"></div>
       </div>
 
