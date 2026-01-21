@@ -1,6 +1,11 @@
 import { defineConfig } from 'tinacms';
 
+// =============================================================================
+// Environment Variables (standardized naming per TinaCMS guide)
+// =============================================================================
 const branch =
+  process.env.TINA_BRANCH ||
+  process.env.VITE_TINA_BRANCH ||
   process.env.GITHUB_BRANCH ||
   process.env.RENDER_GIT_BRANCH ||
   process.env.VERCEL_GIT_COMMIT_REF ||
@@ -8,14 +13,41 @@ const branch =
   'main';
 
 const clientId = 
+  process.env.TINA_CLIENT_ID || 
+  process.env.VITE_TINA_CLIENT_ID || 
+  // Legacy fallbacks (deprecated)
   process.env.TINA_PUBLIC_CLIENT_ID || 
   process.env.VITE_TINA_PUBLIC_CLIENT_ID || 
-  process.env.VITE_TINA_CLIENT_ID || 
   null;
+
 const token = 
   process.env.TINA_TOKEN || 
   process.env.VITE_TINA_TOKEN || 
   null;
+
+// =============================================================================
+// Route Mapping for Visual Editing
+// Maps content filenames to their frontend routes
+// =============================================================================
+const ROUTE_MAP: Record<string, string> = {
+  // Pages
+  'startseite': '/de',
+  'ueber-uns': '/de/about',
+  'karriere': '/de/career',
+  'kontakt': '/de/contact',
+  // Legal pages
+  'imprint': '/de/imprint',
+  'privacy': '/de/privacy',
+  'terms': '/de/terms',
+  'cookies': '/de/cookies',
+};
+
+/**
+ * Get the frontend route for a document based on its filename
+ */
+function getRouteForDocument(filename: string, fallbackPath?: string): string {
+  return ROUTE_MAP[filename] || fallbackPath || `/de/${filename}`;
+}
 
 export default defineConfig({
   branch,
@@ -757,15 +789,7 @@ export default defineConfig({
         path: 'content/legal',
         format: 'md',
         ui: {
-          router: ({ document }) => {
-            const slugMap: Record<string, string> = {
-              'imprint': '/de/imprint',
-              'privacy': '/de/privacy',
-              'terms': '/de/terms',
-              'cookies': '/de/cookies',
-            };
-            return slugMap[document._sys.filename] || `/de/${document._sys.filename}`;
-          },
+          router: ({ document }) => getRouteForDocument(document._sys.filename),
         },
         fields: [
           { type: 'string', name: 'title', label: 'Seitentitel', required: true, isTitle: true },

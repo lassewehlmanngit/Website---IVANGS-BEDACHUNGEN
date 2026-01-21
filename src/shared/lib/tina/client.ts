@@ -1,15 +1,24 @@
 import { createClient } from 'tinacms/dist/client';
 
+// =============================================================================
+// Environment Variables (standardized naming per TinaCMS guide)
+// =============================================================================
+
 // Branch detection matching tina/config.ts
 const branch =
+  import.meta.env.VITE_TINA_BRANCH ||
   import.meta.env.VITE_GITHUB_BRANCH ||
   import.meta.env.VITE_RENDER_GIT_BRANCH ||
   import.meta.env.VITE_VERCEL_GIT_COMMIT_REF ||
   import.meta.env.VITE_HEAD ||
   'main';
 
-// Check if TinaCMS credentials are configured
-const clientId = import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID;
+// Check if TinaCMS credentials are configured (standardized naming)
+const clientId = 
+  import.meta.env.VITE_TINA_CLIENT_ID ||
+  // Legacy fallback (deprecated)
+  import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID;
+
 const token = import.meta.env.VITE_TINA_TOKEN;
 const isTinaConfigured = !!(clientId && token);
 

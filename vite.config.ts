@@ -1,7 +1,46 @@
 import path from 'path';
-import { defineConfig, loadEnv } from 'vite';
+import { existsSync, readFileSync } from 'fs';
+import { defineConfig, loadEnv, type PluginOption } from 'vite';
 import react from '@vitejs/plugin-react';
 import { imagetools } from 'vite-imagetools';
+
+/**
+ * Vite plugin to handle /admin routes in development mode.
+ * Serves public/admin/index.html for the TinaCMS admin panel.
+ */
+function adminRouteHandler(): PluginOption {
+  return {
+    name: 'admin-route-handler',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        const url = req.url || '';
+        const [pathName] = url.split('?');
+        
+        // Handle /admin routes
+        if (pathName === '/admin' || pathName.startsWith('/admin/')) {
+          // Redirect /admin to /admin/ for consistency
+          if (pathName === '/admin') {
+            res.writeHead(302, { Location: '/admin/' });
+            res.end();
+            return;
+          }
+          
+          // Serve admin/index.html for non-asset routes
+          if (pathName === '/admin/' || !pathName.startsWith('/admin/assets/')) {
+            const adminHtmlPath = path.join(__dirname, 'public', 'admin', 'index.html');
+            if (existsSync(adminHtmlPath)) {
+              const html = readFileSync(adminHtmlPath, 'utf-8');
+              res.setHeader('Content-Type', 'text/html');
+              res.end(html);
+              return;
+            }
+          }
+        }
+        next();
+      });
+    },
+  };
+}
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
@@ -20,6 +59,8 @@ export default defineConfig(({ mode }) => {
           return new URLSearchParams('format=webp;quality=80');
         },
       }),
+      // Handle TinaCMS admin panel routes in development
+      adminRouteHandler(),
     ],
     // Serve content/ folder as static assets during dev
     publicDir: 'public',

@@ -8,23 +8,22 @@ import { Accordion } from '@/shared/ui/Accordion';
 import { Button } from '@/shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
-import { useTina, tinaField } from 'tinacms/dist/react';
+import { tinaField } from 'tinacms/dist/react';
 import { useJobsData } from '@/shared/lib/tina/useJobsData';
-import { useCareerPageData } from '@/shared/lib/tina/useCareerPageData';
+import { usePageContent } from '@/shared/lib/tina/usePageContent';
 
 export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const navigate = useNavigate();
   
-  // Fetch career page data from TinaCMS
-  const { data: careerData, isLoading: careerLoading } = useCareerPageData(lang);
+  // Fetch career page data and global settings from TinaCMS
+  const { page: career, global, isLoading: careerLoading } = usePageContent('career');
   
   // Fetch jobs data from TinaCMS with visual editing support
   const { data, isLoading } = useJobsData();
   
-  const career = careerData?.careerPage || {};
-  const hero = career.hero || {};
-  const jobsSection = career.jobsSection || {};
-  const wizardSection = career.wizardSection || {};
+  const hero = career?.hero || {};
+  const jobsSection = career?.jobsSection || {};
+  const wizardSection = career?.wizardSection || {};
   
   // Show loading state
   if (isLoading) {
@@ -62,7 +61,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             srcSet={hero.backgroundImage ? generateUnsplashSrcSet(hero.backgroundImage) : undefined}
             sizes="100vw"
             priority
-            data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'backgroundImage')}
+            data-tina-field={career?.hero && tinaField(career.hero, 'backgroundImage')}
           />
           {/* Stronger overlay for better text readability */}
           <div className="absolute inset-0 bg-slate-900/80 flex items-center justify-center">
@@ -72,19 +71,19 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                 <div className="bg-slate-900/80 supports-[backdrop-filter]:bg-slate-900/60 backdrop-blur-sm px-4 sm:px-6 md:px-8 py-6 md:py-8 lg:py-10 rounded-sm border border-white/10">
                   <span 
                     className="text-primary font-bold uppercase tracking-widest text-xs sm:text-sm mb-3 md:mb-4 block"
-                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'eyebrow')}
+                    data-tina-field={career?.hero && tinaField(career.hero, 'eyebrow')}
                   >
                     {hero.eyebrow || 'Karriere bei Ivangs'}
                   </span>
                   <h1 
                     className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 lg:mb-6"
-                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'title')}
+                    data-tina-field={career?.hero && tinaField(career.hero, 'title')}
                   >
                     {hero.title || 'Bock auf Handwerk? Komm ins Team Ivangs.'}
                   </h1>
                   <p 
                     className="text-slate-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto font-medium"
-                    data-tina-field={careerData?.careerPage?.hero && tinaField(careerData.careerPage.hero, 'description')}
+                    data-tina-field={career?.hero && tinaField(career.hero, 'description')}
                   >
                     {hero.description || 'Wir suchen Macher, keine Nummern. 28 Kollegen freuen sich auf dich.'}
                   </p>
@@ -101,7 +100,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
              <div className="lg:col-span-7 order-2 lg:order-1">
                 <h2 
                   className="text-h2 font-bold text-slate-900 mb-6 md:mb-8"
-                  data-tina-field={careerData?.careerPage?.jobsSection && tinaField(careerData.careerPage.jobsSection, 'title')}
+                  data-tina-field={career?.jobsSection && tinaField(career.jobsSection, 'title')}
                 >
                   {jobsSection.title || 'Offene Stellen'}
                 </h2>
@@ -116,7 +115,7 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                 ) : (
                   <p 
                     className="text-slate-600"
-                    data-tina-field={careerData?.careerPage?.jobsSection && tinaField(careerData.careerPage.jobsSection, 'emptyMessage')}
+                    data-tina-field={career?.jobsSection && tinaField(career.jobsSection, 'emptyMessage')}
                   >
                     {jobsSection.emptyMessage || 'Aktuell keine offenen Stellen verfügbar.'}
                   </p>
@@ -128,13 +127,13 @@ export const CareerPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
                <div className="bg-white p-6 md:p-8 rounded-sm shadow-xl border border-slate-100">
                  <h3 
                    className="text-h4 font-bold mb-4 md:mb-6 text-slate-900"
-                   data-tina-field={careerData?.careerPage?.wizardSection && tinaField(careerData.careerPage.wizardSection, 'title')}
+                   data-tina-field={career?.wizardSection && tinaField(career.wizardSection, 'title')}
                  >
                    {wizardSection.title || 'Karriere Finder'}
                  </h3>
                  <p 
                    className="text-sm text-slate-500 mb-4 md:mb-6"
-                   data-tina-field={careerData?.careerPage?.wizardSection && tinaField(careerData.careerPage.wizardSection, 'description')}
+                   data-tina-field={career?.wizardSection && tinaField(career.wizardSection, 'description')}
                  >
                    {wizardSection.description || 'Unsicher welche Stelle passt? Beantworte 3 Fragen.'}
                  </p>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { HeroSection } from '@/widgets/home/ui/HeroSection';
@@ -9,26 +9,18 @@ import { TrustIndicators } from '@/widgets/home/ui/TrustIndicators';
 import { CeoQuote } from '@/widgets/home/ui/CeoQuote';
 import { ProjectShowcase } from '@/widgets/home/ui/ProjectShowcase';
 import { HomeFAQ } from '@/widgets/home/ui/HomeFAQ';
-import { Link } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { SmartLink } from '@/shared/ui/SmartLink';
-import { getSettings, type SettingsData } from '@/shared/lib/content/globals';
 import { tinaField } from 'tinacms/dist/react';
-import { useHomePageData } from '@/shared/lib/tina/useHomePageData';
+import { usePageContent } from '@/shared/lib/tina/usePageContent';
 
 export interface HomePageProps {
   lang: SupportedLang;
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
-  const [settings, setSettings] = useState<SettingsData | null>(null);
-  
-  // Fetch home page data from TinaCMS with visual editing support
-  const { data, isLoading } = useHomePageData(lang);
-
-  useEffect(() => {
-    getSettings(lang).then(setSettings);
-  }, [lang]);
+  // Fetch home page data and global settings from TinaCMS with visual editing support
+  const { page: home, global, isLoading } = usePageContent('home');
   
   // Show loading state
   if (isLoading) {
@@ -40,7 +32,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
   }
   
   // Show error state or fallback
-  if (!data?.homePage) {
+  if (!home) {
     return (
       <>
         <Seo
@@ -60,7 +52,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
               }
           }}
         />
-        <HeroSection lang={lang} settings={settings?.hero} />
+        <HeroSection lang={lang} />
         <ServiceNavigationStrip lang={lang} />
         <ServicePreview lang={lang} />
         <TrustIndicators />
@@ -76,19 +68,17 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
               Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.
             </p>
             <div className="flex justify-center gap-4">
-              <Link to={`/${lang}/contact`}>
+              <SmartLink link={`/${lang}/contact`}>
                   <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold">
                     Beratungstermin vereinbaren
                   </Button>
-              </Link>
+              </SmartLink>
             </div>
           </div>
         </section>
       </>
     );
   }
-  
-  const home = data.homePage;
 
   return (
     <>
