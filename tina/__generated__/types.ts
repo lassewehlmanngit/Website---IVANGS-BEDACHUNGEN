@@ -86,6 +86,12 @@ export type Query = {
   homePageConnection: HomePageConnection;
   page: Page;
   pageConnection: PageConnection;
+  aboutPage: AboutPage;
+  aboutPageConnection: AboutPageConnection;
+  careerPage: CareerPage;
+  careerPageConnection: CareerPageConnection;
+  contactBuilderPage: ContactBuilderPage;
+  contactBuilderPageConnection: ContactBuilderPageConnection;
   teamMember: TeamMember;
   teamMemberConnection: TeamMemberConnection;
   service: Service;
@@ -153,6 +159,51 @@ export type QueryPageConnectionArgs = {
   last?: InputMaybe<Scalars['Float']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<PageFilter>;
+};
+
+
+export type QueryAboutPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryAboutPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutPageFilter>;
+};
+
+
+export type QueryCareerPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryCareerPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CareerPageFilter>;
+};
+
+
+export type QueryContactBuilderPageArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type QueryContactBuilderPageConnectionArgs = {
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ContactBuilderPageFilter>;
 };
 
 
@@ -278,6 +329,9 @@ export type QueryLegalPageConnectionArgs = {
 export type DocumentFilter = {
   homePage?: InputMaybe<HomePageFilter>;
   page?: InputMaybe<PageFilter>;
+  aboutPage?: InputMaybe<AboutPageFilter>;
+  careerPage?: InputMaybe<CareerPageFilter>;
+  contactBuilderPage?: InputMaybe<ContactBuilderPageFilter>;
   teamMember?: InputMaybe<TeamMemberFilter>;
   service?: InputMaybe<ServiceFilter>;
   job?: InputMaybe<JobFilter>;
@@ -325,7 +379,7 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = HomePage | Page | TeamMember | Service | Job | Settings | Navigation | ContactPage | Footer | LegalPage | Folder;
+export type DocumentNode = HomePage | Page | AboutPage | CareerPage | ContactBuilderPage | TeamMember | Service | Job | Settings | Navigation | ContactPage | Footer | LegalPage | Folder;
 
 export type HomePageSeo = {
   __typename?: 'HomePageSeo';
@@ -980,6 +1034,1068 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
+export type AboutPageSeo = {
+  __typename?: 'AboutPageSeo';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksHeroPrimaryButton = {
+  __typename?: 'AboutPageBlocksHeroPrimaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksHeroSecondaryButton = {
+  __typename?: 'AboutPageBlocksHeroSecondaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksHero = {
+  __typename?: 'AboutPageBlocksHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  primaryButton?: Maybe<AboutPageBlocksHeroPrimaryButton>;
+  secondaryButton?: Maybe<AboutPageBlocksHeroSecondaryButton>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksContent = {
+  __typename?: 'AboutPageBlocksContent';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imagePosition?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksStoryHighlights = {
+  __typename?: 'AboutPageBlocksStoryHighlights';
+  text: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksStory = {
+  __typename?: 'AboutPageBlocksStory';
+  title?: Maybe<Scalars['String']['output']>;
+  text1?: Maybe<Scalars['String']['output']>;
+  text2?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Maybe<AboutPageBlocksStoryHighlights>>>;
+};
+
+export type AboutPageBlocksFeaturesItems = {
+  __typename?: 'AboutPageBlocksFeaturesItems';
+  icon?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksFeatures = {
+  __typename?: 'AboutPageBlocksFeatures';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<AboutPageBlocksFeaturesItems>>>;
+  columns?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksEquipment = {
+  __typename?: 'AboutPageBlocksEquipment';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksTeamGrid = {
+  __typename?: 'AboutPageBlocksTeamGrid';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  showEmail?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type AboutPageBlocksJobsList = {
+  __typename?: 'AboutPageBlocksJobsList';
+  title?: Maybe<Scalars['String']['output']>;
+  emptyMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksForm = {
+  __typename?: 'AboutPageBlocksForm';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  formType: Scalars['String']['output'];
+  submitButtonText?: Maybe<Scalars['String']['output']>;
+  successMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksContactInfoAddress = {
+  __typename?: 'AboutPageBlocksContactInfoAddress';
+  company: Scalars['String']['output'];
+  street: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  zip: Scalars['String']['output'];
+};
+
+export type AboutPageBlocksContactInfoOfficeHours = {
+  __typename?: 'AboutPageBlocksContactInfoOfficeHours';
+  weekdays: Scalars['String']['output'];
+};
+
+export type AboutPageBlocksContactInfoRepairHours = {
+  __typename?: 'AboutPageBlocksContactInfoRepairHours';
+  tueThu: Scalars['String']['output'];
+  fri: Scalars['String']['output'];
+};
+
+export type AboutPageBlocksContactInfo = {
+  __typename?: 'AboutPageBlocksContactInfo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  address?: Maybe<AboutPageBlocksContactInfoAddress>;
+  phone: Scalars['String']['output'];
+  fax?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  website?: Maybe<Scalars['String']['output']>;
+  officeHours?: Maybe<AboutPageBlocksContactInfoOfficeHours>;
+  repairHours?: Maybe<AboutPageBlocksContactInfoRepairHours>;
+};
+
+export type AboutPageBlocksCtaButton = {
+  __typename?: 'AboutPageBlocksCtaButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksCta = {
+  __typename?: 'AboutPageBlocksCta';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  button?: Maybe<AboutPageBlocksCtaButton>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type AboutPageBlocksFaqQuestions = {
+  __typename?: 'AboutPageBlocksFaqQuestions';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
+export type AboutPageBlocksFaq = {
+  __typename?: 'AboutPageBlocksFaq';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  questions?: Maybe<Array<Maybe<AboutPageBlocksFaqQuestions>>>;
+};
+
+export type AboutPageBlocks = AboutPageBlocksHero | AboutPageBlocksContent | AboutPageBlocksStory | AboutPageBlocksFeatures | AboutPageBlocksEquipment | AboutPageBlocksTeamGrid | AboutPageBlocksJobsList | AboutPageBlocksForm | AboutPageBlocksContactInfo | AboutPageBlocksCta | AboutPageBlocksFaq;
+
+export type AboutPage = Node & Document & {
+  __typename?: 'AboutPage';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  seo?: Maybe<AboutPageSeo>;
+  blocks?: Maybe<Array<Maybe<AboutPageBlocks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type AboutPageSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
+};
+
+export type AboutPageBlocksHeroPrimaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksHeroSecondaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  primaryButton?: InputMaybe<AboutPageBlocksHeroPrimaryButtonFilter>;
+  secondaryButton?: InputMaybe<AboutPageBlocksHeroSecondaryButtonFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksContentFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imagePosition?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksStoryHighlightsFilter = {
+  text?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksStoryFilter = {
+  title?: InputMaybe<StringFilter>;
+  text1?: InputMaybe<StringFilter>;
+  text2?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  highlights?: InputMaybe<AboutPageBlocksStoryHighlightsFilter>;
+};
+
+export type AboutPageBlocksFeaturesItemsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksFeaturesFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  items?: InputMaybe<AboutPageBlocksFeaturesItemsFilter>;
+  columns?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksEquipmentFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksTeamGridFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  categories?: InputMaybe<StringFilter>;
+  showEmail?: InputMaybe<BooleanFilter>;
+};
+
+export type AboutPageBlocksJobsListFilter = {
+  title?: InputMaybe<StringFilter>;
+  emptyMessage?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksFormFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  formType?: InputMaybe<StringFilter>;
+  submitButtonText?: InputMaybe<StringFilter>;
+  successMessage?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksContactInfoAddressFilter = {
+  company?: InputMaybe<StringFilter>;
+  street?: InputMaybe<StringFilter>;
+  city?: InputMaybe<StringFilter>;
+  zip?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksContactInfoOfficeHoursFilter = {
+  weekdays?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksContactInfoRepairHoursFilter = {
+  tueThu?: InputMaybe<StringFilter>;
+  fri?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksContactInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  address?: InputMaybe<AboutPageBlocksContactInfoAddressFilter>;
+  phone?: InputMaybe<StringFilter>;
+  fax?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  website?: InputMaybe<StringFilter>;
+  officeHours?: InputMaybe<AboutPageBlocksContactInfoOfficeHoursFilter>;
+  repairHours?: InputMaybe<AboutPageBlocksContactInfoRepairHoursFilter>;
+};
+
+export type AboutPageBlocksCtaButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksCtaFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  button?: InputMaybe<AboutPageBlocksCtaButtonFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksFaqQuestionsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+};
+
+export type AboutPageBlocksFaqFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  questions?: InputMaybe<AboutPageBlocksFaqQuestionsFilter>;
+};
+
+export type AboutPageBlocksFilter = {
+  hero?: InputMaybe<AboutPageBlocksHeroFilter>;
+  content?: InputMaybe<AboutPageBlocksContentFilter>;
+  story?: InputMaybe<AboutPageBlocksStoryFilter>;
+  features?: InputMaybe<AboutPageBlocksFeaturesFilter>;
+  equipment?: InputMaybe<AboutPageBlocksEquipmentFilter>;
+  teamGrid?: InputMaybe<AboutPageBlocksTeamGridFilter>;
+  jobsList?: InputMaybe<AboutPageBlocksJobsListFilter>;
+  form?: InputMaybe<AboutPageBlocksFormFilter>;
+  contactInfo?: InputMaybe<AboutPageBlocksContactInfoFilter>;
+  cta?: InputMaybe<AboutPageBlocksCtaFilter>;
+  faq?: InputMaybe<AboutPageBlocksFaqFilter>;
+};
+
+export type AboutPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<AboutPageSeoFilter>;
+  blocks?: InputMaybe<AboutPageBlocksFilter>;
+};
+
+export type AboutPageConnectionEdges = {
+  __typename?: 'AboutPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<AboutPage>;
+};
+
+export type AboutPageConnection = Connection & {
+  __typename?: 'AboutPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<AboutPageConnectionEdges>>>;
+};
+
+export type CareerPageSeo = {
+  __typename?: 'CareerPageSeo';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksHeroPrimaryButton = {
+  __typename?: 'CareerPageBlocksHeroPrimaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksHeroSecondaryButton = {
+  __typename?: 'CareerPageBlocksHeroSecondaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksHero = {
+  __typename?: 'CareerPageBlocksHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  primaryButton?: Maybe<CareerPageBlocksHeroPrimaryButton>;
+  secondaryButton?: Maybe<CareerPageBlocksHeroSecondaryButton>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksContent = {
+  __typename?: 'CareerPageBlocksContent';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imagePosition?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksStoryHighlights = {
+  __typename?: 'CareerPageBlocksStoryHighlights';
+  text: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksStory = {
+  __typename?: 'CareerPageBlocksStory';
+  title?: Maybe<Scalars['String']['output']>;
+  text1?: Maybe<Scalars['String']['output']>;
+  text2?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Maybe<CareerPageBlocksStoryHighlights>>>;
+};
+
+export type CareerPageBlocksFeaturesItems = {
+  __typename?: 'CareerPageBlocksFeaturesItems';
+  icon?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksFeatures = {
+  __typename?: 'CareerPageBlocksFeatures';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<CareerPageBlocksFeaturesItems>>>;
+  columns?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksEquipment = {
+  __typename?: 'CareerPageBlocksEquipment';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksTeamGrid = {
+  __typename?: 'CareerPageBlocksTeamGrid';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  showEmail?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type CareerPageBlocksJobsList = {
+  __typename?: 'CareerPageBlocksJobsList';
+  title?: Maybe<Scalars['String']['output']>;
+  emptyMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksForm = {
+  __typename?: 'CareerPageBlocksForm';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  formType: Scalars['String']['output'];
+  submitButtonText?: Maybe<Scalars['String']['output']>;
+  successMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksContactInfoAddress = {
+  __typename?: 'CareerPageBlocksContactInfoAddress';
+  company: Scalars['String']['output'];
+  street: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  zip: Scalars['String']['output'];
+};
+
+export type CareerPageBlocksContactInfoOfficeHours = {
+  __typename?: 'CareerPageBlocksContactInfoOfficeHours';
+  weekdays: Scalars['String']['output'];
+};
+
+export type CareerPageBlocksContactInfoRepairHours = {
+  __typename?: 'CareerPageBlocksContactInfoRepairHours';
+  tueThu: Scalars['String']['output'];
+  fri: Scalars['String']['output'];
+};
+
+export type CareerPageBlocksContactInfo = {
+  __typename?: 'CareerPageBlocksContactInfo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  address?: Maybe<CareerPageBlocksContactInfoAddress>;
+  phone: Scalars['String']['output'];
+  fax?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  website?: Maybe<Scalars['String']['output']>;
+  officeHours?: Maybe<CareerPageBlocksContactInfoOfficeHours>;
+  repairHours?: Maybe<CareerPageBlocksContactInfoRepairHours>;
+};
+
+export type CareerPageBlocksCtaButton = {
+  __typename?: 'CareerPageBlocksCtaButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksCta = {
+  __typename?: 'CareerPageBlocksCta';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  button?: Maybe<CareerPageBlocksCtaButton>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type CareerPageBlocksFaqQuestions = {
+  __typename?: 'CareerPageBlocksFaqQuestions';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
+export type CareerPageBlocksFaq = {
+  __typename?: 'CareerPageBlocksFaq';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  questions?: Maybe<Array<Maybe<CareerPageBlocksFaqQuestions>>>;
+};
+
+export type CareerPageBlocks = CareerPageBlocksHero | CareerPageBlocksContent | CareerPageBlocksStory | CareerPageBlocksFeatures | CareerPageBlocksEquipment | CareerPageBlocksTeamGrid | CareerPageBlocksJobsList | CareerPageBlocksForm | CareerPageBlocksContactInfo | CareerPageBlocksCta | CareerPageBlocksFaq;
+
+export type CareerPage = Node & Document & {
+  __typename?: 'CareerPage';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  seo?: Maybe<CareerPageSeo>;
+  blocks?: Maybe<Array<Maybe<CareerPageBlocks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type CareerPageSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
+};
+
+export type CareerPageBlocksHeroPrimaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksHeroSecondaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  primaryButton?: InputMaybe<CareerPageBlocksHeroPrimaryButtonFilter>;
+  secondaryButton?: InputMaybe<CareerPageBlocksHeroSecondaryButtonFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksContentFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imagePosition?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksStoryHighlightsFilter = {
+  text?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksStoryFilter = {
+  title?: InputMaybe<StringFilter>;
+  text1?: InputMaybe<StringFilter>;
+  text2?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  highlights?: InputMaybe<CareerPageBlocksStoryHighlightsFilter>;
+};
+
+export type CareerPageBlocksFeaturesItemsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksFeaturesFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  items?: InputMaybe<CareerPageBlocksFeaturesItemsFilter>;
+  columns?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksEquipmentFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksTeamGridFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  categories?: InputMaybe<StringFilter>;
+  showEmail?: InputMaybe<BooleanFilter>;
+};
+
+export type CareerPageBlocksJobsListFilter = {
+  title?: InputMaybe<StringFilter>;
+  emptyMessage?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksFormFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  formType?: InputMaybe<StringFilter>;
+  submitButtonText?: InputMaybe<StringFilter>;
+  successMessage?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksContactInfoAddressFilter = {
+  company?: InputMaybe<StringFilter>;
+  street?: InputMaybe<StringFilter>;
+  city?: InputMaybe<StringFilter>;
+  zip?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksContactInfoOfficeHoursFilter = {
+  weekdays?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksContactInfoRepairHoursFilter = {
+  tueThu?: InputMaybe<StringFilter>;
+  fri?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksContactInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  address?: InputMaybe<CareerPageBlocksContactInfoAddressFilter>;
+  phone?: InputMaybe<StringFilter>;
+  fax?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  website?: InputMaybe<StringFilter>;
+  officeHours?: InputMaybe<CareerPageBlocksContactInfoOfficeHoursFilter>;
+  repairHours?: InputMaybe<CareerPageBlocksContactInfoRepairHoursFilter>;
+};
+
+export type CareerPageBlocksCtaButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksCtaFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  button?: InputMaybe<CareerPageBlocksCtaButtonFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksFaqQuestionsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+};
+
+export type CareerPageBlocksFaqFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  questions?: InputMaybe<CareerPageBlocksFaqQuestionsFilter>;
+};
+
+export type CareerPageBlocksFilter = {
+  hero?: InputMaybe<CareerPageBlocksHeroFilter>;
+  content?: InputMaybe<CareerPageBlocksContentFilter>;
+  story?: InputMaybe<CareerPageBlocksStoryFilter>;
+  features?: InputMaybe<CareerPageBlocksFeaturesFilter>;
+  equipment?: InputMaybe<CareerPageBlocksEquipmentFilter>;
+  teamGrid?: InputMaybe<CareerPageBlocksTeamGridFilter>;
+  jobsList?: InputMaybe<CareerPageBlocksJobsListFilter>;
+  form?: InputMaybe<CareerPageBlocksFormFilter>;
+  contactInfo?: InputMaybe<CareerPageBlocksContactInfoFilter>;
+  cta?: InputMaybe<CareerPageBlocksCtaFilter>;
+  faq?: InputMaybe<CareerPageBlocksFaqFilter>;
+};
+
+export type CareerPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<CareerPageSeoFilter>;
+  blocks?: InputMaybe<CareerPageBlocksFilter>;
+};
+
+export type CareerPageConnectionEdges = {
+  __typename?: 'CareerPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<CareerPage>;
+};
+
+export type CareerPageConnection = Connection & {
+  __typename?: 'CareerPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<CareerPageConnectionEdges>>>;
+};
+
+export type ContactBuilderPageSeo = {
+  __typename?: 'ContactBuilderPageSeo';
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  ogImage?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksHeroPrimaryButton = {
+  __typename?: 'ContactBuilderPageBlocksHeroPrimaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksHeroSecondaryButton = {
+  __typename?: 'ContactBuilderPageBlocksHeroSecondaryButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksHero = {
+  __typename?: 'ContactBuilderPageBlocksHero';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  subtitle?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  primaryButton?: Maybe<ContactBuilderPageBlocksHeroPrimaryButton>;
+  secondaryButton?: Maybe<ContactBuilderPageBlocksHeroSecondaryButton>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksContent = {
+  __typename?: 'ContactBuilderPageBlocksContent';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  imagePosition?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksStoryHighlights = {
+  __typename?: 'ContactBuilderPageBlocksStoryHighlights';
+  text: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksStory = {
+  __typename?: 'ContactBuilderPageBlocksStory';
+  title?: Maybe<Scalars['String']['output']>;
+  text1?: Maybe<Scalars['String']['output']>;
+  text2?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Scalars['String']['output']>;
+  highlights?: Maybe<Array<Maybe<ContactBuilderPageBlocksStoryHighlights>>>;
+};
+
+export type ContactBuilderPageBlocksFeaturesItems = {
+  __typename?: 'ContactBuilderPageBlocksFeaturesItems';
+  icon?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksFeatures = {
+  __typename?: 'ContactBuilderPageBlocksFeatures';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  items?: Maybe<Array<Maybe<ContactBuilderPageBlocksFeaturesItems>>>;
+  columns?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksEquipment = {
+  __typename?: 'ContactBuilderPageBlocksEquipment';
+  icon?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksTeamGrid = {
+  __typename?: 'ContactBuilderPageBlocksTeamGrid';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  showEmail?: Maybe<Scalars['Boolean']['output']>;
+};
+
+export type ContactBuilderPageBlocksJobsList = {
+  __typename?: 'ContactBuilderPageBlocksJobsList';
+  title?: Maybe<Scalars['String']['output']>;
+  emptyMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksForm = {
+  __typename?: 'ContactBuilderPageBlocksForm';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  formType: Scalars['String']['output'];
+  submitButtonText?: Maybe<Scalars['String']['output']>;
+  successMessage?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksContactInfoAddress = {
+  __typename?: 'ContactBuilderPageBlocksContactInfoAddress';
+  company: Scalars['String']['output'];
+  street: Scalars['String']['output'];
+  city: Scalars['String']['output'];
+  zip: Scalars['String']['output'];
+};
+
+export type ContactBuilderPageBlocksContactInfoOfficeHours = {
+  __typename?: 'ContactBuilderPageBlocksContactInfoOfficeHours';
+  weekdays: Scalars['String']['output'];
+};
+
+export type ContactBuilderPageBlocksContactInfoRepairHours = {
+  __typename?: 'ContactBuilderPageBlocksContactInfoRepairHours';
+  tueThu: Scalars['String']['output'];
+  fri: Scalars['String']['output'];
+};
+
+export type ContactBuilderPageBlocksContactInfo = {
+  __typename?: 'ContactBuilderPageBlocksContactInfo';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  address?: Maybe<ContactBuilderPageBlocksContactInfoAddress>;
+  phone: Scalars['String']['output'];
+  fax?: Maybe<Scalars['String']['output']>;
+  email: Scalars['String']['output'];
+  website?: Maybe<Scalars['String']['output']>;
+  officeHours?: Maybe<ContactBuilderPageBlocksContactInfoOfficeHours>;
+  repairHours?: Maybe<ContactBuilderPageBlocksContactInfoRepairHours>;
+};
+
+export type ContactBuilderPageBlocksCtaButton = {
+  __typename?: 'ContactBuilderPageBlocksCtaButton';
+  text: Scalars['String']['output'];
+  link: Scalars['String']['output'];
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksCta = {
+  __typename?: 'ContactBuilderPageBlocksCta';
+  eyebrow?: Maybe<Scalars['String']['output']>;
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  button?: Maybe<ContactBuilderPageBlocksCtaButton>;
+  variant?: Maybe<Scalars['String']['output']>;
+};
+
+export type ContactBuilderPageBlocksFaqQuestions = {
+  __typename?: 'ContactBuilderPageBlocksFaqQuestions';
+  question: Scalars['String']['output'];
+  answer: Scalars['String']['output'];
+};
+
+export type ContactBuilderPageBlocksFaq = {
+  __typename?: 'ContactBuilderPageBlocksFaq';
+  title?: Maybe<Scalars['String']['output']>;
+  description?: Maybe<Scalars['String']['output']>;
+  questions?: Maybe<Array<Maybe<ContactBuilderPageBlocksFaqQuestions>>>;
+};
+
+export type ContactBuilderPageBlocks = ContactBuilderPageBlocksHero | ContactBuilderPageBlocksContent | ContactBuilderPageBlocksStory | ContactBuilderPageBlocksFeatures | ContactBuilderPageBlocksEquipment | ContactBuilderPageBlocksTeamGrid | ContactBuilderPageBlocksJobsList | ContactBuilderPageBlocksForm | ContactBuilderPageBlocksContactInfo | ContactBuilderPageBlocksCta | ContactBuilderPageBlocksFaq;
+
+export type ContactBuilderPage = Node & Document & {
+  __typename?: 'ContactBuilderPage';
+  title: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  seo?: Maybe<ContactBuilderPageSeo>;
+  blocks?: Maybe<Array<Maybe<ContactBuilderPageBlocks>>>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type ContactBuilderPageSeoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  ogImage?: InputMaybe<ImageFilter>;
+};
+
+export type ContactBuilderPageBlocksHeroPrimaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksHeroSecondaryButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksHeroFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  subtitle?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  primaryButton?: InputMaybe<ContactBuilderPageBlocksHeroPrimaryButtonFilter>;
+  secondaryButton?: InputMaybe<ContactBuilderPageBlocksHeroSecondaryButtonFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksContentFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  image?: InputMaybe<ImageFilter>;
+  imagePosition?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksStoryHighlightsFilter = {
+  text?: InputMaybe<StringFilter>;
+  icon?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksStoryFilter = {
+  title?: InputMaybe<StringFilter>;
+  text1?: InputMaybe<StringFilter>;
+  text2?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  highlights?: InputMaybe<ContactBuilderPageBlocksStoryHighlightsFilter>;
+};
+
+export type ContactBuilderPageBlocksFeaturesItemsFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksFeaturesFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  items?: InputMaybe<ContactBuilderPageBlocksFeaturesItemsFilter>;
+  columns?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksEquipmentFilter = {
+  icon?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksTeamGridFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  categories?: InputMaybe<StringFilter>;
+  showEmail?: InputMaybe<BooleanFilter>;
+};
+
+export type ContactBuilderPageBlocksJobsListFilter = {
+  title?: InputMaybe<StringFilter>;
+  emptyMessage?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksFormFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  formType?: InputMaybe<StringFilter>;
+  submitButtonText?: InputMaybe<StringFilter>;
+  successMessage?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksContactInfoAddressFilter = {
+  company?: InputMaybe<StringFilter>;
+  street?: InputMaybe<StringFilter>;
+  city?: InputMaybe<StringFilter>;
+  zip?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksContactInfoOfficeHoursFilter = {
+  weekdays?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksContactInfoRepairHoursFilter = {
+  tueThu?: InputMaybe<StringFilter>;
+  fri?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksContactInfoFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  address?: InputMaybe<ContactBuilderPageBlocksContactInfoAddressFilter>;
+  phone?: InputMaybe<StringFilter>;
+  fax?: InputMaybe<StringFilter>;
+  email?: InputMaybe<StringFilter>;
+  website?: InputMaybe<StringFilter>;
+  officeHours?: InputMaybe<ContactBuilderPageBlocksContactInfoOfficeHoursFilter>;
+  repairHours?: InputMaybe<ContactBuilderPageBlocksContactInfoRepairHoursFilter>;
+};
+
+export type ContactBuilderPageBlocksCtaButtonFilter = {
+  text?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksCtaFilter = {
+  eyebrow?: InputMaybe<StringFilter>;
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  button?: InputMaybe<ContactBuilderPageBlocksCtaButtonFilter>;
+  variant?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksFaqQuestionsFilter = {
+  question?: InputMaybe<StringFilter>;
+  answer?: InputMaybe<StringFilter>;
+};
+
+export type ContactBuilderPageBlocksFaqFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  questions?: InputMaybe<ContactBuilderPageBlocksFaqQuestionsFilter>;
+};
+
+export type ContactBuilderPageBlocksFilter = {
+  hero?: InputMaybe<ContactBuilderPageBlocksHeroFilter>;
+  content?: InputMaybe<ContactBuilderPageBlocksContentFilter>;
+  story?: InputMaybe<ContactBuilderPageBlocksStoryFilter>;
+  features?: InputMaybe<ContactBuilderPageBlocksFeaturesFilter>;
+  equipment?: InputMaybe<ContactBuilderPageBlocksEquipmentFilter>;
+  teamGrid?: InputMaybe<ContactBuilderPageBlocksTeamGridFilter>;
+  jobsList?: InputMaybe<ContactBuilderPageBlocksJobsListFilter>;
+  form?: InputMaybe<ContactBuilderPageBlocksFormFilter>;
+  contactInfo?: InputMaybe<ContactBuilderPageBlocksContactInfoFilter>;
+  cta?: InputMaybe<ContactBuilderPageBlocksCtaFilter>;
+  faq?: InputMaybe<ContactBuilderPageBlocksFaqFilter>;
+};
+
+export type ContactBuilderPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<StringFilter>;
+  seo?: InputMaybe<ContactBuilderPageSeoFilter>;
+  blocks?: InputMaybe<ContactBuilderPageBlocksFilter>;
+};
+
+export type ContactBuilderPageConnectionEdges = {
+  __typename?: 'ContactBuilderPageConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<ContactBuilderPage>;
+};
+
+export type ContactBuilderPageConnection = Connection & {
+  __typename?: 'ContactBuilderPageConnection';
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+  edges?: Maybe<Array<Maybe<ContactBuilderPageConnectionEdges>>>;
+};
+
 export type TeamMember = Node & Document & {
   __typename?: 'TeamMember';
   name: Scalars['String']['output'];
@@ -1511,6 +2627,12 @@ export type Mutation = {
   createHomePage: HomePage;
   updatePage: Page;
   createPage: Page;
+  updateAboutPage: AboutPage;
+  createAboutPage: AboutPage;
+  updateCareerPage: CareerPage;
+  createCareerPage: CareerPage;
+  updateContactBuilderPage: ContactBuilderPage;
+  createContactBuilderPage: ContactBuilderPage;
   updateTeamMember: TeamMember;
   createTeamMember: TeamMember;
   updateService: Service;
@@ -1584,6 +2706,42 @@ export type MutationUpdatePageArgs = {
 export type MutationCreatePageArgs = {
   relativePath: Scalars['String']['input'];
   params: PageMutation;
+};
+
+
+export type MutationUpdateAboutPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutPageMutation;
+};
+
+
+export type MutationCreateAboutPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: AboutPageMutation;
+};
+
+
+export type MutationUpdateCareerPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareerPageMutation;
+};
+
+
+export type MutationCreateCareerPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: CareerPageMutation;
+};
+
+
+export type MutationUpdateContactBuilderPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactBuilderPageMutation;
+};
+
+
+export type MutationCreateContactBuilderPageArgs = {
+  relativePath: Scalars['String']['input'];
+  params: ContactBuilderPageMutation;
 };
 
 
@@ -1685,6 +2843,9 @@ export type MutationCreateLegalPageArgs = {
 export type DocumentUpdateMutation = {
   homePage?: InputMaybe<HomePageMutation>;
   page?: InputMaybe<PageMutation>;
+  aboutPage?: InputMaybe<AboutPageMutation>;
+  careerPage?: InputMaybe<CareerPageMutation>;
+  contactBuilderPage?: InputMaybe<ContactBuilderPageMutation>;
   teamMember?: InputMaybe<TeamMemberMutation>;
   service?: InputMaybe<ServiceMutation>;
   job?: InputMaybe<JobMutation>;
@@ -1699,6 +2860,9 @@ export type DocumentUpdateMutation = {
 export type DocumentMutation = {
   homePage?: InputMaybe<HomePageMutation>;
   page?: InputMaybe<PageMutation>;
+  aboutPage?: InputMaybe<AboutPageMutation>;
+  careerPage?: InputMaybe<CareerPageMutation>;
+  contactBuilderPage?: InputMaybe<ContactBuilderPageMutation>;
   teamMember?: InputMaybe<TeamMemberMutation>;
   service?: InputMaybe<ServiceMutation>;
   job?: InputMaybe<JobMutation>;
@@ -1994,6 +3158,498 @@ export type PageMutation = {
   blocks?: InputMaybe<Array<InputMaybe<PageBlocksMutation>>>;
 };
 
+export type AboutPageSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksHeroPrimaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksHeroSecondaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  primaryButton?: InputMaybe<AboutPageBlocksHeroPrimaryButtonMutation>;
+  secondaryButton?: InputMaybe<AboutPageBlocksHeroSecondaryButtonMutation>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksContentMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imagePosition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksStoryHighlightsMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksStoryMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text1?: InputMaybe<Scalars['String']['input']>;
+  text2?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<Array<InputMaybe<AboutPageBlocksStoryHighlightsMutation>>>;
+};
+
+export type AboutPageBlocksFeaturesItemsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksFeaturesMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<AboutPageBlocksFeaturesItemsMutation>>>;
+  columns?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksEquipmentMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksTeamGridMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  showEmail?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type AboutPageBlocksJobsListMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  emptyMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksFormMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  formType?: InputMaybe<Scalars['String']['input']>;
+  submitButtonText?: InputMaybe<Scalars['String']['input']>;
+  successMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksContactInfoAddressMutation = {
+  company?: InputMaybe<Scalars['String']['input']>;
+  street?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  zip?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksContactInfoOfficeHoursMutation = {
+  weekdays?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksContactInfoRepairHoursMutation = {
+  tueThu?: InputMaybe<Scalars['String']['input']>;
+  fri?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksContactInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<AboutPageBlocksContactInfoAddressMutation>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  fax?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['String']['input']>;
+  officeHours?: InputMaybe<AboutPageBlocksContactInfoOfficeHoursMutation>;
+  repairHours?: InputMaybe<AboutPageBlocksContactInfoRepairHoursMutation>;
+};
+
+export type AboutPageBlocksCtaButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksCtaMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  button?: InputMaybe<AboutPageBlocksCtaButtonMutation>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksFaqQuestionsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type AboutPageBlocksFaqMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  questions?: InputMaybe<Array<InputMaybe<AboutPageBlocksFaqQuestionsMutation>>>;
+};
+
+export type AboutPageBlocksMutation = {
+  hero?: InputMaybe<AboutPageBlocksHeroMutation>;
+  content?: InputMaybe<AboutPageBlocksContentMutation>;
+  story?: InputMaybe<AboutPageBlocksStoryMutation>;
+  features?: InputMaybe<AboutPageBlocksFeaturesMutation>;
+  equipment?: InputMaybe<AboutPageBlocksEquipmentMutation>;
+  teamGrid?: InputMaybe<AboutPageBlocksTeamGridMutation>;
+  jobsList?: InputMaybe<AboutPageBlocksJobsListMutation>;
+  form?: InputMaybe<AboutPageBlocksFormMutation>;
+  contactInfo?: InputMaybe<AboutPageBlocksContactInfoMutation>;
+  cta?: InputMaybe<AboutPageBlocksCtaMutation>;
+  faq?: InputMaybe<AboutPageBlocksFaqMutation>;
+};
+
+export type AboutPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  seo?: InputMaybe<AboutPageSeoMutation>;
+  blocks?: InputMaybe<Array<InputMaybe<AboutPageBlocksMutation>>>;
+};
+
+export type CareerPageSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksHeroPrimaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksHeroSecondaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  primaryButton?: InputMaybe<CareerPageBlocksHeroPrimaryButtonMutation>;
+  secondaryButton?: InputMaybe<CareerPageBlocksHeroSecondaryButtonMutation>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksContentMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imagePosition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksStoryHighlightsMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksStoryMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text1?: InputMaybe<Scalars['String']['input']>;
+  text2?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<Array<InputMaybe<CareerPageBlocksStoryHighlightsMutation>>>;
+};
+
+export type CareerPageBlocksFeaturesItemsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksFeaturesMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<CareerPageBlocksFeaturesItemsMutation>>>;
+  columns?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksEquipmentMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksTeamGridMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  showEmail?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CareerPageBlocksJobsListMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  emptyMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksFormMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  formType?: InputMaybe<Scalars['String']['input']>;
+  submitButtonText?: InputMaybe<Scalars['String']['input']>;
+  successMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksContactInfoAddressMutation = {
+  company?: InputMaybe<Scalars['String']['input']>;
+  street?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  zip?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksContactInfoOfficeHoursMutation = {
+  weekdays?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksContactInfoRepairHoursMutation = {
+  tueThu?: InputMaybe<Scalars['String']['input']>;
+  fri?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksContactInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<CareerPageBlocksContactInfoAddressMutation>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  fax?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['String']['input']>;
+  officeHours?: InputMaybe<CareerPageBlocksContactInfoOfficeHoursMutation>;
+  repairHours?: InputMaybe<CareerPageBlocksContactInfoRepairHoursMutation>;
+};
+
+export type CareerPageBlocksCtaButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksCtaMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  button?: InputMaybe<CareerPageBlocksCtaButtonMutation>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksFaqQuestionsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CareerPageBlocksFaqMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  questions?: InputMaybe<Array<InputMaybe<CareerPageBlocksFaqQuestionsMutation>>>;
+};
+
+export type CareerPageBlocksMutation = {
+  hero?: InputMaybe<CareerPageBlocksHeroMutation>;
+  content?: InputMaybe<CareerPageBlocksContentMutation>;
+  story?: InputMaybe<CareerPageBlocksStoryMutation>;
+  features?: InputMaybe<CareerPageBlocksFeaturesMutation>;
+  equipment?: InputMaybe<CareerPageBlocksEquipmentMutation>;
+  teamGrid?: InputMaybe<CareerPageBlocksTeamGridMutation>;
+  jobsList?: InputMaybe<CareerPageBlocksJobsListMutation>;
+  form?: InputMaybe<CareerPageBlocksFormMutation>;
+  contactInfo?: InputMaybe<CareerPageBlocksContactInfoMutation>;
+  cta?: InputMaybe<CareerPageBlocksCtaMutation>;
+  faq?: InputMaybe<CareerPageBlocksFaqMutation>;
+};
+
+export type CareerPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  seo?: InputMaybe<CareerPageSeoMutation>;
+  blocks?: InputMaybe<Array<InputMaybe<CareerPageBlocksMutation>>>;
+};
+
+export type ContactBuilderPageSeoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  ogImage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksHeroPrimaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksHeroSecondaryButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksHeroMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  subtitle?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  primaryButton?: InputMaybe<ContactBuilderPageBlocksHeroPrimaryButtonMutation>;
+  secondaryButton?: InputMaybe<ContactBuilderPageBlocksHeroSecondaryButtonMutation>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksContentMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  imagePosition?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksStoryHighlightsMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksStoryMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  text1?: InputMaybe<Scalars['String']['input']>;
+  text2?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  highlights?: InputMaybe<Array<InputMaybe<ContactBuilderPageBlocksStoryHighlightsMutation>>>;
+};
+
+export type ContactBuilderPageBlocksFeaturesItemsMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksFeaturesMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  items?: InputMaybe<Array<InputMaybe<ContactBuilderPageBlocksFeaturesItemsMutation>>>;
+  columns?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksEquipmentMutation = {
+  icon?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksTeamGridMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  showEmail?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type ContactBuilderPageBlocksJobsListMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  emptyMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksFormMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  formType?: InputMaybe<Scalars['String']['input']>;
+  submitButtonText?: InputMaybe<Scalars['String']['input']>;
+  successMessage?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksContactInfoAddressMutation = {
+  company?: InputMaybe<Scalars['String']['input']>;
+  street?: InputMaybe<Scalars['String']['input']>;
+  city?: InputMaybe<Scalars['String']['input']>;
+  zip?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksContactInfoOfficeHoursMutation = {
+  weekdays?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksContactInfoRepairHoursMutation = {
+  tueThu?: InputMaybe<Scalars['String']['input']>;
+  fri?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksContactInfoMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  address?: InputMaybe<ContactBuilderPageBlocksContactInfoAddressMutation>;
+  phone?: InputMaybe<Scalars['String']['input']>;
+  fax?: InputMaybe<Scalars['String']['input']>;
+  email?: InputMaybe<Scalars['String']['input']>;
+  website?: InputMaybe<Scalars['String']['input']>;
+  officeHours?: InputMaybe<ContactBuilderPageBlocksContactInfoOfficeHoursMutation>;
+  repairHours?: InputMaybe<ContactBuilderPageBlocksContactInfoRepairHoursMutation>;
+};
+
+export type ContactBuilderPageBlocksCtaButtonMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksCtaMutation = {
+  eyebrow?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  button?: InputMaybe<ContactBuilderPageBlocksCtaButtonMutation>;
+  variant?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksFaqQuestionsMutation = {
+  question?: InputMaybe<Scalars['String']['input']>;
+  answer?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type ContactBuilderPageBlocksFaqMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  questions?: InputMaybe<Array<InputMaybe<ContactBuilderPageBlocksFaqQuestionsMutation>>>;
+};
+
+export type ContactBuilderPageBlocksMutation = {
+  hero?: InputMaybe<ContactBuilderPageBlocksHeroMutation>;
+  content?: InputMaybe<ContactBuilderPageBlocksContentMutation>;
+  story?: InputMaybe<ContactBuilderPageBlocksStoryMutation>;
+  features?: InputMaybe<ContactBuilderPageBlocksFeaturesMutation>;
+  equipment?: InputMaybe<ContactBuilderPageBlocksEquipmentMutation>;
+  teamGrid?: InputMaybe<ContactBuilderPageBlocksTeamGridMutation>;
+  jobsList?: InputMaybe<ContactBuilderPageBlocksJobsListMutation>;
+  form?: InputMaybe<ContactBuilderPageBlocksFormMutation>;
+  contactInfo?: InputMaybe<ContactBuilderPageBlocksContactInfoMutation>;
+  cta?: InputMaybe<ContactBuilderPageBlocksCtaMutation>;
+  faq?: InputMaybe<ContactBuilderPageBlocksFaqMutation>;
+};
+
+export type ContactBuilderPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  seo?: InputMaybe<ContactBuilderPageSeoMutation>;
+  blocks?: InputMaybe<Array<InputMaybe<ContactBuilderPageBlocksMutation>>>;
+};
+
 export type TeamMemberMutation = {
   name?: InputMaybe<Scalars['String']['input']>;
   role?: InputMaybe<Scalars['String']['input']>;
@@ -2177,6 +3833,12 @@ export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename
 
 export type PagePartsFragment = { __typename: 'Page', title: string, slug: string, seo?: { __typename: 'PageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'PageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'PageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'PageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'PageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'PageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'PageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'PageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'PageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'PageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'PageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'PageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'PageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'PageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'PageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'PageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'PageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'PageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'PageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null };
 
+export type AboutPagePartsFragment = { __typename: 'AboutPage', title: string, slug: string, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'AboutPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'AboutPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'AboutPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'AboutPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'AboutPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'AboutPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'AboutPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'AboutPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'AboutPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'AboutPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'AboutPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'AboutPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'AboutPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'AboutPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'AboutPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'AboutPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'AboutPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'AboutPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null };
+
+export type CareerPagePartsFragment = { __typename: 'CareerPage', title: string, slug: string, seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'CareerPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'CareerPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'CareerPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'CareerPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'CareerPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'CareerPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'CareerPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'CareerPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'CareerPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'CareerPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'CareerPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'CareerPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'CareerPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'CareerPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'CareerPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'CareerPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'CareerPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'CareerPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null };
+
+export type ContactBuilderPagePartsFragment = { __typename: 'ContactBuilderPage', title: string, slug: string, seo?: { __typename: 'ContactBuilderPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'ContactBuilderPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'ContactBuilderPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'ContactBuilderPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'ContactBuilderPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'ContactBuilderPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'ContactBuilderPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'ContactBuilderPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'ContactBuilderPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'ContactBuilderPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactBuilderPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactBuilderPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'ContactBuilderPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'ContactBuilderPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'ContactBuilderPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null };
+
 export type TeamMemberPartsFragment = { __typename: 'TeamMember', name: string, role: string, email?: string | null, category: string, description?: string | null, image?: string | null, order?: number | null };
 
 export type ServicePartsFragment = { __typename: 'Service', title: string, subtitle?: string | null, shortDescription?: string | null, intro?: string | null, body?: any | null, image?: string | null, heroImage?: string | null, icon?: string | null, expertTip?: string | null, features?: Array<string | null> | null, benefits?: Array<string | null> | null, referenceImages?: Array<string | null> | null, contactIds?: Array<string | null> | null, sections?: Array<{ __typename: 'ServiceSections', title: string, icon?: string | null, content?: string | null } | null> | null, processSteps?: Array<{ __typename: 'ServiceProcessSteps', step: number, title: string, text?: string | null } | null> | null, faq?: Array<{ __typename: 'ServiceFaq', question: string, answer: string } | null> | null, gallery?: Array<{ __typename: 'ServiceGallery', image: string, caption?: string | null } | null> | null, uiText?: { __typename: 'ServiceUiText', introHeader?: string | null, contactButtonText?: string | null, careerCtaTitle?: string | null, careerCtaDescription?: string | null, careerCtaButtonText?: string | null } | null };
@@ -2230,6 +3892,63 @@ export type PageConnectionQueryVariables = Exact<{
 
 
 export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'PageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'PageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'PageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'PageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'PageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'PageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'PageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'PageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'PageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'PageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'PageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'PageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'PageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'PageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'PageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'PageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'PageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'PageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'PageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'PageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'PageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } | null } | null> | null } };
+
+export type AboutPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'AboutPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'AboutPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'AboutPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'AboutPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'AboutPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'AboutPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'AboutPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'AboutPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'AboutPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'AboutPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'AboutPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'AboutPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'AboutPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'AboutPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'AboutPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'AboutPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'AboutPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'AboutPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } };
+
+export type AboutPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AboutPageFilter>;
+}>;
+
+
+export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'AboutPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'AboutPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'AboutPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'AboutPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'AboutPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'AboutPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'AboutPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'AboutPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'AboutPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'AboutPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'AboutPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'AboutPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'AboutPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'AboutPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'AboutPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'AboutPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'AboutPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'AboutPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'AboutPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } | null } | null> | null } };
+
+export type CareerPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type CareerPageQuery = { __typename?: 'Query', careerPage: { __typename: 'CareerPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'CareerPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'CareerPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'CareerPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'CareerPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'CareerPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'CareerPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'CareerPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'CareerPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'CareerPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'CareerPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'CareerPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'CareerPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'CareerPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'CareerPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'CareerPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'CareerPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'CareerPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'CareerPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } };
+
+export type CareerPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CareerPageFilter>;
+}>;
+
+
+export type CareerPageConnectionQuery = { __typename?: 'Query', careerPageConnection: { __typename?: 'CareerPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'CareerPageConnectionEdges', cursor: string, node?: { __typename: 'CareerPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'CareerPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'CareerPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'CareerPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'CareerPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'CareerPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'CareerPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'CareerPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'CareerPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'CareerPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'CareerPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'CareerPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'CareerPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'CareerPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'CareerPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'CareerPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'CareerPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'CareerPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'CareerPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'CareerPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } | null } | null> | null } };
+
+export type ContactBuilderPageQueryVariables = Exact<{
+  relativePath: Scalars['String']['input'];
+}>;
+
+
+export type ContactBuilderPageQuery = { __typename?: 'Query', contactBuilderPage: { __typename: 'ContactBuilderPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactBuilderPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'ContactBuilderPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'ContactBuilderPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'ContactBuilderPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'ContactBuilderPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'ContactBuilderPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'ContactBuilderPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'ContactBuilderPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'ContactBuilderPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'ContactBuilderPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactBuilderPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactBuilderPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'ContactBuilderPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'ContactBuilderPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'ContactBuilderPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } };
+
+export type ContactBuilderPageConnectionQueryVariables = Exact<{
+  before?: InputMaybe<Scalars['String']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<ContactBuilderPageFilter>;
+}>;
+
+
+export type ContactBuilderPageConnectionQuery = { __typename?: 'Query', contactBuilderPageConnection: { __typename?: 'ContactBuilderPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'ContactBuilderPageConnectionEdges', cursor: string, node?: { __typename: 'ContactBuilderPage', id: string, title: string, slug: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'ContactBuilderPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, blocks?: Array<{ __typename: 'ContactBuilderPageBlocksHero', eyebrow?: string | null, title?: string | null, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, variant?: string | null, primaryButton?: { __typename: 'ContactBuilderPageBlocksHeroPrimaryButton', text: string, link: string, variant?: string | null } | null, secondaryButton?: { __typename: 'ContactBuilderPageBlocksHeroSecondaryButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksContent', eyebrow?: string | null, title?: string | null, body?: any | null, image?: string | null, imagePosition?: string | null } | { __typename: 'ContactBuilderPageBlocksStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null, highlights?: Array<{ __typename: 'ContactBuilderPageBlocksStoryHighlights', text: string, icon?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksFeatures', eyebrow?: string | null, title?: string | null, description?: string | null, columns?: string | null, items?: Array<{ __typename: 'ContactBuilderPageBlocksFeaturesItems', icon?: string | null, title: string, description?: string | null } | null> | null } | { __typename: 'ContactBuilderPageBlocksEquipment', icon?: string | null, title?: string | null, description?: string | null } | { __typename: 'ContactBuilderPageBlocksTeamGrid', title?: string | null, description?: string | null, categories?: Array<string | null> | null, showEmail?: boolean | null } | { __typename: 'ContactBuilderPageBlocksJobsList', title?: string | null, emptyMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksForm', title?: string | null, description?: string | null, formType: string, submitButtonText?: string | null, successMessage?: string | null } | { __typename: 'ContactBuilderPageBlocksContactInfo', title?: string | null, description?: string | null, phone: string, fax?: string | null, email: string, website?: string | null, address?: { __typename: 'ContactBuilderPageBlocksContactInfoAddress', company: string, street: string, city: string, zip: string } | null, officeHours?: { __typename: 'ContactBuilderPageBlocksContactInfoOfficeHours', weekdays: string } | null, repairHours?: { __typename: 'ContactBuilderPageBlocksContactInfoRepairHours', tueThu: string, fri: string } | null } | { __typename: 'ContactBuilderPageBlocksCta', eyebrow?: string | null, title?: string | null, description?: string | null, variant?: string | null, button?: { __typename: 'ContactBuilderPageBlocksCtaButton', text: string, link: string, variant?: string | null } | null } | { __typename: 'ContactBuilderPageBlocksFaq', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'ContactBuilderPageBlocksFaqQuestions', question: string, answer: string } | null> | null } | null> | null } | null } | null> | null } };
 
 export type TeamMemberQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2624,6 +4343,405 @@ export const PagePartsFragmentDoc = gql`
   }
 }
     `;
+export const AboutPagePartsFragmentDoc = gql`
+    fragment AboutPageParts on AboutPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on AboutPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on AboutPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on AboutPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on AboutPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on AboutPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on AboutPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on AboutPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on AboutPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on AboutPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on AboutPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on AboutPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+    `;
+export const CareerPagePartsFragmentDoc = gql`
+    fragment CareerPageParts on CareerPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on CareerPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on CareerPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on CareerPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on CareerPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on CareerPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on CareerPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on CareerPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on CareerPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on CareerPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on CareerPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on CareerPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+    `;
+export const ContactBuilderPagePartsFragmentDoc = gql`
+    fragment ContactBuilderPageParts on ContactBuilderPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on ContactBuilderPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on ContactBuilderPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on ContactBuilderPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on ContactBuilderPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on ContactBuilderPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on ContactBuilderPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on ContactBuilderPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on ContactBuilderPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on ContactBuilderPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on ContactBuilderPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on ContactBuilderPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+    `;
 export const TeamMemberPartsFragmentDoc = gql`
     fragment TeamMemberParts on TeamMember {
   __typename
@@ -2917,6 +5035,177 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
+export const AboutPageDocument = gql`
+    query aboutPage($relativePath: String!) {
+  aboutPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...AboutPageParts
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const AboutPageConnectionDocument = gql`
+    query aboutPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: AboutPageFilter) {
+  aboutPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...AboutPageParts
+      }
+    }
+  }
+}
+    ${AboutPagePartsFragmentDoc}`;
+export const CareerPageDocument = gql`
+    query careerPage($relativePath: String!) {
+  careerPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...CareerPageParts
+  }
+}
+    ${CareerPagePartsFragmentDoc}`;
+export const CareerPageConnectionDocument = gql`
+    query careerPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: CareerPageFilter) {
+  careerPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...CareerPageParts
+      }
+    }
+  }
+}
+    ${CareerPagePartsFragmentDoc}`;
+export const ContactBuilderPageDocument = gql`
+    query contactBuilderPage($relativePath: String!) {
+  contactBuilderPage(relativePath: $relativePath) {
+    ... on Document {
+      _sys {
+        filename
+        basename
+        hasReferences
+        breadcrumbs
+        path
+        relativePath
+        extension
+      }
+      id
+    }
+    ...ContactBuilderPageParts
+  }
+}
+    ${ContactBuilderPagePartsFragmentDoc}`;
+export const ContactBuilderPageConnectionDocument = gql`
+    query contactBuilderPageConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: ContactBuilderPageFilter) {
+  contactBuilderPageConnection(
+    before: $before
+    after: $after
+    first: $first
+    last: $last
+    sort: $sort
+    filter: $filter
+  ) {
+    pageInfo {
+      hasPreviousPage
+      hasNextPage
+      startCursor
+      endCursor
+    }
+    totalCount
+    edges {
+      cursor
+      node {
+        ... on Document {
+          _sys {
+            filename
+            basename
+            hasReferences
+            breadcrumbs
+            path
+            relativePath
+            extension
+          }
+          id
+        }
+        ...ContactBuilderPageParts
+      }
+    }
+  }
+}
+    ${ContactBuilderPagePartsFragmentDoc}`;
 export const TeamMemberDocument = gql`
     query teamMember($relativePath: String!) {
   teamMember(relativePath: $relativePath) {
@@ -3387,6 +5676,24 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
         return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
+      },
+    aboutPage(variables: AboutPageQueryVariables, options?: C): Promise<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}> {
+        return requester<{data: AboutPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageQueryVariables, query: string}, AboutPageQueryVariables>(AboutPageDocument, variables, options);
+      },
+    aboutPageConnection(variables?: AboutPageConnectionQueryVariables, options?: C): Promise<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}> {
+        return requester<{data: AboutPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: AboutPageConnectionQueryVariables, query: string}, AboutPageConnectionQueryVariables>(AboutPageConnectionDocument, variables, options);
+      },
+    careerPage(variables: CareerPageQueryVariables, options?: C): Promise<{data: CareerPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageQueryVariables, query: string}> {
+        return requester<{data: CareerPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageQueryVariables, query: string}, CareerPageQueryVariables>(CareerPageDocument, variables, options);
+      },
+    careerPageConnection(variables?: CareerPageConnectionQueryVariables, options?: C): Promise<{data: CareerPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageConnectionQueryVariables, query: string}> {
+        return requester<{data: CareerPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: CareerPageConnectionQueryVariables, query: string}, CareerPageConnectionQueryVariables>(CareerPageConnectionDocument, variables, options);
+      },
+    contactBuilderPage(variables: ContactBuilderPageQueryVariables, options?: C): Promise<{data: ContactBuilderPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactBuilderPageQueryVariables, query: string}> {
+        return requester<{data: ContactBuilderPageQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactBuilderPageQueryVariables, query: string}, ContactBuilderPageQueryVariables>(ContactBuilderPageDocument, variables, options);
+      },
+    contactBuilderPageConnection(variables?: ContactBuilderPageConnectionQueryVariables, options?: C): Promise<{data: ContactBuilderPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactBuilderPageConnectionQueryVariables, query: string}> {
+        return requester<{data: ContactBuilderPageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: ContactBuilderPageConnectionQueryVariables, query: string}, ContactBuilderPageConnectionQueryVariables>(ContactBuilderPageConnectionDocument, variables, options);
       },
     teamMember(variables: TeamMemberQueryVariables, options?: C): Promise<{data: TeamMemberQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberQueryVariables, query: string}> {
         return requester<{data: TeamMemberQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: TeamMemberQueryVariables, query: string}, TeamMemberQueryVariables>(TeamMemberDocument, variables, options);

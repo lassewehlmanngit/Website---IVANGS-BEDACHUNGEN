@@ -237,6 +237,402 @@ fragment PageParts on Page {
   }
 }
 
+fragment AboutPageParts on AboutPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on AboutPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on AboutPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on AboutPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on AboutPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on AboutPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on AboutPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on AboutPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on AboutPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on AboutPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on AboutPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on AboutPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+
+fragment CareerPageParts on CareerPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on CareerPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on CareerPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on CareerPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on CareerPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on CareerPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on CareerPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on CareerPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on CareerPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on CareerPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on CareerPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on CareerPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+
+fragment ContactBuilderPageParts on ContactBuilderPage {
+  __typename
+  title
+  slug
+  seo {
+    __typename
+    title
+    description
+    ogImage
+  }
+  blocks {
+    __typename
+    ... on ContactBuilderPageBlocksHero {
+      eyebrow
+      title
+      subtitle
+      description
+      primaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      secondaryButton {
+        __typename
+        text
+        link
+        variant
+      }
+      backgroundImage
+      variant
+    }
+    ... on ContactBuilderPageBlocksContent {
+      eyebrow
+      title
+      body
+      image
+      imagePosition
+    }
+    ... on ContactBuilderPageBlocksStory {
+      title
+      text1
+      text2
+      image
+      highlights {
+        __typename
+        text
+        icon
+      }
+    }
+    ... on ContactBuilderPageBlocksFeatures {
+      eyebrow
+      title
+      description
+      items {
+        __typename
+        icon
+        title
+        description
+      }
+      columns
+    }
+    ... on ContactBuilderPageBlocksEquipment {
+      icon
+      title
+      description
+    }
+    ... on ContactBuilderPageBlocksTeamGrid {
+      title
+      description
+      categories
+      showEmail
+    }
+    ... on ContactBuilderPageBlocksJobsList {
+      title
+      emptyMessage
+    }
+    ... on ContactBuilderPageBlocksForm {
+      title
+      description
+      formType
+      submitButtonText
+      successMessage
+    }
+    ... on ContactBuilderPageBlocksContactInfo {
+      title
+      description
+      address {
+        __typename
+        company
+        street
+        city
+        zip
+      }
+      phone
+      fax
+      email
+      website
+      officeHours {
+        __typename
+        weekdays
+      }
+      repairHours {
+        __typename
+        tueThu
+        fri
+      }
+    }
+    ... on ContactBuilderPageBlocksCta {
+      eyebrow
+      title
+      description
+      button {
+        __typename
+        text
+        link
+        variant
+      }
+      variant
+    }
+    ... on ContactBuilderPageBlocksFaq {
+      title
+      description
+      questions {
+        __typename
+        question
+        answer
+      }
+    }
+  }
+}
+
 fragment TeamMemberParts on TeamMember {
   __typename
   name

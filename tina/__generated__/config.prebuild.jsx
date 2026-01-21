@@ -544,6 +544,114 @@ var config_default = defineConfig({
           }
         ]
       },
+      // 📖 ABOUT PAGE (Singleton)
+      {
+        name: "aboutPage",
+        label: "\u{1F4D6} \xDCber Uns",
+        path: "content/pages",
+        format: "json",
+        match: { include: "about" },
+        ui: {
+          router: () => "/de/about",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
+          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "about" f\xFCr /de/about' },
+          seoFields,
+          {
+            type: "object",
+            list: true,
+            name: "blocks",
+            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
+            templates: [
+              heroBlock,
+              contentBlock,
+              storyBlock,
+              featuresBlock,
+              equipmentBlock,
+              teamGridBlock,
+              jobsListBlock,
+              formBlock,
+              contactInfoBlock,
+              ctaBlock,
+              faqBlock
+            ]
+          }
+        ]
+      },
+      // 💼 CAREER PAGE (Singleton)
+      {
+        name: "careerPage",
+        label: "\u{1F4BC} Karriere",
+        path: "content/pages",
+        format: "json",
+        match: { include: "career" },
+        ui: {
+          router: () => "/de/career",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
+          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "career" f\xFCr /de/career' },
+          seoFields,
+          {
+            type: "object",
+            list: true,
+            name: "blocks",
+            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
+            templates: [
+              heroBlock,
+              contentBlock,
+              storyBlock,
+              featuresBlock,
+              equipmentBlock,
+              teamGridBlock,
+              jobsListBlock,
+              formBlock,
+              contactInfoBlock,
+              ctaBlock,
+              faqBlock
+            ]
+          }
+        ]
+      },
+      // 📬 CONTACT PAGE (Singleton - Page Builder)
+      {
+        name: "contactBuilderPage",
+        label: "\u{1F4EC} Kontakt Seite",
+        path: "content/pages",
+        format: "json",
+        match: { include: "contact" },
+        ui: {
+          router: () => "/de/contact",
+          allowedActions: { create: false, delete: false }
+        },
+        fields: [
+          { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
+          { type: "string", name: "slug", label: "URL-Pfad", required: true, description: 'z.B. "contact" f\xFCr /de/contact' },
+          seoFields,
+          {
+            type: "object",
+            list: true,
+            name: "blocks",
+            label: "\u{1F9F1} Seiteninhalt (Bl\xF6cke)",
+            templates: [
+              heroBlock,
+              contentBlock,
+              storyBlock,
+              featuresBlock,
+              equipmentBlock,
+              teamGridBlock,
+              jobsListBlock,
+              formBlock,
+              contactInfoBlock,
+              ctaBlock,
+              faqBlock
+            ]
+          }
+        ]
+      },
       // 👥 TEAM MITGLIEDER
       {
         name: "teamMember",
