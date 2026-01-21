@@ -6,7 +6,7 @@ import { useEffect, useState, useMemo } from 'react';
 const EMPTY_DATA = { serviceConnection: { edges: [] } };
 const EMPTY_VARIABLES = {};
 
-// Query to fetch all services
+// Query to fetch all services with preview fields
 const SERVICES_LIST_QUERY = `
   query ServicesListQuery {
     serviceConnection {
@@ -15,9 +15,13 @@ const SERVICES_LIST_QUERY = `
           _sys { filename }
           id
           title
+          subtitle
           shortDescription
+          intro
           icon
           heroImage
+          image
+          features
           benefits
         }
       }

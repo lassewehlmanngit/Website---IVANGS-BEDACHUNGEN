@@ -39,6 +39,9 @@ export default defineConfig({
         label: '🏠 Startseite',
         path: 'content/home',
         format: 'json',
+        match: {
+          include: 'startseite',
+        },
         ui: {
           router: () => '/de',
           allowedActions: { create: false, delete: false },
@@ -297,22 +300,28 @@ export default defineConfig({
             list: true,
             name: 'features',
             label: 'Merkmale (Liste)',
+            description: 'Kurze Stichpunkte zu den Merkmalen dieser Leistung',
           },
           {
             type: 'string',
             list: true,
             name: 'benefits',
             label: 'Vorteile (Liste)',
+            description: 'Kurze Stichpunkte zu den Vorteilen für den Kunden',
           },
           {
             type: 'object',
             list: true,
             name: 'sections',
             label: 'Detailsektionen',
-            ui: { max: 6 },
+            description: 'Ausführliche Informationsblöcke mit Icon und Text',
+            ui: { 
+              max: 6,
+              itemProps: (item) => ({ label: item?.title || 'Neue Sektion' }),
+            },
             fields: [
               { type: 'string', name: 'title', label: 'Titel', required: true },
-              { type: 'string', name: 'icon', label: 'Icon (Lucide)' },
+              { type: 'string', name: 'icon', label: 'Icon (Lucide)', description: 'z.B. Hammer, Layers, CloudRain, Sun' },
               { type: 'string', name: 'content', label: 'Inhalt', ui: { component: 'textarea' } },
             ],
           },
@@ -321,31 +330,41 @@ export default defineConfig({
             list: true,
             name: 'processSteps',
             label: 'Prozessschritte',
-            ui: { max: 8 },
+            description: 'Ablauf des Projekts in einzelnen Schritten',
+            ui: { 
+              max: 8,
+              itemProps: (item) => ({ label: item?.title ? `${item.step || '?'}. ${item.title}` : 'Neuer Schritt' }),
+            },
             fields: [
-              { type: 'number', name: 'step', label: 'Schritt Nr.' },
-              { type: 'string', name: 'title', label: 'Titel' },
-              { type: 'string', name: 'text', label: 'Beschreibung' },
+              { type: 'number', name: 'step', label: 'Schritt Nr.', required: true },
+              { type: 'string', name: 'title', label: 'Titel', required: true },
+              { type: 'string', name: 'text', label: 'Beschreibung', ui: { component: 'textarea' } },
             ],
           },
           {
-            type: 'string',
+            type: 'image',
             list: true,
             name: 'referenceImages',
-            label: 'Projektbilder (URLs)',
+            label: 'Projektbilder',
+            description: 'Referenzbilder aus abgeschlossenen Projekten',
           },
           {
             type: 'string',
             list: true,
             name: 'contactIds',
             label: 'Ansprechpartner IDs',
+            description: 'IDs der Team-Mitglieder (z.B. sascha, isabel)',
           },
           {
             type: 'object',
             list: true,
             name: 'faq',
             label: 'FAQ',
-            ui: { max: 8 },
+            description: 'Häufig gestellte Kundenfragen',
+            ui: { 
+              max: 10,
+              itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
+            },
             fields: [
               { type: 'string', name: 'question', label: 'Frage', required: true },
               { type: 'string', name: 'answer', label: 'Antwort', ui: { component: 'textarea' }, required: true },
@@ -356,21 +375,26 @@ export default defineConfig({
             list: true,
             name: 'gallery',
             label: 'Galerie',
-            ui: { max: 12 },
+            description: 'Zusätzliche Bilder mit Bildunterschrift',
+            ui: { 
+              max: 12,
+              itemProps: (item) => ({ label: item?.caption || 'Neues Bild' }),
+            },
             fields: [
-              { type: 'image', name: 'image', label: 'Bild' },
+              { type: 'image', name: 'image', label: 'Bild', required: true },
               { type: 'string', name: 'caption', label: 'Bildunterschrift' },
             ],
           },
           {
             type: 'object',
             name: 'uiText',
-            label: 'UI Texte',
+            label: '🎨 UI Texte & Buttons',
+            description: 'Anpassbare Texte für Buttons und Call-to-Actions auf der Seite',
             fields: [
-              { type: 'string', name: 'introHeader', label: 'Intro Überschrift', required: true },
-              { type: 'string', name: 'contactButtonText', label: 'Kontakt Button Text' },
-              { type: 'string', name: 'careerCtaTitle', label: 'Karriere CTA Titel' },
-              { type: 'string', name: 'careerCtaDescription', label: 'Karriere CTA Beschreibung' },
+              { type: 'string', name: 'introHeader', label: 'Intro Überschrift', description: 'Überschrift über dem Einleitungstext' },
+              { type: 'string', name: 'contactButtonText', label: 'Kontakt Button Text', description: 'z.B. "Kontakt aufnehmen"' },
+              { type: 'string', name: 'careerCtaTitle', label: 'Karriere CTA Titel', description: 'Titel der Karriere-Box' },
+              { type: 'string', name: 'careerCtaDescription', label: 'Karriere CTA Beschreibung', ui: { component: 'textarea' } },
               { type: 'string', name: 'careerCtaButtonText', label: 'Karriere CTA Button Text' },
             ],
           },
@@ -427,6 +451,9 @@ export default defineConfig({
         label: '📄 Über Uns Seite',
         path: 'content/about',
         format: 'json',
+        match: {
+          include: 'ueber-uns',
+        },
         ui: {
           router: () => '/de/about',
           allowedActions: { create: false, delete: false },
@@ -507,6 +534,9 @@ export default defineConfig({
         label: '💼 Karriere Seite',
         path: 'content/career',
         format: 'json',
+        match: {
+          include: 'karriere',
+        },
         ui: {
           router: () => '/de/career',
           allowedActions: { create: false, delete: false },
@@ -559,6 +589,9 @@ export default defineConfig({
         label: '📞 Kontakt Seite',
         path: 'content/contact',
         format: 'json',
+        match: {
+          include: 'kontakt',
+        },
         ui: {
           router: () => '/de/contact',
           allowedActions: { create: false, delete: false },

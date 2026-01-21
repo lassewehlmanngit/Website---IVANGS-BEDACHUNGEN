@@ -43,11 +43,16 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
   const fallbackService = servicesData[id];
   const Icon = serviceIcons[id];
   
-  // Use CMS data with fallbacks
+  // Use CMS data with fallbacks - handle both string arrays and potential nested objects
   const title = cmsService?.title || fallbackService.title;
-  const description = cmsService?.shortDescription || fallbackService.description;
-  const img = cmsService?.heroImage || serviceImages[id];
-  const checkpoints = cmsService?.benefits || fallbackService.checkpoints;
+  const description = cmsService?.shortDescription || cmsService?.intro || fallbackService.description;
+  const img = cmsService?.heroImage || cmsService?.image || serviceImages[id];
+  
+  // Handle benefits - could be string array from CMS or checkpoints from fallback
+  const rawBenefits = cmsService?.benefits || cmsService?.features || fallbackService.checkpoints || [];
+  const checkpoints = Array.isArray(rawBenefits) 
+    ? rawBenefits.map((item: any) => typeof item === 'string' ? item : item?.text || item)
+    : [];
   const ctaText = ctaTexts[id];
 
   return (
