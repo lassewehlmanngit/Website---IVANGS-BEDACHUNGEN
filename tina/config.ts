@@ -371,7 +371,6 @@ export default defineConfig({
         ui: {
           router: () => '/de',
           allowedActions: { create: false, delete: false },
-          group: '🖥️ Seiten',
         },
         fields: [
           seoFields,
@@ -568,7 +567,6 @@ export default defineConfig({
         format: 'json',
         ui: {
           router: ({ document }) => getRouteForDocument(document._sys.filename),
-          group: '🖥️ Seiten',
         },
         fields: [
           { type: 'string', name: 'title', label: 'Seitentitel (intern)', required: true, isTitle: true },
@@ -607,7 +605,6 @@ export default defineConfig({
           router: ({ document }) => {
             return `/de/about#team-${document._sys.filename}`;
           },
-          group: '📝 Inhalte',
         },
         fields: [
           { type: 'string', name: 'name', label: 'Vor- & Nachname', required: true, isTitle: true },
@@ -640,7 +637,6 @@ export default defineConfig({
           router: ({ document }) => {
             return `/de/services/${document._sys.filename}`;
           },
-          group: '📝 Inhalte',
         },
         fields: [
           { type: 'string', name: 'title', label: 'Name der Leistung', required: true, isTitle: true },
@@ -768,7 +764,6 @@ export default defineConfig({
           router: ({ document }) => {
             return `/de/career#${document._sys.filename}`;
           },
-          group: '📝 Inhalte',
         },
         fields: [
           { type: 'string', name: 'title', label: 'Jobtitel', required: true, isTitle: true },
@@ -811,7 +806,6 @@ export default defineConfig({
         format: 'json',
         ui: { 
           allowedActions: { create: false, delete: false },
-          group: '⚙️ Einstellungen',
         },
         match: { include: 'settings' },
         fields: [
@@ -856,7 +850,6 @@ export default defineConfig({
         format: 'json',
         ui: { 
           allowedActions: { create: false, delete: false },
-          group: '⚙️ Einstellungen',
         },
         match: { include: 'navigation' },
         fields: [
@@ -893,7 +886,6 @@ export default defineConfig({
         format: 'json',
         ui: { 
           allowedActions: { create: false, delete: false },
-          group: '⚙️ Einstellungen',
         },
         match: { include: 'footer' },
         fields: [
@@ -929,7 +921,6 @@ export default defineConfig({
         format: 'md',
         ui: {
           router: ({ document }) => getRouteForDocument(document._sys.filename),
-          group: '⚖️ Rechtliches',
         },
         fields: [
           { type: 'string', name: 'title', label: 'Seitentitel (Intern)', required: true, isTitle: true },

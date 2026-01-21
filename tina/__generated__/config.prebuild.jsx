@@ -322,8 +322,7 @@ var config_default = defineConfig({
         },
         ui: {
           router: () => "/de",
-          allowedActions: { create: false, delete: false },
-          group: "\u{1F5A5}\uFE0F Seiten"
+          allowedActions: { create: false, delete: false }
         },
         fields: [
           seoFields,
@@ -518,8 +517,7 @@ var config_default = defineConfig({
         path: "content/pages",
         format: "json",
         ui: {
-          router: ({ document }) => getRouteForDocument(document._sys.filename),
-          group: "\u{1F5A5}\uFE0F Seiten"
+          router: ({ document }) => getRouteForDocument(document._sys.filename)
         },
         fields: [
           { type: "string", name: "title", label: "Seitentitel (intern)", required: true, isTitle: true },
@@ -555,8 +553,7 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/about#team-${document._sys.filename}`;
-          },
-          group: "\u{1F4DD} Inhalte"
+          }
         },
         fields: [
           { type: "string", name: "name", label: "Vor- & Nachname", required: true, isTitle: true },
@@ -587,8 +584,7 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/services/${document._sys.filename}`;
-          },
-          group: "\u{1F4DD} Inhalte"
+          }
         },
         fields: [
           { type: "string", name: "title", label: "Name der Leistung", required: true, isTitle: true },
@@ -714,8 +710,7 @@ var config_default = defineConfig({
         ui: {
           router: ({ document }) => {
             return `/de/career#${document._sys.filename}`;
-          },
-          group: "\u{1F4DD} Inhalte"
+          }
         },
         fields: [
           { type: "string", name: "title", label: "Jobtitel", required: true, isTitle: true },
@@ -756,8 +751,7 @@ var config_default = defineConfig({
         path: "content/globals",
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
-          group: "\u2699\uFE0F Einstellungen"
+          allowedActions: { create: false, delete: false }
         },
         match: { include: "settings" },
         fields: [
@@ -800,8 +794,7 @@ var config_default = defineConfig({
         path: "content/globals",
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
-          group: "\u2699\uFE0F Einstellungen"
+          allowedActions: { create: false, delete: false }
         },
         match: { include: "navigation" },
         fields: [
@@ -835,8 +828,7 @@ var config_default = defineConfig({
         path: "content/globals",
         format: "json",
         ui: {
-          allowedActions: { create: false, delete: false },
-          group: "\u2699\uFE0F Einstellungen"
+          allowedActions: { create: false, delete: false }
         },
         match: { include: "footer" },
         fields: [
@@ -870,8 +862,7 @@ var config_default = defineConfig({
         path: "content/legal",
         format: "md",
         ui: {
-          router: ({ document }) => getRouteForDocument(document._sys.filename),
-          group: "\u2696\uFE0F Rechtliches"
+          router: ({ document }) => getRouteForDocument(document._sys.filename)
         },
         fields: [
           { type: "string", name: "title", label: "Seitentitel (Intern)", required: true, isTitle: true },
