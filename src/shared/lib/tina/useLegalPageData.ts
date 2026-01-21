@@ -7,7 +7,7 @@ const EMPTY_DATA = { legalPage: null };
 
 // Fallback query for legal page
 const LEGAL_PAGE_QUERY = `
-  query LegalPageQuery($relativePath: String!) {
+  query legalPage($relativePath: String!) {
     legalPage(relativePath: $relativePath) {
       _sys { filename }
       title

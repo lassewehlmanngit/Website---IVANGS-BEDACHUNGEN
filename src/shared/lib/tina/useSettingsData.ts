@@ -9,7 +9,7 @@ const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 // Fallback query for settings
 const SETTINGS_QUERY = `
-  query SettingsQuery($relativePath: String!) {
+  query settings($relativePath: String!) {
     settings(relativePath: $relativePath) {
       _sys { filename }
       siteName

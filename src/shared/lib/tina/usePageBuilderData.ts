@@ -4,7 +4,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 
 // GraphQL query for page builder pages
 const PAGE_QUERY = `
-  query PageQuery($relativePath: String!) {
+  query page($relativePath: String!) {
     page(relativePath: $relativePath) {
       _sys { filename }
       title

@@ -4,7 +4,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 
 // GraphQL query for Contact page singleton
 const CONTACT_PAGE_QUERY = `
-  query ContactPageQuery($relativePath: String!) {
+  query contactPage($relativePath: String!) {
     contactPage(relativePath: $relativePath) {
       _sys { filename }
       seo {

@@ -4,7 +4,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 
 // GraphQL query for Career page singleton
 const CAREER_PAGE_QUERY = `
-  query CareerPageQuery($relativePath: String!) {
+  query careerPage($relativePath: String!) {
     careerPage(relativePath: $relativePath) {
       _sys { filename }
       seo {

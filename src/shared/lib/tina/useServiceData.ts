@@ -8,7 +8,7 @@ const EMPTY_DATA = { service: null };
 
 // Fallback query for service - used when client response doesn't include query
 const SERVICE_QUERY = `
-  query ServiceQuery($relativePath: String!) {
+  query service($relativePath: String!) {
     service(relativePath: $relativePath) {
       _sys { filename }
       title subtitle shortDescription intro

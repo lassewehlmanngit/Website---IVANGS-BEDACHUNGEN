@@ -18,7 +18,7 @@ const PAGE_CONFIGS: Record<string, PageConfig> = {
     relativePath: 'startseite.json',
     contentPath: '/content/home/startseite.json',
     query: `
-      query HomePageQuery($relativePath: String!) {
+      query homePage($relativePath: String!) {
         homePage(relativePath: $relativePath) {
           _sys { filename }
           seo { title description }
@@ -57,7 +57,7 @@ const PAGE_CONFIGS: Record<string, PageConfig> = {
 
 // Global content queries
 const NAVIGATION_QUERY = `
-  query NavigationQuery($relativePath: String!) {
+  query navigation($relativePath: String!) {
     navigation(relativePath: $relativePath) {
       logo
       items { label href }
@@ -67,7 +67,7 @@ const NAVIGATION_QUERY = `
 `;
 
 const FOOTER_QUERY = `
-  query FooterQuery($relativePath: String!) {
+  query footer($relativePath: String!) {
     footer(relativePath: $relativePath) {
       copyright
       links { label href }
@@ -77,7 +77,7 @@ const FOOTER_QUERY = `
 `;
 
 const SETTINGS_QUERY = `
-  query SettingsQuery($relativePath: String!) {
+  query settings($relativePath: String!) {
     settings(relativePath: $relativePath) {
       _sys { filename }
       siteName

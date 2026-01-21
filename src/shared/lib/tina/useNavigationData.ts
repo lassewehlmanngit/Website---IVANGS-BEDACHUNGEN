@@ -9,7 +9,7 @@ const EMPTY_DATA = { navigation: { items: [] } };
 const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 const NAVIGATION_QUERY = `
-  query NavigationQuery($relativePath: String!) {
+  query navigation($relativePath: String!) {
     navigation(relativePath: $relativePath) {
       logo
       items { label href }

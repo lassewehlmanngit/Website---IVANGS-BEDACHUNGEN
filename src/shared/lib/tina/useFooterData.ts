@@ -9,7 +9,7 @@ const EMPTY_DATA = { footer: { links: [], social: [] } };
 const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
 const FOOTER_QUERY = `
-  query FooterQuery($relativePath: String!) {
+  query footer($relativePath: String!) {
     footer(relativePath: $relativePath) {
       copyright
       links { label href }

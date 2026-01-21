@@ -4,7 +4,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 
 // GraphQL query for About page singleton
 const ABOUT_PAGE_QUERY = `
-  query AboutPageQuery($relativePath: String!) {
+  query aboutPage($relativePath: String!) {
     aboutPage(relativePath: $relativePath) {
       _sys { filename }
       seo {

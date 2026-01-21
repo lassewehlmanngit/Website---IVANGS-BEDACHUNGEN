@@ -9,7 +9,7 @@ const FALLBACK_PATH = '/content/home/startseite.json';
 // Fallback query for home page - used when client response doesn't include query
 // Matches the nested structure in tina/config.ts
 const HOME_PAGE_QUERY = `
-  query HomePageQuery($relativePath: String!) {
+  query homePage($relativePath: String!) {
     homePage(relativePath: $relativePath) {
       _sys { filename }
       seo { title description }
