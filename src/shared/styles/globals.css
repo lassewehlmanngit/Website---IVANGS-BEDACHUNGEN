@@ -89,7 +89,11 @@
 [data-tina-wrapper] input[type="url"],
 [data-tina-wrapper] input[type="number"],
 .tina-field textarea,
-.tina-field input {
+.tina-field input,
+.tina-tailwind textarea,
+.tina-tailwind input,
+div[class*="FieldWrapper"] textarea,
+div[class*="FieldWrapper"] input {
   background-color: hsl(var(--background)) !important;
   color: hsl(var(--foreground)) !important;
   border: 1px solid hsl(var(--border)) !important;
@@ -98,7 +102,11 @@
 [data-tina-wrapper] textarea:focus,
 [data-tina-wrapper] input:focus,
 .tina-field textarea:focus,
-.tina-field input:focus {
+.tina-field input:focus,
+.tina-tailwind textarea:focus,
+.tina-tailwind input:focus,
+div[class*="FieldWrapper"] textarea:focus,
+div[class*="FieldWrapper"] input:focus {
   border-color: hsl(var(--primary)) !important;
   outline: none !important;
   box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2) !important;
