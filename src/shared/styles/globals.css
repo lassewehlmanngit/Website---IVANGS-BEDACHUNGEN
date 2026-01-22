@@ -81,6 +81,28 @@
   }
 }
 
+/* TinaCMS Form Field Overrides */
+/* Fix for dark/black textarea and input fields in TinaCMS sidebar */
+[data-tina-wrapper] textarea,
+[data-tina-wrapper] input[type="text"],
+[data-tina-wrapper] input[type="email"],
+[data-tina-wrapper] input[type="url"],
+[data-tina-wrapper] input[type="number"],
+.tina-field textarea,
+.tina-field input {
+  background-color: white !important;
+  color: #1e293b !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+[data-tina-wrapper] textarea:focus,
+[data-tina-wrapper] input:focus,
+.tina-field textarea:focus,
+.tina-field input:focus {
+  border-color: #3b82f6 !important;
+  outline: none !important;
+}
+
 @layer utilities {
   .sr-only {
     position: absolute;
