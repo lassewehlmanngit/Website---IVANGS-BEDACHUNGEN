@@ -1,47 +1,48 @@
 :root {
-  --background: 222 47% 11%;
-  --foreground: 210 40% 98%;
+  /* Light mode colors as default */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
 
   /* Primary brand color scale (darker blue #2563eb for WCAG AA with white text) */
   --primary: 217 91% 50%;
   --primary-foreground: 0 0% 100%;
-  --primary-50: 217 91% 95%;
-  --primary-100: 217 91% 85%;
-  --primary-200: 217 91% 75%;
+  --primary-50: 217 91% 97%;
+  --primary-100: 217 91% 92%;
+  --primary-200: 217 91% 85%;
   --primary-400: 217 91% 60%;
   --primary-600: 217 91% 45%;
   --primary-700: 217 91% 40%;
 
-  --secondary: 217 32% 17%;
-  --secondary-foreground: 210 40% 98%;
+  --secondary: 210 40% 96%;
+  --secondary-foreground: 222 47% 11%;
 
-  --muted: 217 32% 17%;
-  --muted-foreground: 215 20% 65%;
+  --muted: 210 40% 96%;
+  --muted-foreground: 215 16% 47%;
 
   --accent: 217 91% 50%;
   --accent-foreground: 0 0% 100%;
 
   /* Status colors */
   --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-  --success: 142 71% 45%;
-  --success-foreground: 210 40% 98%;
+  --destructive-foreground: 0 0% 100%;
+  --success: 142 71% 34%;
+  --success-foreground: 0 0% 100%;
   --warning: 38 92% 50%;
   --warning-foreground: 222 47% 11%;
 
   /* UI surfaces */
-  --border: 217 32% 20%;
-  --input: 217 32% 17%;
+  --border: 214 32% 91%;
+  --input: 214 32% 91%;
   --ring: 217 91% 60%;
 
   /* Semantic surface colors */
   --surface-subtle: var(--primary-50);
-  --surface-muted: 217 32% 17%;
-  --surface-elevated: 222 47% 15%;
+  --surface-muted: 210 40% 96%;
+  --surface-elevated: 0 0% 100%;
 
   /* Text semantic tokens */
   --text-emphasis: var(--primary);
-  --text-subtle: 215 20% 65%;
+  --text-subtle: 215 16% 47%;
 
   --radius: 0.75rem;
 
@@ -97,49 +98,4 @@
   --shadow-sm: 0 1px 2px 0 hsl(var(--foreground) / 0.06);
   --shadow-md: 0 6px 20px -12px hsl(var(--foreground) / 0.25);
   --shadow-lg: 0 18px 40px -24px hsl(var(--foreground) / 0.35);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
-
-    --primary: 217 91% 50%;
-    --primary-foreground: 0 0% 100%;
-    --primary-50: 217 91% 97%;
-    --primary-100: 217 91% 92%;
-    --primary-200: 217 91% 85%;
-    --primary-400: 217 91% 60%;
-    --primary-600: 217 91% 45%;
-    --primary-700: 217 91% 40%;
-
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
-
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 47%;
-
-    --accent: 217 91% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-    --success: 142 71% 34%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 222 47% 11%;
-
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 217 91% 60%;
-
-    /* Semantic surface colors (light mode) */
-    --surface-subtle: var(--primary-50);
-    --surface-muted: 210 40% 96%;
-    --surface-elevated: 0 0% 100%;
-
-    /* Text semantic tokens (light mode) */
-    --text-emphasis: var(--primary);
-    --text-subtle: 215 16% 47%;
-  }
 }
