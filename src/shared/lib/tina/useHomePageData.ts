@@ -24,6 +24,9 @@ const HOME_PAGE_QUERY = `
       stats { value label icon }
       servicesSection {
         eyebrow title description
+        services {
+          title description image icon checkpoints ctaText link
+        }
       }
       ceoQuote { eyebrow name role quote text image buttonText buttonLink }
       projectsSection {

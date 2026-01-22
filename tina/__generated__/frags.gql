@@ -42,6 +42,16 @@ fragment HomePageParts on HomePage {
     eyebrow
     title
     description
+    services {
+      __typename
+      title
+      description
+      image
+      icon
+      checkpoints
+      ctaText
+      link
+    }
   }
   ceoQuote {
     __typename

@@ -50,7 +50,79 @@
   "servicesSection": {
     "eyebrow": "Unsere Expertise",
     "title": "Nicht nur dicht, sondern durchdacht.",
-    "description": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik."
+    "description": "Ivangs Bedachungen bietet Ihnen das komplette Spektrum der Dach- und Fassadentechnik.",
+    "services": [
+      {
+        "title": "Steildach",
+        "description": "Von klassischer Ziegeldeckung bis zur modernen Schieferfassade – wir liefern fachgerechte Lösungen für jedes geneigte Dach. Unsere Meister beraten Sie zu Material, Dämmung und Design.",
+        "image": "/uploads/steildach-service.avif",
+        "icon": "Home",
+        "checkpoints": [
+          "Neueindeckung & Sanierung",
+          "Ziegeldach, Schiefer, Metall",
+          "Dämmung nach EnEV 2020",
+          "Sturmschadensanierung"
+        ],
+        "ctaText": "Mehr zu Steildach",
+        "link": "/de/services/steildach"
+      },
+      {
+        "title": "Flachdach",
+        "description": "Moderne Flachdächer sind wartungsarm, langlebig und bieten zusätzlichen Nutzraum. Wir realisieren Bitumen-, Kunststoff- und Gründachlösungen – fachgerecht und dicht.",
+        "image": "/uploads/flachdach-service.avif",
+        "icon": "Layers",
+        "checkpoints": [
+          "Bitumen & Kunststoffabdichtung",
+          "Gründach & Kiesdach",
+          "Dachentwässerung",
+          "Wartungsverträge"
+        ],
+        "ctaText": "Mehr zu Flachdach",
+        "link": "/de/services/flachdach"
+      },
+      {
+        "title": "Solar & Photovoltaik",
+        "description": "Nutzen Sie Ihr Dach als Einnahmequelle. Wir planen und montieren PV-Anlagen inklusive Speichersystemen – für maximale Unabhängigkeit und Ertrag.",
+        "image": "/uploads/solar-service.avif",
+        "icon": "Sun",
+        "checkpoints": [
+          "Aufdach- & Indach-Montage",
+          "Speichersysteme integrierbar",
+          "Förderberatung & Anträge",
+          "Made in Germany"
+        ],
+        "ctaText": "Mehr zu Solar",
+        "link": "/de/services/solar"
+      },
+      {
+        "title": "Dachfenster & Gauben",
+        "description": "Mehr Licht, mehr Luft, mehr Wohnqualität. Wir setzen VELUX-Dachfenster fachgerecht ein und bauen individuelle Gauben – wasserdicht und wärmegedämmt.",
+        "image": "/uploads/fenster-service.avif",
+        "icon": "Hammer",
+        "checkpoints": [
+          "VELUX-Dachfenster",
+          "Individuelle Gauben",
+          "Rollläden & Insektenschutz",
+          "Montage in 3-4 Stunden"
+        ],
+        "ctaText": "Mehr zu Dachfenstern",
+        "link": "/de/services/fenster"
+      },
+      {
+        "title": "Dachsanierung",
+        "description": "Ein altes Dach ist teuer – aber eine Sanierung lohnt sich. Wir analysieren Zustand, Dämmung und Statik und entwickeln eine wirtschaftliche Lösung.",
+        "image": "/uploads/sanierung-service.avif",
+        "icon": "Zap",
+        "checkpoints": [
+          "Schadensanalyse & Beratung",
+          "Dachstuhl-Reparaturen",
+          "Energetische Sanierung",
+          "BAFA- & KfW-Förderung"
+        ],
+        "ctaText": "Mehr zu Sanierung",
+        "link": "/de/services/sanierung"
+      }
+    ]
   },
   "ceoQuote": {
     "eyebrow": "Ein Wort vom Chef",

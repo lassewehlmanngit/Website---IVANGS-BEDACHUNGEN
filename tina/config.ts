@@ -440,6 +440,31 @@ export default defineConfig({
               { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
               { type: 'string', name: 'title', label: 'Titel' },
               { type: 'string', name: 'description', label: 'Text', ui: { component: 'textarea' } },
+              {
+                type: 'object',
+                list: true,
+                name: 'services',
+                label: 'Leistungen',
+                ui: { 
+                  max: 8,
+                  itemProps: (item) => ({ label: item?.title || 'Neue Leistung' }) 
+                },
+                fields: [
+                  { type: 'string', name: 'title', label: 'Titel', required: true },
+                  { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' }, required: true },
+                  { type: 'image', name: 'image', label: 'Bild', required: true },
+                  { type: 'string', name: 'icon', label: 'Icon (Lucide)', description: 'z.B. Home, Layers, Zap, Sun, Hammer' },
+                  {
+                    type: 'string',
+                    list: true,
+                    name: 'checkpoints',
+                    label: 'Stichpunkte',
+                    description: 'Wichtige Merkmale als Liste',
+                  },
+                  { type: 'string', name: 'ctaText', label: 'Button Text' },
+                  { type: 'string', name: 'link', label: 'Link', description: 'z.B. /de/services/steildach' },
+                ],
+              },
             ],
           },
           // CEO QUOTE
@@ -789,7 +814,7 @@ export default defineConfig({
       // =========================================================================
       // 📚 RESSOURCEN
       // =========================================================================
-
+      
       // 🔧 DIENSTLEISTUNGEN
       {
         name: 'service',
@@ -914,7 +939,7 @@ export default defineConfig({
           },
         ],
       },
-
+      
       // 📋 STELLENANGEBOTE
       {
         name: 'job',
@@ -990,7 +1015,7 @@ export default defineConfig({
       // =========================================================================
       // ⚙️ GLOBALE EINSTELLUNGEN
       // =========================================================================
-
+      
       // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: 'settings',
@@ -1034,7 +1059,7 @@ export default defineConfig({
           },
         ],
       },
-
+      
       // 🧭 NAVIGATION
       {
         name: 'navigation',
@@ -1104,7 +1129,7 @@ export default defineConfig({
           },
         ],
       },
-
+      
       // ⚖️ RECHTSTEXTE
       {
         name: 'legalPage',

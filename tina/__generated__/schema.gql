@@ -158,10 +158,21 @@ type HomePageStats {
   icon: String
 }
 
+type HomePageServicesSectionServices {
+  title: String!
+  description: String!
+  image: String!
+  icon: String
+  checkpoints: [String]
+  ctaText: String
+  link: String
+}
+
 type HomePageServicesSection {
   eyebrow: String
   title: String
   description: String
+  services: [HomePageServicesSectionServices]
 }
 
 type HomePageCeoQuote {
@@ -301,10 +312,21 @@ input HomePageStatsFilter {
   icon: StringFilter
 }
 
+input HomePageServicesSectionServicesFilter {
+  title: StringFilter
+  description: StringFilter
+  image: ImageFilter
+  icon: StringFilter
+  checkpoints: StringFilter
+  ctaText: StringFilter
+  link: StringFilter
+}
+
 input HomePageServicesSectionFilter {
   eyebrow: StringFilter
   title: StringFilter
   description: StringFilter
+  services: HomePageServicesSectionServicesFilter
 }
 
 input HomePageCeoQuoteFilter {
@@ -1502,10 +1524,21 @@ input HomePageStatsMutation {
   icon: String
 }
 
+input HomePageServicesSectionServicesMutation {
+  title: String
+  description: String
+  image: String
+  icon: String
+  checkpoints: [String]
+  ctaText: String
+  link: String
+}
+
 input HomePageServicesSectionMutation {
   eyebrow: String
   title: String
   description: String
+  services: [HomePageServicesSectionServicesMutation]
 }
 
 input HomePageCeoQuoteMutation {

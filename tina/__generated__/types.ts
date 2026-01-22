@@ -406,11 +406,23 @@ export type HomePageStats = {
   icon?: Maybe<Scalars['String']['output']>;
 };
 
+export type HomePageServicesSectionServices = {
+  __typename?: 'HomePageServicesSectionServices';
+  title: Scalars['String']['output'];
+  description: Scalars['String']['output'];
+  image: Scalars['String']['output'];
+  icon?: Maybe<Scalars['String']['output']>;
+  checkpoints?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  ctaText?: Maybe<Scalars['String']['output']>;
+  link?: Maybe<Scalars['String']['output']>;
+};
+
 export type HomePageServicesSection = {
   __typename?: 'HomePageServicesSection';
   eyebrow?: Maybe<Scalars['String']['output']>;
   title?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  services?: Maybe<Array<Maybe<HomePageServicesSectionServices>>>;
 };
 
 export type HomePageCeoQuote = {
@@ -560,10 +572,21 @@ export type HomePageStatsFilter = {
   icon?: InputMaybe<StringFilter>;
 };
 
+export type HomePageServicesSectionServicesFilter = {
+  title?: InputMaybe<StringFilter>;
+  description?: InputMaybe<StringFilter>;
+  image?: InputMaybe<ImageFilter>;
+  icon?: InputMaybe<StringFilter>;
+  checkpoints?: InputMaybe<StringFilter>;
+  ctaText?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+};
+
 export type HomePageServicesSectionFilter = {
   eyebrow?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  services?: InputMaybe<HomePageServicesSectionServicesFilter>;
 };
 
 export type HomePageCeoQuoteFilter = {
@@ -2022,10 +2045,21 @@ export type HomePageStatsMutation = {
   icon?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type HomePageServicesSectionServicesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  image?: InputMaybe<Scalars['String']['input']>;
+  icon?: InputMaybe<Scalars['String']['input']>;
+  checkpoints?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  ctaText?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type HomePageServicesSectionMutation = {
   eyebrow?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  services?: InputMaybe<Array<InputMaybe<HomePageServicesSectionServicesMutation>>>;
 };
 
 export type HomePageCeoQuoteMutation = {
@@ -2529,7 +2563,7 @@ export type LegalPageMutation = {
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
-export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
+export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null, services?: Array<{ __typename: 'HomePageServicesSectionServices', title: string, description: string, image: string, icon?: string | null, checkpoints?: Array<string | null> | null, ctaText?: string | null, link?: string | null } | null> | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
 
 export type AboutPagePartsFragment = { __typename: 'AboutPage', seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null };
 
@@ -2558,7 +2592,7 @@ export type HomePageQueryVariables = Exact<{
 }>;
 
 
-export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
+export type HomePageQuery = { __typename?: 'Query', homePage: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null, services?: Array<{ __typename: 'HomePageServicesSectionServices', title: string, description: string, image: string, icon?: string | null, checkpoints?: Array<string | null> | null, ctaText?: string | null, link?: string | null } | null> | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } };
 
 export type HomePageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2570,7 +2604,7 @@ export type HomePageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
+export type HomePageConnectionQuery = { __typename?: 'Query', homePageConnection: { __typename?: 'HomePageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'HomePageConnectionEdges', cursor: string, node?: { __typename: 'HomePage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null, services?: Array<{ __typename: 'HomePageServicesSectionServices', title: string, description: string, image: string, icon?: string | null, checkpoints?: Array<string | null> | null, ctaText?: string | null, link?: string | null } | null> | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null } | null> | null } };
 
 export type AboutPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2826,6 +2860,16 @@ export const HomePagePartsFragmentDoc = gql`
     eyebrow
     title
     description
+    services {
+      __typename
+      title
+      description
+      image
+      icon
+      checkpoints
+      ctaText
+      link
+    }
   }
   ceoQuote {
     __typename
