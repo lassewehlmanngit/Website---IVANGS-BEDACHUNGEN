@@ -371,6 +371,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'startseite' },
         ui: {
+          global: true,
           router: () => '/de',
           allowedActions: { create: false, delete: false },
         },
@@ -594,6 +595,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'about' },
         ui: {
+          global: true,
           router: () => '/de/about',
           allowedActions: { create: false, delete: false },
         },
@@ -680,6 +682,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'career' },
         ui: {
+          global: true,
           router: () => '/de/career',
           allowedActions: { create: false, delete: false },
         },
@@ -728,6 +731,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'contact' },
         ui: {
+          global: true,
           router: () => '/de/contact',
           allowedActions: { create: false, delete: false },
         },
@@ -1024,6 +1028,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'settings' },
         ui: { 
+          global: true,
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -1068,6 +1073,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'navigation' },
         ui: { 
+          global: true,
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -1103,6 +1109,7 @@ export default defineConfig({
         format: 'json',
         match: { include: 'footer' },
         ui: { 
+          global: true,
           allowedActions: { create: false, delete: false },
         },
         fields: [
