@@ -39,7 +39,7 @@ export const TrustIndicators: React.FC<TrustIndicatorsProps> = ({ trustData }) =
                    {trust.eyebrow || 'Prozess & Effizienz'}
                  </span>
                  <h2 
-                   className="text-3xl md:text-5xl font-medium mb-6 leading-tight"
+                   className="text-h2 font-medium mb-6 leading-tight"
                    data-tina-field={trustData && tinaField(trustData, 'title')}
                  >
                    {trust.title || 'Wir warten nicht auf Material. Wir haben es.'}
@@ -77,7 +77,7 @@ export const TrustIndicators: React.FC<TrustIndicatorsProps> = ({ trustData }) =
                     })}
                  </ul>
               </div>
-              <div className="relative h-[500px] rounded-3xl overflow-hidden border border-white/10">
+              <div className="relative h-[500px] rounded-lg overflow-hidden border border-white/10">
                 <img 
                    src={trust.image || '/uploads/ivangs-car-logo.avif'}
                    alt="Materiallager und Logistik" 

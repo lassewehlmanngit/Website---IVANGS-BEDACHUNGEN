@@ -20,7 +20,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
                 <span className="text-primary-600 font-bold uppercase tracking-wider text-sm block mb-4" data-tina-field={ceoData && tinaField(ceoData, 'eyebrow')}>
                   {ceo.eyebrow || 'Ein Wort vom Chef'}
                 </span>
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-2" data-tina-field={ceoData && tinaField(ceoData, 'name')}>
+                <h2 className="text-h2 font-bold text-slate-900 mb-2" data-tina-field={ceoData && tinaField(ceoData, 'name')}>
                   {ceo.name || 'Marcus Ivangs'}
                 </h2>
                 <p className="text-sm font-bold text-slate-500 uppercase tracking-widest mb-8" data-tina-field={ceoData && tinaField(ceoData, 'role')}>
@@ -50,7 +50,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
               </div>
 
               <div className="relative order-1 lg:order-2">
-                 <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-6 translate-y-6 rounded-sm -z-10"></div>
+                 <div className="absolute top-0 right-0 w-full h-full border-4 border-slate-200 translate-x-3 translate-y-3 md:translate-x-6 md:translate-y-6 rounded-sm -z-10"></div>
                  <OptimizedImage
                    src={ceo.image || '/uploads/invangs-ceo-image.webp'}
                    alt={ceo.name || 'Marcus Ivangs'}

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Users, Truck, Warehouse, Calendar, Mail, LucideIcon } from 'lucide-react';
-import * as LucideIcons from 'lucide-react';
+import { ArrowRight, Users, Truck, Warehouse, Calendar, LucideIcon } from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
-import { Link } from 'react-router-dom';
 import type { HeroSettings } from '@/shared/lib/content/globals';
 import { tinaField } from 'tinacms/dist/react';
 import { SmartLink } from '@/shared/ui/SmartLink';
+import { QuickContactForm } from '@/features/contact/QuickContactForm';
 
 export interface HeroSectionProps {
   lang: string;
@@ -95,12 +94,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
           
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
              <SmartLink link={heroData?.buttons?.primaryLink || `/${lang}/contact`} className="w-full sm:w-auto">
-                <Button className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm shadow-lg shadow-primary/30 whitespace-nowrap" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'primaryText')}>
+                <Button size="xl" className="w-full shadow-lg shadow-primary/30" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'primaryText')}>
                    {heroData?.buttons?.primaryText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
              </SmartLink>
              <SmartLink link={heroData?.buttons?.secondaryLink || `/${lang}/career`} className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-sm sm:text-base md:text-lg py-4 md:py-5 lg:py-6 px-5 md:px-6 lg:px-8 rounded-sm bg-white/10 text-white border-white/20 hover:bg-white/20 whitespace-nowrap" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'secondaryText')}>
+                <Button variant="outline" size="xl" className="w-full bg-white/10 text-white border-white/20 hover:bg-white/20" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'secondaryText')}>
                    {heroData?.buttons?.secondaryText || 'Karriere starten'}
                 </Button>
              </SmartLink>
@@ -114,28 +113,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                {/* Decorative Blur */}
                <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-30 -mr-10 -mt-10 pointer-events-none"></div>
 
-              <h3 className="text-h4 font-bold text-white mb-4 md:mb-6 flex items-center gap-2 relative z-10" data-tina-field={formData && tinaField(formData, 'title')}>
-                <Mail size={20} className="text-primary shrink-0" /> {formData.title || 'Schnellanfrage'}
-              </h3>
-              <div className="space-y-4 relative z-10">
-                <div>
-                   <label htmlFor="hero-name" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block" data-tina-field={formData && tinaField(formData, 'nameLabel')}>{formData.nameLabel || 'Ihr Name'}</label>
-                   <input id="hero-name" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Max Mustermann" />
-                </div>
-                <div>
-                   <label htmlFor="hero-contact" className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1 block" data-tina-field={formData && tinaField(formData, 'contactLabel')}>{formData.contactLabel || 'E-Mail oder Telefon'}</label>
-                   <input id="hero-contact" type="text" className="bg-slate-900/50 border border-white/10 text-white px-4 py-3 rounded-sm focus:outline-none focus:border-primary w-full text-sm transition-colors" placeholder="Kontaktmöglichkeit" />
-                </div>
-                
-                <Link to={`/${lang}/contact`} className="block">
-                  <button className="bg-white text-slate-900 hover:bg-slate-200 px-6 py-4 rounded-sm font-bold transition-all w-full flex items-center justify-center gap-2 shadow-lg mt-2" data-tina-field={formData && tinaField(formData, 'buttonText')}>
-                    {formData.buttonText || 'Kostenlos anfragen'} <ArrowRight size={18} />
-                  </button>
-                </Link>
-                <p className="text-[10px] text-slate-400 text-center" data-tina-field={formData && tinaField(formData, 'disclaimer')}>
-                   {formData.disclaimer || 'Wir melden uns innerhalb von 24h. Unverbindlich.'}
-                </p>
-              </div>
+              <QuickContactForm 
+                source="hero" 
+                formData={formData} 
+                lang={lang}
+                variant="dark"
+              />
             </div>
           </div>
         )}

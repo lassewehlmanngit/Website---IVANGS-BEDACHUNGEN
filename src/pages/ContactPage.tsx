@@ -1,6 +1,8 @@
 import React from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
 import { useContactPageData } from '@/shared/lib/tina/useContactPageData';
 import { ContactForm } from '@/features/contact/ContactForm';
@@ -16,8 +18,38 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="animate-fade-in">
+        {/* Hero Skeleton */}
+        <div className="bg-slate-900 py-20 md:py-32">
+          <div className="container mx-auto px-4">
+            <Skeleton variant="text" width="100px" className="h-4 mb-4 bg-slate-700" />
+            <Skeleton variant="text" width="60%" className="h-12 mb-6 bg-slate-700" />
+            <Skeleton variant="text" width="80%" className="h-6 bg-slate-700" />
+          </div>
+        </div>
+        {/* Content Skeleton */}
+        <div className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+              <div className="order-2 lg:order-1 space-y-6">
+                <Skeleton variant="text" width="200px" className="h-8 mb-8" />
+                {[...Array(5)].map((_, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <Skeleton variant="rectangular" width={48} height={48} className="flex-shrink-0" />
+                    <div className="flex-1">
+                      <Skeleton variant="text" width="80px" className="h-5 mb-2" />
+                      <SkeletonText lines={2} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="order-1 lg:order-2">
+                <Skeleton variant="text" width="200px" className="h-8 mb-8" />
+                <Skeleton variant="rectangular" height={400} />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -42,34 +74,23 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
 
       <div className="animate-fade-in">
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 bg-slate-900 text-white overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl">
-              <p className="text-primary font-bold uppercase tracking-wider mb-4">Kontakt</p>
-              <h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-                data-tina-field={contact && tinaField(contact, 'title')}
-              >
-                {contact.title || 'Der erste Schritt zum dichten Dach.'}
-              </h1>
-              <p 
-                className="text-xl text-slate-300 max-w-2xl"
-                data-tina-field={contact && tinaField(contact, 'description')}
-              >
-                {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
-              </p>
-            </div>
-          </div>
-        </section>
+        <PageHero variant="dark">
+          <PageHero.Eyebrow>Kontakt</PageHero.Eyebrow>
+          <PageHero.Title data-tina-field={contact && tinaField(contact, 'title')}>
+            {contact.title || 'Der erste Schritt zum dichten Dach.'}
+          </PageHero.Title>
+          <PageHero.Description data-tina-field={contact && tinaField(contact, 'description')}>
+            {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
+          </PageHero.Description>
+        </PageHero>
 
         {/* Contact Info & Form Section */}
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
               {/* Contact Information */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">So erreichen Sie uns</h2>
+              <div className="order-2 lg:order-1">
+                <h2 className="text-h2 font-bold text-slate-900 mb-8">So erreichen Sie uns</h2>
                 
                 <div className="space-y-6">
                   {/* Address */}
@@ -232,10 +253,10 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
                 </div>
               </div>
 
-              {/* Contact Form */}
-              <div>
-                <h2 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8">Nachricht senden</h2>
-                <div className="bg-slate-50 p-6 md:p-8 rounded-lg">
+              {/* Contact Form - Show first on mobile */}
+              <div className="order-1 lg:order-2">
+                <h2 className="text-h2 font-bold text-slate-900 mb-8">Nachricht senden</h2>
+                <div className="bg-slate-50 p-6 md:p-8 rounded-sm">
                   <ContactForm />
                 </div>
               </div>

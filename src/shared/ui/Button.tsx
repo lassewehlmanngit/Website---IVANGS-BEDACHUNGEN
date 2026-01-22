@@ -1,8 +1,8 @@
 import React from 'react';
 import { cn } from '@/shared/lib/cn';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive';
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'default';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 export const buttonClassName = ({
   variant,
@@ -20,10 +20,13 @@ export const buttonClassName = ({
     sm: 'px-3 py-2 text-sm',
     md: 'px-4 py-3 text-sm',
     lg: 'px-5 py-3 text-base',
+    xl: 'px-6 py-4 md:px-8 md:py-5 text-base md:text-lg font-bold',
+    '2xl': 'px-8 py-5 md:px-10 md:py-6 text-lg md:text-xl font-bold',
   };
 
   const variants: Record<ButtonVariant, string> = {
     primary: 'bg-primary text-primary-foreground hover:opacity-90',
+    default: 'bg-primary text-primary-foreground hover:opacity-90',
     secondary: 'bg-secondary text-secondary-foreground hover:opacity-90',
     outline: 'border border-border bg-transparent text-foreground hover:bg-muted',
     ghost: 'bg-transparent text-foreground hover:bg-muted',

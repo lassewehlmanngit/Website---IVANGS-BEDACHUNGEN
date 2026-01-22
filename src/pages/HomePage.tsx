@@ -69,7 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
             </p>
             <div className="flex justify-center gap-4">
               <SmartLink link={`/${lang}/contact`}>
-                  <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold">
+                  <Button variant="secondary" size="xl" className="bg-white text-primary hover:bg-white/90 shadow-xl">
                     Beratungstermin vereinbaren
                   </Button>
               </SmartLink>
@@ -122,7 +122,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
           </p>
           <div className="flex justify-center gap-4">
             <SmartLink link={home.finalCTA?.buttonLink || `/${lang}/contact`}>
-                <Button variant="secondary" className="bg-white text-primary hover:bg-white/90 px-6 py-5 md:px-8 md:py-6 text-base md:text-lg rounded-sm shadow-xl font-bold" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}>
+                <Button variant="secondary" size="xl" className="bg-white text-primary hover:bg-white/90 shadow-xl" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}>
                   {home.finalCTA?.buttonText || 'Beratungstermin vereinbaren'}
                 </Button>
             </SmartLink>

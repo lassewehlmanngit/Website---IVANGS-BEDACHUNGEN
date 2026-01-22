@@ -80,7 +80,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
             className="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
-          <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
+          <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors"></div>
           {/* Service label overlay */}
           <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm flex items-center gap-2 shadow-sm">
             <Icon size={18} className="text-primary" />
@@ -109,7 +109,8 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
 
         <Link to={`/${lang}/services/${id}`}>
           <Button
-            className="text-white bg-slate-900 px-6 py-3 md:px-8 md:py-4 rounded-sm font-bold hover:bg-primary transition-colors flex items-center gap-2 md:gap-3 shadow-lg text-sm md:text-base"
+            size="lg"
+            className="bg-slate-900 hover:bg-primary shadow-lg"
           >
             {ctaText} <ArrowRight size={18} className="shrink-0" />
           </Button>
@@ -196,7 +197,7 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         data-tina-field={tinaField(service, 'image')}
                       />
-                      <div className="absolute inset-0 bg-slate-900/10 group-hover:bg-transparent transition-colors"></div>
+                      <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors"></div>
                       <div className="absolute top-4 left-4 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-sm flex items-center gap-2 shadow-sm">
                         <Icon size={18} className="text-primary" />
                         <span className="font-bold text-sm text-slate-900" data-tina-field={tinaField(service, 'title')}>{service.title}</span>
@@ -227,7 +228,8 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                     {service.link && (
                       <Link to={service.link}>
                         <Button
-                          className="text-white bg-slate-900 px-6 py-3 md:px-8 md:py-4 rounded-sm font-bold hover:bg-primary transition-colors flex items-center gap-2 md:gap-3 shadow-lg text-sm md:text-base"
+                          size="lg"
+                          className="bg-slate-900 hover:bg-primary shadow-lg"
                           data-tina-field={tinaField(service, 'ctaText')}
                         >
                           {service.ctaText || 'Mehr erfahren'} <ArrowRight size={18} className="shrink-0" />

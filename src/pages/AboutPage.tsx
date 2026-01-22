@@ -3,6 +3,8 @@ import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
 import { SmartLink } from '@/shared/ui/SmartLink';
+import { PageHero } from '@/shared/ui/PageHero';
+import { Skeleton, SkeletonText, SkeletonCard } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
 import { useAboutPageData } from '@/shared/lib/tina/useAboutPageData';
 import { TeamGridBlock } from '@/widgets/blocks/TeamGridBlock';
@@ -18,8 +20,41 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="animate-fade-in">
+        {/* Hero Skeleton */}
+        <div className="bg-slate-900 py-20 md:py-32">
+          <div className="container mx-auto px-4">
+            <Skeleton variant="text" width="120px" className="h-4 mb-4 bg-slate-700" />
+            <Skeleton variant="text" width="50%" className="h-12 mb-6 bg-slate-700" />
+            <Skeleton variant="text" width="70%" className="h-6 bg-slate-700" />
+          </div>
+        </div>
+        {/* Story Section Skeleton */}
+        <div className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <Skeleton variant="text" width="60%" className="h-10 mb-6" />
+                <SkeletonText lines={4} className="mb-4" />
+                <SkeletonText lines={3} />
+              </div>
+              <Skeleton variant="rectangular" height={400} />
+            </div>
+          </div>
+        </div>
+        {/* Values Section Skeleton */}
+        <div className="py-16 md:py-20 bg-slate-50">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto space-y-4">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="flex items-start gap-4 bg-white p-4 rounded-lg">
+                  <Skeleton variant="circular" width={24} height={24} className="flex-shrink-0" />
+                  <Skeleton variant="text" className="flex-1 h-6" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
@@ -44,35 +79,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
 
       <div className="animate-fade-in">
         {/* Hero Section */}
-        <section className="relative py-20 md:py-32 bg-slate-900 text-white overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl">
-              {about.hero?.eyebrow && (
-                <p 
-                  className="text-primary font-bold uppercase tracking-wider mb-4"
-                  data-tina-field={about.hero && tinaField(about.hero, 'eyebrow')}
-                >
-                  {about.hero.eyebrow}
-                </p>
-              )}
-              <h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
-                data-tina-field={about.hero && tinaField(about.hero, 'title')}
-              >
-                {about.hero?.title}
-              </h1>
-              {about.hero?.description && (
-                <p 
-                  className="text-xl text-slate-300 max-w-2xl"
-                  data-tina-field={about.hero && tinaField(about.hero, 'description')}
-                >
-                  {about.hero.description}
-                </p>
-              )}
-            </div>
-          </div>
-        </section>
+        <PageHero variant="dark">
+          {about.hero?.eyebrow && (
+            <PageHero.Eyebrow data-tina-field={about.hero && tinaField(about.hero, 'eyebrow')}>
+              {about.hero.eyebrow}
+            </PageHero.Eyebrow>
+          )}
+          <PageHero.Title data-tina-field={about.hero && tinaField(about.hero, 'title')}>
+            {about.hero?.title}
+          </PageHero.Title>
+          {about.hero?.description && (
+            <PageHero.Description data-tina-field={about.hero && tinaField(about.hero, 'description')}>
+              {about.hero.description}
+            </PageHero.Description>
+          )}
+        </PageHero>
 
         {/* Story Section */}
         <section className="py-16 md:py-24 bg-white">
@@ -80,7 +101,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 
-                  className="text-3xl md:text-4xl font-bold mb-6 text-slate-900"
+                  className="text-h2 font-bold mb-6 text-slate-900"
                   data-tina-field={about.story && tinaField(about.story, 'title')}
                 >
                   {about.story?.title}
@@ -143,7 +164,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
                   <Hammer className="w-8 h-8 text-primary" />
                 </div>
                 <h2 
-                  className="text-3xl md:text-4xl font-bold mb-6 text-slate-900"
+                  className="text-h2 font-bold mb-6 text-slate-900"
                   data-tina-field={about.equipment && tinaField(about.equipment, 'title')}
                 >
                   {about.equipment.title}
@@ -165,7 +186,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 
-                  className="text-3xl md:text-4xl font-bold mb-4 text-slate-900"
+                  className="text-h2 font-bold mb-4 text-slate-900"
                   data-tina-field={about.teamSection && tinaField(about.teamSection, 'title')}
                 >
                   {about.teamSection.title}
@@ -187,7 +208,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
           <section className="py-16 md:py-24 bg-slate-900 text-white">
             <div className="container mx-auto px-4 text-center">
               <h2 
-                className="text-3xl md:text-4xl font-bold mb-6"
+                className="text-h2 font-bold mb-6"
                 data-tina-field={about.cta && tinaField(about.cta, 'title')}
               >
                 {about.cta.title}

@@ -72,7 +72,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               {service.subtitle}
             </span>
             <h1 
-              className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-lg"
+              className="text-h1 font-bold mb-6 drop-shadow-lg"
               data-tina-field={useTinaData && tinaField(data.service, 'title')}
             >
               {service.title}
@@ -244,8 +244,11 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               )}
             </div>
 
-            {/* Sidebar Navigation - top-40 (160px) clears header (80px) + service nav (48px) + padding */}
-            <div className="lg:col-span-4 space-y-6 md:space-y-8 lg:sticky lg:top-40 h-fit">
+            {/* Sidebar Navigation - Uses CSS variables for header height calculation */}
+            <div 
+              className="lg:col-span-4 space-y-6 md:space-y-8 lg:sticky h-fit"
+              style={{ top: 'calc(var(--header-height, 5rem) + var(--service-nav-height, 3rem) + 2rem)' }}
+            >
               {/* Quick CTA Box */}
               <div className="bg-slate-900 text-white p-6 md:p-8 rounded-md shadow-xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-20 -mr-10 -mt-10"></div>
@@ -255,7 +258,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 </p>
                 <Button 
                   onClick={() => navigate(`/${lang}/contact`)}
-                  className="w-full py-5 md:py-6 text-base md:text-lg font-bold shadow-lg shadow-primary/20"
+                  size="xl"
+                  className="w-full shadow-lg shadow-primary/20"
                 >
                   Termin anfragen <ArrowRight size={18} className="ml-2 shrink-0" />
                 </Button>
@@ -292,7 +296,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 <p className="mb-8 text-primary-100 text-lg">Vereinbaren Sie einen unverbindlichen Beratungstermin vor Ort.</p>
                 <Button 
                   onClick={() => navigate(`/${lang}/contact`)}
-                  className="bg-white text-primary hover:bg-white/90 w-full md:w-auto font-bold"
+                  size="lg"
+                  className="bg-white text-primary hover:bg-white/90 w-full md:w-auto"
                   data-tina-field={useTinaData && tinaField(data.service.uiText, 'contactButtonText')}
                 >
                   {service.uiText?.contactButtonText || 'Kontakt aufnehmen'}
@@ -315,7 +320,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 <Button 
                   onClick={() => navigate(`/${lang}/career`)}
                   variant="outline"
-                  className="w-full md:w-auto font-bold border-white/20 hover:bg-white/10 text-white"
+                  size="lg"
+                  className="w-full md:w-auto border-white/20 hover:bg-white/10 text-white"
                   data-tina-field={useTinaData && tinaField(data.service.uiText, 'careerCtaButtonText')}
                 >
                   {service.uiText?.careerCtaButtonText || 'Offene Stellen ansehen'}

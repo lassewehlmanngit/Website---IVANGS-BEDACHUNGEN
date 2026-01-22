@@ -39,6 +39,7 @@ export { Tooltip } from './Tooltip';
 export { FeatureCard, FeatureGrid, FeatureSection } from './Feature';
 export { Hero } from './Hero';
 export { OptimizedImage, AvatarImage } from './Image';
+export { PageHero, PageHeroEyebrow, PageHeroTitle, PageHeroDescription } from './PageHero';
 export { PricingCard, PricingGrid, PricingToggle } from './Pricing';
 export { Testimonial, TestimonialGrid, FeaturedTestimonial } from './Testimonial';
 
