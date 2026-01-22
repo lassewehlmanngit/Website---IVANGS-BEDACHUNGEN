@@ -17,7 +17,7 @@ interface BreadcrumbsProps {
 export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, lang, className }) => {
   return (
     <nav className={className} aria-label="Breadcrumb">
-      <ol className="flex items-center flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm text-muted-foreground">
+      <ol className="flex items-center flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm text-slate-500">
         <li>
           <Link to={`/${lang}`} className="hover:text-primary flex items-center transition-colors min-h-touch min-w-touch p-1">
             <Home size={16} className="shrink-0" />
@@ -26,16 +26,16 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, lang, className
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-1">
-            <ChevronRight size={16} className="shrink-0 text-border" aria-hidden="true" />
+            <ChevronRight size={16} className="shrink-0 text-slate-400" aria-hidden="true" />
             {item.href ? (
               <Link 
                 to={`/${lang}${item.href}`} 
-                className="hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-[200px] md:max-w-none"
+                className="text-slate-500 hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-[200px] md:max-w-none"
               >
                 {item.label}
               </Link>
             ) : (
-              <span className="font-medium text-foreground truncate max-w-[120px] sm:max-w-[200px] md:max-w-none">
+              <span className="font-medium text-slate-900 truncate max-w-[120px] sm:max-w-[200px] md:max-w-none">
                 {item.label}
               </span>
             )}

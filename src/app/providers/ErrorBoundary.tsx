@@ -81,7 +81,7 @@ const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
 
   return (
     <div className="min-h-dvh bg-background text-foreground flex items-center justify-center p-6">
-      <div className="w-full max-w-2xl rounded-xl border border-white/10 bg-white/5 p-6 shadow-xl">
+      <div className="w-full max-w-2xl rounded-lg border border-white/10 bg-white/5 p-6 shadow-lg">
         <div className="flex items-start gap-4">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-red-500/15 text-red-200">
             <AlertTriangle className="h-6 w-6" aria-hidden="true" />

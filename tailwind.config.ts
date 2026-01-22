@@ -31,6 +31,7 @@ const config: Config = {
           200: 'hsl(var(--primary-200))',
           400: 'hsl(var(--primary-400))',
           600: 'hsl(var(--primary-600))',
+          700: 'hsl(var(--primary-700))',
         },
         surface: {
           subtle: 'hsl(var(--surface-subtle))',

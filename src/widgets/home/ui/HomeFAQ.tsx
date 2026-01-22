@@ -87,7 +87,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
             <div className="flex items-center justify-center gap-3 mb-4">
               <HelpCircle className="text-primary" size={32} />
               <h2 
-                className="text-3xl md:text-4xl font-bold text-slate-900"
+                className="text-h2 font-bold text-slate-900"
                 data-tina-field={homeData?.faqSection && tinaField(homeData.faqSection, 'title')}
               >
                 {headerTitle}

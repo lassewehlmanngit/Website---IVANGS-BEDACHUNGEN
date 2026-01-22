@@ -41,15 +41,18 @@ export const FAQBlock: React.FC<FAQBlockProps> = ({ data, parentField }) => {
           )}
 
           {data.questions && data.questions.length > 0 && (
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className="border-slate-200">
               {data.questions.map((item, index) => (
                 <AccordionItem key={index} value={`faq-${index}`}>
-                  <AccordionTrigger>
-                    <span data-tina-field={parentField && data.questions && tinaField(data.questions[index], 'question')}>
+                  <AccordionTrigger className="text-left hover:bg-slate-50/50">
+                    <span 
+                      className="text-base md:text-lg font-semibold text-slate-900 pr-4"
+                      data-tina-field={parentField && data.questions && tinaField(data.questions[index], 'question')}
+                    >
                       {item.question}
                     </span>
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="text-slate-600 leading-relaxed">
                     <p data-tina-field={parentField && data.questions && tinaField(data.questions[index], 'answer')}>
                       {item.answer}
                     </p>

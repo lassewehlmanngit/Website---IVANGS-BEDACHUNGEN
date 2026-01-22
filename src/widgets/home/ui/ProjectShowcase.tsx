@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { tinaField } from 'tinacms/dist/react';
 
 export interface ProjectShowcaseProps {
@@ -7,27 +7,45 @@ export interface ProjectShowcaseProps {
 }
 
 export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, projects }) => {
-  // Default projects fallback
+  // Track which images failed to load
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+  
+  // Default projects fallback - using local images
   const defaultProjects = [
     {
-      title: 'Einfamilienhaus in Kempen',
+      title: 'Steildach Sanierung in Kempen',
       description: 'Sanierung',
-      image: 'https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=800&auto=format&fit=crop',
+      image: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif',
     },
     {
-      title: 'Gewerbehalle Viersen',
+      title: 'Flachdach mit Begrünung',
       description: 'Flachdach',
-      image: 'https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=800&auto=format&fit=crop',
+      image: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
     },
     {
-      title: 'Neubau in Willich',
-      description: 'Solar',
-      image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop',
+      title: 'Dachfenster Installation',
+      description: 'Fenster',
+      image: '/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif',
     },
   ];
 
   // Use direct projects prop first, then nested projectsSection, then defaults
-  const projectsList = projects || homeData?.projectsSection?.items || defaultProjects;
+  const rawProjectsList = projects || homeData?.projectsSection?.items || defaultProjects;
+  
+  // Filter out projects with failed images or no image
+  const projectsList = rawProjectsList.filter((project: any, index: number) => 
+    project.image && !failedImages.has(index)
+  );
+  
+  // Handle image load error
+  const handleImageError = (index: number) => {
+    setFailedImages(prev => new Set(prev).add(index));
+  };
+  
+  // If no valid projects, don't render the section
+  if (projectsList.length === 0) {
+    return null;
+  }
   
   // Header data with fallbacks (using nested projectsSection)
   const headerEyebrow = homeData?.projectsSection?.eyebrow || 'Referenzen';
@@ -52,7 +70,7 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, proj
                     {headerEyebrow}
                   </span>
                   <h2 
-                    className="text-4xl font-bold text-slate-900 mt-2"
+                    className="text-h2 font-bold text-slate-900 mt-2"
                     data-tina-field={homeData?.projectsSection && tinaField(homeData.projectsSection, 'title')}
                   >
                     {headerTitle}
@@ -61,30 +79,35 @@ export const ProjectShowcase: React.FC<ProjectShowcaseProps> = ({ homeData, proj
             </div>
 
             <div className={getGridClass(projectsList.length)}>
-               {projectsList.map((project: any, index: number) => (
-                 <div key={index} className="group cursor-pointer">
-                    <div className="relative h-72 overflow-hidden rounded-sm mb-4">
-                       <img 
-                         src={project.image}
-                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
-                         alt={project.title}
-                         data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'image')}
-                       />
-                       <div 
-                         className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-900 rounded-full"
-                         data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'description')}
-                       >
-                         {project.description}
-                       </div>
-                    </div>
-                    <h3 
-                      className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors"
-                      data-tina-field={homeData?.projectsSection?.items?.[index] && tinaField(homeData.projectsSection.items[index], 'title')}
-                    >
-                      {project.title}
-                    </h3>
-                 </div>
-               ))}
+               {projectsList.map((project: any, index: number) => {
+                 // Find original index for tina field bindings
+                 const originalIndex = rawProjectsList.indexOf(project);
+                 return (
+                   <div key={originalIndex} className="group cursor-pointer">
+                      <div className="relative h-72 overflow-hidden rounded-sm mb-4">
+                         <img 
+                           src={project.image}
+                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700" 
+                           alt={project.title}
+                           onError={() => handleImageError(originalIndex)}
+                           data-tina-field={homeData?.projectsSection?.items?.[originalIndex] && tinaField(homeData.projectsSection.items[originalIndex], 'image')}
+                         />
+                         <div 
+                           className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-900 rounded-full"
+                           data-tina-field={homeData?.projectsSection?.items?.[originalIndex] && tinaField(homeData.projectsSection.items[originalIndex], 'description')}
+                         >
+                           {project.description}
+                         </div>
+                      </div>
+                      <h3 
+                        className="text-xl font-bold text-slate-900 mb-2 group-hover:text-primary transition-colors"
+                        data-tina-field={homeData?.projectsSection?.items?.[originalIndex] && tinaField(homeData.projectsSection.items[originalIndex], 'title')}
+                      >
+                        {project.title}
+                      </h3>
+                   </div>
+                 );
+               })}
             </div>
          </div>
       </section>

@@ -31,7 +31,7 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField 
               <span 
                 className={cn(
                   "px-3 py-1 rounded-sm text-xs font-bold shrink-0",
-                  job.type === 'Ausbildung' ? 'bg-orange-100 text-orange-700' : 'bg-primary/10 text-primary'
+                  job.type === 'Ausbildung' ? 'bg-warning/10 text-warning' : 'bg-primary/10 text-primary'
                 )}
                 data-tina-field={useTinaField && tinaField(job, 'type')}
               >

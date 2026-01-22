@@ -22,9 +22,9 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ lang }) => {
   return (
     <div className="container py-12">
       <Seo title={title} noindex />
-      <div className="mx-auto max-w-2xl rounded-xl border border-border bg-card p-8 shadow-sm text-center">
+      <div className="mx-auto max-w-2xl rounded-lg border border-border bg-card p-8 shadow-sm text-center">
         <h1 
-          className="text-3xl font-bold text-foreground"
+          className="text-h2 font-bold text-foreground"
           data-tina-field={data?.settings?.notFoundPage && tinaField(data.settings.notFoundPage, 'title')}
         >
           {title}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
@@ -27,6 +27,77 @@ const iconMap: Record<string, React.ElementType> = {
   Calendar,
   Info,
   Ruler
+};
+
+// Helper function to render text with **bold** markdown support
+const renderFormattedText = (text: string): React.ReactNode => {
+  if (!text) return null;
+  
+  // Split text by **bold** pattern
+  const parts = text.split(/\*\*(.*?)\*\*/g);
+  
+  return parts.map((part, index) => {
+    // Every odd index is a bold part (content between **)
+    if (index % 2 === 1) {
+      return <strong key={index} className="font-semibold text-slate-900">{part}</strong>;
+    }
+    return part;
+  });
+};
+
+// Reference Gallery component with image validation
+const ReferenceGallery: React.FC<{
+  images: string[];
+  title: string;
+  useTinaData: boolean;
+  data: any;
+}> = ({ images, title, useTinaData, data }) => {
+  const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+  
+  // Filter out invalid/failed images
+  const validImages = images.filter((img, idx) => img && !failedImages.has(idx));
+  
+  // If no valid images, don't render section
+  if (validImages.length === 0) return null;
+  
+  const getGridClass = (count: number) => {
+    if (count === 1) return 'grid grid-cols-1 gap-4';
+    if (count === 2) return 'grid grid-cols-1 md:grid-cols-2 gap-4';
+    return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
+  };
+  
+  const handleImageError = (originalIndex: number) => {
+    setFailedImages(prev => new Set(prev).add(originalIndex));
+  };
+  
+  return (
+    <div className="mb-16 md:mb-20">
+      <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8 flex items-center gap-2">
+        <ImageIcon size={24} className="text-primary" /> 
+        Ausgewählte Projekte
+      </h3>
+      <div className={getGridClass(validImages.length)}>
+        {validImages.map((img: string, displayIdx: number) => {
+          // Find original index for tina field binding
+          const originalIdx = images.indexOf(img);
+          return (
+            <div 
+              key={originalIdx} 
+              className="rounded-sm overflow-hidden h-64 border border-slate-100 group"
+              data-tina-field={useTinaData && tinaField(data.service, `referenceImages.${originalIdx}`)}
+            >
+              <OptimizedImage 
+                src={img} 
+                alt={`Projektbeispiel ${title} ${displayIdx + 1}`} 
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                onError={() => handleImageError(originalIdx)}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
@@ -141,12 +212,12 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                           >
                             {section.title}
                           </h3>
-                          <p 
+                          <div 
                             className="text-slate-600 leading-relaxed whitespace-pre-line"
                             data-tina-field={useTinaData && tinaField(data.service, `sections.${idx}.content`)}
                           >
-                            {section.content}
-                          </p>
+                            {renderFormattedText(section.content)}
+                          </div>
                         </div>
                       </div>
                     );
@@ -163,38 +234,12 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               )}
 
               {/* Project References Gallery */}
-              {(service.referenceImages || service.references) && (service.referenceImages || service.references).length > 0 && (() => {
-                const images = service.referenceImages || service.references;
-                const getGridClass = (count: number) => {
-                  if (count === 1) return 'grid grid-cols-1 gap-4';
-                  if (count === 2) return 'grid grid-cols-1 md:grid-cols-2 gap-4';
-                  return 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
-                };
-                
-                return (
-                 <div className="mb-16 md:mb-20">
-                    <h3 className="text-h3 font-bold text-slate-900 mb-6 md:mb-8 flex items-center gap-2">
-                      <ImageIcon size={24} className="text-primary" /> 
-                      Ausgewählte Projekte
-                    </h3>
-                    <div className={getGridClass(images.length)}>
-                      {images.map((img: string, idx: number) => (
-                        <div 
-                          key={idx} 
-                          className="rounded-sm overflow-hidden h-64 border border-slate-100 group"
-                          data-tina-field={useTinaData && tinaField(data.service, `referenceImages.${idx}`)}
-                        >
-                          <OptimizedImage 
-                            src={img} 
-                            alt={`Projektbeispiel ${service.title} ${idx + 1}`} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-                          />
-                        </div>
-                      ))}
-                    </div>
-                 </div>
-                );
-              })()}
+              <ReferenceGallery 
+                images={service.referenceImages || service.references || []}
+                title={service.title}
+                useTinaData={useTinaData}
+                data={data}
+              />
 
               {/* Humanized Contact Section */}
               {((service.contactIds && service.contactIds.length > 0) || (service.contacts && service.contacts.length > 0)) && (
@@ -220,22 +265,22 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                      <HelpCircle className="text-primary shrink-0" size={24} />
                      <h3 className="text-h3 font-bold text-slate-900">Häufige Kundenfragen</h3>
                   </div>
-                  <Accordion type="single" collapsible>
+                  <Accordion type="single" collapsible className="border-slate-200">
                     {service.faq.map((item: any, idx: number) => (
                       <AccordionItem key={idx} value={`item-${idx}`} data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}`)}>
-                        <AccordionTrigger 
-                          className="text-lg font-bold text-slate-800 hover:text-primary"
-                          data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.question`)}
-                        >
-                          {item.question || item.q}
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <p 
-                            className="text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-sm border-l-2 border-primary/30"
-                            data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.answer`)}
+                        <AccordionTrigger className="text-left hover:bg-slate-50/50">
+                          <span 
+                            className="text-base md:text-lg font-semibold text-slate-900 pr-4"
+                            data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.question`)}
                           >
-                            {item.answer || item.a}
-                          </p>
+                            {item.question || item.q}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent 
+                          className="text-slate-600 leading-relaxed"
+                          data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}.answer`)}
+                        >
+                          {item.answer || item.a}
                         </AccordionContent>
                       </AccordionItem>
                     ))}
@@ -250,7 +295,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               style={{ top: 'calc(var(--header-height, 5rem) + var(--service-nav-height, 3rem) + 2rem)' }}
             >
               {/* Quick CTA Box */}
-              <div className="bg-slate-900 text-white p-6 md:p-8 rounded-md shadow-xl relative overflow-hidden">
+              <div className="bg-slate-900 text-white p-6 md:p-8 rounded-md shadow-lg relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-primary rounded-full blur-[60px] opacity-20 -mr-10 -mt-10"></div>
                 <h3 className="text-h4 font-bold mb-3 md:mb-4 relative z-10">Wir schauen uns das an.</h3>
                 <p className="text-slate-300 mb-8 text-sm relative z-10 leading-relaxed">

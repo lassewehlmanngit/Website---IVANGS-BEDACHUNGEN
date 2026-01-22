@@ -1,0 +1,9 @@
+{
+  "logo": "/logo.svg",
+  "items": [
+    { "label": "Startseite", "href": "/" },
+    { "label": "Unternehmen", "href": "/about" },
+    { "label": "Karriere", "href": "/career" },
+    { "label": "Kontakt", "href": "/contact" }
+  ]
+}

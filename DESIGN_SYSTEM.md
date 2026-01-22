@@ -53,6 +53,14 @@ Tailwind utilities:
 - `text-base`, `text-lg`, `text-2xl`, etc.
 - `text-h1` → `text-h6` for headings
 
+**Body text size guidelines:**
+- `text-base` (16px): Default body text, form labels, buttons
+- `text-lg` (18px): Emphasized paragraphs, card descriptions
+- `text-xl` (20px): Hero descriptions, CTA text, pullquotes
+- `text-2xl` (24px): Stats, large numbers, prominent labels
+
+Headings should always use semantic classes (`text-h1` through `text-h6`). Use responsive sizing for large text (e.g., `text-lg md:text-xl`).
+
 ### Spacing + shadows
 
 Spacing: `--space-1` … `--space-32` (4px base)
@@ -62,6 +70,13 @@ Spacing: `--space-1` … `--space-32` (4px base)
 Shadows: `--shadow-sm`, `--shadow-md`, `--shadow-lg`
 
 Tailwind shadows map to tokens (e.g. `shadow-md`).
+
+**Shadow usage guidelines:**
+- `shadow-sm`: Subtle borders, hover states, elevated inputs
+- `shadow-md`: Cards, dropdowns, modals (default for elevated content)
+- `shadow-lg`: Hero elements, featured cards, prominent CTAs, images
+
+Use shadows consistently across the design system. Avoid custom shadow values.
 
 ### Icon size scale (new)
 

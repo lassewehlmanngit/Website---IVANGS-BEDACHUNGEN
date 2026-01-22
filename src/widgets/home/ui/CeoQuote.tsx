@@ -15,7 +15,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
   return (
     <section className="bg-slate-50 py-24 border-y border-slate-200">
         <div className="container mx-auto px-4">
-           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="order-2 lg:order-1">
                 <span className="text-primary-600 font-bold uppercase tracking-wider text-sm block mb-4" data-tina-field={ceoData && tinaField(ceoData, 'eyebrow')}>
                   {ceo.eyebrow || 'Ein Wort vom Chef'}
@@ -54,7 +54,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
                  <OptimizedImage
                    src={ceo.image || '/uploads/invangs-ceo-image.webp'}
                    alt={ceo.name || 'Marcus Ivangs'}
-                   className="rounded-sm w-full h-[650px] object-cover transition-all duration-700 shadow-xl"
+                   className="rounded-sm w-full h-[650px] object-cover transition-all duration-700 shadow-lg"
                    width={800}
                    height={1200}
                    sizes="(max-width: 1024px) 100vw, 50vw"

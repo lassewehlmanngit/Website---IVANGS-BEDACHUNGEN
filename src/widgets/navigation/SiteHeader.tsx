@@ -160,7 +160,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               to={`/${lang}${item.href}`}
               onClick={() => setMobileMenuOpen(false)}
               className={({ isActive }) => cn(
-                "text-3xl font-bold tracking-tight transition-colors",
+                "text-h3 font-bold tracking-tight transition-colors",
                 isActive ? "text-primary" : "text-slate-900"
               )}
               data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
@@ -186,7 +186,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
           <div className="mt-auto pt-8">
              <Button 
-               className="w-full py-6 text-lg font-bold shadow-xl shadow-primary/20" 
+               className="w-full py-6 text-lg font-bold shadow-lg shadow-primary/20" 
                onClick={() => {
                  navigate(ctaLink);
                  setMobileMenuOpen(false);

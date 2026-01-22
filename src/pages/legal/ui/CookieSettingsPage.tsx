@@ -4,6 +4,7 @@ import { Seo } from '@/shared/ui/Seo';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Button } from '@/shared/ui/Button';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { Switch } from '@/shared/ui/Switch';
 
 // Reuse the key and types to ensure sync with CookieBanner
 const COOKIE_STORAGE_KEY = 'cookie-consent-settings';
@@ -65,7 +66,7 @@ export const CookieSettingsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) 
             items={[{ label: 'Cookie-Einstellungen' }]}
             className="mb-6"
           />
-          <h1 className="text-4xl font-bold text-slate-900 mb-6">Cookie-Einstellungen</h1>
+          <h1 className="text-h1 font-bold text-slate-900 mb-6">Cookie-Einstellungen</h1>
           <p className="text-slate-600 mb-10 text-lg">
             Hier können Sie entscheiden, welche Cookies wir verwenden dürfen. Ihre Einstellungen können jederzeit geändert werden.
           </p>
@@ -80,10 +81,12 @@ export const CookieSettingsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) 
                       Diese Cookies sind für den Betrieb der Seite unerlässlich (z.B. Sicherheitsfunktionen, Speichern Ihrer Einstellungen).
                    </p>
                 </div>
-                <div className="relative inline-flex items-center cursor-not-allowed opacity-50">
-                   <input type="checkbox" checked={true} disabled className="sr-only peer" />
-                   <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                </div>
+                <Switch
+                  checked={true}
+                  onChange={() => {}}
+                  disabled={true}
+                  ariaLabel="Notwendige Cookies (immer aktiviert)"
+                />
              </div>
 
              {/* Analytics */}
@@ -94,17 +97,11 @@ export const CookieSettingsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) 
                       Helfen uns zu verstehen, wie Besucher mit der Website interagieren, indem Informationen anonym gesammelt werden.
                    </p>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                   <input 
-                     type="checkbox" 
-                     checked={preferences.analytics} 
-                     onChange={() => setPreferences(prev => ({...prev, analytics: !prev.analytics}))}
-                     className="sr-only peer"
-                     aria-labelledby="analytics-label"
-                   />
-                   <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-focus:ring-offset-2 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                   <span className="sr-only">Analyse & Statistik Cookies aktivieren</span>
-                </label>
+                <Switch
+                  checked={preferences.analytics}
+                  onChange={(checked) => setPreferences(prev => ({...prev, analytics: checked}))}
+                  ariaLabelledBy="analytics-label"
+                />
              </div>
 
              {/* Marketing */}
@@ -115,17 +112,11 @@ export const CookieSettingsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) 
                       Werden verwendet, um Besuchern auf Webseiten zu folgen. Die Absicht ist, Anzeigen zu zeigen, die relevant und ansprechend für den einzelnen Benutzer sind.
                    </p>
                 </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                   <input 
-                     type="checkbox" 
-                     checked={preferences.marketing} 
-                     onChange={() => setPreferences(prev => ({...prev, marketing: !prev.marketing}))}
-                     className="sr-only peer"
-                     aria-labelledby="marketing-label"
-                   />
-                   <div className="w-11 h-6 bg-slate-200 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-primary peer-focus:ring-offset-2 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                   <span className="sr-only">Marketing Cookies aktivieren</span>
-                </label>
+                <Switch
+                  checked={preferences.marketing}
+                  onChange={(checked) => setPreferences(prev => ({...prev, marketing: checked}))}
+                  ariaLabelledBy="marketing-label"
+                />
              </div>
           </div>
 
@@ -133,8 +124,8 @@ export const CookieSettingsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) 
              <Button 
                onClick={handleSave}
                className={`px-8 py-3 rounded-sm font-bold flex items-center gap-2 transition-all ${
-                 saved ? 'bg-green-600 hover:bg-green-700' : ''
-               }`}
+                saved ? 'bg-success hover:bg-success/90' : ''
+              }`}
              >
                {saved ? (
                  <>

@@ -3,6 +3,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
 import { SmartLink } from '@/shared/ui/SmartLink';
+import { Skeleton, SkeletonCard, SkeletonText } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
 import { useCareerPageData } from '@/shared/lib/tina/useCareerPageData';
 import { JobListing } from '@/features/career/ui/JobListing';
@@ -45,8 +46,17 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="animate-fade-in">
+        <div className="container mx-auto px-4 py-16 md:py-24 space-y-16">
+          <Skeleton variant="rectangular" height={400} className="rounded-lg" />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
+          <SkeletonText lines={5} />
+        </div>
       </div>
     );
   }
@@ -91,7 +101,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
                 </p>
               )}
               <h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
+                className="text-h1 font-bold mb-6"
                 data-tina-field={career.hero && tinaField(career.hero, 'title')}
               >
                 {career.hero?.title}
@@ -125,11 +135,11 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <p className="text-primary font-bold uppercase tracking-wider mb-4">Warum IVANGS?</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Das erwartet dich bei uns</h2>
+              <h2 className="text-h2 font-bold text-slate-900">Das erwartet dich bei uns</h2>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {BENEFITS.map((benefit, index) => (
-                <div key={index} className="text-center p-6 bg-slate-50 rounded-lg">
+                <div key={index} className="text-center p-6 bg-slate-50 rounded-sm">
                   <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-full mb-4">
                     <benefit.icon className="w-7 h-7 text-primary" />
                   </div>
@@ -146,7 +156,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 
-                className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+                className="text-h2 font-bold text-slate-900 mb-4"
                 data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'title')}
               >
                 {career.jobsSection?.title || 'Offene Stellen'}
@@ -177,7 +187,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
                 <h2 
-                  className="text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+                  className="text-h2 font-bold text-slate-900 mb-4"
                   data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'title')}
                 >
                   {career.wizardSection.title}
@@ -197,15 +207,19 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
         )}
 
         {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-primary text-white">
-          <div className="container mx-auto px-4 text-center">
-            <p className="text-primary-foreground/80 font-bold uppercase tracking-wider mb-4">Keine passende Stelle?</p>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Initiativbewerbung</h2>
-            <p className="text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-8">
+        <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05)_0%,transparent_40%)]"></div>
+          
+          <div className="container mx-auto px-4 text-center relative z-10">
+            <p className="text-white/80 font-bold uppercase tracking-wider mb-4">Keine passende Stelle?</p>
+            <h2 className="text-h2 font-bold mb-6">Initiativbewerbung</h2>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
               Du hast keine passende Stelle gefunden? Bewirb dich trotzdem! Wir sind immer auf der Suche nach motivierten Mitarbeitern.
             </p>
             <SmartLink link={`/${lang}/contact`}>
-              <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-white/90">
+              <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-slate-50 shadow-lg">
                 Jetzt bewerben
               </Button>
             </SmartLink>

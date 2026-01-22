@@ -41,7 +41,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     title: 'Steildach',
     subtitle: 'Der Charakter Ihres Hauses',
     intro: 'Ein Steildach ist ein komplexes System aus vielen Schichten. Es muss atmen, dämmen und schützen. Wir erklären Ihnen, wie eine fachgerechte Sanierung abläuft und warum wir auf bestimmte Materialien setzen.',
-    img: 'https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=2070&auto=format&fit=crop',
+    img: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif',
     description: 'Ob Schieferarbeiten oder klassische Ziegel: Wir beherrschen traditionelles Handwerk und moderne Technik für Ihr Steildach.',
     checkpoints: [
       "Langlebiger Schutz vor Wind & Wetter",
@@ -69,10 +69,10 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
       { step: 5, title: "Spenglerarbeiten", text: "Montage von Rinnen, Kaminverkleidungen und Wandanschlüssen aus Zink oder Kupfer." }
     ],
     references: [
-      "https://images.unsplash.com/photo-1628151016008-61e88e85579f?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1555699847-f41e54911049?q=80&w=600&auto=format&fit=crop"
+      "/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif",
+      "/uploads/ivangs_steildach_Ziegeldach mit Kamin- und Gaubenverschieferung.avif",
+      "/uploads/ivangs_steildach_Ziegeldach mit Kamin- und Gaubenverschieferung_2.avif",
+      "/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif"
     ],
     contacts: [teamMembers.sascha, teamMembers.isabel],
     faq: [
@@ -92,7 +92,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     title: 'Flachdach',
     subtitle: 'Moderne Architektur & Nutzbarkeit',
     intro: 'Das moderne Flachdach ist ein Hochleistungsbauteil. Vergessen Sie die alten "Teerpappe-Geschichten". Wir arbeiten mit Materialien, die Jahrzehnte halten und neue Lebensräume schaffen.',
-    img: 'https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=2070&auto=format&fit=crop',
+    img: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
     description: 'Ob moderne Abdichtung oder Dachbegrünung: Wir nutzen Hochleistungs-Materialien, die Jahrzehnte halten.',
     checkpoints: [
       "100% Dichtheitsgarantie",
@@ -119,9 +119,9 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
       { step: 4, title: "Abdichtung", text: "Fachgerechtes Verschweißen der Oberlage. Anschlüsse an Wände und Lichtkuppeln." }
     ],
     references: [
-      "https://images.unsplash.com/photo-1596253686851-90a6e35509d3?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1464146072230-91cabc968266?q=80&w=600&auto=format&fit=crop"
+      "/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_1.avif",
+      "/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif",
+      "/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_3.avif"
     ],
     contacts: [teamMembers.sascha, teamMembers.isabel],
     faq: [
@@ -141,7 +141,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     title: 'Fenster & VELUX Partner',
     subtitle: 'Licht, Luft & Lebensqualität',
     intro: 'Warum wir so viel über VELUX sprechen? Weil es für Qualität steht. Ein Dachfenster ist extremen Belastungen ausgesetzt – Hitze, Frost, Schlagregen. Hier sparen wir nicht am Material.',
-    img: 'https://images.unsplash.com/photo-1596637508677-03cb29559c5d?q=80&w=2070&auto=format&fit=crop',
+    img: '/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif',
     description: 'Als VELUX-geschulter Betrieb bringen wir mehr Licht und Luft in Ihr Dachgeschoss. Fachgerecht eingebaut durch qualifizierte Mitarbeiter.',
     checkpoints: [
       "Helle Wohnräume und gesundes Klima",
@@ -169,9 +169,8 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
       { step: 5, title: "Einweisung", text: "Wir zeigen Ihnen die Funktionen und Pflege Ihres neuen Fensters." }
     ],
     references: [
-      "https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1596637508677-03cb29559c5d?q=80&w=600&auto=format&fit=crop"
+      "/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif",
+      "/uploads/ivangs-arbeiter-fenstertausch.avif"
     ],
     contacts: [teamMembers.sabine, teamMembers.sascha],
     faq: [
@@ -191,7 +190,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     title: 'Sanierung & Reparatur',
     subtitle: 'Werterhalt statt Totalschaden',
     intro: 'Kleine Schäden werden schnell groß. Ein loser Ziegel, eine undichte Rinne – Wasser sucht sich seinen Weg. Wir kümmern uns um den Werterhalt Ihrer Immobilie.',
-    img: 'https://images.unsplash.com/photo-1555699847-f41e54911049?q=80&w=2070&auto=format&fit=crop',
+    img: '/uploads/ivangs-dach-sanierung.avif',
     description: 'Vom Altbau bis zum Balkon: Wir stellen den Wert Ihrer Immobilie materialgetreu wieder her.',
     checkpoints: [
       "Materialgetreue Wiederherstellung",
@@ -218,8 +217,9 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
       { step: 4, title: "Ausführung", text: "Schnelle und saubere Durchführung durch unsere Service-Teams." }
     ],
     references: [
-      "https://images.unsplash.com/photo-1574739712545-924d77265cbb?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=600&auto=format&fit=crop"
+      "/uploads/ivangs-dach-sanierung.avif",
+      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_1.avif",
+      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_2.avif"
     ],
     contacts: [teamMembers.sabine, teamMembers.isabel],
     faq: [
@@ -239,7 +239,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     title: 'Solar & Photovoltaik',
     subtitle: 'Warum der Dachdecker die bessere Wahl ist',
     intro: 'Photovoltaik boomt. Aber Vorsicht: Die meisten Anlagen werden von Elektrikern montiert, die die Dachhaut nicht kennen. Wir garantieren Ihnen: Strom fließt, Wasser bleibt draußen.',
-    img: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2070&auto=format&fit=crop',
+    img: '/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif',
     description: 'Machen Sie Ihr Dach zum Kraftwerk. Wir montieren Auf-Dach-Solar-Anlagen fachgerecht und sicher – alles aus einer Hand.',
     checkpoints: [
       "Stromkosten senken & unabhängig werden",
@@ -267,9 +267,7 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
       { step: 5, title: "Anschluss", text: "Der elektrische Anschluss erfolgt durch unseren Partner-Elektriker." }
     ],
     references: [
-      "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=600&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1624397640148-949b1732bb0a?q=80&w=600&auto=format&fit=crop"
+      "/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif"
     ],
     contacts: [teamMembers.marcus, teamMembers.sascha],
     faq: [

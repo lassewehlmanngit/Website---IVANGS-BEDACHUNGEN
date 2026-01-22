@@ -44,7 +44,7 @@ export const CareerWizard: React.FC = () => {
 
   if (step === 3) {
     return (
-      <div className="bg-white p-8 rounded-sm shadow-xl border border-slate-100 text-center animate-fade-in max-w-lg mx-auto">
+      <div className="bg-white p-8 rounded-sm shadow-lg border border-slate-100 text-center animate-fade-in max-w-lg mx-auto">
         {result === "dachdecker" && (
           <div>
             <div className="inline-flex p-4 bg-green-100 text-green-600 rounded-full mb-4">
@@ -77,7 +77,7 @@ export const CareerWizard: React.FC = () => {
 
         {result === "none" && (
           <div>
-            <div className="inline-flex p-4 bg-orange-100 text-orange-600 rounded-full mb-4">
+            <div className="inline-flex p-4 bg-warning/10 text-warning rounded-full mb-4">
               <XCircle size={32} />
             </div>
             <h3 className="text-2xl font-bold mb-2">Nicht sicher?</h3>
@@ -99,7 +99,7 @@ export const CareerWizard: React.FC = () => {
   const currentQ = questions.find(q => q.id === step);
 
   return (
-    <div className="bg-white p-8 rounded-sm shadow-xl border border-slate-100 max-w-lg mx-auto">
+    <div className="bg-white p-8 rounded-sm shadow-lg border border-slate-100 max-w-lg mx-auto">
       <div className="mb-6 flex justify-between items-center">
         <span className="text-xs font-bold text-primary tracking-wider uppercase">Karriere-Finder</span>
         <span className="text-xs text-slate-400">Schritt {step + 1} von 3</span>
@@ -114,7 +114,7 @@ export const CareerWizard: React.FC = () => {
           <button
             key={opt.value}
             onClick={() => handleAnswer(opt.value)}
-            className="w-full text-left p-4 rounded-lg border border-slate-200 hover:border-primary hover:bg-primary/5 transition-all group flex items-center justify-between"
+            className="w-full text-left p-4 rounded-sm border border-slate-200 hover:border-primary hover:bg-primary/5 transition-all group flex items-center justify-between"
           >
             <span className="font-medium text-slate-700 group-hover:text-primary">{opt.label}</span>
             <ArrowRight size={18} className="text-slate-300 group-hover:text-primary" />

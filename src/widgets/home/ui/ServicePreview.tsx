@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Home as HomeIcon, Layers, Zap, Sun, Hammer, L
 import * as LucideIcons from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 import { OptimizedImage } from '@/shared/ui/Image';
+import { Skeleton, SkeletonCard } from '@/shared/ui/Skeleton';
 import { servicesData, ServiceId } from '@/features/service/model/serviceData';
 import { cn } from '@/shared/lib/cn';
 import { tinaField } from 'tinacms/dist/react';
@@ -27,9 +28,9 @@ const serviceIcons: Record<ServiceId, React.ElementType> = {
 const serviceImages: Record<ServiceId, string> = {
   steildach: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif',
   flachdach: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
-  solar: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2070&auto=format&fit=crop',
-  fenster: 'https://images.unsplash.com/photo-1596637508677-03cb29559c5d?q=80&w=2070&auto=format&fit=crop',
-  sanierung: 'https://images.unsplash.com/photo-1555699847-f41e54911049?q=80&w=2070&auto=format&fit=crop',
+  solar: '/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif',
+  fenster: '/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif',
+  sanierung: '/uploads/ivangs-dach-sanierung.avif',
 };
 
 const ctaTexts: Record<ServiceId, string> = {
@@ -110,7 +111,8 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
         <Link to={`/${lang}/services/${id}`}>
           <Button
             size="lg"
-            className="bg-slate-900 hover:bg-primary shadow-lg"
+            variant="outline"
+            className="border-slate-300 text-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 shadow-sm"
           >
             {ctaText} <ArrowRight size={18} className="shrink-0" />
           </Button>
@@ -150,8 +152,16 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
   if (isLoading && !hasCustomServices) {
     return (
       <section className="py-16 md:py-24 bg-white">
-        <div className="container mx-auto px-4 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Skeleton variant="text" width={300} height={40} className="mx-auto mb-4" />
+            <Skeleton variant="text" width={500} height={24} className="mx-auto" />
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <SkeletonCard />
+            <SkeletonCard />
+            <SkeletonCard />
+          </div>
         </div>
       </section>
     );
@@ -229,7 +239,8 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                       <Link to={service.link}>
                         <Button
                           size="lg"
-                          className="bg-slate-900 hover:bg-primary shadow-lg"
+                          variant="outline"
+                          className="border-slate-300 text-slate-900 hover:bg-slate-900 hover:text-white hover:border-slate-900 shadow-sm"
                           data-tina-field={tinaField(service, 'ctaText')}
                         >
                           {service.ctaText || 'Mehr erfahren'} <ArrowRight size={18} className="shrink-0" />

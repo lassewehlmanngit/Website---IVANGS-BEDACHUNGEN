@@ -124,7 +124,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
                   <img
                     src={about.story.image}
                     alt="Über Ivangs Bedachungen"
-                    className="rounded-lg shadow-xl w-full h-auto"
+                    className="rounded-lg shadow-lg w-full h-auto"
                     data-tina-field={about.story && tinaField(about.story, 'image')}
                   />
                 </div>

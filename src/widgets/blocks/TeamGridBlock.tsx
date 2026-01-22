@@ -48,7 +48,7 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
         {/* Leadership */}
         {leadership.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+            <h3 className="text-h4 font-bold text-slate-900 mb-8 flex items-center gap-2">
               <span className="w-8 h-1 bg-primary rounded-full"></span>
               Geschäftsführung & Bauleitung
             </h3>
@@ -76,7 +76,7 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
         {/* Office Team */}
         {officeTeam.length > 0 && (
           <div className="mb-16">
-            <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+            <h3 className="text-h4 font-bold text-slate-900 mb-8 flex items-center gap-2">
               <span className="w-8 h-1 bg-primary rounded-full"></span>
               Büro & Verwaltung
             </h3>
@@ -102,7 +102,7 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
         {/* Craftsmen */}
         {craftsmen.length > 0 && (
           <div>
-            <h3 className="text-xl font-bold text-slate-900 mb-8 flex items-center gap-2">
+            <h3 className="text-h4 font-bold text-slate-900 mb-8 flex items-center gap-2">
               <span className="w-8 h-1 bg-primary rounded-full"></span>
               Unsere Dachdecker
             </h3>

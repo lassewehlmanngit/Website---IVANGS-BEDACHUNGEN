@@ -38,7 +38,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
   return (
     <div
       className={cn(
-        'relative flex flex-col rounded-xl border bg-background p-6',
+        'relative flex flex-col rounded-lg border bg-background p-6',
         popular ? 'border-primary shadow-lg' : 'border-border',
         className,
       )}

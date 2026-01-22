@@ -34,7 +34,7 @@ export const Alert: React.FC<AlertProps> = ({
   return (
     <div
       role={role}
-      className={cn('relative rounded-xl border p-4 shadow-sm', variantClassName[variant], className)}
+      className={cn('relative rounded-lg border p-4 shadow-sm', variantClassName[variant], className)}
       {...props}
     >
       <div className="flex items-start gap-3">

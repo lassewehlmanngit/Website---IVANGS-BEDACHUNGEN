@@ -359,7 +359,7 @@ export const DesignSystemPage: React.FC = () => {
                       <Button variant="outline" size="lg">Learn More</Button>
                     </>
                   }
-                  className="rounded-xl border border-border"
+                  className="rounded-lg border border-border"
                 />
 
                 <FeatureGrid>

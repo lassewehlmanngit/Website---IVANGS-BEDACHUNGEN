@@ -41,7 +41,7 @@ export const ImprintPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             className="mb-6"
           />
           <h1 
-            className="text-4xl font-bold text-slate-900 mb-8 border-b border-slate-200 pb-4"
+            className="text-h1 font-bold text-slate-900 mb-8 border-b border-slate-200 pb-4"
             data-tina-field={data?.legalPage && tinaField(data.legalPage, 'title')}
           >
             {page.title}

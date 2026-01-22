@@ -47,7 +47,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         <div className="bg-primary p-1.5 rounded-sm text-primary-foreground">
           <Hammer size={20} />
         </div>
-        <span className="text-xl font-bold">IVANGS</span>
+        <span className="text-2xl font-bold">IVANGS</span>
       </div>
       <p 
         className="text-slate-300 text-sm leading-relaxed mb-6"

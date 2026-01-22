@@ -90,17 +90,18 @@
 [data-tina-wrapper] input[type="number"],
 .tina-field textarea,
 .tina-field input {
-  background-color: white !important;
-  color: #1e293b !important;
-  border: 1px solid #e2e8f0 !important;
+  background-color: hsl(var(--background)) !important;
+  color: hsl(var(--foreground)) !important;
+  border: 1px solid hsl(var(--border)) !important;
 }
 
 [data-tina-wrapper] textarea:focus,
 [data-tina-wrapper] input:focus,
 .tina-field textarea:focus,
 .tina-field input:focus {
-  border-color: #3b82f6 !important;
+  border-color: hsl(var(--primary)) !important;
   outline: none !important;
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2) !important;
 }
 
 @layer utilities {

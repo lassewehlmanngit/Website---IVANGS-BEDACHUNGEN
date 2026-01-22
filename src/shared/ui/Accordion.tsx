@@ -73,7 +73,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 
   return (
     <AccordionContext.Provider value={{ openItems, toggleItem, type }}>
-      <div className={cn('divide-y divide-border rounded-lg border border-border', className)}>
+      <div className={cn('divide-y divide-slate-200 rounded-lg border border-slate-200', className)}>
         {children}
       </div>
     </AccordionContext.Provider>

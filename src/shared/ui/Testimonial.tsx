@@ -130,7 +130,7 @@ export const FeaturedTestimonial: React.FC<FeaturedTestimonialProps> = ({
   return (
     <figure
       className={cn(
-        'mx-auto max-w-3xl rounded-xl bg-muted p-8 text-center md:p-12',
+        'mx-auto max-w-3xl rounded-lg bg-muted p-8 text-center md:p-12',
         className,
       )}
     >
