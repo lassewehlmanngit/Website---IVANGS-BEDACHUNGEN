@@ -99,7 +99,8 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         title={home.seo?.title || "Ivangs Bedachungen - Meisterbetrieb seit 1996"}
         description={home.seo?.description || "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."}
         ogLocale="de_DE"
-        ogSiteName="Ivangs Bedachungen"
+        ogSiteName={global?.siteName || "Ivangs Bedachungen"}
+        ogImage={home.seo?.ogImage ? { url: home.seo.ogImage, alt: home.seo?.title || "Ivangs Bedachungen" } : (global?.defaultOgImage ? { url: global.defaultOgImage, alt: "Ivangs Bedachungen" } : undefined)}
         localBusiness={{
             name: "Ivangs Bedachungen GmbH & Co. KG",
             telephone: "+49 2162 356666",

@@ -42,7 +42,7 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }
       <Seo 
         title={page.seo?.title || page.title}
         description={page.seo?.description}
-        ogImage={page.seo?.ogImage}
+        ogImage={page.seo?.ogImage ? { url: page.seo.ogImage, alt: page.seo?.title || page.title } : undefined}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />

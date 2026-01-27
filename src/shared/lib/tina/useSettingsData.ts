@@ -14,6 +14,11 @@ const SETTINGS_QUERY = `
       _sys { filename }
       siteName
       siteDescription
+      favicon
+      logo
+      defaultOgImage
+      gtmId
+      gaId
       cookieBanner {
         message
         privacyLinkText

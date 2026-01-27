@@ -72,7 +72,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
       <Seo
         title={about.seo?.title || 'Über Uns - Ivangs Bedachungen'}
         description={about.seo?.description}
-        ogImage={about.seo?.ogImage}
+        ogImage={about.seo?.ogImage ? { url: about.seo.ogImage, alt: about.seo?.title || 'Über Uns - Ivangs Bedachungen' } : undefined}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />

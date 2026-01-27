@@ -40,6 +40,8 @@ export interface SeoProps {
   description?: string;
   canonicalUrl?: string;
   noindex?: boolean;
+  // Favicon (dynamically set from CMS)
+  favicon?: string;
   // Open Graph
   ogType?: 'website' | 'article' | 'product';
   ogImage?: SeoImage;
@@ -62,6 +64,7 @@ export const Seo: React.FC<SeoProps> = ({
   description,
   canonicalUrl,
   noindex,
+  favicon,
   ogType = 'website',
   ogImage,
   ogSiteName,
@@ -153,6 +156,9 @@ export const Seo: React.FC<SeoProps> = ({
   return (
     <Helmet>
       <title>{title}</title>
+
+      {/* Favicon - dynamically set from CMS */}
+      {favicon && <link rel="icon" href={favicon} type="image/svg+xml" />}
 
       {/* Basic meta */}
       {description && <meta name="description" content={description} />}

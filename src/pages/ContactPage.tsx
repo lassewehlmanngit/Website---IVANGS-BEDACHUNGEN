@@ -67,7 +67,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
       <Seo
         title={contact.seo?.title || 'Kontakt - Ivangs Bedachungen'}
         description={contact.seo?.description}
-        ogImage={contact.seo?.ogImage}
+        ogImage={contact.seo?.ogImage ? { url: contact.seo.ogImage, alt: contact.seo?.title || 'Kontakt - Ivangs Bedachungen' } : undefined}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />

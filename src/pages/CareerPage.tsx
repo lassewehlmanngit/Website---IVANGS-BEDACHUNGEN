@@ -74,7 +74,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
       <Seo
         title={career.seo?.title || 'Karriere bei Ivangs - Werde Teil des Teams'}
         description={career.seo?.description}
-        ogImage={career.seo?.ogImage}
+        ogImage={career.seo?.ogImage ? { url: career.seo.ogImage, alt: career.seo?.title || 'Karriere bei Ivangs' } : undefined}
         ogLocale="de_DE"
         ogSiteName="Ivangs Bedachungen"
       />

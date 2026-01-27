@@ -8,6 +8,9 @@ import { Button } from '@/shared/ui/Button';
 import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
 import { tinaField } from 'tinacms/dist/react';
 
+// Fallback logo SVG path
+const FALLBACK_LOGO = '/logo.svg';
+
 export interface SiteHeaderProps {
   lang: SupportedLang;
   mobileMenuOpen: boolean;
@@ -60,15 +63,24 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
         <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
           {/* Increased vertical padding (py-5 to py-6) for cleaner look */}
           <div className="container flex items-center justify-between py-5 md:py-6">
-              {/* Logo Section */}
+              {/* Logo Section - Uses logo from CMS navigation data */}
               <Link 
                 to={`/${lang}`} 
                 className="flex items-center gap-3 cursor-pointer group relative z-50"
                 onClick={() => setMobileMenuOpen(false)}
+                data-tina-field={nav.logo && tinaField(data?.navigation, 'logo')}
               >
-                <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
-                  <Hammer size={24} />
-                </div>
+                {nav.logo ? (
+                  <img 
+                    src={nav.logo} 
+                    alt="Ivangs Bedachungen Logo" 
+                    className="h-10 w-auto group-hover:scale-105 transition-transform"
+                  />
+                ) : (
+                  <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                    <Hammer size={24} />
+                  </div>
+                )}
                 <div>
                   <h1 className="text-2xl font-bold leading-none text-foreground tracking-tight">
                     IVANGS
