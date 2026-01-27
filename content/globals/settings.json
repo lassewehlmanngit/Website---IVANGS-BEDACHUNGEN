@@ -1,6 +1,9 @@
 {
   "siteName": "Ivangs Bedachungen",
   "siteDescription": "Meisterbetrieb für Dachdeckerarbeiten im Kreis Viersen seit 1996",
+  "favicon": "/uploads/ivangs-logo.avif",
+  "logo": "/uploads/ivangs-logo.avif",
+  "defaultOgImage": "/uploads/ivangs-logo.avif",
   "cookieBanner": {
     "message": "Wir nutzen Cookies, um Ihnen die bestmögliche Erfahrung auf unserer Website zu bieten. Einige sind technisch notwendig, andere helfen uns, die Website zu verbessern.",
     "privacyLinkText": "Datenschutzerklärung",
