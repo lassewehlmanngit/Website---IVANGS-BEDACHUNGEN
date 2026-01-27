@@ -355,6 +355,7 @@ export default defineConfig({
     tina: {
       publicFolder: 'public',
       mediaRoot: 'uploads',
+      static: false, // Allows editors to upload/delete media (dynamic assets)
     },
   },
   schema: {
