@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Home as HomeIcon, Layers, Zap, Sun, Hammer, LucideIcon } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Home as HomeIcon, Layers, Zap, Sun, Hammer, LucideIcon, Flame, Wrench } from 'lucide-react';
 import * as LucideIcons from 'lucide-react';
 import { Button } from '@/shared/ui/Button';
 import { OptimizedImage } from '@/shared/ui/Image';
@@ -20,9 +20,11 @@ interface ServiceSectionProps {
 const serviceIcons: Record<ServiceId, React.ElementType> = {
   steildach: HomeIcon,
   flachdach: Layers,
-  solar: Zap,
+  solar: Zap, // Consider removing if type allows, or keep for legacy/safety but unused
   fenster: Sun,
   sanierung: Hammer,
+  reparatur: Wrench,
+  brandschaden: Flame,
 };
 
 const serviceImages: Record<ServiceId, string> = {
@@ -31,6 +33,8 @@ const serviceImages: Record<ServiceId, string> = {
   solar: '/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif',
   fenster: '/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif',
   sanierung: '/uploads/ivangs-dach-sanierung.avif',
+  reparatur: '/images/services/reparatur-service.jpg',
+  brandschaden: '/images/services/brandschaden-dach.jpg',
 };
 
 const ctaTexts: Record<ServiceId, string> = {
@@ -39,24 +43,26 @@ const ctaTexts: Record<ServiceId, string> = {
   solar: 'Solar-Beratung starten',
   fenster: 'Dachfenster-Tausch anfragen',
   sanierung: 'Sanierung besprechen',
+  reparatur: 'Reparatur anfragen',
+  brandschaden: 'Hilfe bei Brandschaden',
 };
 
 const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = false, cmsService }) => {
   const fallbackService = servicesData[id];
   const Icon = serviceIcons[id];
-  
+
   // #region agent log
-  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'ServicePreview.tsx:ServiceSection',message:'Service section render',data:{id,hasCmsService:!!cmsService,cmsServiceKeys:cmsService?Object.keys(cmsService):[],hasSys:cmsService?._sys?true:false,sysFilename:cmsService?._sys?.filename},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'A'})}).catch(()=>{});
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'ServicePreview.tsx:ServiceSection', message: 'Service section render', data: { id, hasCmsService: !!cmsService, cmsServiceKeys: cmsService ? Object.keys(cmsService) : [], hasSys: cmsService?._sys ? true : false, sysFilename: cmsService?._sys?.filename }, timestamp: Date.now(), sessionId: 'debug-session', hypothesisId: 'A' }) }).catch(() => { });
   // #endregion
-  
+
   // Use CMS data with fallbacks - handle both string arrays and potential nested objects
   const title = cmsService?.title || fallbackService.title;
   const description = cmsService?.shortDescription || cmsService?.intro || fallbackService.description;
   const img = cmsService?.heroImage || cmsService?.image || serviceImages[id];
-  
+
   // Handle benefits - could be string array from CMS or checkpoints from fallback
   const rawBenefits = cmsService?.benefits || cmsService?.features || fallbackService.checkpoints || [];
-  const checkpoints = Array.isArray(rawBenefits) 
+  const checkpoints = Array.isArray(rawBenefits)
     ? rawBenefits.map((item: any) => typeof item === 'string' ? item : item?.text || item)
     : [];
   const ctaText = ctaTexts[id];
@@ -136,16 +142,16 @@ const getIconComponent = (iconName: string | undefined): React.ElementType => {
 
 export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }) => {
   const { data: cmsData, isLoading } = useServicesListData();
-  const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'solar', 'fenster', 'sanierung'];
-  
+  const serviceOrder: ServiceId[] = ['steildach', 'flachdach', 'fenster', 'sanierung', 'brandschaden', 'reparatur'];
+
   // Check if home page has custom services defined
   const hasCustomServices = homeData?.servicesSection?.services && homeData.servicesSection.services.length > 0;
-  
+
   // Extract services from CMS if available (fallback)
   const cmsServices = cmsData?.serviceConnection?.edges?.map((edge: any) => edge.node) || [];
-  
+
   // If we have CMS services, use them; otherwise fall back to hardcoded order
-  const displayOrder = cmsServices.length > 0 
+  const displayOrder = cmsServices.length > 0
     ? cmsServices.map((s: any) => s._sys.filename).filter((id: string) => serviceOrder.includes(id as ServiceId))
     : serviceOrder;
 
@@ -170,7 +176,7 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
   return (
     <section className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4">
-        
+
         <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
           <span className="text-primary-600 font-bold uppercase tracking-wider text-xs sm:text-sm" data-tina-field={homeData?.servicesSection && tinaField(homeData.servicesSection, 'eyebrow')}>
             {homeData?.servicesSection?.eyebrow || 'Unsere Expertise'}
@@ -256,7 +262,7 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
             displayOrder.map((id, index) => {
               const cmsService = cmsServices.find((s: any) => s._sys.filename === id);
               return (
-                <ServiceSection 
+                <ServiceSection
                   key={id}
                   id={id as ServiceId}
                   lang={lang}

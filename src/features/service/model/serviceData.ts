@@ -1,6 +1,6 @@
 import { teamMembersLegacy as teamMembers, TeamMember } from '../../company/model/teamData';
 
-export type ServiceId = 'steildach' | 'flachdach' | 'fenster' | 'sanierung' | 'solar';
+export type ServiceId = 'steildach' | 'flachdach' | 'fenster' | 'sanierung' | 'reparatur' | 'brandschaden';
 
 export interface ServiceSection {
   title: string;
@@ -90,33 +90,33 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
   flachdach: {
     id: 'flachdach',
     title: 'Flachdach',
-    subtitle: 'Moderne Architektur & Nutzbarkeit',
-    intro: 'Das moderne Flachdach ist ein Hochleistungsbauteil. Vergessen Sie die alten "Teerpappe-Geschichten". Wir arbeiten mit Materialien, die Jahrzehnte halten und neue Lebensräume schaffen.',
+    subtitle: 'Lösung für Industrie & Gewerbe',
+    intro: 'Gerade im Industriebau ist das Dach kapitalentscheidend. Wir sanieren große Hallendächer energetisch effizient und dauerhaft dicht. Mit Systemen, die den Betrieb nicht stören.',
     img: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
-    description: 'Ob moderne Abdichtung oder Dachbegrünung: Wir nutzen Hochleistungs-Materialien, die Jahrzehnte halten.',
+    description: 'Spezialisiert auf Industriehallen und Großprojekte. Langlebige Abdichtungssysteme für Ihr Gewerbe.',
     checkpoints: [
-      "100% Dichtheitsgarantie",
-      "Moderne Nutzungskonzepte (Begrünung)",
-      "Optimale Raumausnutzung"
+      "Industriestandards & Großflächen",
+      "Energetische Sanierung bei laufendem Betrieb",
+      "Wirtschaftliche Lösungen"
     ],
-    expertTip: "Ein Flachdach bietet Platz! Nutzen Sie es doppelt: Als Terrasse zum Entspannen oder als Gründach für besseres Klima.",
+    expertTip: "Bei Industriehallen rechnet sich eine Sanierung oft doppelt: Durch massive Heizkostenersparnis und staatliche Förderung.",
     sections: [
       {
         title: 'Die Abdichtung: Bitumen oder Kunststoff?',
         icon: 'Layers',
-        content: 'Wir beraten objektiv:\n\n• **Bitumen:** Der Klassiker. Zweilagig verschweißt entsteht eine dicke, robuste Schicht. Ideal, wenn das Dach später begehbar sein soll.\n• **Kunststoff (FPO/PVC):** Einlagig, leicht und flexibel. Perfekt für große Hallen oder Leichtbauweisen. Chemisch beständig und langlebig.'
+        content: 'Wir beraten objektiv für Ihr Projekt:\n\n• **Kunststoff (FPO/PVC):** Die erste Wahl für Industriehallen. Einlagig, leicht, schnell zu verlegen und mechanisch hoch belastbar. Ideal für große Spannweiten.\n• **Bitumen:** Der robuste Klassiker für begehbare Flächen oder Parkdecks. Zweilagig für höchste Sicherheit.'
       },
       {
-        title: 'Entwässerung ist alles',
+        title: 'Entwässerung & Gefälle',
         icon: 'CloudRain',
-        content: 'Stehendes Wasser ist der Feind. Wir planen das Gefälle exakt und verbauen Notüberläufe, damit auch bei Starkregen das Wasser sicher abfließt und die Statik nicht gefährdet.'
+        content: 'Bei großen Flächen ist stehendes Wasser ein Risiko. Wir planen Gefälledämmungen und leistungsstarke Entwässerungssysteme (Freispiegel oder Unterdruck), die auch Starkregen sicher ableiten.'
       }
     ],
     process: [
-      { step: 1, title: "Untergrundvorbereitung", text: "Reinigung der Betondecke oder Trapezbleche. Auftragung von Voranstrich." },
-      { step: 2, title: "Dampfsperre", text: "Verhindert, dass Feuchtigkeit aus dem Wohnraum in die Dämmung zieht." },
-      { step: 3, title: "Gefälledämmung", text: "Wir schneiden die Dämmung so, dass das Wasser gezielt zu den Abläufen fließt." },
-      { step: 4, title: "Abdichtung", text: "Fachgerechtes Verschweißen der Oberlage. Anschlüsse an Wände und Lichtkuppeln." }
+      { step: 1, title: "Bestandsaufnahme", text: "Drohnenanalyse und Kernbohrungen zur Prüfung des Schichtenpakets." },
+      { step: 2, title: "Konzept & Angebot", text: "Wir erstellen ein Sanierungskonzept unter Berücksichtigung der EnEV und Statik." },
+      { step: 3, title: "Sicherung & Vorbereitung", text: "Absturzsicherungen und Einrichtung der Baustelle." },
+      { step: 4, title: "Ausführung", text: "Segmentweise Sanierung, damit die Halle stets wettergeschützt bleibt." }
     ],
     references: [
       "/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_1.avif",
@@ -125,15 +125,11 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     ],
     contacts: [teamMembers.sascha, teamMembers.isabel],
     faq: [
-      { q: 'Was kostet eine Flachdachabdichtung pro m²?', a: 'Eine professionelle Flachdachabdichtung kostet zwischen 80 und 150 Euro pro m², abhängig vom System (Bitumen oder Kunststoff), der Dämmstärke und Zugänglichkeit. Dachbegrünung erhöht die Kosten auf 120-200 Euro/m². Wir kalkulieren transparent und bieten Festpreise an.' },
-      { q: 'Wie lange hält ein Flachdach?', a: 'Ein fachgerecht abgedichtetes Flachdach hält 25-40 Jahre. Bitumenbahnen halten etwa 25-30 Jahre, moderne Kunststoffbahnen (FPO/PVC) erreichen 30-40 Jahre. Entscheidend ist die regelmäßige Wartung – damit verlängern Sie die Lebensdauer erheblich.' },
-      { q: 'Wie oft muss ein Flachdach gewartet werden?', a: 'Wir empfehlen eine professionelle Wartung einmal jährlich, idealerweise im Herbst. Dabei reinigen wir die Abläufe von Laub und Schmutz, prüfen Nähte und Anschlüsse und dokumentieren den Zustand. Das kostet etwa 200-400 Euro und verhindert teure Folgeschäden.' },
-      { q: 'Kann ich mein Flachdach begrünen?', a: 'Ja, Dachbegrünung ist eine hervorragende Lösung! Sie schützt die Abdichtung vor UV-Strahlung, verbessert das Raumklima und bindet Regenwasser. Wichtig ist die Statikprüfung (Zusatzlast ca. 60-150 kg/m²). Wir planen und bauen extensive und intensive Begrünungen.' },
-      { q: 'Ist ein Flachdach als Terrasse nutzbar?', a: 'Absolut! Wir planen begehbare Flachdächer mit entsprechender Abdichtung und Entwässerung. Sie können Terrassenplatten, Kies oder Holzdielen verlegen. Die Statik muss die Nutzlast tragen, und die Abdichtung muss durchtrittsicher sein – beides planen wir für Sie.' },
-      { q: 'Warum ist mein Flachdach undicht?', a: 'Häufigste Ursachen sind verstopfte Abläufe (Wasser staut sich), gerissene Nähte durch Alterung, mechanische Beschädigungen oder fehlerhafte Anschlüsse an Wände/Lichtkuppeln. Wir finden die Leckage mit Thermografie oder Rauchprüfung und reparieren gezielt.' },
-      { q: 'Bitumen oder Kunststoff – was ist besser?', a: 'Bitumen ist robust, schwer und ideal für begehbare Dächer. Kunststoff (FPO/PVC) ist leicht, flexibel und chemisch beständig – perfekt für große Flächen und Leichtbau. Beide Systeme sind langlebig. Wir beraten objektiv basierend auf Ihrem Objekt und Nutzung.' },
-      { q: 'Braucht ein Flachdach ein Gefälle?', a: 'Ja, mindestens 2% Gefälle sind Pflicht! Nur so fließt Regenwasser zuverlässig ab. Wir erzeugen das Gefälle durch Gefälledämmung – das spart Bauhöhe und verbessert die Dämmleistung. Stehendes Wasser ist der Feind jeder Abdichtung.' },
-      { q: 'Kann ich ein altes Flachdach überdachen statt es zu erneuern?', a: 'Ja, wenn die alte Abdichtung noch intakt ist, können wir eine neue Lage aufschweißen (Aufdoppelung). Das spart Entsorgungskosten. Ist die Dämmung aber durchfeuchtet oder die Statik überlastet, empfehlen wir einen Komplettabriss und Neuaufbau.' }
+      { q: 'Was kostet eine Flachdachsanierung für Industriehallen?', a: 'Das hängt stark von Größe, Dämmstandard und gewähltem Material ab. Bei Hallendächern kalkulieren wir oft mit Quadratmeterpreisen, die bei großen Flächen wirtschaftlicher sind. Gerne erstellen wir ein individuelles Angebot nach Besichtigung.' },
+      { q: 'Kann der Betrieb während der Sanierung weiterlaufen?', a: 'Ja. Wir arbeiten so, dass Ihr Betrieb möglichst wenig gestört wird. Lärmintensive Arbeiten stimmen wir ab, und die Dichtigkeit ist zu jedem Zeitpunkt gewährleistet.' },
+      { q: 'Welche Dämmung eignet sich für Hallen?', a: 'Oft kommen Mineralwolle (Brandschutz!) oder PIR-Hartschaum zum Einsatz. Wir beraten Sie zu Brandschutzvorgaben und energetischen Anforderungen.' },
+      { q: 'Wie lange hält eine neue Abdichtung?', a: 'Moderne Kunststoffbahnen halten bei fachgerechter Verlegung und Wartung 30-40 Jahre, Bitumenbahnen ca. 25-30 Jahre.' },
+      { q: 'Bieten Sie auch regelmäßige Wartung für Hallendächer an?', a: 'Ja, das ist essentiell. Wir bieten Wartungsverträge an, die jährliche Inspektionen und Rinnenreinigungen beinhalten, um die Lebensdauer des Daches zu maximieren und Versicherungsschutz zu gewährleisten.' }
     ]
   },
   fenster: {
@@ -187,22 +183,64 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
   },
   sanierung: {
     id: 'sanierung',
-    title: 'Sanierung & Reparatur',
-    subtitle: 'Werterhalt statt Totalschaden',
-    intro: 'Kleine Schäden werden schnell groß. Ein loser Ziegel, eine undichte Rinne – Wasser sucht sich seinen Weg. Wir kümmern uns um den Werterhalt Ihrer Immobilie.',
+    title: 'Sanierung',
+    subtitle: 'Werterhalt & Modernisierung',
+    intro: 'Bei einer Dachsanierung geht es um mehr als nur Dichtigkeit. Es geht um Energieeffizienz, Wohnkomfort und den langfristigen Erhalt Ihrer Immobilie. Wir machen Ihr Dach fit für die Zukunft.',
     img: '/uploads/ivangs-dach-sanierung.avif',
-    description: 'Vom Altbau bis zum Balkon: Wir stellen den Wert Ihrer Immobilie materialgetreu wieder her.',
+    description: 'Komplettsanierung nach neuesten energetischen Standards. Alles aus einer Hand für Ihre Immobilie.',
     checkpoints: [
-      "Materialgetreue Wiederherstellung",
-      "Energetische Optimierung",
-      "Fassadenbekleidung vom Fachmann"
+      "Energetische Optimierung (KfW/BAFA)",
+      "Wertsteigerung der Immobilie",
+      "Nachhaltige Materialien"
+    ],
+    expertTip: "Eine energetische Sanierung ist der beste Inflationsschutz. Sie investieren in Ihr Eigentum und senken dauerhaft Ihre laufenden Kosten.",
+    sections: [
+      {
+        title: 'Mehr als nur neue Ziegel',
+        icon: 'ShieldCheck',
+        content: 'Eine Sanierung umfasst den kompletten Dachaufbau: Von der Dampfbremse über die Dämmung bis zur Eindeckung. Wir prüfen auch den Dachstuhl auf Tragfähigkeit und Schädlinge.'
+      },
+      {
+        title: 'Investition, die sich lohnt',
+        icon: 'Calendar',
+        content: 'Durch moderne Dämmung sparen Sie nicht nur Heizkosten. Sie verbessern auch das Wohnklima im Sommer (Hitzeschutz) und steigern den Wiederverkaufswert Ihres Hauses massiv.'
+      }
+    ],
+    process: [
+      { step: 1, title: "Analyse", text: "Ausführliche Bestandsaufnahme und Prüfung der Bausubstanz." },
+      { step: 2, title: "Planung & Förderung", text: "Wir erstellen ein Sanierungskonzept und beraten zu Fördermitteln." },
+      { step: 3, title: "Umsetzung", text: "Fachgerechte Ausführung aller Arbeiten aus einer Hand." },
+      { step: 4, title: "Abnahme", text: "Gemeinsame Begehung und Übergabe des sanierten Daches." }
+    ],
+    references: [
+      "/uploads/ivangs-dach-sanierung.avif",
+      "/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif"
+    ],
+    contacts: [teamMembers.sabine, teamMembers.isabel],
+    faq: [
+      { q: 'Lohnt sich eine Sanierung oder reicht eine Reparatur?', a: 'Das hängt vom Gesamtzustand ab. Wenn die Bausubstanz gut ist, reicht oft eine Reparatur. Ist die Dämmung alt oder feucht, spart eine Sanierung langfristig viel Geld.' },
+      { q: 'Wie lange dauert eine Dachsanierung?', a: 'Etwa 2-3 Wochen bei einem Einfamilienhaus, stark wetterabhängig.' },
+      { q: 'Bekomme ich Förderung?', a: 'Ja, für energetische Maßnahmen gibt es attraktive Zuschüsse. Wir beraten Sie gerne.' }
+    ]
+  },
+  reparatur: {
+    id: 'reparatur',
+    title: 'Reparatur & Service',
+    subtitle: 'Schnelle Hilfe & Wartung',
+    intro: 'Ein kleiner Schaden kann schnell teuer werden. Wasser sucht sich seinen Weg. Wir reparieren schnell, unkompliziert und nachhaltig – damit aus Kleinigkeiten keine Großbaustellen werden.',
+    img: '/images/services/reparatur-service.jpg',
+    description: 'Sturmschaden? Undichtes Fenster? Lose Ziegel? Wir kümmern uns sofort um den Werterhalt.',
+    checkpoints: [
+      "Schnelle Reaktionszeiten",
+      "Reparatur aller Dacharten",
+      "Wartungsservice"
     ],
     expertTip: "Warten Sie nicht auf den Sturm. Ein Wartungsvertrag ist wie der TÜV fürs Auto – und oft günstiger als ein Wasserschaden.",
     sections: [
       {
-        title: 'Reparatur vs. Sanierung',
+        title: 'Reparatur vor Austausch',
         icon: 'ShieldCheck',
-        content: 'Wir verkaufen Ihnen kein neues Dach, wenn eine Reparatur reicht. Wir prüfen den Zustand der Substanz ehrlich. Sind >30% der Fläche betroffen oder die Dämmung nass, planen wir eine Sanierung. Bei Sturmschäden oder Verschleißteilen reparieren wir punktuell.'
+        content: 'Wir verkaufen Ihnen kein neues Dach, wenn eine Reparatur reicht. Wir prüfen den Zustand ehrlich. Oft lassen sich Schäden lokal beheben, ohne gleich alles neu zu machen.'
       },
       {
         title: 'Wartungsservice',
@@ -213,74 +251,56 @@ export const servicesData: Record<ServiceId, ServiceDetailData> = {
     process: [
       { step: 1, title: "Meldung", text: "Sie rufen an oder schicken ein Foto des Schadens." },
       { step: 2, title: "Besichtigung", text: "Wir schauen uns den Schaden vor Ort an (bei Gefahr im Verzug sichern wir sofort)." },
-      { step: 3, title: "Planung", text: "Kleine Reparaturen erledigen wir oft sofort. Für Größeres erhalten Sie ein Festpreis-Angebot." },
-      { step: 4, title: "Ausführung", text: "Schnelle und saubere Durchführung durch unsere Service-Teams." }
+      { step: 3, title: "Reparatur", text: "Kleine Reparaturen erledigen wir oft sofort. Für Größeres erhalten Sie ein Festpreis-Angebot." }
     ],
-    references: [
-      "/uploads/ivangs-dach-sanierung.avif",
-      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_1.avif",
-      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_2.avif"
-    ],
+    references: [],
     contacts: [teamMembers.sabine, teamMembers.isabel],
     faq: [
-      { q: 'Was kostet eine Dachreparatur im Kreis Viersen?', a: 'Kleine Reparaturen (einzelne Ziegel, Dichtungen) kosten etwa 200-500 Euro. Größere Arbeiten wie Rinnenerneuerung oder Flachdachabdichtung liegen bei 1.000-5.000 Euro. Sturmschäden rechnen wir oft direkt mit Ihrer Versicherung ab. Wir erstellen kostenlose Kostenvoranschläge.' },
-      { q: 'Wie schnell können Sie bei einem Notfall kommen?', a: 'Bei akuten Schadensfällen (Sturmschaden, Wassereintritt) sind wir innerhalb von 24 Stunden vor Ort und sichern das Dach provisorisch ab. Für reguläre Reparaturen bieten wir Termine innerhalb einer Woche. Rufen Sie uns an: 02162 356666.' },
-      { q: 'Was kostet eine Rinnenreinigung?', a: 'Eine Rinnenreinigung kostet pauschal etwa 150-300 Euro für ein Einfamilienhaus, abhängig von Länge und Höhe. Bei stark verschmutzten oder schwer zugänglichen Rinnen kann es mehr werden. Wir bieten auch Wartungsverträge mit jährlicher Rinnenreinigung an.' },
-      { q: 'Helfen Sie bei Versicherungsschäden?', a: 'Ja, wir sind erfahren im Umgang mit Versicherungen. Wir dokumentieren den Schaden mit Fotos, erstellen detaillierte Gutachten und rechnen auf Wunsch direkt mit Ihrer Wohngebäudeversicherung ab. Das spart Ihnen Aufwand und beschleunigt die Schadenregulierung.' },
-      { q: 'Lohnt sich ein Wartungsvertrag fürs Dach?', a: 'Absolut! Ein Wartungsvertrag kostet etwa 200-400 Euro jährlich und beinhaltet Rinnenreinigung, Sichtprüfung und Protokoll. Damit verhindern Sie teure Folgeschäden und haben ein gutes Gefühl. Viele Versicherungen gewähren Rabatte bei regelmäßiger Wartung.' },
-      { q: 'Können Sie auch historische Dächer sanieren?', a: 'Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden und historischen Baustoffen. Wir arbeiten mit Naturschiefer, historischen Ziegeln und traditionellen Techniken. Bei Bedarf koordinieren wir mit der Denkmalbehörde und beraten zu förderfähigen Maßnahmen.' },
-      { q: 'Was ist der Unterschied zwischen Reparatur und Sanierung?', a: 'Reparatur bedeutet punktuellen Austausch defekter Teile (Ziegel, Rinnen, Abdichtung). Sanierung ist die Erneuerung größerer Bereiche oder des gesamten Daches inkl. Dämmung. Faustregel: Sind mehr als 30% der Fläche betroffen, lohnt sich eine Komplettsanierung.' },
-      { q: 'Wie erkenne ich einen Sturmschaden am Dach?', a: 'Typische Anzeichen: fehlende oder verschobene Ziegel, abgerissene Dachrinnen, gelöste Bleche oder Eindringen von Wasser. Nach Unwettern empfehlen wir eine Sichtprüfung. Melden Sie Schäden sofort der Versicherung – wir unterstützen Sie bei der Dokumentation.' },
-      { q: 'Übernehmen Sie auch Fassadenarbeiten?', a: 'Ja, als Fachbetrieb für Außenhülle machen wir auch Fassadenverkleidungen mit Schiefer, Metall oder Faserzement. Das passt perfekt zur Dacharbeit – so haben Sie einen Ansprechpartner für die komplette Gebäudehülle und einheitliche Optik.' }
+      { q: 'Was kostet eine Dachreparatur?', a: 'Kleine Reparaturen (einzelne Ziegel) ab ca. 200€. Wir geben Ihnen vorab eine Einschätzung.' },
+      { q: 'Helfen Sie bei Sturmschäden?', a: 'Ja, wir sichern das Dach und dokumentieren den Schaden für Ihre Versicherung.' },
+      { q: 'Reinigen Sie auch Dachrinnen?', a: 'Ja, das gehört zu unseren Standard-Serviceleistungen.' }
     ]
   },
-  solar: {
-    id: 'solar',
-    title: 'Solar & Photovoltaik',
-    subtitle: 'Warum der Dachdecker die bessere Wahl ist',
-    intro: 'Photovoltaik boomt. Aber Vorsicht: Die meisten Anlagen werden von Elektrikern montiert, die die Dachhaut nicht kennen. Wir garantieren Ihnen: Strom fließt, Wasser bleibt draußen.',
-    img: '/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif',
-    description: 'Machen Sie Ihr Dach zum Kraftwerk. Wir montieren Auf-Dach-Solar-Anlagen fachgerecht und sicher – alles aus einer Hand.',
+  brandschaden: {
+    id: 'brandschaden',
+    title: 'Brandschadensanierung',
+    subtitle: 'Wiederaufbau mit Verstand',
+    intro: 'Ein Brandschaden ist ein Ausnahmezustand. Wir helfen Ihnen, schnell wieder zur Normalität zurückzufinden. Von der Sicherung bis zum kompletten Wiederaufbau der Dachkonstruktion.',
+    img: '/images/services/brandschaden-dach.jpg',
+    description: 'Spezialisierte Sanierung nach Feuer- und Löschwasserschäden. Statikprüfung, Abbruch und Wiederaufbau aus einer Hand.',
     checkpoints: [
-      "Stromkosten senken & unabhängig werden",
-      "Sichere Montage ohne Dachschäden",
-      "Komplettservice vom Meisterbetrieb"
+      "Sofortmaßnahmen & Sicherung",
+      "Statische Überprüfung",
+      "Kompletter Wiederaufbau"
     ],
-    expertTip: "Lassen Sie keine Laien an Ihr Dach. Ein durchgebohrter Ziegel kann Jahre später zu morschen Balken führen.",
+    expertTip: "Nach einem Brand ist oft nicht nur das Feuer das Problem, sondern auch das Löschwasser. Wir prüfen die Dämmung auf Feuchtigkeit, um Spätschäden zu vermeiden.",
     sections: [
       {
-        title: 'Das Problem mit den Dachhaken',
-        icon: 'Info',
-        content: 'Um Solarmodule zu befestigen, müssen Haken unter die Ziegel. Viele Anbieter "flexen" die Ziegel einfach aus. Die Folge: Bruchgefahr bei Schneelast. Wir nutzen **spezielle Metalldachplatten** oder bearbeiten die Ziegel fachgerecht, damit die Regensicherheit zu 100% erhalten bleibt.'
+        title: 'Sicherheit zuerst',
+        icon: 'ShieldCheck',
+        content: 'Brandruinen sind gefährlich. Wir prüfen zuerst die Statik und sichern die Baustelle, bevor wir mit Aufräumarbeiten beginnen.'
       },
       {
-        title: 'Statik Check',
-        icon: 'Ruler',
-        content: 'Eine Solaranlage wiegt hunderte Kilo. Wir prüfen vorab, ob Ihr Dachstuhl das trägt. Als Dachdecker erkennen wir morsche Balken sofort – bevor die teure Anlage draufgeschraubt wird.'
+        title: 'Alles aus einer Hand',
+        icon: 'Hammer',
+        content: 'Wir koordinieren Abriss, Entsorgung von Brandlasten und den fachgerechten Wiederaufbau. So haben Sie nur einen Ansprechpartner in dieser stressigen Zeit.'
       }
     ],
     process: [
-      { step: 1, title: "Dach-Check & Planung", text: "Prüfung der Ziegel und Statik. Berechnung der möglichen Modulanzahl." },
-      { step: 2, title: "Gerüststellung", text: "Arbeitssicherheit für die Montage." },
-      { step: 3, title: "Montage Unterkonstruktion", text: "Fachgerechtes Setzen der Dachhaken und Schienen." },
-      { step: 4, title: "Modulmontage", text: "Verkabelung und Befestigung der Module." },
-      { step: 5, title: "Anschluss", text: "Der elektrische Anschluss erfolgt durch unseren Partner-Elektriker." }
+      { step: 1, title: "Sicherung", text: "Notabdichtung und Sicherung der Statik, um Folgeschäden zu vermeiden." },
+      { step: 2, title: "Bestandsaufnahme", text: "Detaillierte Analyse für Versicherung und Sanierungsplan." },
+      { step: 3, title: "Rückbau", text: "Fachgerechte Entsorgung beschädigter und kontaminierter Bauteile." },
+      { step: 4, title: "Wiederaufbau", text: "Erstellung des neuen Dachstuhls und der Eindeckung." }
     ],
     references: [
-      "/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif"
+      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_1.avif",
+      "/uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_2.avif"
     ],
     contacts: [teamMembers.marcus, teamMembers.sascha],
     faq: [
-      { q: 'Was kostet eine Solaranlage mit Montage?', a: 'Eine Photovoltaik-Anlage für ein Einfamilienhaus (6-10 kWp, ca. 15-25 Module) kostet komplett installiert zwischen 12.000 und 20.000 Euro. Das beinhaltet Module, Wechselrichter, Montagesystem und fachgerechten Einbau durch uns. Mit Speicher (5-10 kWh) kommen 6.000-12.000 Euro hinzu.' },
-      { q: 'Warum sollte ein Dachdecker die Solaranlage montieren?', a: 'Weil wir die Dachhaut kennen und schützen! Viele Elektriker bohren Ziegel an oder beschädigen die Abdichtung – mit teuren Folgeschäden. Wir setzen Dachhaken fachgerecht, verwenden Metalldachplatten wo nötig und garantieren: Strom fließt, Wasser bleibt draußen.' },
-      { q: 'Lohnt sich ein Stromspeicher?', a: 'Ja, wenn Sie Ihren Eigenverbrauch maximieren wollen. Ohne Speicher nutzen Sie ca. 30% des Solarstroms selbst, mit Speicher bis zu 70%. Ein Speicher kostet etwa 6.000-12.000 Euro und amortisiert sich durch eingesparte Stromkosten in 10-15 Jahren. Wir rechnen das individuell für Sie durch.' },
-      { q: 'Kann ich Solar auf ein altes Dach montieren?', a: 'Nur wenn das Dach noch mindestens 20 Jahre hält – eine Solaranlage hat diese Lebensdauer. Sonst sanieren wir das Dach vorher, was sogar günstiger ist, da wir das Gerüst nur einmal aufbauen. Wir prüfen den Dachzustand kostenlos und beraten ehrlich.' },
-      { q: 'Trägt mein Dach das Gewicht einer Solaranlage?', a: 'Eine PV-Anlage wiegt etwa 15-20 kg pro m² – die meisten Dächer halten das problemlos. Wir prüfen vorab die Statik und erkennen als Dachdecker morsche Balken oder Schwachstellen sofort. Bei Bedarf verstärken wir die Konstruktion, bevor wir montieren.' },
-      { q: 'Wie lange dauert die Montage einer Solaranlage?', a: 'Bei einem Einfamilienhaus dauert die reine Montage 2-3 Tage: Tag 1 Gerüst und Dachhaken, Tag 2 Schienen und Module, Tag 3 elektrischer Anschluss (mit Partner-Elektriker). Nach 1-2 Wochen kommt der Netzbetreiber für die Zählermontage und Netzfreischaltung.' },
-      { q: 'Gibt es Förderung für Photovoltaik?', a: 'Ja! Die Einspeisevergütung läuft 20 Jahre (aktuell ca. 8-13 Cent/kWh je nach Anlagengröße). Zudem gibt es zinsgünstige KfW-Kredite und regionale Förderprogramme. Seit 2023 entfällt die Mehrwertsteuer bei PV-Anlagen. Wir beraten Sie zu allen Fördermöglichkeiten.' },
-      { q: 'Muss ich die Solaranlage warten?', a: 'PV-Anlagen sind wartungsarm. Wir empfehlen alle 3-5 Jahre eine Sichtprüfung und Reinigung der Module (Verschmutzung reduziert Ertrag um 5-10%). Die Überprüfung der elektrischen Anlage sollte alle 4 Jahre erfolgen. Wir bieten Wartungsverträge ab 150 Euro/Jahr an.' },
-      { q: 'Was passiert bei Schnee und Sturm?', a: 'Module sind für Schneelasten bis 5.400 Pa (ca. 50 cm Schnee) und Windlasten bis 2.400 Pa ausgelegt. Unsere Montage ist TÜV-geprüft und hält Orkanen stand. Schnee rutscht von geneigten Modulen meist von selbst ab. Bei extremen Wetterlagen prüfen wir die Anlage kostenfrei.' },
-      { q: 'Kann ich mit Solar autark werden?', a: 'Vollständig autark ist in Deutschland schwierig – im Winter reicht die Sonne nicht. Mit großzügiger Anlage (10+ kWp) und Speicher (10+ kWh) erreichen Sie etwa 70-80% Autarkie übers Jahr. Für 100% bräuchten Sie riesige Speicher, was wirtschaftlich nicht sinnvoll ist. Wir planen Ihre optimale Eigenverbrauchsquote.' }
+      { q: 'Rechnen Sie mit der Versicherung ab?', a: 'Wir unterstützen Sie mit detaillierten Angeboten und Dokumentationen für Ihre Versicherung.' },
+      { q: 'Ist der Dachstuhl noch zu retten?', a: 'Das muss ein Statiker prüfen. Oft sind Balken nur oberflächlich angekohlt, manchmal muss aber alles neu. Wir klären das.' },
+      { q: 'Wie lange dauert die Brandschadensanierung?', a: 'Das ist sehr individuell. Nach Freigabe durch die Behörden/Versicherung arbeiten wir mit Hochdruck am Wiederaufbau.' }
     ]
   }
 };

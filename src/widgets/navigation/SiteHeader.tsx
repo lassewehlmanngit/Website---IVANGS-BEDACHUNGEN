@@ -52,7 +52,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
   const serviceLinks = [
     { id: 'steildach', label: 'Steildach' },
     { id: 'flachdach', label: 'Flachdach' },
-    { id: 'solar', label: 'Solar & PV' },
+    { id: 'reparatur', label: 'Reparatur' },
+    { id: 'brandschaden', label: 'Brandschutz' },
     { id: 'fenster', label: 'Fenster' },
     { id: 'sanierung', label: 'Sanierung' },
   ];
@@ -63,31 +64,31 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
         <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
           {/* Increased vertical padding (py-5 to py-6) for cleaner look */}
           <div className="container flex items-center justify-between py-5 md:py-6">
-              {/* Logo Section - Uses logo from CMS navigation data */}
-              <Link 
-                to={`/${lang}`} 
-                className="flex items-center gap-3 cursor-pointer group relative z-50"
-                onClick={() => setMobileMenuOpen(false)}
-                data-tina-field={nav.logo && tinaField(data?.navigation, 'logo')}
-              >
-                {nav.logo ? (
-                  <img 
-                    src={nav.logo} 
-                    alt="Ivangs Bedachungen Logo" 
-                    className="h-10 w-auto group-hover:scale-105 transition-transform"
-                  />
-                ) : (
-                  <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
-                    <Hammer size={24} />
-                  </div>
-                )}
-                <div>
-                  <h1 className="text-2xl font-bold leading-none text-foreground tracking-tight">
-                    IVANGS
-                  </h1>
-                  <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Bedachungen</span>
+            {/* Logo Section - Uses logo from CMS navigation data */}
+            <Link
+              to={`/${lang}`}
+              className="flex items-center gap-3 cursor-pointer group relative z-50"
+              onClick={() => setMobileMenuOpen(false)}
+              data-tina-field={nav.logo && tinaField(data?.navigation, 'logo')}
+            >
+              {nav.logo ? (
+                <img
+                  src={nav.logo}
+                  alt="Ivangs Bedachungen Logo"
+                  className="h-10 w-auto group-hover:scale-105 transition-transform"
+                />
+              ) : (
+                <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
+                  <Hammer size={24} />
                 </div>
-              </Link>
+              )}
+              <div>
+                <h1 className="text-2xl font-bold leading-none text-foreground tracking-tight">
+                  IVANGS
+                </h1>
+                <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Bedachungen</span>
+              </div>
+            </Link>
 
             {/* Desktop navigation */}
             <nav
@@ -95,71 +96,71 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               className="hidden items-center gap-8 md:flex"
             >
               {nav.items.map((item: any, index: number) => (
-                <NavLink 
-                  key={item.href} 
-                  to={`/${lang}${item.href}`} 
+                <NavLink
+                  key={item.href}
+                  to={`/${lang}${item.href}`}
                   className={linkClassName}
                   data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
                 >
                   {item.label}
                 </NavLink>
               ))}
-              <Button 
-                  onClick={() => navigate(ctaLink)}
-                  className="shadow-lg shadow-primary/20"
-                  data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
+              <Button
+                onClick={() => navigate(ctaLink)}
+                className="shadow-lg shadow-primary/20"
+                data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
               >
-                  {ctaText}
+                {ctaText}
               </Button>
             </nav>
 
             {/* Mobile menu button - Z-Index 50 to sit above full screen menu */}
             <div className="md:hidden z-50">
-               <button
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="p-2 text-slate-900 hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                  aria-label={t('navigation.menu')}
-                  aria-expanded={mobileMenuOpen}
-               >
-                  {/* Switch icon based on state */}
-                  {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
-               </button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 text-slate-900 hover:text-primary transition-colors rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                aria-label={t('navigation.menu')}
+                aria-expanded={mobileMenuOpen}
+              >
+                {/* Switch icon based on state */}
+                {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+              </button>
             </div>
           </div>
         </header>
-        
+
         {/* Secondary Service Nav (Desktop Only) */}
         <div className="hidden md:block bg-slate-50 border-b border-slate-200">
-             <div className="container h-12 flex items-center gap-8">
-                <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Leistungen:</span>
-                {serviceLinks.map((service) => (
-                  <NavLink
-                      key={service.id}
-                      to={`/${lang}/services/${service.id}`}
-                      className={({ isActive }) => cn(
-                          "text-sm font-medium transition-colors hover:text-primary relative group py-3",
-                          isActive ? "text-primary" : "text-muted-foreground"
+          <div className="container h-12 flex items-center gap-8">
+            <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Leistungen:</span>
+            {serviceLinks.map((service) => (
+              <NavLink
+                key={service.id}
+                to={`/${lang}/services/${service.id}`}
+                className={({ isActive }) => cn(
+                  "text-sm font-medium transition-colors hover:text-primary relative group py-3",
+                  isActive ? "text-primary" : "text-muted-foreground"
+                )}
+              >
+                {({ isActive }) => (
+                  <>
+                    <span>{service.label}</span>
+                    <span
+                      className={cn(
+                        "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300",
+                        isActive ? "w-full" : "w-0 group-hover:w-full"
                       )}
-                  >
-                      {({ isActive }) => (
-                        <>
-                          <span>{service.label}</span>
-                          <span 
-                            className={cn(
-                              "absolute bottom-0 left-0 h-0.5 bg-primary transition-all duration-300",
-                              isActive ? "w-full" : "w-0 group-hover:w-full"
-                            )}
-                          ></span>
-                        </>
-                      )}
-                  </NavLink>
-                ))}
-             </div>
+                    ></span>
+                  </>
+                )}
+              </NavLink>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Full Page Mobile Menu Overlay */}
-      <div 
+      <div
         className={cn(
           "fixed inset-0 bg-white z-40 flex flex-col pt-32 px-6 pb-12 transition-all duration-300 ease-out md:hidden overflow-y-auto",
           mobileMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
@@ -180,33 +181,33 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               {item.label}
             </NavLink>
           ))}
-          
+
           <hr className="border-slate-100 my-4" />
-          
+
           <div className="grid grid-cols-2 gap-3">
-             {serviceLinks.map((service) => (
-                <Link
-                  key={service.id}
-                  to={`/${lang}/services/${service.id}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="bg-slate-50 p-4 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-100 hover:text-primary transition-colors border border-slate-100"
-                >
-                  {service.label}
-                </Link>
-             ))}
+            {serviceLinks.map((service) => (
+              <Link
+                key={service.id}
+                to={`/${lang}/services/${service.id}`}
+                onClick={() => setMobileMenuOpen(false)}
+                className="bg-slate-50 p-4 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-100 hover:text-primary transition-colors border border-slate-100"
+              >
+                {service.label}
+              </Link>
+            ))}
           </div>
 
           <div className="mt-auto pt-8">
-             <Button 
-               className="w-full py-6 text-lg font-bold shadow-lg shadow-primary/20" 
-               onClick={() => {
-                 navigate(ctaLink);
-                 setMobileMenuOpen(false);
-               }}
-               data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
-             >
-               {ctaText}
-             </Button>
+            <Button
+              className="w-full py-6 text-lg font-bold shadow-lg shadow-primary/20"
+              onClick={() => {
+                navigate(ctaLink);
+                setMobileMenuOpen(false);
+              }}
+              data-tina-field={data?.navigation?.ctaButton && tinaField(data.navigation.ctaButton, 'text')}
+            >
+              {ctaText}
+            </Button>
           </div>
         </nav>
       </div>

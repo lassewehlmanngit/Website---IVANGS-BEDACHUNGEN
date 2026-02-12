@@ -68,31 +68,17 @@
       },
       {
         "title": "Flachdach",
-        "description": "Moderne Flachdächer sind wartungsarm, langlebig und bieten zusätzlichen Nutzraum. Wir realisieren Bitumen-, Kunststoff- und Gründachlösungen – fachgerecht und dicht.",
+        "description": "Spezialisiert auf Industriehallen und Großprojekte. Langlebige Abdichtungssysteme für Ihr Gewerbe – wirtschaftlich & dauerhaft dicht.",
         "image": "/uploads/flachdach-service.avif",
         "icon": "Layers",
         "checkpoints": [
+          "Industriehallen & Gewerbebau",
           "Bitumen & Kunststoffabdichtung",
-          "Gründach & Kiesdach",
-          "Dachentwässerung",
+          "Sanierung bei laufendem Betrieb",
           "Wartungsverträge"
         ],
         "ctaText": "Mehr zu Flachdach",
         "link": "/de/services/flachdach"
-      },
-      {
-        "title": "Solar & Photovoltaik",
-        "description": "Nutzen Sie Ihr Dach als Einnahmequelle. Wir planen und montieren PV-Anlagen inklusive Speichersystemen – für maximale Unabhängigkeit und Ertrag.",
-        "image": "/uploads/solar-service.avif",
-        "icon": "Sun",
-        "checkpoints": [
-          "Aufdach- & Indach-Montage",
-          "Speichersysteme integrierbar",
-          "Förderberatung & Anträge",
-          "Made in Germany"
-        ],
-        "ctaText": "Mehr zu Solar",
-        "link": "/de/services/solar"
       },
       {
         "title": "Dachfenster & Gauben",
@@ -121,6 +107,34 @@
         ],
         "ctaText": "Mehr zu Sanierung",
         "link": "/de/services/sanierung"
+      },
+      {
+        "title": "Brandschadensanierung",
+        "description": "Spezialisierte Sanierung nach Feuer- und Löschwasserschäden. Statikprüfung, Abbruch und Wiederaufbau aus einer Hand.",
+        "image": "/images/services/brandschaden-dach.jpg",
+        "icon": "Flame",
+        "checkpoints": [
+          "Sofortmaßnahmen & Sicherung",
+          "Statische Überprüfung",
+          "Kompletter Wiederaufbau",
+          "Abwicklung mit Versicherung"
+        ],
+        "ctaText": "Hilfe bei Brandschaden",
+        "link": "/de/services/brandschaden"
+      },
+      {
+        "title": "Reparatur & Service",
+        "description": "Sturmschaden? Undichtes Fenster? Lose Ziegel? Wir kümmern uns sofort um den Werterhalt Ihrer Immobilie.",
+        "image": "/images/services/reparatur-service.jpg",
+        "icon": "Wrench",
+        "checkpoints": [
+          "Schnelle Reaktionszeiten",
+          "Reparatur aller Dacharten",
+          "Wartungsservice",
+          "Notdienst"
+        ],
+        "ctaText": "Reparatur anfragen",
+        "link": "/de/services/reparatur"
       }
     ]
   },

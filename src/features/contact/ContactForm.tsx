@@ -41,12 +41,12 @@ const initialFormData: ContactFormData = {
 };
 
 const TOPICS = [
-    { value: 'Allgemeine Anfrage', label: 'Allgemeine Anfrage' },
-    { value: 'Angebot Steildach', label: 'Angebot Steildach' },
-    { value: 'Angebot Flachdach', label: 'Angebot Flachdach' },
-    { value: 'Angebot Solar/PV', label: 'Angebot Solar/PV' },
-    { value: 'Reparatur / Wartung', label: 'Reparatur / Wartung' },
-    { value: 'Bewerbung', label: 'Bewerbung' },
+  { value: 'Allgemeine Anfrage', label: 'Allgemeine Anfrage' },
+  { value: 'Angebot Steildach', label: 'Angebot Steildach' },
+  { value: 'Angebot Flachdach', label: 'Angebot Flachdach' },
+  { value: 'Reparatur / Wartung', label: 'Reparatur / Wartung' },
+  { value: 'Brandschaden', label: 'Brandschaden' },
+  { value: 'Bewerbung', label: 'Bewerbung' },
 ];
 
 export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className }) => {
@@ -68,11 +68,11 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value, type } = e.target;
-    
+
     if (type === 'checkbox') {
-        setFormData((prev) => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
+      setFormData((prev) => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
     } else {
-        setFormData((prev) => ({ ...prev, [name]: value }));
+      setFormData((prev) => ({ ...prev, [name]: value }));
     }
 
     if (errors[name as keyof ContactFormData]) {
@@ -218,17 +218,17 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             aria-invalid={!!errors.message}
           />
         </FormField>
-        
+
         <div className="py-2">
-            <Checkbox 
-                id="contact-privacy"
-                name="privacy"
-                checked={formData.privacy}
-                onChange={handleChange}
-                label="Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu."
-                aria-invalid={!!errors.privacy}
-            />
-            {errors.privacy && <p className="text-sm text-destructive mt-1">{errors.privacy}</p>}
+          <Checkbox
+            id="contact-privacy"
+            name="privacy"
+            checked={formData.privacy}
+            onChange={handleChange}
+            label="Ich stimme der Verarbeitung meiner Daten gemäß der Datenschutzerklärung zu."
+            aria-invalid={!!errors.privacy}
+          />
+          {errors.privacy && <p className="text-sm text-destructive mt-1">{errors.privacy}</p>}
         </div>
 
         <Button type="submit" isLoading={isSubmitting} className="w-full sm:w-auto">

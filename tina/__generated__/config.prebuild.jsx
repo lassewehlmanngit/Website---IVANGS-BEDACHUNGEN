@@ -306,7 +306,9 @@ var config_default = defineConfig({
   media: {
     tina: {
       publicFolder: "public",
-      mediaRoot: "uploads"
+      mediaRoot: "uploads",
+      static: false
+      // Allows editors to upload/delete media (dynamic assets)
     }
   },
   schema: {

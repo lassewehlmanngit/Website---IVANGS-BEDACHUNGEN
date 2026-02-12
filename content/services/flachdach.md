@@ -1,66 +1,71 @@
 ---
 title: Flachdach
-subtitle: Moderne Architektur & Nutzbarkeit
-shortDescription: Ob moderne Abdichtung oder Dachbegrünung - Wir nutzen Hochleistungs-Materialien, die Jahrzehnte halten.
-intro: Das moderne Flachdach ist ein Hochleistungsbauteil. Vergessen Sie die alten "Teerpappe-Geschichten". Wir arbeiten mit Materialien, die Jahrzehnte halten und neue Lebensräume schaffen.
-heroImage: /uploads/flachdach.avif
+subtitle: Lösung für Industrie & Gewerbe
+shortDescription: Spezialisiert auf Industriehallen und Großprojekte. Langlebige Abdichtungssysteme für Ihr Gewerbe.
+intro: Gerade im Industriebau ist das Dach kapitalentscheidend. Wir sanieren große Hallendächer energetisch effizient und dauerhaft dicht. Mit Systemen, die den Betrieb nicht stören.
+heroImage: /uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif
 icon: Layers
-expertTip: Ein Flachdach bietet Platz! Nutzen Sie es doppelt - Als Terrasse zum Entspannen oder als Gründach für besseres Klima.
+expertTip: Bei Industriehallen rechnet sich eine Sanierung oft doppelt - Durch massive Heizkostenersparnis und staatliche Förderung.
 uiText:
-  introHeader: Worum es wirklich geht.
+  introHeader: Wirtschaftlich & Langlebig.
   contactButtonText: Kontakt aufnehmen
   careerCtaTitle: Karriere bei Ivangs
   careerCtaDescription: Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.
   careerCtaButtonText: Offene Stellen ansehen
 features:
-  - Bitumen- und Kunststoffabdichtung
-  - Flachdachsanierung
-  - Dachbegrünung
-  - Entwässerungssysteme
+  - Industriestandards & Großflächen
+  - Energetische Sanierung bei laufendem Betrieb
+  - Wirtschaftliche Lösungen
+  - Wartungsservice
 benefits:
-  - Moderne Abdichtungssysteme
-  - Langlebige Lösungen
-  - Wartungsfreundlich
-  - Ökologische Optionen
+  - Werterhalt der Immobilie
+  - Senkung der Betriebskosten
+  - Brandschutz-Optimierung
+  - Langlebige Abdichtung
 sections:
   - title: Die Abdichtung - Bitumen oder Kunststoff?
     icon: Layers
     content: |
-      Wir beraten objektiv:
+      Wir beraten objektiv für Ihr Projekt:
       
-      • **Bitumen:** Der Klassiker. Zweilagig verschweißt entsteht eine dicke, robuste Schicht. Ideal, wenn das Dach später begehbar sein soll.
-      • **Kunststoff (FPO/PVC):** Einlagig, leicht und flexibel. Perfekt für große Hallen oder Leichtbauweisen. Chemisch beständig und langlebig.
-  - title: Entwässerung ist alles
+      • **Kunststoff (FPO/PVC):** Die erste Wahl für Industriehallen. Einlagig, leicht, schnell zu verlegen und mechanisch hoch belastbar. Ideal für große Spannweiten.
+      • **Bitumen:** Der robuste Klassiker für begehbare Flächen oder Parkdecks. Zweilagig für höchste Sicherheit.
+  - title: Entwässerung & Gefälle
     icon: CloudRain
-    content: Stehendes Wasser ist der Feind. Wir planen das Gefälle exakt und verbauen Notüberläufe, damit auch bei Starkregen das Wasser sicher abfließt und die Statik nicht gefährdet.
+    content: Bei großen Flächen ist stehendes Wasser ein Risiko. Wir planen Gefälledämmungen und leistungsstarke Entwässerungssysteme (Freispiegel oder Unterdruck), die auch Starkregen sicher ableiten.
 processSteps:
   - step: 1
-    title: Untergrundvorbereitung
-    text: Reinigung der Betondecke oder Trapezbleche. Auftragung von Voranstrich.
+    title: Bestandsaufnahme
+    text: Drohnenanalyse und Kernbohrungen zur Prüfung des Schichtenpakets.
   - step: 2
-    title: Dampfsperre
-    text: Verhindert, dass Feuchtigkeit aus dem Wohnraum in die Dämmung zieht.
+    title: Konzept & Angebot
+    text: Wir erstellen ein Sanierungskonzept unter Berücksichtigung der EnEV und Statik.
   - step: 3
-    title: Gefälledämmung
-    text: Wir schneiden die Dämmung so, dass das Wasser gezielt zu den Abläufen fließt.
+    title: Sicherung & Vorbereitung
+    text: Absturzsicherungen und Einrichtung der Baustelle.
   - step: 4
-    title: Abdichtung
-    text: Fachgerechtes Verschweißen der Oberlage. Anschlüsse an Wände und Lichtkuppeln.
+    title: Ausführung
+    text: Segmentweise Sanierung, damit die Halle stets wettergeschützt bleibt.
 referenceImages:
-  - https://images.unsplash.com/photo-1596253686851-90a6e35509d3?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1626292378345-d81230198e3b?q=80&w=600&auto=format&fit=crop
+  - /uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_1.avif
+  - /uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif
+  - /uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_3.avif
 contactIds:
   - sascha
   - isabel
 faq:
-  - question: Was kostet eine Flachdachabdichtung pro m²?
-    answer: Eine professionelle Flachdachabdichtung kostet zwischen 80 und 150 Euro pro m², abhängig vom System (Bitumen oder Kunststoff), der Dämmstärke und Zugänglichkeit. Dachbegrünung erhöht die Kosten auf 120-200 Euro/m². Wir kalkulieren transparent und bieten Festpreise an.
-  - question: Wie lange hält ein Flachdach?
-    answer: Ein fachgerecht abgedichtetes Flachdach hält 25-40 Jahre. Bitumenbahnen halten etwa 25-30 Jahre, moderne Kunststoffbahnen (FPO/PVC) erreichen 30-40 Jahre. Entscheidend ist die regelmäßige Wartung – damit verlängern Sie die Lebensdauer erheblich.
-  - question: Kann ich mein Flachdach begrünen?
-    answer: Ja, Dachbegrünung ist eine hervorragende Lösung! Sie schützt die Abdichtung vor UV-Strahlung, verbessert das Raumklima und bindet Regenwasser. Wichtig ist die Statikprüfung (Zusatzlast ca. 60-150 kg/m²). Wir planen und bauen extensive und intensive Begrünungen.
+  - question: Was kostet eine Flachdachsanierung für Industriehallen?
+    answer: Das hängt stark von Größe, Dämmstandard und gewähltem Material ab. Bei Hallendächern kalkulieren wir oft mit Quadratmeterpreisen, die bei großen Flächen wirtschaftlicher sind. Gerne erstellen wir ein individuelles Angebot nach Besichtigung.
+  - question: Kann der Betrieb während der Sanierung weiterlaufen?
+    answer: Ja. Wir arbeiten so, dass Ihr Betrieb möglichst wenig gestört wird. Lärmintensive Arbeiten stimmen wir ab, und die Dichtigkeit ist zu jedem Zeitpunkt gewährleistet.
+  - question: Welche Dämmung eignet sich für Hallen?
+    answer: Oft kommen Mineralwolle (Brandschutz!) oder PIR-Hartschaum zum Einsatz. Wir beraten Sie zu Brandschutzvorgaben und energetischen Anforderungen.
+  - question: Wie lange hält eine neue Abdichtung?
+    answer: Moderne Kunststoffbahnen halten bei fachgerechter Verlegung und Wartung 30-40 Jahre, Bitumenbahnen ca. 25-30 Jahre.
+  - question: Bieten Sie auch regelmäßige Wartung für Hallendächer an?
+    answer: Ja, das ist essentiell. Wir bieten Wartungsverträge an, die jährliche Inspektionen und Rinnenreinigungen beinhalten, um die Lebensdauer des Daches zu maximieren und Versicherungsschutz zu gewährleisten.
 ---
 
-## Flachdach-Abdichtung vom Spezialisten
+## Flachdach-Sanierung für Industrie & Gewerbe
 
-Flachdächer benötigen besondere Aufmerksamkeit. Wir arbeiten mit modernsten Abdichtungssystemen und bieten Ihnen wartungsfreundliche, langlebige Lösungen.
+Wir sind spezialisiert auf die Sanierung von großflächigen Flachdächern. Ob Industriehalle, Logistikzentrum oder Verwaltungsgebäude: Wir bieten wirtschaftliche Lösungen, die Ihren Betrieb nicht stören und langfristig Sicherheit bieten.

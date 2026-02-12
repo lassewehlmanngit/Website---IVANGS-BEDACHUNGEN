@@ -8,6 +8,7 @@ import { cn } from '@/shared/lib/cn';
 export interface QuickContactData {
   name: string;
   contact: string;
+  category: string;
   source: 'hero' | 'mobile';
 }
 
@@ -19,6 +20,7 @@ export interface QuickContactFormProps {
     title?: string;
     nameLabel?: string;
     contactLabel?: string;
+    categoryLabel?: string;
     buttonText?: string;
     disclaimer?: string;
   };
@@ -35,8 +37,16 @@ export interface QuickContactFormProps {
 const initialFormData: QuickContactData = {
   name: '',
   contact: '',
+  category: '',
   source: 'hero',
 };
+
+const CATEGORIES = [
+  { value: 'Reparatur', label: 'Reparatur' },
+  { value: 'Flachdach', label: 'Flachdach' },
+  { value: 'Steildach', label: 'Steildach' },
+  { value: 'Sonstiges', label: 'Sonstiges' },
+];
 
 export const QuickContactForm: React.FC<QuickContactFormProps> = ({
   source,
@@ -73,11 +83,15 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
       }
     }
 
+    if (!formState.category) {
+      newErrors.category = 'Bitte wählen Sie eine Kategorie';
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
     // Clear error when user starts typing
@@ -244,6 +258,57 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
           {errors.contact && (
             <p id={`${source}-contact-error`} className="text-xs text-destructive mt-1">
               {errors.contact}
+            </p>
+          )}
+        </div>
+
+        {/* Category Field */}
+        <div>
+          <label 
+            htmlFor={`${source}-category`}
+            className={cn(
+              'text-xs font-bold uppercase tracking-wider mb-1 block',
+              isDark ? 'text-slate-300' : 'text-slate-600'
+            )}
+            data-tina-field={cmsData && tinaField(cmsData, 'categoryLabel')}
+          >
+            {cmsData?.categoryLabel || 'Kategorie'}
+          </label>
+          <div className="relative">
+            <select
+              id={`${source}-category`}
+              name="category"
+              value={formState.category}
+              onChange={handleChange}
+              className={cn(
+                'w-full px-4 py-3 rounded-sm text-sm transition-colors appearance-none cursor-pointer',
+                'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
+                isDark 
+                  ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary' 
+                  : 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-primary',
+                errors.category && 'border-destructive',
+                !formState.category && (isDark ? 'text-slate-500' : 'text-slate-400')
+              )}
+              aria-invalid={!!errors.category}
+              aria-describedby={errors.category ? `${source}-category-error` : undefined}
+            >
+              <option value="" disabled>Bitte wählen...</option>
+              {CATEGORIES.map((cat) => (
+                <option key={cat.value} value={cat.value} className={isDark ? 'bg-slate-900 text-white' : 'bg-white text-slate-900'}>
+                  {cat.label}
+                </option>
+              ))}
+            </select>
+            {/* Custom arrow for consistent look */}
+            <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
+               <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                 <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+               </svg>
+            </div>
+          </div>
+          {errors.category && (
+            <p id={`${source}-category-error`} className="text-xs text-destructive mt-1">
+              {errors.category}
             </p>
           )}
         </div>
