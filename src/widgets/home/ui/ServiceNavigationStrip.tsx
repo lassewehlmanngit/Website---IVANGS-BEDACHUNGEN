@@ -52,12 +52,12 @@ export const ServiceNavigationStrip: React.FC<ServiceNavigationStripProps> = ({ 
 
   return (
     <section className="bg-white text-slate-800 border-b border-slate-200 hidden md:block relative z-30 shadow-sm">
-      <div className="w-full grid grid-cols-5 divide-x divide-slate-100">
-        {services.map(({ id, label, Icon }) => (
+      <div className="w-full bg-slate-100 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-[1px]">
+        {services.map(({ id, label, Icon }: { id: string, label: string, Icon: React.ElementType }) => (
           <button
             key={id}
             onClick={() => navigate(`/${lang}/services/${id}`)}
-            className="group flex flex-col items-center justify-center py-6 px-2 hover:bg-slate-50 transition-colors"
+            className="group flex flex-col items-center justify-center py-6 px-2 bg-white hover:bg-slate-50 transition-colors h-full w-full"
           >
             <Icon
               size={24}

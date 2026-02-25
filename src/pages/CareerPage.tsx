@@ -42,7 +42,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
   const { data, isLoading, error } = useCareerPageData(lang);
   const { data: jobsData } = useJobsData();
   const career = data?.careerPage;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const jobs = jobsData?.jobConnection?.edges?.map((edge: any) => edge.node) || [];
+  const jobs = jobsData?.jobConnection?.edges?.map((edge: any) => edge.node) || [];
 
   if (isLoading) {
     return (
