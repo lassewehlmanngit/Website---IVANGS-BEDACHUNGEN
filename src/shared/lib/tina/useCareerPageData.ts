@@ -34,11 +34,11 @@ export function useCareerPageData(_lang: SupportedLang) {
   const relativePath = 'career.json';
   const fallbackPath = '/content/career/career.json';
 
-  const { data, isLoading, error } = useGenericPage({
+  const { data, isLoading, error } = useGenericPage<any>({
     query: CAREER_PAGE_QUERY,
     variables: { relativePath },
     fallbackPath,
-    clientQuery: (vars) => client.queries.careerPage(vars),
+    clientQuery: (vars) => (client as any)?.queries?.careerPage(vars),
     transformFallback: (jsonData) => ({ careerPage: jsonData }),
   });
 
