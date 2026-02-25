@@ -60,7 +60,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             preload="none"
             className="w-full h-full object-cover"
             poster={backgroundImage}
-            fetchpriority="high"
           >
             {loadVideo && (
               <source src={videoUrl} type="video/mp4" />
@@ -71,7 +70,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             src={backgroundImage}
             alt="Hero Background"
             className="w-full h-full object-cover"
-            fetchpriority="high"
+            fetchPriority="high"
           />
         )}
 
@@ -79,7 +78,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/grid-me.png')] opacity-10 z-10"></div>
       </div>
 
-      <div className="relative z-20 container mx-auto px-4 py-20 lg:py-0 grid lg:grid-cols-2 gap-16 items-center flex-grow content-center">
+      <div className="relative z-20 container mx-auto px-4 py-20 lg:py-32 xl:py-40 grid lg:grid-cols-2 gap-16 items-center flex-grow">
         {/* Left: Copy & Main Message */}
         <div className="text-white mt-8 md:mt-0">
           <span className="text-primary font-bold uppercase tracking-[0.2em] text-sm mb-4 block animate-slide-up" data-tina-field={homeData?.hero && tinaField(homeData.hero, 'eyebrow')}>
@@ -128,7 +127,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       <div className="relative z-20 border-t border-white/10 bg-slate-900/80 supports-[backdrop-filter]:bg-white/5 backdrop-blur-md hidden md:block">
         <div className="container mx-auto px-4 py-6 md:py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => {
+            {stats.map((stat: any, index: number) => {
               const Icon = getIcon(stat.icon || 'Users');
               return (
                 <div key={index} className="flex items-center gap-4">
@@ -160,7 +159,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
       <div className="relative z-20 md:hidden border-t border-white/10 bg-slate-900/90 supports-[backdrop-filter]:bg-slate-900/80 backdrop-blur-md">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-2 gap-y-8 gap-x-4">
-            {stats.map((stat, index) => {
+            {stats.map((stat: any, index: number) => {
               const Icon = getIcon(stat.icon || 'Users');
               return (
                 <div key={index} className="flex flex-col items-center text-center gap-2">

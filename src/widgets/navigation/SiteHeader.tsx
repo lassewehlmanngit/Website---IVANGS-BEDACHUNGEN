@@ -62,8 +62,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
     <>
       <div className="sticky top-0 z-50 flex flex-col shadow-sm transition-all duration-300">
         <header className="w-full bg-white/95 backdrop-blur-md border-b border-slate-100">
-          {/* Increased vertical padding (py-5 to py-6) for cleaner look */}
-          <div className="container flex items-center justify-between py-5 md:py-6">
+          {/* Reduced vertical padding to accommodate taller logo without expanding navbar */}
+          <div className="container flex items-center justify-between py-4 md:py-5">
             {/* Logo Section - Uses logo from CMS navigation data */}
             <Link
               to={`/${lang}`}
@@ -75,7 +75,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
                 <img
                   src={nav.logo}
                   alt="Ivangs Bedachungen Logo"
-                  className="h-10 w-auto group-hover:scale-105 transition-transform"
+                  className="h-12 w-auto group-hover:scale-105 transition-transform"
                 />
               ) : (
                 <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
