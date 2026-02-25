@@ -8,7 +8,7 @@ import { useLegalPageData } from '@/shared/lib/tina/useLegalPageData';
 
 export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const { data, isLoading } = useLegalPageData('terms');
-  
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -16,7 +16,7 @@ export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
       </div>
     );
   }
-  
+
   const page = data?.legalPage || {
     title: 'Allgemeine Geschäftsbedingungen (AGB)',
     seo: {
@@ -25,29 +25,29 @@ export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
     },
     body: ''
   };
-  
+
   return (
     <>
-      <Seo 
+      <Seo
         title={`${page.seo?.title || page.title} - Ivangs Bedachungen`}
         description={page.seo?.description}
         ogLocale="de_DE"
       />
       <div className="animate-fade-in bg-white pt-12 pb-24">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Breadcrumbs 
+          <Breadcrumbs
             lang={lang}
             items={[{ label: 'AGB' }]}
             className="mb-6"
           />
-          <h1 
+          <h1
             className="text-h1 font-bold text-slate-900 mb-8 border-b border-slate-200 pb-4"
             data-tina-field={data?.legalPage && tinaField(data.legalPage, 'title')}
           >
             {page.title}
           </h1>
 
-          <div 
+          <div
             className="prose prose-slate max-w-none text-slate-600"
             data-tina-field={data?.legalPage && tinaField(data.legalPage, 'body')}
           >

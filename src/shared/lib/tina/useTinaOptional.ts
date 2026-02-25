@@ -31,19 +31,19 @@ function getIsVisualEditingEnabled(): boolean {
  */
 export function useTinaOptional<T = any>(props: TinaProps): { data: T } {
   const isEditingEnabled = getIsVisualEditingEnabled();
-  
+
   // #region agent log
-  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'useTinaOptional.ts:33',message:'useTinaOptional called',data:{isEditingEnabled,hasQuery:!!props.query,hasData:!!props.data,dataKeys:props.data?Object.keys(props.data):[]},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'useTinaOptional.ts:33', message: 'useTinaOptional called', data: { isEditingEnabled, hasQuery: !!props.query, hasData: !!props.data, dataKeys: props.data ? Object.keys(props.data) : [] }, timestamp: Date.now(), sessionId: 'debug-session', hypothesisId: 'E' }) }).catch(() => { });
   // #endregion
-  
+
   // Store the initial data as a stable reference to prevent re-render cycles
   const stableDataRef = useRef(props.data);
-  
+
   // Update the ref when props.data changes (from the fetch)
   if (props.data !== stableDataRef.current && props.data !== null) {
     stableDataRef.current = props.data;
   }
-  
+
   // Only use useTina when visual editing is enabled
   // This is the key optimization - we avoid setting up subscriptions in production
   const tinaResult = useTina({
@@ -52,7 +52,7 @@ export function useTinaOptional<T = any>(props: TinaProps): { data: T } {
     // When not editing, pass stable data to prevent useTina from triggering updates
     data: isEditingEnabled ? props.data : stableDataRef.current,
   });
-  
+
   // When editing is enabled, use Tina's live data
   // Otherwise, return the stable fetched data without Tina's subscription overhead
   const result = useMemo(() => {
@@ -61,6 +61,6 @@ export function useTinaOptional<T = any>(props: TinaProps): { data: T } {
     }
     return { data: stableDataRef.current };
   }, [isEditingEnabled, tinaResult]);
-  
+
   return result;
 }

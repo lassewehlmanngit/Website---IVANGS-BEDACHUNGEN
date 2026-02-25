@@ -57,15 +57,15 @@ export function useLegalPageData(slug: string) {
       try {
         const response = await fetch(`/content/legal/${slug}.md`);
         const text = await response.text();
-        
+
         // Simple frontmatter parsing
         const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
         const match = text.match(frontmatterRegex);
-        
+
         if (match) {
           const frontmatter = match[1];
           const body = match[2];
-          
+
           // Parse frontmatter
           const metadata: Record<string, string> = {};
           frontmatter.split('\n').forEach(line => {
@@ -76,9 +76,9 @@ export function useLegalPageData(slug: string) {
               metadata[key] = value;
             }
           });
-          
+
           setPayload({
-            data: { 
+            data: {
               legalPage: {
                 title: metadata.title || '',
                 seo: {

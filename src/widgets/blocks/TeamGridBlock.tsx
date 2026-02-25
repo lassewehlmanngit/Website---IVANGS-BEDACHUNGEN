@@ -27,7 +27,7 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
         {(data.title || data.description) && (
           <div className="mb-12 md:mb-16 text-center">
             {data.title && (
-              <h2 
+              <h2
                 className="text-h2 font-bold text-slate-900"
                 data-tina-field={parentField && tinaField(data, 'title')}
               >
@@ -35,7 +35,7 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
               </h2>
             )}
             {data.description && (
-              <p 
+              <p
                 className="text-slate-600 mt-4 max-w-2xl mx-auto"
                 data-tina-field={parentField && tinaField(data, 'description')}
               >

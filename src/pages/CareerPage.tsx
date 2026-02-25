@@ -42,7 +42,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
   const { data, isLoading, error } = useCareerPageData(lang);
   const { data: jobsData } = useJobsData();
   const career = data?.careerPage;
-  const jobs = jobsData?.jobConnection?.edges?.map((edge: any) => edge.node) || [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const jobs = jobsData?.jobConnection?.edges?.map((edge: any) => edge.node) || [];
 
   if (isLoading) {
     return (
@@ -81,7 +81,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
 
       <div className="animate-fade-in">
         {/* Hero Section */}
-        <section 
+        <section
           className="relative py-20 md:py-32 bg-slate-900 text-white overflow-hidden"
           style={career.hero?.backgroundImage ? {
             backgroundImage: `url(${career.hero.backgroundImage})`,
@@ -93,21 +93,21 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
           <div className="container mx-auto px-4 relative z-10">
             <div className="max-w-4xl">
               {career.hero?.eyebrow && (
-                <p 
+                <p
                   className="text-primary font-bold uppercase tracking-wider mb-4"
                   data-tina-field={career.hero && tinaField(career.hero, 'eyebrow')}
                 >
                   {career.hero.eyebrow}
                 </p>
               )}
-              <h1 
+              <h1
                 className="text-h1 font-bold mb-6"
                 data-tina-field={career.hero && tinaField(career.hero, 'title')}
               >
                 {career.hero?.title}
               </h1>
               {career.hero?.description && (
-                <p 
+                <p
                   className="text-xl text-slate-300 max-w-2xl mb-8"
                   data-tina-field={career.hero && tinaField(career.hero, 'description')}
                 >
@@ -155,7 +155,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
         <section id="jobs" className="py-16 md:py-24 bg-slate-50">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-              <h2 
+              <h2
                 className="text-h2 font-bold text-slate-900 mb-4"
                 data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'title')}
               >
@@ -170,7 +170,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
               </div>
             ) : (
               <div className="text-center py-12">
-                <p 
+                <p
                   className="text-lg text-slate-600"
                   data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'emptyMessage')}
                 >
@@ -186,13 +186,13 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
           <section className="py-16 md:py-24 bg-white">
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
-                <h2 
+                <h2
                   className="text-h2 font-bold text-slate-900 mb-4"
                   data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'title')}
                 >
                   {career.wizardSection.title}
                 </h2>
-                <p 
+                <p
                   className="text-lg text-slate-600"
                   data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'description')}
                 >
@@ -211,7 +211,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
           {/* Decorative elements */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05)_0%,transparent_40%)]"></div>
-          
+
           <div className="container mx-auto px-4 text-center relative z-10">
             <p className="text-white/80 font-bold uppercase tracking-wider mb-4">Keine passende Stelle?</p>
             <h2 className="text-h2 font-bold mb-6">Initiativbewerbung</h2>

@@ -166,7 +166,7 @@ export const DesignSystemPage: React.FC = () => {
                   <FormField label="Email Address" description="We'll never share your email." required>
                     <Input type="email" placeholder="you@example.com" />
                   </FormField>
-                  
+
                   <FormField label="Full Name" error="This field is required">
                     <Input placeholder="John Doe" invalid />
                   </FormField>
@@ -196,7 +196,7 @@ export const DesignSystemPage: React.FC = () => {
 
                   <div className="space-y-3">
                     <Label>Notifications</Label>
-                    <RadioGroup 
+                    <RadioGroup
                       name="notifications"
                       value={radioValue}
                       onChange={setRadioValue}
@@ -249,17 +249,17 @@ export const DesignSystemPage: React.FC = () => {
                     Show Error Toast
                   </Button>
                 </div>
-                
+
                 <div>
-                   <Tooltip content="Add to library" side="right">
-                      <Button variant="outline" size="sm">Hover me (Tooltip)</Button>
-                   </Tooltip>
+                  <Tooltip content="Add to library" side="right">
+                    <Button variant="outline" size="sm">Hover me (Tooltip)</Button>
+                  </Tooltip>
                 </div>
               </div>
             </Section>
 
-             {/* Layout & Overlay */}
-             <Section id="overlay">
+            {/* Layout & Overlay */}
+            <Section id="overlay">
               <div className="mb-8 border-b border-border pb-4">
                 <Heading level={2}>Layout & Overlay</Heading>
                 <Text variant="muted">Dialogs, drawers, cards, and accordions.</Text>
@@ -267,20 +267,20 @@ export const DesignSystemPage: React.FC = () => {
               <div className="space-y-8">
                 <div className="flex gap-4">
                   <Button onClick={() => setDialogOpen(true)}>Open Dialog</Button>
-                  <Dialog 
-                    open={dialogOpen} 
+                  <Dialog
+                    open={dialogOpen}
                     onClose={() => setDialogOpen(false)}
                     title="Edit Profile"
                     description="Make changes to your profile here. Click save when you're done."
                   >
-                      <div className="grid gap-4 py-4">
-                        <FormField label="Name"><Input defaultValue="Pedro Duarte" /></FormField>
-                        <FormField label="Username"><Input defaultValue="@peduarte" /></FormField>
-                      </div>
-                      <DialogFooter>
-                        <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
-                        <Button onClick={() => setDialogOpen(false)}>Save changes</Button>
-                      </DialogFooter>
+                    <div className="grid gap-4 py-4">
+                      <FormField label="Name"><Input defaultValue="Pedro Duarte" /></FormField>
+                      <FormField label="Username"><Input defaultValue="@peduarte" /></FormField>
+                    </div>
+                    <DialogFooter>
+                      <Button variant="outline" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                      <Button onClick={() => setDialogOpen(false)}>Save changes</Button>
+                    </DialogFooter>
                   </Dialog>
 
                   <Button variant="outline" onClick={() => setDrawerOpen(true)}>Open Drawer</Button>
@@ -330,9 +330,9 @@ export const DesignSystemPage: React.FC = () => {
                     <Tab value="password">Password</Tab>
                   </TabList>
                   <TabPanel value="account">
-                     <div className="p-4 border rounded-b-md border-t-0 bg-background mt-0">
-                        <Text>Make changes to your account here.</Text>
-                     </div>
+                    <div className="p-4 border rounded-b-md border-t-0 bg-background mt-0">
+                      <Text>Make changes to your account here.</Text>
+                    </div>
                   </TabPanel>
                   <TabPanel value="password">
                     <div className="p-4 border rounded-b-md border-t-0 bg-background mt-0">

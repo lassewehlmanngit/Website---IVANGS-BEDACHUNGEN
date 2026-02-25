@@ -152,7 +152,7 @@ interface UsePageContentResult {
  */
 export function usePageContent(pageKey: string): UsePageContentResult {
   const config = PAGE_CONFIGS[pageKey];
-  
+
   if (!config) {
     console.error(`usePageContent: Unknown page key "${pageKey}". Use 'home' or switch to usePageBuilderData for block-based pages.`);
   }
@@ -164,7 +164,7 @@ export function usePageContent(pageKey: string): UsePageContentResult {
     settings: globalContentCache.settings,
   });
   const [isLoading, setIsLoading] = useState(true);
-  
+
   // Track if this is the initial mount
   const isMounted = useRef(false);
 

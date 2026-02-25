@@ -176,7 +176,7 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
     <form onSubmit={handleSubmit} className={className} noValidate>
       {/* Header - only show in hero variant */}
       {source === 'hero' && (
-        <h3 
+        <h3
           className="text-h4 font-bold text-white mb-4 md:mb-6 flex items-center gap-2 relative z-10"
           data-tina-field={cmsData && tinaField(cmsData, 'title')}
         >
@@ -188,7 +188,7 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
       <div className="space-y-4 relative z-10">
         {/* Name Field */}
         <div>
-          <label 
+          <label
             htmlFor={`${source}-name`}
             className={cn(
               'text-xs font-bold uppercase tracking-wider mb-1 block',
@@ -207,8 +207,8 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
             className={cn(
               'w-full px-4 py-3 rounded-sm text-sm transition-colors',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-              isDark 
-                ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary' 
+              isDark
+                ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary'
                 : 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-primary',
               errors.name && 'border-destructive'
             )}
@@ -226,7 +226,7 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
 
         {/* Contact Field */}
         <div>
-          <label 
+          <label
             htmlFor={`${source}-contact`}
             className={cn(
               'text-xs font-bold uppercase tracking-wider mb-1 block',
@@ -245,8 +245,8 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
             className={cn(
               'w-full px-4 py-3 rounded-sm text-sm transition-colors',
               'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-              isDark 
-                ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary' 
+              isDark
+                ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary'
                 : 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-primary',
               errors.contact && 'border-destructive'
             )}
@@ -264,7 +264,7 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
 
         {/* Category Field */}
         <div>
-          <label 
+          <label
             htmlFor={`${source}-category`}
             className={cn(
               'text-xs font-bold uppercase tracking-wider mb-1 block',
@@ -283,8 +283,8 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
               className={cn(
                 'w-full px-4 py-3 rounded-sm text-sm transition-colors appearance-none cursor-pointer',
                 'focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2',
-                isDark 
-                  ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary' 
+                isDark
+                  ? 'bg-slate-900/50 border border-white/10 text-white placeholder:text-slate-500 focus:border-primary'
                   : 'bg-white border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:border-primary',
                 errors.category && 'border-destructive',
                 !formState.category && (isDark ? 'text-slate-500' : 'text-slate-400')
@@ -301,9 +301,9 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
             </select>
             {/* Custom arrow for consistent look */}
             <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-slate-500">
-               <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                 <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-               </svg>
+              <svg className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+              </svg>
             </div>
           </div>
           {errors.category && (
@@ -331,8 +331,8 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
           isLoading={isSubmitting}
           className={cn(
             'w-full mt-2 shadow-lg',
-            isDark 
-              ? 'bg-white text-slate-900 hover:bg-slate-100' 
+            isDark
+              ? 'bg-white text-slate-900 hover:bg-slate-100'
               : 'bg-primary text-white hover:bg-primary/90'
           )}
           data-tina-field={cmsData && tinaField(cmsData, 'buttonText')}
@@ -342,7 +342,7 @@ export const QuickContactForm: React.FC<QuickContactFormProps> = ({
         </Button>
 
         {/* Disclaimer */}
-        <p 
+        <p
           className={cn(
             'text-[10px] text-center',
             isDark ? 'text-slate-400' : 'text-slate-500'

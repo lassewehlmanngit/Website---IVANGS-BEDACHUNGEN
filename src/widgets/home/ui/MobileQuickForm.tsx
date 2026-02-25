@@ -11,7 +11,7 @@ interface MobileQuickFormProps {
 export const MobileQuickForm: React.FC<MobileQuickFormProps> = ({ lang, data }) => {
   // Use new quickForm data or fallbacks
   const formData = data?.quickForm || {};
-  
+
   if (data?.hero?.showQuickForm === false) return null;
 
   return (
@@ -20,7 +20,7 @@ export const MobileQuickForm: React.FC<MobileQuickFormProps> = ({ lang, data }) 
       <div className="absolute top-0 right-0 w-48 h-48 bg-primary/20 rounded-full blur-[60px] -mr-12 -mt-12 pointer-events-none"></div>
 
       <div className="relative z-10 max-w-md mx-auto">
-        <h3 
+        <h3
           className="text-2xl font-bold text-white mb-6 flex items-center gap-3"
           data-tina-field={formData && tinaField(formData, 'title')}
         >
@@ -31,9 +31,9 @@ export const MobileQuickForm: React.FC<MobileQuickFormProps> = ({ lang, data }) 
         </h3>
 
         <div className="bg-white/5 p-6 rounded-lg border border-white/10 backdrop-blur-sm">
-          <QuickContactForm 
-            source="mobile" 
-            formData={formData} 
+          <QuickContactForm
+            source="mobile"
+            formData={formData}
             lang={lang}
             variant="dark"
           />

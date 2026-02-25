@@ -65,11 +65,11 @@ interface HomeFAQProps {
 export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCTA: faqCTAProp }) => {
   // Use direct props first, then faqSection from homeData, then fallback to defaults
   const faqList = faqData || homeData?.faqSection?.questions || defaultHomeFAQ;
-  
+
   // Header data with fallbacks (using nested faqSection)
   const headerTitle = homeData?.faqSection?.title || 'Häufig gestellte Fragen';
   const headerDescription = homeData?.faqSection?.description || 'Alles, was Sie über Dacharbeiten wissen müssen – ehrlich beantwortet';
-  
+
   // CTA data with fallbacks (using nested faqSection.cta or direct prop)
   const faqCTA = faqCTAProp || homeData?.faqSection?.cta;
   const ctaTitle = faqCTA?.title || 'Ihre Frage war nicht dabei?';
@@ -77,7 +77,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
   const ctaPhone = faqCTA?.phone || '02162 356666';
   const ctaButtonText = faqCTA?.buttonText || 'Nachricht senden';
   const ctaButtonLink = faqCTA?.buttonLink || `/${lang}/contact`;
-  
+
   return (
     <section className="py-20 bg-white border-t border-slate-100">
       <div className="container mx-auto px-4">
@@ -86,14 +86,14 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-4">
               <HelpCircle className="text-primary" size={32} />
-              <h2 
+              <h2
                 className="text-h2 font-bold text-slate-900"
                 data-tina-field={homeData?.faqSection && tinaField(homeData.faqSection, 'title')}
               >
                 {headerTitle}
               </h2>
             </div>
-            <p 
+            <p
               className="text-slate-600 text-lg"
               data-tina-field={homeData?.faqSection && tinaField(homeData.faqSection, 'description')}
             >
@@ -106,14 +106,14 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
             {faqList.map((item: FAQItem, index: number) => (
               <AccordionItem key={index} value={`faq-${index}`}>
                 <AccordionTrigger className="text-left hover:bg-slate-50/50">
-                  <span 
+                  <span
                     className="text-base md:text-lg font-semibold text-slate-900 pr-4"
                     data-tina-field={homeData?.faqSection?.questions?.[index] && tinaField(homeData.faqSection.questions[index], 'question')}
                   >
                     {item.question || item.q}
                   </span>
                 </AccordionTrigger>
-                <AccordionContent 
+                <AccordionContent
                   className="text-slate-600 leading-relaxed"
                   data-tina-field={homeData?.faqSection?.questions?.[index] && tinaField(homeData.faqSection.questions[index], 'answer')}
                 >
@@ -125,32 +125,32 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
 
           {/* CTA below FAQ */}
           <div className="mt-12 text-center p-8 bg-slate-50 rounded-sm border border-slate-100">
-            <p 
+            <p
               className="text-slate-700 text-lg mb-4"
               data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'title')}
             >
               {ctaTitle}
             </p>
-            <p 
+            <p
               className="text-slate-600 mb-6"
               data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'description')}
             >
               {ctaDescription}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a 
+              <a
                 href={`tel:+49${ctaPhone.replace(/\s/g, '').replace(/^0/, '')}`}
                 className="inline-flex items-center justify-center px-6 py-3 bg-primary text-white font-bold rounded-sm hover:bg-primary/90 transition-colors"
                 data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'phone')}
               >
                 {ctaPhone}
               </a>
-              <SmartLink 
+              <SmartLink
                 link={ctaButtonLink}
                 className="inline-flex items-center justify-center px-6 py-3 bg-white text-primary font-bold rounded-sm border-2 border-primary hover:bg-primary/5 transition-colors"
               >
                 <span data-tina-field={homeData?.faqSection?.cta && tinaField(homeData.faqSection.cta, 'buttonText')}>
-                {ctaButtonText}
+                  {ctaButtonText}
                 </span>
               </SmartLink>
             </div>

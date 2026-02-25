@@ -22,7 +22,7 @@ export const JobsListBlock: React.FC<JobsListBlockProps> = ({ data, parentField,
   return (
     <section className="py-16 md:py-20 bg-white" id="jobs">
       <div className="container mx-auto px-4">
-        <h2 
+        <h2
           className="text-h2 font-bold text-slate-900 mb-8 md:mb-12"
           data-tina-field={parentField && tinaField(data, 'title')}
         >
@@ -32,7 +32,7 @@ export const JobsListBlock: React.FC<JobsListBlockProps> = ({ data, parentField,
         {publishedJobs.length > 0 ? (
           <Accordion type="single" collapsible className="space-y-4 border-none">
             {publishedJobs.map((job: any) => (
-              <JobListing 
+              <JobListing
                 key={job._sys?.filename || job.id}
                 job={job}
                 lang={lang}
@@ -42,7 +42,7 @@ export const JobsListBlock: React.FC<JobsListBlockProps> = ({ data, parentField,
           </Accordion>
         ) : (
           <div className="bg-slate-50 p-8 rounded-sm text-center">
-            <p 
+            <p
               className="text-slate-600"
               data-tina-field={parentField && tinaField(data, 'emptyMessage')}
             >

@@ -113,7 +113,7 @@ const Eyebrow = ({ className, children, ...props }: PageHeroEyebrowProps) => {
   const styles = variantStyles[variant];
 
   return (
-    <p 
+    <p
       className={cn(
         'font-bold uppercase tracking-wider mb-4',
         styles.eyebrow,
@@ -134,7 +134,7 @@ const Title = ({ className, children, ...props }: PageHeroTitleProps) => {
   const styles = variantStyles[variant];
 
   return (
-    <h1 
+    <h1
       className={cn(
         'text-h1 font-bold mb-6',
         styles.title,
@@ -155,7 +155,7 @@ const Description = ({ className, children, ...props }: PageHeroDescriptionProps
   const styles = variantStyles[variant];
 
   return (
-    <p 
+    <p
       className={cn(
         'text-xl max-w-2xl',
         styles.description,

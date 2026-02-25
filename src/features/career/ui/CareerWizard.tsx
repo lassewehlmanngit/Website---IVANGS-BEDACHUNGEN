@@ -87,7 +87,7 @@ export const CareerWizard: React.FC = () => {
             <Button variant="outline" className="w-full" onClick={() => handleApply('Initiativ')}>Initiativ bewerben</Button>
           </div>
         )}
-        
+
         <button onClick={reset} className="mt-4 text-slate-400 hover:text-slate-600 text-sm flex items-center justify-center gap-2 mx-auto">
           <RotateCcw size={14} />
           Wizard neu starten
@@ -104,7 +104,7 @@ export const CareerWizard: React.FC = () => {
         <span className="text-xs font-bold text-primary tracking-wider uppercase">Karriere-Finder</span>
         <span className="text-xs text-slate-400">Schritt {step + 1} von 3</span>
       </div>
-      
+
       <h3 className="text-xl font-bold text-slate-900 mb-8 leading-snug">
         {currentQ?.question}
       </h3>

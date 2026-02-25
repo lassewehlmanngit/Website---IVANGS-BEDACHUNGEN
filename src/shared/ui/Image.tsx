@@ -9,11 +9,11 @@ import { cn } from '@/shared/lib/cn';
  */
 export const generateUnsplashSrcSet = (baseUrl: string, widths: number[] = [640, 768, 1024, 1280, 1920]): string => {
   if (!baseUrl.includes('unsplash.com')) return '';
-  
+
   // Remove existing width param if present
   const url = new URL(baseUrl);
   url.searchParams.delete('w');
-  
+
   return widths
     .map(w => {
       const newUrl = new URL(url.toString());

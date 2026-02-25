@@ -34,7 +34,7 @@ export const ContactInfoBlock: React.FC<ContactInfoBlockProps> = ({ data, parent
         {(data.title || data.description) && (
           <div className="text-center mb-12">
             {data.title && (
-              <h2 
+              <h2
                 className="text-h2 font-bold text-slate-900 mb-4"
                 data-tina-field={parentField && tinaField(data, 'title')}
               >
@@ -42,7 +42,7 @@ export const ContactInfoBlock: React.FC<ContactInfoBlockProps> = ({ data, parent
               </h2>
             )}
             {data.description && (
-              <p 
+              <p
                 className="text-lg text-slate-600 max-w-2xl mx-auto"
                 data-tina-field={parentField && tinaField(data, 'description')}
               >
@@ -60,7 +60,7 @@ export const ContactInfoBlock: React.FC<ContactInfoBlockProps> = ({ data, parent
                 <MapPin size={24} className="text-primary" />
               </div>
               <h3 className="font-bold text-slate-900 mb-2">Adresse</h3>
-              <p 
+              <p
                 className="text-slate-600"
                 data-tina-field={parentField && data.address && tinaField(data.address, 'company')}
               >
@@ -85,8 +85,8 @@ export const ContactInfoBlock: React.FC<ContactInfoBlockProps> = ({ data, parent
             </div>
             <h3 className="font-bold text-slate-900 mb-2">Kontakt</h3>
             <p className="text-slate-600">
-              <a 
-                href={`tel:${data.phone.replace(/\s/g, '')}`} 
+              <a
+                href={`tel:${data.phone.replace(/\s/g, '')}`}
                 className="hover:text-primary transition-colors"
                 data-tina-field={parentField && tinaField(data, 'phone')}
               >
@@ -99,8 +99,8 @@ export const ContactInfoBlock: React.FC<ContactInfoBlockProps> = ({ data, parent
                   </span><br />
                 </>
               )}
-              <a 
-                href={`mailto:${data.email}`} 
+              <a
+                href={`mailto:${data.email}`}
                 className="hover:text-primary transition-colors"
                 data-tina-field={parentField && tinaField(data, 'email')}
               >

@@ -4,7 +4,7 @@ import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
 import { SmartLink } from '@/shared/ui/SmartLink';
 import { PageHero } from '@/shared/ui/PageHero';
-import { Skeleton, SkeletonText, SkeletonCard } from '@/shared/ui/Skeleton';
+import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
 import { useAboutPageData } from '@/shared/lib/tina/useAboutPageData';
 import { TeamGridBlock } from '@/widgets/blocks/TeamGridBlock';
@@ -16,7 +16,7 @@ export interface AboutPageProps {
 
 export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
   const { data, isLoading, error } = useAboutPageData(lang);
-  const about = data?.aboutPage;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  const about = (data as any)?.aboutPage;
 
   if (isLoading) {
     return (
@@ -100,19 +100,19 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 
+                <h2
                   className="text-h2 font-bold mb-6 text-slate-900"
                   data-tina-field={about.story && tinaField(about.story, 'title')}
                 >
                   {about.story?.title}
                 </h2>
-                <p 
+                <p
                   className="text-lg text-slate-600 mb-4"
                   data-tina-field={about.story && tinaField(about.story, 'text1')}
                 >
                   {about.story?.text1}
                 </p>
-                <p 
+                <p
                   className="text-lg text-slate-600"
                   data-tina-field={about.story && tinaField(about.story, 'text2')}
                 >
@@ -140,8 +140,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
               <div className="max-w-3xl mx-auto">
                 <ul className="space-y-4">
                   {about.values.map((value: { text: string; icon?: string }, index: number) => (
-                    <li 
-                      key={index} 
+                    <li
+                      key={index}
                       className="flex items-start gap-4 bg-white p-4 rounded-lg shadow-sm"
                       data-tina-field={value && tinaField(value, 'text')}
                     >
@@ -163,13 +163,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-6">
                   <Hammer className="w-8 h-8 text-primary" />
                 </div>
-                <h2 
+                <h2
                   className="text-h2 font-bold mb-6 text-slate-900"
                   data-tina-field={about.equipment && tinaField(about.equipment, 'title')}
                 >
                   {about.equipment.title}
                 </h2>
-                <p 
+                <p
                   className="text-lg text-slate-600"
                   data-tina-field={about.equipment && tinaField(about.equipment, 'description')}
                 >
@@ -185,13 +185,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
           <section className="py-16 md:py-24 bg-slate-50">
             <div className="container mx-auto px-4">
               <div className="text-center mb-12">
-                <h2 
+                <h2
                   className="text-h2 font-bold mb-4 text-slate-900"
                   data-tina-field={about.teamSection && tinaField(about.teamSection, 'title')}
                 >
                   {about.teamSection.title}
                 </h2>
-                <p 
+                <p
                   className="text-lg text-slate-600 max-w-2xl mx-auto"
                   data-tina-field={about.teamSection && tinaField(about.teamSection, 'description')}
                 >
@@ -207,21 +207,21 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
         {about.cta && (
           <section className="py-16 md:py-24 bg-slate-900 text-white">
             <div className="container mx-auto px-4 text-center">
-              <h2 
+              <h2
                 className="text-h2 font-bold mb-6"
                 data-tina-field={about.cta && tinaField(about.cta, 'title')}
               >
                 {about.cta.title}
               </h2>
-              <p 
+              <p
                 className="text-xl text-slate-300 max-w-2xl mx-auto mb-8"
                 data-tina-field={about.cta && tinaField(about.cta, 'description')}
               >
                 {about.cta.description}
               </p>
               <SmartLink link={`/${lang}/contact`}>
-                <Button 
-                  variant="default" 
+                <Button
+                  variant="default"
                   size="lg"
                   className="bg-primary hover:bg-primary/90"
                   data-tina-field={about.cta && tinaField(about.cta, 'buttonText')}

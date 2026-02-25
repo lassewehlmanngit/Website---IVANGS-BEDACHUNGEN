@@ -13,7 +13,7 @@ export interface DynamicPageProps {
 export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }) => {
   const params = useParams();
   const splat = params['*'];
-  
+
   // Use prop slug if available, otherwise use the catch-all splat
   const slug = propSlug || splat;
 
@@ -39,7 +39,7 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }
 
   return (
     <>
-      <Seo 
+      <Seo
         title={page.seo?.title || page.title}
         description={page.seo?.description}
         ogImage={page.seo?.ogImage ? { url: page.seo.ogImage, alt: page.seo?.title || page.title } : undefined}

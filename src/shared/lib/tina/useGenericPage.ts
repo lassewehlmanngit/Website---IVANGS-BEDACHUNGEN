@@ -68,7 +68,7 @@ export function useGenericPage<T>({
             throw new Error(`Failed to load static data from ${fallbackPath}`);
           }
           const jsonData = await response.json();
-          
+
           if (isMounted) {
             setPayload({
               data: transformFallback(jsonData),
@@ -91,13 +91,13 @@ export function useGenericPage<T>({
       } else {
         // No fallback path provided, just stop loading
         if (isMounted) {
-           // If we didn't get data from client and no fallback, we have no data.
-           // But we might want to initialize with empty data.
-           setPayload({
-             data: transformFallback(null),
-             query,
-             variables,
-           });
+          // If we didn't get data from client and no fallback, we have no data.
+          // But we might want to initialize with empty data.
+          setPayload({
+            data: transformFallback(null),
+            query,
+            variables,
+          });
         }
       }
 

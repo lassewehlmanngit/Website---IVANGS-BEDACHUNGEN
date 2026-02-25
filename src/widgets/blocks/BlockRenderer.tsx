@@ -13,7 +13,7 @@ import { CTABlock } from './CTABlock';
 import { FAQBlock } from './FAQBlock';
 
 // Block type definitions
-export type BlockType = 
+export type BlockType =
   | 'hero'
   | 'content'
   | 'story'

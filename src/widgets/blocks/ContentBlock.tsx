@@ -23,25 +23,25 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ data, parentField })
   const contentElement = (
     <div className={cn(hasImage && isHorizontal && 'flex-1')}>
       {data.eyebrow && (
-        <span 
+        <span
           className="text-primary font-bold uppercase tracking-wider text-sm mb-3 block"
           data-tina-field={parentField && tinaField(data, 'eyebrow')}
         >
           {data.eyebrow}
         </span>
       )}
-      
+
       {data.title && (
-        <h2 
+        <h2
           className="text-h2 font-bold text-slate-900 mb-6"
           data-tina-field={parentField && tinaField(data, 'title')}
         >
           {data.title}
         </h2>
       )}
-      
+
       {data.body && (
-        <div 
+        <div
           className="prose prose-lg max-w-none"
           data-tina-field={parentField && tinaField(data, 'body')}
         >
@@ -53,9 +53,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ data, parentField })
 
   const imageElement = hasImage && (
     <div className={cn(isHorizontal && 'flex-1')}>
-      <OptimizedImage 
-        src={data.image!} 
-        alt={data.title || ''} 
+      <OptimizedImage
+        src={data.image!}
+        alt={data.title || ''}
         className="w-full h-auto rounded-md"
         data-tina-field={parentField && tinaField(data, 'image')}
       />

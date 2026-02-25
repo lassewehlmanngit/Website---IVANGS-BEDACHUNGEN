@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Hammer, Facebook, Instagram, MapPin, Phone, Mail, ArrowRight, Twitter, Linkedin } from 'lucide-react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { useFooterData } from '@/shared/lib/tina/useFooterData';
+import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
 import { tinaField } from 'tinacms/dist/react';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 
@@ -23,6 +24,8 @@ const SocialIcon = ({ platform }: { platform: string }) => {
 export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const { data } = useFooterData(lang);
   const footer = data?.footer || { links: [], social: [] };
+  const { data: navData } = useNavigationData(lang);
+  const nav = navData?.navigation || { items: [] };
   const year = new Date().getFullYear();
 
   // Hardcoded contact info since global contact collection was removed
@@ -43,13 +46,23 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   // Brand section content (shared between mobile and desktop)
   const BrandContent = () => (
     <>
-      <div className="flex items-center gap-2 mb-6 text-white">
-        <div className="bg-primary p-1.5 rounded-sm text-primary-foreground">
-          <Hammer size={20} />
-        </div>
-        <span className="text-2xl font-bold">IVANGS</span>
-      </div>
-      <p 
+      <Link to={`/${lang}`} className="block mb-6">
+        {nav.logo ? (
+          <img
+            src={nav.logo}
+            alt="Ivangs Bedachungen Logo"
+            className="h-10 w-auto brightness-0 invert"
+          />
+        ) : (
+          <div className="flex items-center gap-2 text-white">
+            <div className="bg-primary p-1.5 rounded-sm text-primary-foreground">
+              <Hammer size={20} />
+            </div>
+            <span className="text-2xl font-bold">IVANGS</span>
+          </div>
+        )}
+      </Link>
+      <p
         className="text-slate-300 text-sm leading-relaxed mb-6"
       >
         {contact.address.company} – Ihr Meisterbetrieb für Bedachungen, Fassaden und Bauklempnerei im Kreis Viersen.
@@ -59,12 +72,12 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
           const Icon = SocialIcon({ platform: s.platform });
           if (!Icon) return null;
           return (
-            <a 
+            <a
               key={s.platform}
-              href={s.url} 
+              href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white" 
+              className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white"
               aria-label={s.platform}
               data-tina-field={data?.footer?.social && tinaField(data.footer.social[index], 'url')}
             >
@@ -93,7 +106,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
       </li>
       <li className="flex items-center gap-3">
         <Phone size={18} className="text-primary shrink-0" />
-        <a 
+        <a
           href={`tel:${contact.phone.replace(/\s/g, '')}`}
           className="hover:text-white transition-colors"
         >
@@ -102,7 +115,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
       </li>
       <li className="flex items-center gap-3">
         <Mail size={18} className="text-primary shrink-0" />
-        <a 
+        <a
           href={`mailto:${contact.email}`}
           className="hover:text-white transition-colors"
         >
@@ -116,7 +129,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const OfficeHoursContent = () => (
     <div className="mt-6 pt-4 border-t border-slate-700">
       <p className="text-xs text-slate-400 mb-2">Öffnungszeiten Büro:</p>
-      <p 
+      <p
         className="text-sm"
       >
         {contact.officeHours.weekdays}
@@ -129,8 +142,8 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
     <ul className="space-y-3 text-sm">
       {footer.links.length > 0 ? footer.links.map((link: any, index: number) => (
         <li key={link.href}>
-          <Link 
-            to={`/${lang}${link.href}`} 
+          <Link
+            to={`/${lang}${link.href}`}
             className="hover:text-white transition-colors"
             data-tina-field={data?.footer?.links && tinaField(data.footer.links[index], 'label')}
           >
@@ -154,7 +167,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
       <p className="text-sm text-slate-300 mb-4">
         Werde Teil unseres 28-köpfigen Teams. Wir bilden aus!
       </p>
-      <Link 
+      <Link
         to={`/${lang}/career`}
         className="text-primary hover:text-white text-sm font-medium flex items-center gap-2 transition-colors"
       >

@@ -82,12 +82,6 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
                   <Hammer size={24} />
                 </div>
               )}
-              <div>
-                <h1 className="text-2xl font-bold leading-none text-foreground tracking-tight">
-                  IVANGS
-                </h1>
-                <span className="text-xs uppercase tracking-widest text-muted-foreground font-semibold">Bedachungen</span>
-              </div>
             </Link>
 
             {/* Desktop navigation */}
