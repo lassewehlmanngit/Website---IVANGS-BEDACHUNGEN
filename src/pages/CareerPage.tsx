@@ -2,6 +2,7 @@ import React from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
+import { Accordion } from '@/shared/ui/Accordion';
 import { SmartLink } from '@/shared/ui/SmartLink';
 import { Skeleton, SkeletonCard, SkeletonText } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
@@ -164,9 +165,11 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
             </div>
             {jobs.length > 0 ? (
               <div className="max-w-3xl mx-auto space-y-6">
-                {jobs.filter((job: any) => job.published !== false).map((job: any, index: number) => (
-                  <JobListing key={index} job={job} lang={lang} />
-                ))}
+                <Accordion type="single" collapsible className="space-y-4">
+                  {jobs.filter((job: any) => job.published !== false).map((job: any, index: number) => (
+                    <JobListing key={index} job={job} lang={lang} />
+                  ))}
+                </Accordion>
               </div>
             ) : (
               <div className="text-center py-12">

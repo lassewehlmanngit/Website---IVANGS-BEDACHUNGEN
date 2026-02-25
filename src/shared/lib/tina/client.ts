@@ -1,4 +1,5 @@
 import { createClient } from 'tinacms/dist/client';
+import { queries } from '../../../../tina/__generated__/types';
 
 // =============================================================================
 // Environment Variables (standardized naming per TinaCMS guide)
@@ -14,7 +15,7 @@ const branch =
   'main';
 
 // Check if TinaCMS credentials are configured (standardized naming)
-const clientId = 
+const clientId =
   import.meta.env.VITE_TINA_CLIENT_ID ||
   // Legacy fallback (deprecated)
   import.meta.env.VITE_TINA_PUBLIC_CLIENT_ID;
@@ -32,6 +33,7 @@ if (import.meta.env.DEV) {
     client = createClient({
       url: 'http://localhost:4001/graphql',
       token: token || '',
+      queries,
     });
   } catch (error) {
     console.warn('TinaCMS client initialization failed in dev mode:', error);
@@ -42,6 +44,7 @@ if (import.meta.env.DEV) {
     client = createClient({
       url: `https://content.tinajs.io/content/${clientId}/github/${branch}`,
       token: token,
+      queries,
     });
   } catch (error) {
     console.warn('TinaCMS client initialization failed:', error);
@@ -55,23 +58,23 @@ if (import.meta.env.DEV) {
  */
 export function isVisualEditingEnabled(): boolean {
   if (typeof window === 'undefined') return false;
-  
+
   // Check if we're inside an iframe (TinaCMS admin embeds the site in an iframe)
   const isInIframe = window.self !== window.top;
-  
+
   // Check for Tina-specific URL parameters
-  const hasTinaParam = window.location.search.includes('tinaPreview') || 
-                       window.location.search.includes('tina-iframe');
-  
+  const hasTinaParam = window.location.search.includes('tinaPreview') ||
+    window.location.search.includes('tina-iframe');
+
   // Check if we're on the /admin path
   const isAdminPath = window.location.pathname.includes('/admin');
-  
+
   const result = isInIframe || hasTinaParam || isAdminPath;
-  
+
   // #region agent log
-  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({location:'client.ts:isVisualEditingEnabled',message:'Visual editing check',data:{isInIframe,hasTinaParam,isAdminPath,result,pathname:window.location.pathname,search:window.location.search},timestamp:Date.now(),sessionId:'debug-session',hypothesisId:'E'})}).catch(()=>{});
+  fetch('http://127.0.0.1:7245/ingest/984a66b5-88db-4299-9992-dc0fd2248136', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'client.ts:isVisualEditingEnabled', message: 'Visual editing check', data: { isInIframe, hasTinaParam, isAdminPath, result, pathname: window.location.pathname, search: window.location.search }, timestamp: Date.now(), sessionId: 'debug-session', hypothesisId: 'E' }) }).catch(() => { });
   // #endregion
-  
+
   return result;
 }
 
