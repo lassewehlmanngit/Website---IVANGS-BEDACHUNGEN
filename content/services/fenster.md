@@ -3,7 +3,7 @@ title: Fenster & VELUX Partner
 subtitle: Licht, Luft & Lebensqualität
 shortDescription: Als VELUX-geschulter Betrieb bringen wir mehr Licht und Luft in Ihr Dachgeschoss. Fachgerecht eingebaut durch qualifizierte Mitarbeiter.
 intro: Warum wir so viel über VELUX sprechen? Weil es für Qualität steht. Ein Dachfenster ist extremen Belastungen ausgesetzt – Hitze, Frost, Schlagregen. Hier sparen wir nicht am Material.
-heroImage: https://images.unsplash.com/photo-1596637508677-03cb29559c5d?q=80&w=2070&auto=format&fit=crop
+heroImage: /uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif
 icon: Sun
 expertTip: Tauschen Sie alt gegen neu an einem Tag. Mit speziellen Renovierungsrahmen geht das oft ohne Dreck im Innenraum.
 uiText:
@@ -47,9 +47,8 @@ processSteps:
     title: Einweisung
     text: Wir zeigen Ihnen die Funktionen und Pflege Ihres neuen Fensters.
 referenceImages:
-  - https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1596637508677-03cb29559c5d?q=80&w=600&auto=format&fit=crop
+  - /uploads/ivangs-arbeiter-fenstertausch.avif
+  - /uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif
 contactIds:
   - sabine
   - sascha

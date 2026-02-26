@@ -69,7 +69,7 @@ interface ErrorFallbackProps {
 
 const ErrorFallback: React.FC<ErrorFallbackProps> = ({ error, onReset }) => {
   const { lang } = useParams<{ lang: SupportedLang }>();
-  const activeLang: SupportedLang = lang === 'de' || lang === 'en' ? lang : 'en';
+  const activeLang: SupportedLang = 'de';
 
   const handleGoHome = (): void => {
     window.location.href = `/${activeLang}`;

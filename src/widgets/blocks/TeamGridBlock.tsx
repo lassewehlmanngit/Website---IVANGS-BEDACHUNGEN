@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { tinaField } from 'tinacms/dist/react';
-import { User, Mail } from 'lucide-react';
-import { teamMembers, getLeadership, getOfficeTeam, getCraftsmen } from '@/features/company/model/teamData';
+import { User, Mail, Info } from 'lucide-react';
+import { teamMembers, getLeadership, getOfficeTeam, getCraftsmen, TeamMember } from '@/features/company/model/teamData';
+import { Dialog } from '@/shared/ui/Dialog';
+import { Button } from '@/shared/ui/Button';
 
 export interface TeamGridBlockProps {
   data: {
@@ -14,6 +16,7 @@ export interface TeamGridBlockProps {
 }
 
 export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField }) => {
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const categories = data.categories || ['leadership', 'office', 'craftsmen'];
   const showEmail = data.showEmail ?? true;
 
@@ -54,15 +57,23 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
             </h3>
             <div className="grid md:grid-cols-2 gap-6">
               {leadership.map((member) => (
-                <div key={member.id} className="bg-slate-50 p-6 rounded-sm border border-slate-100 flex items-start gap-4">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center shrink-0">
-                    <User size={28} className="text-primary" />
+                <div
+                  key={member.id}
+                  className="bg-slate-50 p-6 rounded-sm border border-slate-100 flex items-start gap-4 cursor-pointer hover:border-primary hover:shadow-md transition-all group"
+                  onClick={() => setSelectedMember(member)}
+                >
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center shrink-0 overflow-hidden">
+                    {member.img ? (
+                      <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    ) : (
+                      <User size={28} className="text-primary" />
+                    )}
                   </div>
-                  <div>
-                    <h4 className="font-bold text-lg text-slate-900">{member.name}</h4>
+                  <div className="flex-1">
+                    <h4 className="font-bold text-lg text-slate-900 group-hover:text-primary transition-colors">{member.name}</h4>
                     <p className="text-sm text-slate-500 mb-2">{member.role}</p>
                     {showEmail && member.email && (
-                      <a href={`mailto:${member.email}`} className="text-sm text-primary hover:underline flex items-center gap-1">
+                      <a href={`mailto:${member.email}`} className="text-sm text-primary hover:underline flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
                         <Mail size={14} /> {member.email}
                       </a>
                     )}
@@ -82,15 +93,23 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
             </h3>
             <div className="grid md:grid-cols-3 gap-6">
               {officeTeam.map((member) => (
-                <div key={member.id} className="bg-slate-50 p-6 rounded-sm border border-slate-100">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                    <User size={20} className="text-primary" />
+                <div
+                  key={member.id}
+                  className="bg-slate-50 p-6 rounded-sm border border-slate-100 cursor-pointer hover:border-primary hover:shadow-md transition-all group"
+                  onClick={() => setSelectedMember(member)}
+                >
+                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4 overflow-hidden">
+                    {member.img ? (
+                      <img src={member.img} alt={member.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                    ) : (
+                      <User size={20} className="text-primary" />
+                    )}
                   </div>
-                  <h4 className="font-bold text-slate-900">{member.name}</h4>
+                  <h4 className="font-bold text-slate-900 group-hover:text-primary transition-colors">{member.name}</h4>
                   <p className="text-sm text-slate-500 mb-2">{member.role}</p>
                   {showEmail && member.email && (
-                    <a href={`mailto:${member.email}`} className="text-xs text-primary hover:underline">
-                      {member.email}
+                    <a href={`mailto:${member.email}`} className="text-xs text-primary hover:underline flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                      <Mail size={12} /> {member.email}
                     </a>
                   )}
                 </div>
@@ -119,6 +138,55 @@ export const TeamGridBlock: React.FC<TeamGridBlockProps> = ({ data, parentField 
             </div>
           </div>
         )}
+
+        {/* Member Modal */}
+        <Dialog
+          open={!!selectedMember}
+          onClose={() => setSelectedMember(null)}
+          title={selectedMember?.name}
+          description={selectedMember?.role}
+        >
+          {selectedMember && (
+            <div className="mt-4">
+              <div className="flex flex-col sm:flex-row gap-6 items-start">
+                <div className="w-32 h-32 shrink-0 bg-slate-100 rounded-lg overflow-hidden border border-slate-200">
+                  {selectedMember.img ? (
+                    <img src={selectedMember.img} alt={selectedMember.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center">
+                      <User size={48} className="text-slate-400" />
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h4 className="text-lg font-bold text-slate-900 flex items-center gap-2 mb-2">
+                    <Info size={18} className="text-primary" />
+                    Über {selectedMember.name.split(' ')[0]}
+                  </h4>
+                  <p className="text-slate-600 leading-relaxed mb-6">
+                    {selectedMember.desc || `${selectedMember.name} ist ein wichtiger Teil unseres Teams.`}
+                  </p>
+
+                  {selectedMember.email && (
+                    <div className="pt-4 border-t border-slate-100 flex items-center gap-4">
+                      <div className="text-sm text-slate-500">
+                        <p className="font-bold text-slate-900">Direkter Kontakt</p>
+                        <p className="text-xs">Bei Fragen direkt erreichbar.</p>
+                      </div>
+                      <a href={`mailto:${selectedMember.email}`} className="ml-auto">
+                        <Button className="w-full sm:w-auto" variant="outline">
+                          <Mail size={16} className="mr-2" />
+                          Nachricht senden
+                        </Button>
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+        </Dialog>
+
       </div>
     </section>
   );

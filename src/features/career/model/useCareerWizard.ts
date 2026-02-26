@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-export type CareerStep = 'intro' | 'outdoors' | 'indoors' | 'result';
-export type CareerResult = 'dachdecker' | 'kaufmann' | 'none' | null;
+export type CareerStep = 'intro' | 'q1' | 'q2' | 'result';
+export type CareerResult = 'dachdecker' | 'geselle' | 'vorarbeiter' | 'ausbildung' | 'none' | null;
 
 export const useCareerWizard = () => {
   const [step, setStep] = useState(0);
@@ -12,22 +12,28 @@ export const useCareerWizard = () => {
     const currentAnswers = { ...answers, [step]: value };
     setAnswers(currentAnswers);
 
-    // Logic to determine next step or result
     if (step === 0) {
-      if (value === "outdoors") setStep(1);
-      else setStep(2);
+      if (value === "craft_experience") {
+        setStep(1); // ask about details
+      } else if (value === "leadership") {
+        finalize("vorarbeiter");
+      } else if (value === "learn") {
+        finalize("ausbildung");
+      } else {
+        finalize("none");
+      }
     } else if (step === 1) {
-      if (value === "heights_yes") finalize("dachdecker");
-      else finalize("none");
-    } else if (step === 2) {
-      if (value === "org_yes") finalize("kaufmann");
-      else finalize("none");
+      if (value === "big_projects") {
+        finalize("geselle");
+      } else {
+        finalize("dachdecker");
+      }
     }
   };
 
   const finalize = (res: CareerResult) => {
     setResult(res);
-    setStep(3); // Result step
+    setStep(3); // Result step mapped to 3 for UI consistency
   };
 
   const reset = () => {

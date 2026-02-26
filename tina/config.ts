@@ -12,17 +12,17 @@ const branch =
   process.env.HEAD ||
   'main';
 
-const clientId = 
-  process.env.TINA_CLIENT_ID || 
-  process.env.VITE_TINA_CLIENT_ID || 
+const clientId =
+  process.env.TINA_CLIENT_ID ||
+  process.env.VITE_TINA_CLIENT_ID ||
   // Legacy fallbacks (deprecated)
-  process.env.TINA_PUBLIC_CLIENT_ID || 
-  process.env.VITE_TINA_PUBLIC_CLIENT_ID || 
+  process.env.TINA_PUBLIC_CLIENT_ID ||
+  process.env.VITE_TINA_PUBLIC_CLIENT_ID ||
   null;
 
-const token = 
-  process.env.TINA_TOKEN || 
-  process.env.VITE_TINA_TOKEN || 
+const token =
+  process.env.TINA_TOKEN ||
+  process.env.VITE_TINA_TOKEN ||
   null;
 
 // =============================================================================
@@ -62,9 +62,9 @@ const seoFields = {
 const buttonFields = [
   { type: 'string' as const, name: 'text', label: 'Button Text', required: true },
   { type: 'string' as const, name: 'link', label: 'Link', required: true },
-  { 
-    type: 'string' as const, 
-    name: 'variant', 
+  {
+    type: 'string' as const,
+    name: 'variant',
     label: 'Stil',
     options: [
       { label: 'Primär', value: 'primary' },
@@ -85,22 +85,22 @@ const heroBlock: Template = {
     { type: 'string', name: 'title', label: 'Haupttitel (H1)' },
     { type: 'string', name: 'subtitle', label: 'Untertitel' },
     { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
-    { 
-      type: 'object', 
-      name: 'primaryButton', 
+    {
+      type: 'object',
+      name: 'primaryButton',
       label: 'Haupt-Button',
       fields: buttonFields,
     },
-    { 
-      type: 'object', 
-      name: 'secondaryButton', 
+    {
+      type: 'object',
+      name: 'secondaryButton',
       label: 'Zweit-Button',
       fields: buttonFields,
     },
     { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
-    { 
-      type: 'string', 
-      name: 'variant', 
+    {
+      type: 'string',
+      name: 'variant',
       label: 'Stil Variante',
       options: [
         { label: 'Standard (dunkel)', value: 'dark' },
@@ -119,9 +119,9 @@ const contentBlock: Template = {
     { type: 'string', name: 'title', label: 'Titel' },
     { type: 'rich-text', name: 'body', label: 'Inhalt' },
     { type: 'image', name: 'image', label: 'Bild (optional)' },
-    { 
-      type: 'string', 
-      name: 'imagePosition', 
+    {
+      type: 'string',
+      name: 'imagePosition',
       label: 'Bild Position',
       options: [
         { label: 'Links', value: 'left' },
@@ -145,7 +145,7 @@ const featuresBlock: Template = {
       list: true,
       name: 'items',
       label: 'Features',
-      ui: { 
+      ui: {
         max: 8,
         itemProps: (item) => ({ label: item?.title || 'Neues Feature' }),
       },
@@ -218,9 +218,9 @@ const ctaBlock: Template = {
     { type: 'string', name: 'eyebrow', label: 'Kleine Überschrift' },
     { type: 'string', name: 'title', label: 'Titel' },
     { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
-    { 
-      type: 'object', 
-      name: 'button', 
+    {
+      type: 'object',
+      name: 'button',
       label: 'Button',
       fields: buttonFields,
     },
@@ -248,7 +248,7 @@ const faqBlock: Template = {
       list: true,
       name: 'questions',
       label: 'Fragen',
-      ui: { 
+      ui: {
         max: 15,
         itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
       },
@@ -363,7 +363,7 @@ export default defineConfig({
       // =========================================================================
       // 🏠 HAUPTSEITEN (Singletons)
       // =========================================================================
-      
+
       // 1. 🏠 STARTSEITE (Singleton)
       {
         name: 'homePage',
@@ -388,16 +388,16 @@ export default defineConfig({
               { type: 'string', name: 'title', label: 'Haupttitel (H1)', required: true },
               { type: 'string', name: 'subtitle', label: 'Untertitel' },
               { type: 'string', name: 'description', label: 'Einleitungstext', ui: { component: 'textarea' } },
-              { 
-                type: 'object', 
-                name: 'buttons', 
-                label: 'Buttons', 
+              {
+                type: 'object',
+                name: 'buttons',
+                label: 'Buttons',
                 fields: [
                   { type: 'string', name: 'primaryText', label: 'Haupt-Button Text' },
                   { type: 'string', name: 'primaryLink', label: 'Haupt-Button Link' },
                   { type: 'string', name: 'secondaryText', label: 'Zweit-Button Text' },
                   { type: 'string', name: 'secondaryLink', label: 'Zweit-Button Link' },
-                ] 
+                ]
               },
               { type: 'image', name: 'backgroundImage', label: 'Hintergrundbild' },
               { type: 'string', name: 'videoUrl', label: 'Video URL' },
@@ -423,9 +423,9 @@ export default defineConfig({
             list: true,
             name: 'stats',
             label: '📊 Statistiken (Zahlen)',
-            ui: { 
+            ui: {
               max: 6,
-              itemProps: (item) => ({ label: item?.label || 'Neue Statistik' }) 
+              itemProps: (item) => ({ label: item?.label || 'Neue Statistik' })
             },
             fields: [
               { type: 'string', name: 'value', label: 'Zahl (z.B. 28)', required: true },
@@ -447,9 +447,9 @@ export default defineConfig({
                 list: true,
                 name: 'services',
                 label: 'Leistungen',
-                ui: { 
+                ui: {
                   max: 8,
-                  itemProps: (item) => ({ label: item?.title || 'Neue Leistung' }) 
+                  itemProps: (item) => ({ label: item?.title || 'Neue Leistung' })
                 },
                 fields: [
                   { type: 'string', name: 'title', label: 'Titel', required: true },
@@ -498,9 +498,9 @@ export default defineConfig({
                 list: true,
                 name: 'items',
                 label: 'Projekte',
-                ui: { 
+                ui: {
                   max: 6,
-                  itemProps: (item) => ({ label: item?.title || 'Neues Projekt' }) 
+                  itemProps: (item) => ({ label: item?.title || 'Neues Projekt' })
                 },
                 fields: [
                   { type: 'string', name: 'title', label: 'Projektname', required: true },
@@ -525,9 +525,9 @@ export default defineConfig({
                 list: true,
                 name: 'items',
                 label: 'Listenpunkte',
-                ui: { 
+                ui: {
                   max: 4,
-                  itemProps: (item) => ({ label: item?.title || 'Neuer Punkt' }) 
+                  itemProps: (item) => ({ label: item?.title || 'Neuer Punkt' })
                 },
                 fields: [
                   { type: 'string', name: 'title', label: 'Titel', required: true },
@@ -550,9 +550,9 @@ export default defineConfig({
                 list: true,
                 name: 'questions',
                 label: 'Fragen',
-                ui: { 
+                ui: {
                   max: 10,
-                  itemProps: (item) => ({ label: item?.question || 'Neue Frage' }) 
+                  itemProps: (item) => ({ label: item?.question || 'Neue Frage' })
                 },
                 fields: [
                   { type: 'string', name: 'question', label: 'Frage', required: true },
@@ -631,9 +631,9 @@ export default defineConfig({
             list: true,
             name: 'values',
             label: '✅ Werte / Highlights',
-            ui: { 
+            ui: {
               max: 6,
-              itemProps: (item) => ({ label: item?.text || 'Neuer Wert' }) 
+              itemProps: (item) => ({ label: item?.text || 'Neuer Wert' })
             },
             fields: [
               { type: 'string', name: 'text', label: 'Text', required: true },
@@ -644,10 +644,21 @@ export default defineConfig({
           {
             type: 'object',
             name: 'equipment',
-            label: '🔧 Ausstattung',
+            label: '🔧 Ausstattung & Fuhrpark',
             fields: [
               { type: 'string', name: 'title', label: 'Titel' },
               { type: 'string', name: 'description', label: 'Beschreibung', ui: { component: 'textarea' } },
+              {
+                type: 'object',
+                list: true,
+                name: 'gallery',
+                label: '📸 Bildergalerie',
+                ui: { itemProps: (item) => ({ label: item?.alt || 'Neues Bild' }) },
+                fields: [
+                  { type: 'image', name: 'image', label: 'Bild', required: true },
+                  { type: 'string', name: 'alt', label: 'Beschreibung / Alt-Text' },
+                ]
+              }
             ],
           },
           // TEAM SECTION
@@ -819,7 +830,7 @@ export default defineConfig({
       // =========================================================================
       // 📚 RESSOURCEN
       // =========================================================================
-      
+
       // 🔧 DIENSTLEISTUNGEN
       {
         name: 'service',
@@ -859,7 +870,7 @@ export default defineConfig({
             name: 'sections',
             label: 'Detailsektionen',
             description: 'Ausführliche Informationsblöcke mit Icon und Text',
-            ui: { 
+            ui: {
               max: 6,
               itemProps: (item) => ({ label: item?.title || 'Neue Sektion' }),
             },
@@ -875,7 +886,7 @@ export default defineConfig({
             name: 'processSteps',
             label: 'Prozessschritte',
             description: 'Ablauf des Projekts in einzelnen Schritten',
-            ui: { 
+            ui: {
               max: 8,
               itemProps: (item) => ({ label: item?.title ? `${item.step || '?'}. ${item.title}` : 'Neuer Schritt' }),
             },
@@ -905,7 +916,7 @@ export default defineConfig({
             name: 'faq',
             label: 'FAQ',
             description: 'Häufig gestellte Kundenfragen',
-            ui: { 
+            ui: {
               max: 10,
               itemProps: (item) => ({ label: item?.question || 'Neue Frage' }),
             },
@@ -920,7 +931,7 @@ export default defineConfig({
             name: 'gallery',
             label: 'Galerie',
             description: 'Zusätzliche Bilder mit Bildunterschrift',
-            ui: { 
+            ui: {
               max: 12,
               itemProps: (item) => ({ label: item?.caption || 'Neues Bild' }),
             },
@@ -944,7 +955,7 @@ export default defineConfig({
           },
         ],
       },
-      
+
       // 📋 STELLENANGEBOTE
       {
         name: 'job',
@@ -1020,7 +1031,7 @@ export default defineConfig({
       // =========================================================================
       // ⚙️ GLOBALE EINSTELLUNGEN
       // =========================================================================
-      
+
       // ⚙️ GRUNDEINSTELLUNGEN
       {
         name: 'settings',
@@ -1028,7 +1039,7 @@ export default defineConfig({
         path: 'content/globals',
         format: 'json',
         match: { include: 'settings' },
-        ui: { 
+        ui: {
           global: true,
           allowedActions: { create: false, delete: false },
         },
@@ -1065,7 +1076,7 @@ export default defineConfig({
           },
         ],
       },
-      
+
       // 🧭 NAVIGATION
       {
         name: 'navigation',
@@ -1073,7 +1084,7 @@ export default defineConfig({
         path: 'content/globals',
         format: 'json',
         match: { include: 'navigation' },
-        ui: { 
+        ui: {
           global: true,
           allowedActions: { create: false, delete: false },
         },
@@ -1109,7 +1120,7 @@ export default defineConfig({
         path: 'content/globals',
         format: 'json',
         match: { include: 'footer' },
-        ui: { 
+        ui: {
           global: true,
           allowedActions: { create: false, delete: false },
         },
@@ -1137,7 +1148,7 @@ export default defineConfig({
           },
         ],
       },
-      
+
       // ⚖️ RECHTSTEXTE
       {
         name: 'legalPage',

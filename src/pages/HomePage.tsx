@@ -22,7 +22,7 @@ export interface HomePageProps {
 export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
   // Fetch home page data and global settings from TinaCMS with visual editing support
   const { page: home, global, isLoading } = usePageContent('home');
-  
+
   // Show loading state
   if (isLoading) {
     return (
@@ -39,7 +39,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       </div>
     );
   }
-  
+
   // Show error state or fallback
   if (!home) {
     return (
@@ -50,15 +50,15 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
           ogLocale="de_DE"
           ogSiteName="Ivangs Bedachungen"
           localBusiness={{
-              name: "Ivangs Bedachungen GmbH & Co. KG",
-              telephone: "+49 2162 356666",
-              email: "bedachungen@ivangs.de",
-              address: {
-                  streetAddress: "Schmiedestraße 37",
-                  addressLocality: "Viersen - Süchteln",
-                  postalCode: "41749",
-                  addressCountry: "DE"
-              }
+            name: "Ivangs Bedachungen GmbH & Co. KG",
+            telephone: "+49 2162 356666",
+            email: "bedachungen@ivangs.de",
+            address: {
+              streetAddress: "Schmiedestraße 37",
+              addressLocality: "Viersen - Süchteln",
+              postalCode: "41749",
+              addressCountry: "DE"
+            }
           }}
         />
         <HeroSection lang={lang} />
@@ -68,13 +68,13 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         <CeoQuote lang={lang} />
         <ProjectShowcase />
         <HomeFAQ lang={lang} />
-        
+
         {/* Final CTA */}
         <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05)_0%,transparent_40%)]"></div>
-          
+
           <div className="container mx-auto px-4 text-center relative z-10">
             <h2 className="text-h2 font-bold mb-4 md:mb-6 text-white">Planen Sie sicher. Planen Sie mit Ivangs.</h2>
             <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10">
@@ -82,9 +82,9 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
             </p>
             <div className="flex justify-center gap-4">
               <SmartLink link={`/${lang}/contact`}>
-                  <Button variant="secondary" size="xl" className="bg-white text-primary hover:bg-slate-50 shadow-lg">
-                    Beratungstermin vereinbaren
-                  </Button>
+                <Button variant="secondary" size="xl" className="bg-white text-primary hover:bg-slate-50 shadow-lg">
+                  Beratungstermin vereinbaren
+                </Button>
               </SmartLink>
             </div>
           </div>
@@ -99,22 +99,22 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         title={home.seo?.title || "Ivangs Bedachungen - Meisterbetrieb seit 1996"}
         description={home.seo?.description || "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."}
         ogLocale="de_DE"
-        ogSiteName={global?.siteName || "Ivangs Bedachungen"}
-        ogImage={home.seo?.ogImage ? { url: home.seo.ogImage, alt: home.seo?.title || "Ivangs Bedachungen" } : (global?.defaultOgImage ? { url: global.defaultOgImage, alt: "Ivangs Bedachungen" } : undefined)}
+        ogSiteName={(global as any)?.siteName || "Ivangs Bedachungen"}
+        ogImage={home.seo?.ogImage ? { url: home.seo.ogImage, alt: home.seo?.title || "Ivangs Bedachungen" } : ((global as any)?.defaultOgImage ? { url: (global as any).defaultOgImage, alt: "Ivangs Bedachungen" } : undefined)}
         localBusiness={{
-            name: "Ivangs Bedachungen GmbH & Co. KG",
-            telephone: "+49 2162 356666",
-            email: "bedachungen@ivangs.de",
-            address: {
-                streetAddress: "Schmiedestraße 37",
-                addressLocality: "Viersen - Süchteln",
-                postalCode: "41749",
-                addressCountry: "DE"
-            }
+          name: "Ivangs Bedachungen GmbH & Co. KG",
+          telephone: "+49 2162 356666",
+          email: "bedachungen@ivangs.de",
+          address: {
+            streetAddress: "Schmiedestraße 37",
+            addressLocality: "Viersen - Süchteln",
+            postalCode: "41749",
+            addressCountry: "DE"
+          }
         }}
       />
       <HeroSection lang={lang} settings={home.hero} homeData={home} />
-      
+
       {/* Mobile Quick Form (Visible only on mobile) */}
       <MobileQuickForm lang={lang} data={home} />
 
@@ -124,26 +124,42 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
       <CeoQuote lang={lang} ceoData={home.ceoQuote} />
       <ProjectShowcase homeData={home} projects={home.projectsSection?.items} />
       <HomeFAQ lang={lang} homeData={home} faqData={home.faqSection?.questions} faqCTA={home.faqSection?.cta} />
-      
-      {/* Final CTA */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05)_0%,transparent_40%)]"></div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h2 className="text-h2 font-bold mb-4 md:mb-6 text-white" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'title')}>
-            {home.finalCTA?.title || 'Planen Sie sicher. Planen Sie mit Ivangs.'}
-          </h2>
-          <p className="text-white/90 text-lg md:text-xl max-w-2xl mx-auto mb-8 md:mb-10" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'description')}>
-            {home.finalCTA?.description || 'Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.'}
-          </p>
-          <div className="flex justify-center gap-4">
-            <SmartLink link={home.finalCTA?.buttonLink || `/${lang}/contact`}>
-                <Button variant="secondary" size="xl" className="bg-white text-primary hover:bg-slate-50 shadow-lg" data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}>
+
+      {/* Final CTA: Sleek Modern Banner */}
+      <section className="py-12 md:py-20 bg-slate-50 relative px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="relative rounded-[2rem] bg-slate-900 overflow-hidden shadow-2xl border border-slate-800 p-10 md:p-16 text-center group">
+            {/* Ambient Background glows */}
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[100px] pointer-events-none group-hover:bg-primary/30 transition-colors duration-700"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none"></div>
+
+            <div className="relative z-10 flex flex-col items-center max-w-3xl mx-auto">
+              <p className="text-primary font-bold uppercase tracking-widest text-xs mb-4">
+                Zukunft bauen
+              </p>
+              <h2
+                className="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight"
+                data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'title')}
+              >
+                {home.finalCTA?.title || 'Planen Sie sicher.'} <span className="text-primary">Planen Sie mit Ivangs.</span>
+              </h2>
+              <p
+                className="text-slate-300 text-lg md:text-xl mb-10 leading-relaxed"
+                data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'description')}
+              >
+                {home.finalCTA?.description || 'Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.'}
+              </p>
+
+              <SmartLink link={home.finalCTA?.buttonLink || `/${lang}/contact`}>
+                <Button
+                  size="xl"
+                  className="bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(var(--primary),0.3)] hover:shadow-[0_0_40px_rgba(var(--primary),0.5)] transform hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
+                  data-tina-field={home.finalCTA && tinaField(home.finalCTA, 'buttonText')}
+                >
                   {home.finalCTA?.buttonText || 'Beratungstermin vereinbaren'}
                 </Button>
-            </SmartLink>
+              </SmartLink>
+            </div>
           </div>
         </div>
       </section>

@@ -72,7 +72,7 @@ export const Testimonial: React.FC<TestimonialProps> = ({
             className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-primary-foreground"
             aria-hidden="true"
           >
-            {author.name.charAt(0).toUpperCase()}
+            {typeof author.name === 'string' ? author.name.charAt(0).toUpperCase() : 'A'}
           </div>
         )}
         <div>

@@ -2,8 +2,8 @@ import React from 'react';
 import { Seo } from '@/shared/ui/Seo';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
-import { Markdown } from '@/shared/ui/Markdown';
 import { tinaField } from 'tinacms/dist/react';
+import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { useLegalPageData } from '@/shared/lib/tina/useLegalPageData';
 
 export const PrivacyPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
@@ -11,7 +11,7 @@ export const PrivacyPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-dvh">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
       </div>
     );
@@ -51,7 +51,7 @@ export const PrivacyPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
             className="prose prose-slate max-w-none text-slate-600"
             data-tina-field={data?.legalPage && tinaField(data.legalPage, 'body')}
           >
-            <Markdown>{page.body}</Markdown>
+            <TinaMarkdown content={page.body as any} />
           </div>
         </div>
       </div>

@@ -50,7 +50,8 @@ const ReferenceGallery: React.FC<{
   images: string[];
   title: string;
   useTinaData: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any\n  data: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any;
 }> = ({ images, title, useTinaData, data }) => {
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
 
@@ -198,7 +199,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
               {/* Detailed Knowledge Sections */}
               {service.sections && service.sections.length > 0 && (
                 <div className="space-y-12 mb-20">
-                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}\n                  {service.sections.map((section: any, idx: number) => {
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                  {service.sections.map((section: any, idx: number) => {
                     const Icon = iconMap[section.icon] || Info;
                     return (
                       <div key={idx} className="flex gap-6 group" data-tina-field={useTinaData && tinaField(data.service, `sections.${idx}`)}>
@@ -266,7 +268,8 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                     <h3 className="text-h3 font-bold text-slate-900">Häufige Kundenfragen</h3>
                   </div>
                   <Accordion type="single" collapsible className="border-slate-200">
-                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}\n                    {service.faq.map((item: any, idx: number) => (
+                    {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+                    {service.faq.map((item: any, idx: number) => (
                       <AccordionItem key={idx} value={`item-${idx}`} data-tina-field={useTinaData && tinaField(data.service, `faq.${idx}`)}>
                         <AccordionTrigger className="text-left hover:bg-slate-50/50">
                           <span

@@ -145,6 +145,11 @@ fragment AboutPageParts on AboutPage {
     __typename
     title
     description
+    gallery {
+      __typename
+      image
+      alt
+    }
   }
   teamSection {
     __typename

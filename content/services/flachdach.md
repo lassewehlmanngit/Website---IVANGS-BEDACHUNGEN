@@ -1,13 +1,13 @@
 ---
 title: Flachdach
 subtitle: Lösung für Industrie & Gewerbe
-shortDescription: Spezialisiert auf Industriehallen und Großprojekte. Langlebige Abdichtungssysteme für Ihr Gewerbe.
-intro: Gerade im Industriebau ist das Dach kapitalentscheidend. Wir sanieren große Hallendächer energetisch effizient und dauerhaft dicht. Mit Systemen, die den Betrieb nicht stören.
+shortDescription: Unser Flachdach-Fokus liegt auf Industriehallen – sie machen etwa 80 Prozent unserer Flachdachprojekte aus. Wir bieten langlebige Abdichtungssysteme für Gewerbe und Industrie.
+intro: Gerade im Industriebau ist das Dach kapitalentscheidend. Mit einem Spezialisierungsgrad von rund 80 Prozent im Bereich Industrie- und Gewerbehallen verfügen wir über herausragende Expertise in diesem Sektor. Wir sanieren große Hallendächer energetisch effizient und dauerhaft dicht – mit Systemen, die Ihren laufenden Betrieb nicht stören.
 heroImage: /uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif
 icon: Layers
 expertTip: Bei Industriehallen rechnet sich eine Sanierung oft doppelt - Durch massive Heizkostenersparnis und staatliche Förderung.
 uiText:
-  introHeader: Wirtschaftlich & Langlebig.
+  introHeader: Der Experte für Industriehallen.
   contactButtonText: Kontakt aufnehmen
   careerCtaTitle: Karriere bei Ivangs
   careerCtaDescription: Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.
@@ -54,16 +54,14 @@ contactIds:
   - sascha
   - isabel
 faq:
-  - question: Was kostet eine Flachdachsanierung für Industriehallen?
-    answer: Das hängt stark von Größe, Dämmstandard und gewähltem Material ab. Bei Hallendächern kalkulieren wir oft mit Quadratmeterpreisen, die bei großen Flächen wirtschaftlicher sind. Gerne erstellen wir ein individuelles Angebot nach Besichtigung.
-  - question: Kann der Betrieb während der Sanierung weiterlaufen?
-    answer: Ja. Wir arbeiten so, dass Ihr Betrieb möglichst wenig gestört wird. Lärmintensive Arbeiten stimmen wir ab, und die Dichtigkeit ist zu jedem Zeitpunkt gewährleistet.
-  - question: Welche Dämmung eignet sich für Hallen?
-    answer: Oft kommen Mineralwolle (Brandschutz!) oder PIR-Hartschaum zum Einsatz. Wir beraten Sie zu Brandschutzvorgaben und energetischen Anforderungen.
-  - question: Wie lange hält eine neue Abdichtung?
-    answer: Moderne Kunststoffbahnen halten bei fachgerechter Verlegung und Wartung 30-40 Jahre, Bitumenbahnen ca. 25-30 Jahre.
-  - question: Bieten Sie auch regelmäßige Wartung für Hallendächer an?
-    answer: Ja, das ist essentiell. Wir bieten Wartungsverträge an, die jährliche Inspektionen und Rinnenreinigungen beinhalten, um die Lebensdauer des Daches zu maximieren und Versicherungsschutz zu gewährleisten.
+  - question: Was kostet eine Flachdachsanierung für Industriehallen pro Quadratmeter?
+    answer: Die Kosten für eine Flachdachsanierung variieren je nach Material, Zustand des Daches und Dämmstandard. Bei größeren Industriehallen profitieren Sie von Skaleneffekten, wodurch der Quadratmeterpreis wirtschaftlicher wird. Konventionelle Sanierungen starten oft zwischen 150 und 250 €/m², während einfache Regenerationen günstiger sein können. Wir beraten Sie gerne vor Ort zu den genauen Dachdecker-Kosten.
+  - question: Gibt es staatliche Förderungen (BAFA / KfW) für die Flachdachsanierung?
+    answer: Ja, die energetische Dachsanierung wird staatlich gefördert. Wenn die neue Dachdämmung den aktuellen Anforderungen des Gebäudeenergiegesetzes (GEG) entspricht und der U-Wert maßgeblich verbessert wird, können Sie lukrative Zuschüsse über das BAFA oder zinsgünstige Kredite über die KfW beantragen. Wir unterstützen Sie aktiv bei Fachplanung und Antragsstellung.
+  - question: Wann lohnt sich eine komplette Sanierung statt einer Flachdachreparatur?
+    answer: Eine Dachreparatur ist sinnvoll bei lokalen, kleineren Schäden (z.B. kleinen Rissen oder Blasen). Wenn die Abdichtung jedoch das Ende ihrer Lebensdauer erreicht hat (nach 20-30 Jahren) oder die Wärmedämmung veraltet ist (hohe Heizkosten), ist eine Komplettsanierung langfristig die wirtschaftlichste Lösung. Zudem beugt sie fortlaufenden teuren Reparaturen und Wasserschäden vor und erhält den Wert der Immobilie.
+  - question: Wie oft sollte ein Flachdach gewartet werden?
+    answer: Ein Flachdach sollte mindestens ein- bis zweimal jährlich durch einen Fachbetrieb gewartet werden – idealerweise im Frühjahr und Herbst. Regelmäßige Inspektion und Rinnenreinigung verhindern stehendes Wasser, machen kleine Leckeragen frühzeitig sichtbar und verlängern die Lebensdauer der Dachabdichtung erheblich. Mangelnde Wartung kann im Schadensfall zudem den Versicherungsschutz gefährden.
 ---
 
 ## Flachdach-Sanierung für Industrie & Gewerbe

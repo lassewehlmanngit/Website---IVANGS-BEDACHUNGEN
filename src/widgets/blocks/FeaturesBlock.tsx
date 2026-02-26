@@ -19,7 +19,7 @@ export interface FeaturesBlockProps {
 }
 
 const getIcon = (iconName: string) => {
-  const icons = LucideIcons as Record<string, React.ComponentType<{ size?: number; className?: string }>>;
+  const icons = LucideIcons as any;
   return icons[iconName] || LucideIcons.Star;
 };
 
@@ -37,7 +37,7 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({ data, parentField 
         {(data.eyebrow || data.title || data.description) && (
           <div className="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
             {data.eyebrow && (
-              <span 
+              <span
                 className="text-primary font-bold uppercase tracking-wider text-sm mb-3 block"
                 data-tina-field={parentField && tinaField(data, 'eyebrow')}
               >
@@ -45,7 +45,7 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({ data, parentField 
               </span>
             )}
             {data.title && (
-              <h2 
+              <h2
                 className="text-h2 font-bold text-slate-900 mb-4"
                 data-tina-field={parentField && tinaField(data, 'title')}
               >
@@ -53,7 +53,7 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({ data, parentField 
               </h2>
             )}
             {data.description && (
-              <p 
+              <p
                 className="text-lg text-slate-600"
                 data-tina-field={parentField && tinaField(data, 'description')}
               >
@@ -68,21 +68,21 @@ export const FeaturesBlock: React.FC<FeaturesBlockProps> = ({ data, parentField 
             {data.items.map((item, index) => {
               const Icon = item.icon ? getIcon(item.icon) : LucideIcons.CheckCircle;
               return (
-                <div 
-                  key={index} 
+                <div
+                  key={index}
                   className="bg-white p-6 rounded-sm border border-slate-100 shadow-sm"
                 >
                   <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
                     <Icon size={24} className="text-primary" />
                   </div>
-                  <h3 
+                  <h3
                     className="text-lg font-bold text-slate-900 mb-2"
                     data-tina-field={parentField && data.items && tinaField(data.items[index], 'title')}
                   >
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p 
+                    <p
                       className="text-slate-600"
                       data-tina-field={parentField && data.items && tinaField(data.items[index], 'description')}
                     >

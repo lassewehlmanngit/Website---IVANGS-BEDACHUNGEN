@@ -38,28 +38,28 @@ const LanguageWrapper: React.FC = () => {
     document.documentElement.lang = lang;
   }, [lang, navigate]);
 
-  const safeLang: SupportedLang = lang && isSupportedLang(lang) ? lang : 'en';
+  const safeLang: SupportedLang = lang && isSupportedLang(lang) ? lang : 'de';
 
   return (
     <MarketingLayout lang={safeLang}>
       <Routes>
         {/* Home page */}
         <Route path="/" element={<HomePage lang={safeLang} />} />
-        
+
         {/* Service detail pages */}
         <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
-        
+
         {/* Singleton pages (about, career, contact) */}
         <Route path="/about" element={<AboutPage lang={safeLang} />} />
         <Route path="/career" element={<CareerPage lang={safeLang} />} />
         <Route path="/contact" element={<ContactPage lang={safeLang} />} />
-        
+
         {/* Legal pages */}
         <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
         <Route path="/privacy" element={<PrivacyPage lang={safeLang} />} />
         <Route path="/terms" element={<TermsPage lang={safeLang} />} />
         <Route path="/cookies" element={<CookieSettingsPage lang={safeLang} />} />
-        
+
         {/* 404 Page */}
         <Route path="/404" element={<NotFoundPage lang={safeLang} />} />
 

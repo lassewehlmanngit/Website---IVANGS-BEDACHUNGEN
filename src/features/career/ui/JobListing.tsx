@@ -7,15 +7,47 @@ import type { JobOffer } from '@/features/career/model/jobsData';
 import { cn } from '@/shared/lib/cn';
 import { tinaField } from 'tinacms/dist/react';
 
-interface JobListingProps {
+export interface JobListingProps {
   job: JobOffer | any;
   lang: string;
   useTinaField?: boolean;
+  isCardMode?: boolean;
 }
 
-export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField = false }) => {
+export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField = false, isCardMode = false }) => {
   const navigate = useNavigate();
 
+  // If we are in card mode, we just render the expanded details (or a link to them)
+  if (isCardMode) {
+    return (
+      <div className="flex flex-col h-full">
+        {/* We assume the parent component renders the summary/title, so we just provide the CTA and details preview here */}
+        <div className="flex flex-wrap gap-4 text-xs md:text-sm text-slate-500 mb-6">
+          <span className="flex items-center gap-1" data-tina-field={useTinaField && tinaField(job, 'location')}>
+            <MapPin size={14} /> {job.location || 'Dinslaken'}
+          </span>
+          <span className="flex items-center gap-1"><Clock size={14} /> Ab sofort</span>
+        </div>
+
+        <div className="mt-auto pt-4 border-t border-slate-100">
+          {/* If we had a dedicated job detail page, we'd link there. Since it's Contact, we open a dialog or link to Contact */}
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/${lang}/contact?subject=Bewerbung%20als%20${encodeURIComponent(job.title || '')}`);
+            }}
+            variant="outline"
+            className="w-full justify-between group-hover:bg-primary group-hover:text-white transition-colors"
+          >
+            <span>Jetzt bewerben</span>
+            <Briefcase size={16} />
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  // Original Accordion Mode (Fallback)
   return (
     <div className="bg-white border border-slate-200 rounded-sm hover:border-primary hover:shadow-lg transition-all group overflow-hidden">
       <AccordionItem value={job.id || job._sys?.filename} className="border-none">

@@ -595,10 +595,21 @@ var config_default = defineConfig({
           {
             type: "object",
             name: "equipment",
-            label: "\u{1F527} Ausstattung",
+            label: "\u{1F527} Ausstattung & Fuhrpark",
             fields: [
               { type: "string", name: "title", label: "Titel" },
-              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } }
+              { type: "string", name: "description", label: "Beschreibung", ui: { component: "textarea" } },
+              {
+                type: "object",
+                list: true,
+                name: "gallery",
+                label: "\u{1F4F8} Bildergalerie",
+                ui: { itemProps: (item) => ({ label: item?.alt || "Neues Bild" }) },
+                fields: [
+                  { type: "image", name: "image", label: "Bild", required: true },
+                  { type: "string", name: "alt", label: "Beschreibung / Alt-Text" }
+                ]
+              }
             ]
           },
           // TEAM SECTION

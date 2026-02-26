@@ -57,7 +57,7 @@ export const DesignSystemPage: React.FC = () => {
       <Seo title="Design System" description="Component showcase and style guide." noindex />
       <Toaster />
 
-      <div className="min-h-screen bg-background pb-20 pt-24">
+      <div className="min-h-dvh bg-background pb-20 pt-24">
         <div className="container">
           <div className="mb-16">
             <Heading level={1} className="mb-4">Design System</Heading>

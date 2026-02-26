@@ -78,4 +78,5 @@ export function isVisualEditingEnabled(): boolean {
   return result;
 }
 
-export { client, client as tinaClient };
+const exportClient = client as any;
+export { exportClient as client, exportClient as tinaClient };

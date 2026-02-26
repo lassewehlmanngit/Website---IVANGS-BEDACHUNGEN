@@ -47,24 +47,15 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="animate-fade-in">
-        <div className="container mx-auto px-4 py-16 md:py-24 space-y-16">
-          <Skeleton variant="rectangular" height={400} className="rounded-lg" />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
-          <SkeletonText lines={5} />
-        </div>
+      <div className="absolute inset-0 bg-slate-900 animate-pulse flex items-center justify-center">
+        <Skeleton variant="rectangular" width="40%" height="60%" className="rounded-xl opacity-20" />
       </div>
     );
   }
 
   if (error || !career) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-dvh">
         <p className="text-muted-foreground">Seite konnte nicht geladen werden.</p>
       </div>
     );
@@ -80,150 +71,187 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
         ogSiteName="Ivangs Bedachungen"
       />
 
-      <div className="animate-fade-in">
-        {/* Hero Section */}
+      <div className="animate-fade-in bg-slate-50 min-h-screen">
+        {/* Interactive Hero with Glassmorphic Wizard */}
         <section
-          className="relative py-20 md:py-32 bg-slate-900 text-white overflow-hidden"
-          style={career.hero?.backgroundImage ? {
-            backgroundImage: `url(${career.hero.backgroundImage})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-          } : undefined}
+          className="relative text-white overflow-hidden min-h-[80vh] flex items-center pt-24 pb-16 lg:py-24"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95" />
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="max-w-4xl">
+          {/* Background Image / Gradient */}
+          <div
+            className="absolute inset-0 z-0 bg-slate-900"
+            style={career.hero?.backgroundImage ? {
+              backgroundImage: `url(${career.hero.backgroundImage})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            } : undefined}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-900/40" />
+          </div>
+
+          <div className="container mx-auto px-4 relative z-10 flex flex-col xl:flex-row items-center gap-12 xl:gap-24">
+
+            {/* Hero Left Content */}
+            <div className="flex-1 w-full max-w-2xl text-center xl:text-left">
               {career.hero?.eyebrow && (
                 <p
-                  className="text-primary font-bold uppercase tracking-wider mb-4"
+                  className="inline-block px-4 py-1.5 rounded-full bg-primary/20 text-primary font-bold uppercase tracking-wider text-sm mb-6 border border-primary/20"
                   data-tina-field={career.hero && tinaField(career.hero, 'eyebrow')}
                 >
                   {career.hero.eyebrow}
                 </p>
               )}
               <h1
-                className="text-h1 font-bold mb-6"
+                className="text-4xl md:text-5xl lg:text-h1 font-bold mb-6 text-white leading-tight"
                 data-tina-field={career.hero && tinaField(career.hero, 'title')}
               >
                 {career.hero?.title}
               </h1>
               {career.hero?.description && (
                 <p
-                  className="text-xl text-slate-300 max-w-2xl mb-8"
+                  className="text-lg md:text-xl text-slate-300 mb-8 max-w-xl mx-auto xl:mx-0"
                   data-tina-field={career.hero && tinaField(career.hero, 'description')}
                 >
                   {career.hero.description}
                 </p>
               )}
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-4 justify-center xl:justify-start">
                 <a href="#jobs">
-                  <Button variant="default" size="lg" className="bg-primary hover:bg-primary/90">
-                    Offene Stellen
+                  <Button variant="default" size="xl" className="shadow-[0_0_20px_rgba(var(--primary),0.4)]">
+                    Offene Stellen besehen
                   </Button>
                 </a>
-                <SmartLink link={`/${lang}/contact`}>
-                  <Button variant="outline" size="lg" className="border-white text-white hover:bg-white/10">
-                    Initiativbewerbung
-                  </Button>
-                </SmartLink>
               </div>
             </div>
+
+            {/* Hero Right: Floating Frost Glass Wizard */}
+            {career.wizardSection && (
+              <div className="flex-1 w-full max-w-lg xl:max-w-xl">
+                <div className="rounded-3xl p-[1px] bg-gradient-to-br from-white/30 to-white/5 shadow-2xl">
+                  <div className="rounded-3xl bg-slate-900/60 backdrop-blur-2xl p-6 sm:p-8">
+                    <h2
+                      className="text-xl font-bold text-white mb-2"
+                      data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'title')}
+                    >
+                      {career.wizardSection.title || "Karriere-Finder"}
+                    </h2>
+                    <p
+                      className="text-slate-300 text-sm mb-6 pb-6 border-b border-white/10"
+                      data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'description')}
+                    >
+                      {career.wizardSection.description || "Finde in 2 Minuten heraus, ob wir zusammenpassen."}
+                    </p>
+
+                    {/* The Wizard component itself */}
+                    <div className="wizard-container-dark">
+                      <CareerWizard />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <p className="text-primary font-bold uppercase tracking-wider mb-4">Warum IVANGS?</p>
-              <h2 className="text-h2 font-bold text-slate-900">Das erwartet dich bei uns</h2>
+        {/* Dynamic Benefits Section */}
+        <section className="py-20 md:py-32 bg-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/2"></div>
+
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="text-center mb-16 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-h2 font-bold text-slate-900 mb-4">Warum IVANGS?</h2>
+              <p className="text-lg text-slate-600">Wir bieten mehr als nur einen sicheren Arbeitsplatz. Entdecke, was dich bei uns erwartet.</p>
             </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
               {BENEFITS.map((benefit, index) => (
-                <div key={index} className="text-center p-6 bg-slate-50 rounded-sm">
-                  <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 rounded-full mb-4">
-                    <benefit.icon className="w-7 h-7 text-primary" />
+                <div
+                  key={index}
+                  className="group relative p-8 bg-surface-elevated rounded-2xl shadow-sm border border-slate-100 hover:shadow-xl hover:border-primary/30 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl -mr-10 -mt-10 group-hover:bg-primary/10 transition-colors"></div>
+
+                  <div className="relative z-10">
+                    <div className="inline-flex items-center justify-center w-14 h-14 bg-primary/10 text-primary rounded-xl mb-6 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300 shadow-sm">
+                      <benefit.icon className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold text-slate-900 mb-3">{benefit.title}</h3>
+                    <p className="text-slate-600 leading-relaxed">{benefit.description}</p>
                   </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2">{benefit.title}</h3>
-                  <p className="text-slate-600">{benefit.description}</p>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Jobs Section */}
-        <section id="jobs" className="py-16 md:py-24 bg-slate-50">
+        {/* Elevated Jobs Grid Section */}
+        <section id="jobs" className="py-20 md:py-32 bg-surface-subtle">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2
-                className="text-h2 font-bold text-slate-900 mb-4"
-                data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'title')}
-              >
-                {career.jobsSection?.title || 'Offene Stellen'}
-              </h2>
+            <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+              <div className="max-w-2xl">
+                <p className="text-primary font-bold uppercase tracking-wider mb-2">Karriere bei IVANGS</p>
+                <h2
+                  className="text-3xl md:text-h2 font-bold text-slate-900"
+                  data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'title')}
+                >
+                  {career.jobsSection?.title || 'Werde Teil unseres Teams'}
+                </h2>
+              </div>
+              <div className="flex-shrink-0">
+                <SmartLink link={`/${lang}/contact`}>
+                  <Button variant="outline" className="bg-white hover:bg-slate-50">
+                    Initiativbewerbung senden
+                  </Button>
+                </SmartLink>
+              </div>
             </div>
+
             {jobs.length > 0 ? (
-              <div className="max-w-3xl mx-auto space-y-6">
-                <Accordion type="single" collapsible className="space-y-4">
-                  {jobs.filter((job: any) => job.published !== false).map((job: any, index: number) => (
-                    <JobListing key={index} job={job} lang={lang} />
-                  ))}
-                </Accordion>
+              <div className="grid md:grid-cols-2 gap-6 items-stretch">
+                {jobs.filter((job: any) => job.published !== false).map((job: any, index: number) => (
+                  <div key={index} className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100/60 hover:shadow-lg transition-shadow flex flex-col h-full">
+                    <div className="flex items-start justify-between mb-4">
+                      <div>
+                        {job.type && <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 text-xs font-medium rounded-full mb-3">{job.type}</span>}
+                        <h3 className="text-xl font-bold text-slate-900">{job.title}</h3>
+                      </div>
+                      {job.department && <span className="text-sm text-primary font-semibold hidden sm:block">{job.department}</span>}
+                    </div>
+                    <p className="text-slate-600 mb-6">{job.shortDescription || 'Werde Teil unseres erfolgreichen Teams und arbeite an spannenden Projekten in der Region.'}</p>
+                    <div className="mt-auto">
+                      <JobListing job={job} lang={lang} isCardMode={true} />
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
-              <div className="text-center py-12">
+              <div className="text-center py-20 bg-white rounded-3xl border border-slate-100/60 shadow-sm">
                 <p
-                  className="text-lg text-slate-600"
+                  className="text-lg text-slate-600 max-w-2xl mx-auto"
                   data-tina-field={career.jobsSection && tinaField(career.jobsSection, 'emptyMessage')}
                 >
                   {career.jobsSection?.emptyMessage || 'Aktuell keine offenen Stellen verfügbar. Initiativbewerbungen sind jederzeit willkommen!'}
                 </p>
+                <SmartLink link={`/${lang}/contact`}>
+                  <Button className="mt-6">Jetzt initiativ bewerben</Button>
+                </SmartLink>
               </div>
             )}
           </div>
         </section>
 
-        {/* Career Wizard Section */}
-        {career.wizardSection && (
-          <section className="py-16 md:py-24 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="text-center mb-12">
-                <h2
-                  className="text-h2 font-bold text-slate-900 mb-4"
-                  data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'title')}
-                >
-                  {career.wizardSection.title}
-                </h2>
-                <p
-                  className="text-lg text-slate-600"
-                  data-tina-field={career.wizardSection && tinaField(career.wizardSection, 'description')}
-                >
-                  {career.wizardSection.description}
-                </p>
-              </div>
-              <div className="max-w-2xl mx-auto">
-                <CareerWizard />
-              </div>
-            </div>
-          </section>
-        )}
-
         {/* CTA Section */}
-        <section className="py-16 md:py-24 bg-gradient-to-br from-primary via-primary-600 to-primary-700 text-white relative overflow-hidden">
-          {/* Decorative elements */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.1)_0%,transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(255,255,255,0.05)_0%,transparent_40%)]"></div>
+        <section className="py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-full h-full bg-[url('/images/noise.png')] opacity-20 mix-blend-overlay pointer-events-none"></div>
+          <div className="absolute -top-[300px] -right-[300px] w-[800px] h-[800px] bg-primary/20 rounded-full blur-[120px] pointer-events-none"></div>
 
           <div className="container mx-auto px-4 text-center relative z-10">
-            <p className="text-white/80 font-bold uppercase tracking-wider mb-4">Keine passende Stelle?</p>
-            <h2 className="text-h2 font-bold mb-6">Initiativbewerbung</h2>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
-              Du hast keine passende Stelle gefunden? Bewirb dich trotzdem! Wir sind immer auf der Suche nach motivierten Mitarbeitern.
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">Nichts passendes dabei?</h2>
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
+              Gute Leute können wir immer gebrauchen. Zeig uns, was du drauf hast, und bewirb dich initiativ. Wir melden uns umgehend bei dir zurück!
             </p>
             <SmartLink link={`/${lang}/contact`}>
-              <Button variant="secondary" size="lg" className="bg-white text-primary hover:bg-slate-50 shadow-lg">
-                Jetzt bewerben
+              <Button size="2xl" className="bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(var(--primary),0.3)]">
+                Jetzt Initiativbewerbung starten
               </Button>
             </SmartLink>
           </div>

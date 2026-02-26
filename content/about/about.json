@@ -12,7 +12,7 @@
     "title": "Qualität ist bei uns Familiensache.",
     "text1": "Was 1996 als Vision von Dachdeckermeister Marcus Ivangs begann, ist heute eine feste Größe im Kreis Viersen und darüber hinaus. Doch trotz unseres Wachstums auf 28 Mitarbeiter und 8 LKWs haben wir eines nie verloren: Den persönlichen Draht zu unseren Kunden.",
     "text2": "Bei uns sind Sie keine Nummer, sondern ein Partner. Wir setzen auf langfristige Beziehungen und handwerkliche Ehrlichkeit.",
-    "image": "https://images.unsplash.com/photo-1621251939103-6f59c8821035?q=80&w=2070&auto=format&fit=crop"
+    "image": "/uploads/ivangs-dachdecker-einsatz.avif"
   },
   "values": [
     {
@@ -27,7 +27,21 @@
   ],
   "equipment": {
     "title": "Wir warten nicht auf Material. Wir haben es.",
-    "description": "Mit eigenen Lagerräumen, einem modernen Maschinenpark und dem firmeneigenen Autokran (IVANGS Bauservice) sind wir unabhängig von Mietfirmen und Lieferengpässen. Das bedeutet für Sie: Keine unnötigen Verzögerungen auf der Baustelle."
+    "description": "Mit eigenen Lagerräumen, einem modernen Maschinenpark und dem firmeneigenen Autokran (IVANGS Bauservice) sind wir unabhängig von Mietfirmen und Lieferengpässen. Das bedeutet für Sie: Keine unnötigen Verzögerungen auf der Baustelle.",
+    "gallery": [
+      {
+        "image": "/uploads/ivangs-car-logo.avif",
+        "alt": "Unser Fuhrpark: Transporter und LKWs"
+      },
+      {
+        "image": "/uploads/ivangs-dach-sanierung.avif",
+        "alt": "Firmeneigener Autokran"
+      },
+      {
+        "image": "/uploads/ivangs-arbeiter-fenstertausch.avif",
+        "alt": "Moderne Dachdecker-Ausrüstung"
+      }
+    ]
   },
   "teamSection": {
     "title": "Unser Team",

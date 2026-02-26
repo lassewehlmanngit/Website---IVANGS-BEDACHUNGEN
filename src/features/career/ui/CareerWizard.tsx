@@ -12,85 +12,108 @@ export const CareerWizard: React.FC = () => {
   const safeLang = (lang as SupportedLang) || 'de';
 
   const handleApply = (topic?: string) => {
-    navigate(`/${safeLang}/contact`);
+    navigate(`/${safeLang}/contact?subject=Bewerbung%20als%20${encodeURIComponent(topic || '')}`);
   };
 
   const questions = [
     {
       id: 0,
-      question: "Arbeitest du gerne an der frischen Luft und körperlich?",
+      question: "Was ist dir bei deiner Arbeit am wichtigsten?",
       options: [
-        { label: "Ja, sehr gerne!", value: "outdoors" },
-        { label: "Nein, lieber im Büro.", value: "indoors" },
+        { label: "Handwerkliche Arbeit direkt auf dem Dach", value: "craft_experience" },
+        { label: "Verantwortung und Baustellenleitung", value: "leadership" },
+        { label: "Einen spannenden Beruf von Grund auf lernen", value: "learn" },
       ]
     },
     {
       id: 1,
-      question: "Bist du schwindelfrei und trittsicher?",
+      question: "Welche Art von Projekten reizt dich mehr?",
       options: [
-        { label: "Ja, Höhe ist kein Problem.", value: "heights_yes" },
-        { label: "Nicht so gerne.", value: "heights_no" },
-      ]
-    },
-    {
-      id: 2,
-      question: "Magst du es, Dinge zu organisieren und zu planen?",
-      options: [
-        { label: "Ja, ich behalte gerne den Überblick.", value: "org_yes" },
-        { label: "Eher kreativ oder handwerklich.", value: "org_no" },
+        { label: "Teamarbeit bei Großprojekten (z.B. Flachdach)", value: "big_projects" },
+        { label: "Vielfältige Einsätze auch im Steildachbereich", value: "classic_roof" },
       ]
     }
   ];
 
   if (step === 3) {
     return (
-      <div className="bg-white p-8 rounded-sm shadow-lg border border-slate-100 text-center animate-fade-in max-w-lg mx-auto">
+      <div className="text-center animate-fade-in w-full">
         {result === "dachdecker" && (
           <div>
-            <div className="inline-flex p-4 bg-green-100 text-green-600 rounded-full mb-4">
+            <div className="inline-flex p-4 bg-green-500/20 text-green-400 rounded-full mb-4">
               <CheckCircle size={32} />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Perfect Match!</h3>
-            <p className="text-slate-600 mb-6">
-              Du scheinst perfekt für eine Stelle als <strong>Dachdeckergeselle (m/w/d)</strong> geeignet zu sein.
+            <h3 className="text-2xl font-bold mb-2 text-white">Perfect Match!</h3>
+            <p className="text-slate-300 mb-6">
+              Du bist unser nächster <strong>Dachdecker (m/w/d)</strong> für vielfältige Projekte.
             </p>
-            <Button className="w-full" onClick={() => handleApply('Dachdecker')}>
+            <Button className="w-full bg-white text-slate-900 hover:bg-slate-100" onClick={() => handleApply('Dachdecker')}>
               Jetzt direkt bewerben
             </Button>
           </div>
         )}
 
-        {result === "kaufmann" && (
+        {result === "geselle" && (
           <div>
-            <div className="inline-flex p-4 bg-green-100 text-green-600 rounded-full mb-4">
+            <div className="inline-flex p-4 bg-green-500/20 text-green-400 rounded-full mb-4">
               <CheckCircle size={32} />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Das passt!</h3>
-            <p className="text-slate-600 mb-6">
-              Eine Stelle im <strong>Büro & Organisation</strong> scheint genau dein Ding zu sein.
+            <h3 className="text-2xl font-bold mb-2 text-white">Die Großprojekte warten!</h3>
+            <p className="text-slate-300 mb-6">
+              Wir suchen dich als <strong>Dachdeckergeselle (m/w/d)</strong> für unsere starken Teams.
             </p>
-            <Button className="w-full" onClick={() => handleApply('Büro')}>
-              Initiativ bewerben
+            <Button className="w-full bg-white text-slate-900 hover:bg-slate-100" onClick={() => handleApply('Dachdeckergeselle')}>
+              Jetzt direkt bewerben
+            </Button>
+          </div>
+        )}
+
+        {result === "vorarbeiter" && (
+          <div>
+            <div className="inline-flex p-4 bg-blue-500/20 text-blue-400 rounded-full mb-4">
+              <CheckCircle size={32} />
+            </div>
+            <h3 className="text-2xl font-bold mb-2 text-white">Führe unser Team!</h3>
+            <p className="text-slate-300 mb-6">
+              Deine Erfahrung macht dich zum perfekten <strong>Vorarbeiter (m/w/d)</strong>.
+            </p>
+            <Button className="w-full bg-white text-slate-900 hover:bg-slate-100" onClick={() => handleApply('Vorarbeiter')}>
+              Wir wollen dich kennenlernen
+            </Button>
+          </div>
+        )}
+
+        {result === "ausbildung" && (
+          <div>
+            <div className="inline-flex p-4 bg-primary/20 text-primary-light rounded-full mb-4 ring-1 ring-primary/50">
+              <CheckCircle size={32} />
+            </div>
+            <h3 className="text-2xl font-bold mb-2 text-white">Starte deine Karriere!</h3>
+            <p className="text-slate-300 mb-6">
+              Bewirb dich auf einen Platz für die <strong>Ausbildung (m/w/d)</strong>.
+            </p>
+            <Button className="w-full bg-primary text-white hover:bg-primary/90" onClick={() => handleApply('Ausbildung')}>
+              Zur Bewerbung
             </Button>
           </div>
         )}
 
         {result === "none" && (
           <div>
-            <div className="inline-flex p-4 bg-warning/10 text-warning rounded-full mb-4">
+            <div className="inline-flex p-4 bg-amber-500/20 text-amber-400 rounded-full mb-4">
               <XCircle size={32} />
             </div>
-            <h3 className="text-2xl font-bold mb-2">Nicht sicher?</h3>
-            <p className="text-slate-600 mb-6">
-              Unser Wizard konnte keine direkte Zuordnung finden, aber wir lernen dich gerne kennen!
+            <h3 className="text-2xl font-bold mb-2 text-white">Initiativbewerbung</h3>
+            <p className="text-slate-300 mb-6">
+              Wir sind immer auf der Suche nach motivierten Machern.
             </p>
-            <Button variant="outline" className="w-full" onClick={() => handleApply('Initiativ')}>Initiativ bewerben</Button>
+            <Button variant="outline" className="w-full border-white/20 text-white hover:bg-white hover:text-slate-900" onClick={() => handleApply('Initiativbewerbung')}>Initiativ bewerben</Button>
           </div>
         )}
 
-        <button onClick={reset} className="mt-4 text-slate-400 hover:text-slate-600 text-sm flex items-center justify-center gap-2 mx-auto">
+        <button onClick={reset} className="mt-8 text-slate-400 hover:text-white transition-colors text-sm flex items-center justify-center gap-2 mx-auto">
           <RotateCcw size={14} />
-          Wizard neu starten
+          Neu starten
         </button>
       </div>
     );
@@ -99,13 +122,13 @@ export const CareerWizard: React.FC = () => {
   const currentQ = questions.find(q => q.id === step);
 
   return (
-    <div className="bg-white p-8 rounded-sm shadow-lg border border-slate-100 max-w-lg mx-auto">
-      <div className="mb-6 flex justify-between items-center">
-        <span className="text-xs font-bold text-primary tracking-wider uppercase">Karriere-Finder</span>
-        <span className="text-xs text-slate-400">Schritt {step + 1} von 3</span>
+    <div className="w-full">
+      <div className="mb-6 flex justify-between items-center opacity-80">
+        <span className="text-xs font-bold tracking-wider uppercase text-primary-light">Karriere-Finder</span>
+        <span className="text-xs text-slate-300 font-medium">Schritt {step + 1} von 2</span>
       </div>
 
-      <h3 className="text-xl font-bold text-slate-900 mb-8 leading-snug">
+      <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 sm:mb-8 leading-snug">
         {currentQ?.question}
       </h3>
 
@@ -114,10 +137,10 @@ export const CareerWizard: React.FC = () => {
           <button
             key={opt.value}
             onClick={() => handleAnswer(opt.value)}
-            className="w-full text-left p-4 rounded-sm border border-slate-200 hover:border-primary hover:bg-primary/5 transition-all group flex items-center justify-between"
+            className="w-full text-left p-4 rounded-xl border border-white/10 bg-white/5 hover:border-white/30 hover:bg-white/10 transition-all group flex items-center justify-between"
           >
-            <span className="font-medium text-slate-700 group-hover:text-primary">{opt.label}</span>
-            <ArrowRight size={18} className="text-slate-300 group-hover:text-primary" />
+            <span className="font-medium text-slate-200 group-hover:text-white transition-colors">{opt.label}</span>
+            <ArrowRight size={18} className="text-slate-400 group-hover:text-white translate-x-0 group-hover:translate-x-1 transition-all" />
           </button>
         ))}
       </div>

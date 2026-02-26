@@ -51,9 +51,9 @@ processSteps:
     title: Spenglerarbeiten
     text: Montage von Rinnen, Kaminverkleidungen und Wandanschlüssen aus Zink oder Kupfer.
 referenceImages:
-  - https://images.unsplash.com/photo-1628151016008-61e88e85579f?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1591825729269-caeb344f6df2?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1632759132036-799d5059d481?q=80&w=600&auto=format&fit=crop
+  - /uploads/ivangs_steildach_Ziegeldach mit Kamin- und Gaubenverschieferung.avif
+  - /uploads/ivangs_steildach_Ziegeldach mit Kamin- und Gaubenverschieferung_2.avif
+  - /uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif
 contactIds:
   - sascha
   - isabel

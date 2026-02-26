@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { Button } from '@/shared/ui/Button';
 import { Input } from '@/shared/ui/Input';
 import { Textarea } from '@/shared/ui/Textarea';
@@ -51,7 +52,20 @@ const TOPICS = [
 
 export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className }) => {
   const { t } = useTranslation('common');
-  const [formData, setFormData] = useState<ContactFormData>(initialFormData);
+  const [searchParams] = useSearchParams();
+  const initialTopic = searchParams.get('subject') || 'Allgemeine Anfrage';
+
+  const dynamicTopics = React.useMemo(() => {
+    if (!TOPICS.some(t => t.value === initialTopic)) {
+      return [...TOPICS, { value: initialTopic, label: initialTopic }];
+    }
+    return TOPICS;
+  }, [initialTopic]);
+
+  const [formData, setFormData] = useState<ContactFormData>({
+    ...initialFormData,
+    topic: initialTopic,
+  });
   const [errors, setErrors] = useState<Partial<Record<keyof ContactFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -88,7 +102,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
     if (formData._gotcha) {
       // Bot detected - simulate success
       setSubmitStatus('success');
-      setFormData(initialFormData);
+      setFormData({ ...initialFormData, topic: initialTopic });
       return;
     }
 
@@ -110,7 +124,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
       }
 
       setSubmitStatus('success');
-      setFormData(initialFormData);
+      setFormData({ ...initialFormData, topic: initialTopic });
       toast.success(t('status.success'), {
         description: 'Ihre Nachricht wurde erfolgreich versendet.',
       });
@@ -197,7 +211,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             name="topic"
             value={formData.topic}
             onChange={handleChange}
-            options={TOPICS}
+            options={dynamicTopics}
             aria-invalid={!!errors.topic}
           />
         </FormField>

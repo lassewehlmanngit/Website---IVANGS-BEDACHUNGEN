@@ -1,5 +1,5 @@
 ---
-title: Dachdeckergeselle / Vorarbeiter (m/w/d)
+title: Dachdecker (m/w/d)
 location: Kreis Viersen & Umgebung
 type: Vollzeit
 shortDesc: Du bist Profi auf dem Steil- und Flachdach? Wir suchen Macher für unser Team.

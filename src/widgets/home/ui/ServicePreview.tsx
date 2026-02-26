@@ -20,7 +20,6 @@ interface ServiceSectionProps {
 const serviceIcons: Record<ServiceId, React.ElementType> = {
   steildach: HomeIcon,
   flachdach: Layers,
-  solar: Zap, // Consider removing if type allows, or keep for legacy/safety but unused
   fenster: Sun,
   sanierung: Hammer,
   reparatur: Wrench,
@@ -30,7 +29,6 @@ const serviceIcons: Record<ServiceId, React.ElementType> = {
 const serviceImages: Record<ServiceId, string> = {
   steildach: '/uploads/ivangs-steildach_Ziegeldach mit Gaubenbekleidung in Zinkstehfalz.avif',
   flachdach: '/uploads/ivangs_flachdach_Flachdach mit Dachbegrünung_2.avif',
-  solar: '/uploads/ivangs_steildach_Ziegeldach mit Klempnerarbeiten aus Zinkscharen.avif',
   fenster: '/uploads/ivangs_fenster_Ziegeldach im Denkmalschutz mit Dachfenster-Anlage.avif',
   sanierung: '/uploads/ivangs-dach-sanierung.avif',
   reparatur: '/images/services/reparatur-service.jpg',
@@ -40,7 +38,6 @@ const serviceImages: Record<ServiceId, string> = {
 const ctaTexts: Record<ServiceId, string> = {
   steildach: 'Steildach-Sanierung planen',
   flachdach: 'Flachdach-Lösung anfragen',
-  solar: 'Solar-Beratung starten',
   fenster: 'Dachfenster-Tausch anfragen',
   sanierung: 'Sanierung besprechen',
   reparatur: 'Reparatur anfragen',
@@ -80,11 +77,11 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
     )}>
       {/* Image */}
       <div className="w-full lg:w-1/2">
-        <Link to={`/${lang}/services/${id}`} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block">
+        <Link to={`/${lang}/services/${id}`} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block w-full h-[300px] md:h-[400px]">
           <OptimizedImage
             src={img}
             alt={title}
-            className="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors"></div>
@@ -205,11 +202,11 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                 >
                   {/* Image */}
                   <div className="w-full lg:w-1/2">
-                    <Link to={service.link || '#'} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block">
+                    <Link to={service.link || '#'} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block w-full h-[300px] md:h-[400px]">
                       <OptimizedImage
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-[300px] md:h-[400px] object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         data-tina-field={tinaField(service, 'image')}
                       />
@@ -259,7 +256,7 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
             })
           ) : (
             // Fallback: Render from service collection
-            displayOrder.map((id, index) => {
+            displayOrder.map((id: any, index: any) => {
               const cmsService = cmsServices.find((s: any) => s._sys.filename === id);
               return (
                 <ServiceSection

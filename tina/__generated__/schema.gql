@@ -441,9 +441,15 @@ type AboutPageValues {
   icon: String
 }
 
+type AboutPageEquipmentGallery {
+  image: String!
+  alt: String
+}
+
 type AboutPageEquipment {
   title: String
   description: String
+  gallery: [AboutPageEquipmentGallery]
 }
 
 type AboutPageTeamSection {
@@ -495,9 +501,15 @@ input AboutPageValuesFilter {
   icon: StringFilter
 }
 
+input AboutPageEquipmentGalleryFilter {
+  image: ImageFilter
+  alt: StringFilter
+}
+
 input AboutPageEquipmentFilter {
   title: StringFilter
   description: StringFilter
+  gallery: AboutPageEquipmentGalleryFilter
 }
 
 input AboutPageTeamSectionFilter {
@@ -1642,9 +1654,15 @@ input AboutPageValuesMutation {
   icon: String
 }
 
+input AboutPageEquipmentGalleryMutation {
+  image: String
+  alt: String
+}
+
 input AboutPageEquipmentMutation {
   title: String
   description: String
+  gallery: [AboutPageEquipmentGalleryMutation]
 }
 
 input AboutPageTeamSectionMutation {

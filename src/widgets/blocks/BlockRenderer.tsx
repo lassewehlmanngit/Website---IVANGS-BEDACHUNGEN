@@ -68,27 +68,27 @@ export const BlockRenderer: React.FC<BlockRendererProps> = ({ blocks, lang = 'de
 
         switch (blockType) {
           case 'hero':
-            return <HeroBlock key={key} data={block} parentField={parentField} />;
+            return <HeroBlock key={key} data={block as any} parentField={parentField} />;
           case 'content':
-            return <ContentBlock key={key} data={block} parentField={parentField} />;
+            return <ContentBlock key={key} data={block as any} parentField={parentField} />;
           case 'story':
-            return <StoryBlock key={key} data={block} parentField={parentField} />;
+            return <StoryBlock key={key} data={block as any} parentField={parentField} />;
           case 'features':
-            return <FeaturesBlock key={key} data={block} parentField={parentField} />;
+            return <FeaturesBlock key={key} data={block as any} parentField={parentField} />;
           case 'equipment':
-            return <EquipmentBlock key={key} data={block} parentField={parentField} />;
+            return <EquipmentBlock key={key} data={block as any} parentField={parentField} />;
           case 'teamGrid':
-            return <TeamGridBlock key={key} data={block} parentField={parentField} />;
+            return <TeamGridBlock key={key} data={block as any} parentField={parentField} />;
           case 'jobsList':
-            return <JobsListBlock key={key} data={block} parentField={parentField} lang={lang} />;
+            return <JobsListBlock key={key} data={block as any} parentField={parentField} lang={lang} />;
           case 'form':
-            return <FormBlock key={key} data={block} parentField={parentField} />;
+            return <FormBlock key={key} data={block as any} parentField={parentField} />;
           case 'contactInfo':
-            return <ContactInfoBlock key={key} data={block} parentField={parentField} />;
+            return <ContactInfoBlock key={key} data={block as any} parentField={parentField} />;
           case 'cta':
-            return <CTABlock key={key} data={block} parentField={parentField} />;
+            return <CTABlock key={key} data={block as any} parentField={parentField} />;
           case 'faq':
-            return <FAQBlock key={key} data={block} parentField={parentField} />;
+            return <FAQBlock key={key} data={block as any} parentField={parentField} />;
           default:
             console.warn(`Unknown block type: ${block.__typename}`);
             return null;

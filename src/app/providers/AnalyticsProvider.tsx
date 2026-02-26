@@ -10,8 +10,8 @@ export const AnalyticsProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   }>({});
 
   useEffect(() => {
-    // Load settings from 'en' as default for global keys
-    getSettings('en').then((settings) => {
+    // Load settings from 'de' as default for global keys
+    getSettings('de').then((settings) => {
       setConfig({
         gtmId: settings.gtmId,
         umamiId: settings.umamiId,

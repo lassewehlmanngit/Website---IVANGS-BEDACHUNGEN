@@ -14,49 +14,19 @@ export interface ContactPageProps {
 
 export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
   const { data, isLoading, error } = useContactPageData(lang);
-  const contact = data?.contactPage;
+  const contact = (data as any)?.contactPage;
 
   if (isLoading) {
     return (
-      <div className="animate-fade-in">
-        {/* Hero Skeleton */}
-        <div className="bg-slate-900 py-20 md:py-32">
-          <div className="container mx-auto px-4">
-            <Skeleton variant="text" width="100px" className="h-4 mb-4 bg-slate-700" />
-            <Skeleton variant="text" width="60%" className="h-12 mb-6 bg-slate-700" />
-            <Skeleton variant="text" width="80%" className="h-6 bg-slate-700" />
-          </div>
-        </div>
-        {/* Content Skeleton */}
-        <div className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-              <div className="order-2 lg:order-1 space-y-6">
-                <Skeleton variant="text" width="200px" className="h-8 mb-8" />
-                {[...Array(5)].map((_, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <Skeleton variant="rectangular" width={48} height={48} className="flex-shrink-0" />
-                    <div className="flex-1">
-                      <Skeleton variant="text" width="80px" className="h-5 mb-2" />
-                      <SkeletonText lines={2} />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="order-1 lg:order-2">
-                <Skeleton variant="text" width="200px" className="h-8 mb-8" />
-                <Skeleton variant="rectangular" height={400} />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="absolute inset-0 bg-slate-900 animate-pulse flex items-center justify-center">
+        <Skeleton variant="rectangular" width="40%" height="60%" className="rounded-xl opacity-20" />
       </div>
     );
   }
 
   if (error || !contact) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-dvh">
         <p className="text-muted-foreground">Seite konnte nicht geladen werden.</p>
       </div>
     );
@@ -72,197 +42,112 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
         ogSiteName="Ivangs Bedachungen"
       />
 
-      <div className="animate-fade-in">
-        {/* Hero Section */}
-        <PageHero variant="dark">
-          <PageHero.Eyebrow>Kontakt</PageHero.Eyebrow>
-          <PageHero.Title data-tina-field={contact && tinaField(contact, 'title')}>
-            {contact.title || 'Der erste Schritt zum dichten Dach.'}
-          </PageHero.Title>
-          <PageHero.Description data-tina-field={contact && tinaField(contact, 'description')}>
-            {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
-          </PageHero.Description>
-        </PageHero>
+      <div className="min-h-[100dvh] flex flex-col lg:flex-row bg-slate-50 animate-fade-in relative overflow-hidden">
+        {/* Decorative Background Element (Abstract building silhouette hint) */}
+        <div className="absolute left-0 top-0 bottom-0 w-1/2 bg-slate-900 z-0 hidden lg:block" />
 
-        {/* Contact Info & Form Section */}
-        <section className="py-16 md:py-24 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-              {/* Contact Information */}
-              <div className="order-2 lg:order-1">
-                <h2 className="text-h2 font-bold text-slate-900 mb-8">So erreichen Sie uns</h2>
-                
-                <div className="space-y-6">
-                  {/* Address */}
-                  {contact.address && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <MapPin className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Adresse</h3>
-                        <p 
-                          className="text-slate-600"
-                          data-tina-field={contact.address && tinaField(contact.address, 'company')}
-                        >
-                          {contact.address.company}
-                        </p>
-                        <p 
-                          className="text-slate-600"
-                          data-tina-field={contact.address && tinaField(contact.address, 'street')}
-                        >
-                          {contact.address.street}
-                        </p>
-                        <p className="text-slate-600">
-                          <span data-tina-field={contact.address && tinaField(contact.address, 'zip')}>{contact.address.zip}</span>{' '}
-                          <span data-tina-field={contact.address && tinaField(contact.address, 'city')}>{contact.address.city}</span>
-                        </p>
-                      </div>
-                    </div>
-                  )}
+        {/* LEFT SIDE: Brand & Contact Info */}
+        <div className="w-full lg:w-1/2 relative z-10 bg-slate-900 text-white min-h-[50vh] lg:min-h-screen px-6 py-20 lg:py-32 lg:px-16 xl:px-24 flex flex-col justify-center overflow-hidden">
+          {/* Subtle noise/texture overlay */}
+          <div className="absolute inset-0 bg-[url('/images/noise.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+          {/* Subtle gradient glow */}
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-primary/20 via-transparent to-transparent opacity-50 pointer-events-none" />
 
-                  {/* Phone */}
-                  {contact.phone && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Phone className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Telefon</h3>
-                        <a 
-                          href={`tel:${contact.phone.replace(/\s/g, '')}`}
-                          className="text-slate-600 hover:text-primary transition-colors"
-                          data-tina-field={contact && tinaField(contact, 'phone')}
-                        >
-                          {contact.phone}
-                        </a>
-                        {contact.fax && (
-                          <p 
-                            className="text-slate-500 text-sm mt-1"
-                            data-tina-field={contact && tinaField(contact, 'fax')}
-                          >
-                            Fax: {contact.fax}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  )}
+          <div className="relative z-20 max-w-xl mx-auto lg:mx-0 w-full">
+            <p className="text-primary font-bold uppercase tracking-widest text-sm mb-4">
+              Kontakt
+            </p>
+            <h1
+              className="text-4xl md:text-5xl lg:text-h1 font-bold mb-6 text-white"
+              data-tina-field={contact && tinaField(contact, 'title')}
+            >
+              {contact.title || 'Lassen Sie uns über Ihr Dach sprechen.'}
+            </h1>
+            <p
+              className="text-lg md:text-xl text-slate-300 mb-12 max-w-lg"
+              data-tina-field={contact && tinaField(contact, 'description')}
+            >
+              {contact.description || 'Rufen Sie uns an oder schreiben Sie uns. Wir beraten Sie gerne – auch gemeinsam mit Ihrem Architekten.'}
+            </p>
 
-                  {/* Email */}
-                  {contact.email && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Mail className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">E-Mail</h3>
-                        <a 
-                          href={`mailto:${contact.email}`}
-                          className="text-slate-600 hover:text-primary transition-colors"
-                          data-tina-field={contact && tinaField(contact, 'email')}
-                        >
-                          {contact.email}
-                        </a>
-                      </div>
-                    </div>
-                  )}
+            {/* Glassmorphic Contact Info Cards */}
+            <div className="space-y-4">
+              {contact.phone && (
+                <a
+                  href={`tel:${contact.phone.replace(/\s/g, '')}`}
+                  className="group flex items-center gap-6 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-primary/50 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]"
+                  data-tina-field={contact && tinaField(contact, 'phone')}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <Phone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-400 mb-1">Telefon</h3>
+                    <p className="text-lg font-semibold text-white">{contact.phone}</p>
+                  </div>
+                </a>
+              )}
 
-                  {/* Website */}
-                  {contact.website && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Globe className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Website</h3>
-                        <a 
-                          href={`https://${contact.website}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate-600 hover:text-primary transition-colors"
-                          data-tina-field={contact && tinaField(contact, 'website')}
-                        >
-                          {contact.website}
-                        </a>
-                      </div>
-                    </div>
-                  )}
+              {contact.email && (
+                <a
+                  href={`mailto:${contact.email}`}
+                  className="group flex items-center gap-6 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 hover:border-primary/50 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]"
+                  data-tina-field={contact && tinaField(contact, 'email')}
+                >
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-400 mb-1">E-Mail</h3>
+                    <p className="text-lg font-semibold text-white">{contact.email}</p>
+                  </div>
+                </a>
+              )}
 
-                  {/* Facebook */}
-                  {contact.facebook && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Facebook className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Facebook</h3>
-                        <a 
-                          href={contact.facebook}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-slate-600 hover:text-primary transition-colors"
-                          data-tina-field={contact && tinaField(contact, 'facebook')}
-                        >
-                          Folgen Sie uns
-                        </a>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Office Hours */}
-                  {contact.officeHours && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Clock className="w-6 h-6 text-primary" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Öffnungszeiten Büro</h3>
-                        <p 
-                          className="text-slate-600"
-                          data-tina-field={contact.officeHours && tinaField(contact.officeHours, 'weekdays')}
-                        >
-                          {contact.officeHours.weekdays}
-                        </p>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* Repair Hours */}
-                  {contact.repairHours && (
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                        <Clock className="w-6 h-6 text-slate-500" />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-1">Reparaturplanung</h3>
-                        <p 
-                          className="text-slate-600"
-                          data-tina-field={contact.repairHours && tinaField(contact.repairHours, 'tueThu')}
-                        >
-                          {contact.repairHours.tueThu}
-                        </p>
-                        <p 
-                          className="text-slate-600"
-                          data-tina-field={contact.repairHours && tinaField(contact.repairHours, 'fri')}
-                        >
-                          {contact.repairHours.fri}
-                        </p>
-                      </div>
-                    </div>
-                  )}
+              {contact.address && (
+                <div className="group flex items-center gap-6 p-4 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                    <MapPin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-400 mb-1">Adresse</h3>
+                    <p className="text-base text-white">
+                      <span data-tina-field={contact.address && tinaField(contact.address, 'street')}>{contact.address.street}</span>,{' '}
+                      <span data-tina-field={contact.address && tinaField(contact.address, 'zip')}>{contact.address.zip}</span>{' '}
+                      <span data-tina-field={contact.address && tinaField(contact.address, 'city')}>{contact.address.city}</span>
+                    </p>
+                  </div>
                 </div>
-              </div>
-
-              {/* Contact Form - Show first on mobile */}
-              <div className="order-1 lg:order-2">
-                <h2 className="text-h2 font-bold text-slate-900 mb-8">Nachricht senden</h2>
-                <div className="bg-slate-50 p-6 md:p-8 rounded-sm">
-                  <ContactForm />
-                </div>
-              </div>
+              )}
             </div>
+
+            {/* Office Hours - Subdued */}
+            {contact.officeHours && (
+              <div className="mt-8 flex items-start gap-3 text-slate-400 text-sm">
+                <Clock className="w-4 h-4 mt-0.5" />
+                <div>
+                  <p className="font-semibold text-slate-300 mb-1">Bürozeiten:</p>
+                  <p data-tina-field={contact.officeHours && tinaField(contact.officeHours, 'weekdays')}>
+                    {contact.officeHours.weekdays}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-        </section>
+        </div>
+
+        {/* RIGHT SIDE: The Form */}
+        <div className="w-full lg:w-1/2 relative z-20 px-6 py-12 lg:py-24 lg:px-16 xl:px-24 flex items-center -mt-10 lg:mt-0">
+          <div className="w-full max-w-xl mx-auto bg-white rounded-2xl shadow-2xl p-8 lg:p-12 border border-slate-100 relative">
+            {/* Form decorative accent */}
+            <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-primary via-primary-400 to-primary rounded-t-2xl"></div>
+
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Nachricht senden</h2>
+            <p className="text-slate-500 mb-8">Füllen Sie das Formular aus und wir melden uns zeitnah bei Ihnen.</p>
+
+            <ContactForm />
+          </div>
+        </div>
       </div>
     </>
   );

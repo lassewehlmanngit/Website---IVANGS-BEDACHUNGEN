@@ -24,7 +24,7 @@ export function usePageData(lang: SupportedLang, slug: string) {
 
     tinaClient.queries
       .page({ relativePath })
-      .then((response) => {
+      .then((response: any) => {
         setState({
           data: response.data,
           query: response.query,

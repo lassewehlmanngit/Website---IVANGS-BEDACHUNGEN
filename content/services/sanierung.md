@@ -3,7 +3,7 @@ title: Sanierung & Reparatur
 subtitle: Werterhalt statt Totalschaden
 shortDescription: Vom Altbau bis zum Balkon - Wir stellen den Wert Ihrer Immobilie materialgetreu wieder her.
 intro: Kleine Schäden werden schnell groß. Ein loser Ziegel, eine undichte Rinne – Wasser sucht sich seinen Weg. Wir kümmern uns um den Werterhalt Ihrer Immobilie.
-heroImage: https://images.unsplash.com/photo-1555699847-f41e54911049?q=80&w=2070&auto=format&fit=crop
+heroImage: /uploads/ivangs-dach-sanierung.avif
 icon: Hammer
 expertTip: Warten Sie nicht auf den Sturm. Ein Wartungsvertrag ist wie der TÜV fürs Auto – und oft günstiger als ein Wasserschaden.
 uiText:
@@ -44,22 +44,22 @@ processSteps:
     title: Ausführung
     text: Schnelle und saubere Durchführung durch unsere Service-Teams.
 referenceImages:
-  - https://images.unsplash.com/photo-1574739712545-924d77265cbb?q=80&w=600&auto=format&fit=crop
-  - https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?q=80&w=600&auto=format&fit=crop
+  - /uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_1.avif
+  - /uploads/ivangs_brandschadensanierung_Eternit-Dach mit Brandschadensanierung_2.avif
 contactIds:
   - sabine
   - isabel
 faq:
-  - question: Was kostet eine Dachreparatur im Kreis Viersen?
-    answer: Kleine Reparaturen (einzelne Ziegel, Dichtungen) kosten etwa 200-500 Euro. Größere Arbeiten wie Rinnenerneuerung oder Flachdachabdichtung liegen bei 1.000-5.000 Euro. Sturmschäden rechnen wir oft direkt mit Ihrer Versicherung ab. Wir erstellen kostenlose Kostenvoranschläge.
+  - question: Was kostet eine Dachreparatur pro Quadratmeter (z.B. im Kreis Viersen)?
+    answer: Die Kosten für eine Dachreparatur hängen stark vom Arbeitsaufwand ab. Der Austausch von Dachziegeln liegt oft bei 40 bis 80 Euro pro Quadratmeter zzgl. Material. Pauschal kosten kleinere Reparaturen (einzelne defekte Ziegel, Dichtungen) meist zwischen 200 und 500 Euro. Größere Arbeiten wie Rinnenerneuerungen beginnen bei ca. 1.000 Euro. Wir erstellen transparente und kostenlose Kostenvoranschläge.
+  - question: Welche staatlichen Förderungen gibt es für eine Dachsanierung?
+    answer: Wenn Sie Ihr Dach energetisch sanieren und die Wärmedämmung verbessern, können Sie staatliche Förderungen nutzen. Dazu gehören attraktive BAFA-Zuschüsse (z.B. für die Dachdämmung) oder zinsgünstige KfW-Kredite. Wir beraten Sie gerne zu den aktuellen Anforderungen des Gebäudeenergiegesetzes (GEG) und unterstützen Sie.
   - question: Wie schnell können Sie bei einem Notfall kommen?
     answer: Bei akuten Schadensfällen (Sturmschaden, Wassereintritt) sind wir innerhalb von 24 Stunden vor Ort und sichern das Dach provisorisch ab. Für reguläre Reparaturen bieten wir Termine innerhalb einer Woche. Rufen Sie uns an - 02162 356666.
-  - question: Was kostet eine Rinnenreinigung?
-    answer: Eine Rinnenreinigung kostet pauschal etwa 150-300 Euro für ein Einfamilienhaus, abhängig von Länge und Höhe. Bei stark verschmutzten oder schwer zugänglichen Rinnen kann es mehr werden. Wir bieten auch Wartungsverträge mit jährlicher Rinnenreinigung an.
   - question: Helfen Sie bei Versicherungsschäden?
     answer: Ja, wir sind erfahren im Umgang mit Versicherungen. Wir dokumentieren den Schaden mit Fotos, erstellen detaillierte Gutachten und rechnen auf Wunsch direkt mit Ihrer Wohngebäudeversicherung ab. Das spart Ihnen Aufwand und beschleunigt die Schadenregulierung.
   - question: Lohnt sich ein Wartungsvertrag fürs Dach?
-    answer: Absolut! Ein Wartungsvertrag kostet etwa 200-400 Euro jährlich und beinhaltet Rinnenreinigung, Sichtprüfung und Protokoll. Damit verhindern Sie teure Folgeschäden und haben ein gutes Gefühl. Viele Versicherungen gewähren Rabatte bei regelmäßiger Wartung.
+    answer: Absolut! Ein Wartungsvertrag kostet etwa 200-400 Euro jährlich und beinhaltet Rinnenreinigung, Sichtprüfung und Protokoll. Damit verhindern Sie teure Folgeschäden durch Wassereintritt und haben ein gutes Gefühl. Viele Hausrat- und Gebäudeversicherungen gewähren zudem Rabatte bei regelmäßiger, fachmännischer Wartung.
   - question: Können Sie auch historische Dächer sanieren?
     answer: Ja, wir haben Erfahrung mit denkmalgeschützten Gebäuden und historischen Baustoffen. Wir arbeiten mit Naturschiefer, historischen Ziegeln und traditionellen Techniken. Bei Bedarf koordinieren wir mit der Denkmalbehörde und beraten zu förderfähigen Maßnahmen.
   - question: Was ist der Unterschied zwischen Reparatur und Sanierung?

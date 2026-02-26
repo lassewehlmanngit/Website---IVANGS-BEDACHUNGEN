@@ -707,10 +707,17 @@ export type AboutPageValues = {
   icon?: Maybe<Scalars['String']['output']>;
 };
 
+export type AboutPageEquipmentGallery = {
+  __typename?: 'AboutPageEquipmentGallery';
+  image: Scalars['String']['output'];
+  alt?: Maybe<Scalars['String']['output']>;
+};
+
 export type AboutPageEquipment = {
   __typename?: 'AboutPageEquipment';
   title?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  gallery?: Maybe<Array<Maybe<AboutPageEquipmentGallery>>>;
 };
 
 export type AboutPageTeamSection = {
@@ -765,9 +772,15 @@ export type AboutPageValuesFilter = {
   icon?: InputMaybe<StringFilter>;
 };
 
+export type AboutPageEquipmentGalleryFilter = {
+  image?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+};
+
 export type AboutPageEquipmentFilter = {
   title?: InputMaybe<StringFilter>;
   description?: InputMaybe<StringFilter>;
+  gallery?: InputMaybe<AboutPageEquipmentGalleryFilter>;
 };
 
 export type AboutPageTeamSectionFilter = {
@@ -2163,9 +2176,15 @@ export type AboutPageValuesMutation = {
   icon?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type AboutPageEquipmentGalleryMutation = {
+  image?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+};
+
 export type AboutPageEquipmentMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
+  gallery?: InputMaybe<Array<InputMaybe<AboutPageEquipmentGalleryMutation>>>;
 };
 
 export type AboutPageTeamSectionMutation = {
@@ -2565,7 +2584,7 @@ export type LegalPageMutation = {
 
 export type HomePagePartsFragment = { __typename: 'HomePage', seo?: { __typename: 'HomePageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'HomePageHero', eyebrow?: string | null, title: string, subtitle?: string | null, description?: string | null, backgroundImage?: string | null, videoUrl?: string | null, showQuickForm?: boolean | null, buttons?: { __typename: 'HomePageHeroButtons', primaryText?: string | null, primaryLink?: string | null, secondaryText?: string | null, secondaryLink?: string | null } | null } | null, quickForm?: { __typename: 'HomePageQuickForm', title: string, nameLabel?: string | null, contactLabel?: string | null, buttonText?: string | null, disclaimer?: string | null } | null, stats?: Array<{ __typename: 'HomePageStats', value: string, label: string, icon?: string | null } | null> | null, servicesSection?: { __typename: 'HomePageServicesSection', eyebrow?: string | null, title?: string | null, description?: string | null, services?: Array<{ __typename: 'HomePageServicesSectionServices', title: string, description: string, image: string, icon?: string | null, checkpoints?: Array<string | null> | null, ctaText?: string | null, link?: string | null } | null> | null } | null, ceoQuote?: { __typename: 'HomePageCeoQuote', eyebrow?: string | null, name: string, role: string, quote: string, text?: string | null, image?: string | null, buttonText?: string | null, buttonLink?: string | null } | null, projectsSection?: { __typename: 'HomePageProjectsSection', eyebrow?: string | null, title?: string | null, items?: Array<{ __typename: 'HomePageProjectsSectionItems', title: string, description?: string | null, image: string } | null> | null } | null, trustIndicators?: { __typename: 'HomePageTrustIndicators', eyebrow?: string | null, title: string, description?: string | null, image?: string | null, items?: Array<{ __typename: 'HomePageTrustIndicatorsItems', title: string, description?: string | null, icon?: string | null } | null> | null } | null, faqSection?: { __typename: 'HomePageFaqSection', title?: string | null, description?: string | null, questions?: Array<{ __typename: 'HomePageFaqSectionQuestions', question: string, answer: string } | null> | null, cta?: { __typename: 'HomePageFaqSectionCta', title?: string | null, description?: string | null, phone?: string | null, buttonText?: string | null, buttonLink?: string | null } | null } | null, finalCTA?: { __typename: 'HomePageFinalCTA', title: string, description?: string | null, buttonText?: string | null, buttonLink?: string | null } | null };
 
-export type AboutPagePartsFragment = { __typename: 'AboutPage', seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null };
+export type AboutPagePartsFragment = { __typename: 'AboutPage', seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null, gallery?: Array<{ __typename: 'AboutPageEquipmentGallery', image: string, alt?: string | null } | null> | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null };
 
 export type CareerPagePartsFragment = { __typename: 'CareerPage', seo?: { __typename: 'CareerPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'CareerPageHero', eyebrow?: string | null, title: string, description?: string | null, backgroundImage?: string | null } | null, jobsSection?: { __typename: 'CareerPageJobsSection', title?: string | null, emptyMessage?: string | null } | null, wizardSection?: { __typename: 'CareerPageWizardSection', title?: string | null, description?: string | null } | null };
 
@@ -2611,7 +2630,7 @@ export type AboutPageQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null } };
+export type AboutPageQuery = { __typename?: 'Query', aboutPage: { __typename: 'AboutPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null, gallery?: Array<{ __typename: 'AboutPageEquipmentGallery', image: string, alt?: string | null } | null> | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null } };
 
 export type AboutPageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -2623,7 +2642,7 @@ export type AboutPageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null } | null } | null> | null } };
+export type AboutPageConnectionQuery = { __typename?: 'Query', aboutPageConnection: { __typename?: 'AboutPageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'AboutPageConnectionEdges', cursor: string, node?: { __typename: 'AboutPage', id: string, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, seo?: { __typename: 'AboutPageSeo', title: string, description?: string | null, ogImage?: string | null } | null, hero?: { __typename: 'AboutPageHero', eyebrow?: string | null, title: string, description?: string | null } | null, story?: { __typename: 'AboutPageStory', title?: string | null, text1?: string | null, text2?: string | null, image?: string | null } | null, values?: Array<{ __typename: 'AboutPageValues', text: string, icon?: string | null } | null> | null, equipment?: { __typename: 'AboutPageEquipment', title?: string | null, description?: string | null, gallery?: Array<{ __typename: 'AboutPageEquipmentGallery', image: string, alt?: string | null } | null> | null } | null, teamSection?: { __typename: 'AboutPageTeamSection', title?: string | null, description?: string | null } | null, cta?: { __typename: 'AboutPageCta', title?: string | null, description?: string | null, buttonText?: string | null, email?: string | null } | null } | null } | null> | null } };
 
 export type CareerPageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
@@ -2964,6 +2983,11 @@ export const AboutPagePartsFragmentDoc = gql`
     __typename
     title
     description
+    gallery {
+      __typename
+      image
+      alt
+    }
   }
   teamSection {
     __typename
