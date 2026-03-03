@@ -25,46 +25,38 @@ const isSupportedLang = (lang: string): lang is SupportedLang => {
   return (SUPPORTED_LANGS as readonly string[]).includes(lang);
 };
 
-const LanguageWrapper: React.FC = () => {
-  const { lang } = useParams<{ lang: string }>();
-  const navigate = useNavigate();
+const AppRoutes: React.FC = () => {
+  const lang: SupportedLang = 'de';
 
   useEffect(() => {
-    if (!lang) return;
-    if (!isSupportedLang(lang)) {
-      navigate('/de', { replace: true });
-      return;
-    }
     document.documentElement.lang = lang;
-  }, [lang, navigate]);
-
-  const safeLang: SupportedLang = lang && isSupportedLang(lang) ? lang : 'de';
+  }, []);
 
   return (
-    <MarketingLayout lang={safeLang}>
+    <MarketingLayout lang={lang}>
       <Routes>
         {/* Home page */}
-        <Route path="/" element={<HomePage lang={safeLang} />} />
+        <Route path="/" element={<HomePage lang={lang} />} />
 
         {/* Service detail pages */}
-        <Route path="/services/:id" element={<ServiceDetailPage lang={safeLang} />} />
+        <Route path="/services/:id" element={<ServiceDetailPage lang={lang} />} />
 
         {/* Singleton pages (about, career, contact) */}
-        <Route path="/about" element={<AboutPage lang={safeLang} />} />
-        <Route path="/career" element={<CareerPage lang={safeLang} />} />
-        <Route path="/contact" element={<ContactPage lang={safeLang} />} />
+        <Route path="/about" element={<AboutPage lang={lang} />} />
+        <Route path="/career" element={<CareerPage lang={lang} />} />
+        <Route path="/contact" element={<ContactPage lang={lang} />} />
 
         {/* Legal pages */}
-        <Route path="/imprint" element={<ImprintPage lang={safeLang} />} />
-        <Route path="/privacy" element={<PrivacyPage lang={safeLang} />} />
-        <Route path="/terms" element={<TermsPage lang={safeLang} />} />
-        <Route path="/cookies" element={<CookieSettingsPage lang={safeLang} />} />
+        <Route path="/imprint" element={<ImprintPage lang={lang} />} />
+        <Route path="/privacy" element={<PrivacyPage lang={lang} />} />
+        <Route path="/terms" element={<TermsPage lang={lang} />} />
+        <Route path="/cookies" element={<CookieSettingsPage lang={lang} />} />
 
         {/* 404 Page */}
-        <Route path="/404" element={<NotFoundPage lang={safeLang} />} />
+        <Route path="/404" element={<NotFoundPage lang={lang} />} />
 
         {/* Dynamic catch-all for any other page slugs */}
-        <Route path="*" element={<DynamicPage lang={safeLang} />} />
+        <Route path="*" element={<DynamicPage lang={lang} />} />
       </Routes>
     </MarketingLayout>
   );
@@ -76,9 +68,7 @@ export const AppRouter: React.FC = () => {
       <ScrollHandler />
       <Routes>
         <Route path="/design-system" element={<MarketingLayout lang="de"><DesignSystemPage /></MarketingLayout>} />
-        <Route path="/" element={<Navigate to={`/${detectBrowserLanguage()}`} replace />} />
-        <Route path="/:lang/*" element={<LanguageWrapper />} />
-        <Route path="*" element={<Navigate to="/de" replace />} />
+        <Route path="/*" element={<AppRoutes />} />
       </Routes>
     </BrowserRouter>
   );

@@ -15,7 +15,7 @@ function adminRouteHandler(): PluginOption {
       server.middlewares.use((req, res, next) => {
         const url = req.url || '';
         const [pathName] = url.split('?');
-        
+
         // Handle /admin routes
         if (pathName === '/admin' || pathName.startsWith('/admin/')) {
           // Redirect /admin to /admin/ for consistency
@@ -24,7 +24,7 @@ function adminRouteHandler(): PluginOption {
             res.end();
             return;
           }
-          
+
           // Serve admin/index.html for non-asset routes
           if (pathName === '/admin/' || !pathName.startsWith('/admin/assets/')) {
             const adminHtmlPath = path.join(__dirname, 'public', 'admin', 'index.html');
@@ -74,7 +74,7 @@ export default defineConfig(({ mode }) => {
       __APP_ENV__: JSON.stringify(env.VITE_ENVIRONMENT || mode),
     },
     build: {
-      chunkSizeWarningLimit: 500,
+      chunkSizeWarningLimit: 800,
       sourcemap: false,
       minify: 'terser',
       terserOptions: {
@@ -91,7 +91,6 @@ export default defineConfig(({ mode }) => {
           manualChunks: {
             'vendor-react': ['react', 'react-dom'],
             'vendor-router': ['react-router-dom'],
-            'vendor-i18n': ['i18next', 'react-i18next', 'i18next-browser-languagedetector', 'i18next-http-backend'],
             'vendor-ui': ['lucide-react'],
             'vendor-helmet': ['react-helmet-async'],
             'vendor-markdown': ['react-markdown'],

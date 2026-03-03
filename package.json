@@ -12,7 +12,7 @@
     "build": "npm run generate:sitemap && npm run generate:robots && npm run tina:build && vite build && npm run postbuild",
     "build:local": "npm run generate:sitemap && npm run generate:robots && vite build && npm run postbuild",
     "tina:build": "tinacms build || echo 'Tina build skipped (no credentials)'",
-    "postbuild": "npm run copy:content && npm run generate:static-paths",
+    "postbuild": "npm run copy:content",
     "copy:content": "cp -r content dist/content",
     "preview": "vite preview",
     "lint": "eslint src/",
@@ -25,8 +25,7 @@
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "generate:sitemap": "tsx scripts/generate-sitemap.ts",
-    "generate:robots": "tsx scripts/generate-robots.ts",
-    "generate:static-paths": "tsx scripts/generate-static-paths.ts"
+    "generate:robots": "tsx scripts/generate-robots.ts"
   },
   "dependencies": {
     "@fontsource/inter": "^5.0.0",
@@ -45,7 +44,7 @@
     "react-router-dom": "6.22.3",
     "rehype-raw": "^7.0.0",
     "tailwind-merge": "^3.4.0",
-    "tinacms": "^3.3.1"
+    "tinacms": "^3.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.0.0",
@@ -54,7 +53,7 @@
     "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.5.1",
-    "@tinacms/cli": "^2.0.0",
+    "@tinacms/cli": "^2.1.8",
     "@types/node": "^20.19.30",
     "@types/react": "^18.3.24",
     "@types/react-dom": "^18.3.7",

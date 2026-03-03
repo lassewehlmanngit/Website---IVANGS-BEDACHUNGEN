@@ -7,6 +7,9 @@ const RELATIVE_PATH = 'settings.json';
 const EMPTY_DATA = { settings: null };
 const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
+const settingsCache: { payload: TinaPayload | null; timestamp: number } = { payload: null, timestamp: 0 };
+const CACHE_TTL = 5 * 60 * 1000;
+
 // Fallback query for settings
 const SETTINGS_QUERY = `
   query settings($relativePath: String!) {
@@ -42,20 +45,27 @@ interface TinaPayload {
 }
 
 export function useSettingsData() {
-  const [payload, setPayload] = useState<TinaPayload | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const isCacheValid = settingsCache.payload !== null && (Date.now() - settingsCache.timestamp < CACHE_TTL);
+
+  const [payload, setPayload] = useState<TinaPayload | null>(isCacheValid ? settingsCache.payload : null);
+  const [isLoading, setIsLoading] = useState(!isCacheValid);
 
   useEffect(() => {
+    if (isCacheValid) return;
+
     const loadData = async () => {
       // Try to fetch from TinaCMS client first
       if (client) {
         try {
           const response = await client.queries.settings({ relativePath: RELATIVE_PATH });
-          setPayload({
+          const newPayload = {
             data: response.data,
             query: response.query,
             variables: response.variables,
-          });
+          };
+          settingsCache.payload = newPayload;
+          settingsCache.timestamp = Date.now();
+          setPayload(newPayload);
           setIsLoading(false);
           return;
         } catch (error) {
@@ -67,25 +77,31 @@ export function useSettingsData() {
       try {
         const response = await fetch('/content/globals/settings.json');
         const jsonData = await response.json();
-        setPayload({
+        const newPayload = {
           data: { settings: jsonData },
           query: SETTINGS_QUERY,
           variables: DEFAULT_VARIABLES,
-        });
+        };
+        settingsCache.payload = newPayload;
+        settingsCache.timestamp = Date.now();
+        setPayload(newPayload);
       } catch (error) {
         console.error('Error loading static settings data:', error);
         // Last resort: empty structure
-        setPayload({
+        const newPayload = {
           data: EMPTY_DATA,
           query: SETTINGS_QUERY,
           variables: DEFAULT_VARIABLES,
-        });
+        };
+        settingsCache.payload = newPayload;
+        settingsCache.timestamp = Date.now();
+        setPayload(newPayload);
       }
       setIsLoading(false);
     };
 
     loadData();
-  }, []);
+  }, [isCacheValid]);
 
   // Memoize the variables to ensure stability
   const tinaVariables = useMemo(() => {

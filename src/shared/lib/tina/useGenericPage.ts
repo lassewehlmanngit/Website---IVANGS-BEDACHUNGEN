@@ -2,6 +2,9 @@ import { useState, useEffect, useMemo } from 'react';
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
 
+const pageCache: Record<string, { data: any; query: string; variables: Record<string, any>; timestamp: number }> = {};
+const CACHE_TTL = 5 * 60 * 1000;
+
 interface UseGenericPageOptions {
   query: string;
   variables: Record<string, any>;
@@ -23,19 +26,25 @@ export function useGenericPage<T>({
   clientQuery,
   transformFallback = (d) => d,
 }: UseGenericPageOptions): GenericPageResult<T> {
+  const variablesKey = JSON.stringify(variables);
+  const cacheKey = `${query}-${variablesKey}`;
+  const cached = pageCache[cacheKey];
+  const isCacheValid = cached && (Date.now() - cached.timestamp < CACHE_TTL);
+
   const [payload, setPayload] = useState<{
     data: any;
     query: string;
     variables: Record<string, any>;
-  } | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  } | null>(isCacheValid ? { data: cached.data, query: cached.query, variables: cached.variables } : null);
+  const [isLoading, setIsLoading] = useState(!isCacheValid);
   const [error, setError] = useState<Error | null>(null);
-
-  // JSON.stringify variables to use as dependency
-  const variablesKey = JSON.stringify(variables);
 
   useEffect(() => {
     let isMounted = true;
+
+    if (isCacheValid) {
+      return;
+    }
 
     const loadData = async () => {
       setIsLoading(true);
@@ -46,6 +55,12 @@ export function useGenericPage<T>({
         try {
           const response = await clientQuery(variables);
           if (isMounted) {
+            pageCache[cacheKey] = {
+              data: response.data,
+              query: response.query,
+              variables: response.variables,
+              timestamp: Date.now(),
+            };
             setPayload({
               data: response.data,
               query: response.query,
@@ -70,8 +85,15 @@ export function useGenericPage<T>({
           const jsonData = await response.json();
 
           if (isMounted) {
+            const transformedData = transformFallback(jsonData);
+            pageCache[cacheKey] = {
+              data: transformedData,
+              query,
+              variables,
+              timestamp: Date.now(),
+            };
             setPayload({
-              data: transformFallback(jsonData),
+              data: transformedData,
               query,
               variables,
             });
@@ -93,8 +115,15 @@ export function useGenericPage<T>({
         if (isMounted) {
           // If we didn't get data from client and no fallback, we have no data.
           // But we might want to initialize with empty data.
+          const defaultData = transformFallback(null);
+          pageCache[cacheKey] = {
+            data: defaultData,
+            query,
+            variables,
+            timestamp: Date.now(),
+          };
           setPayload({
-            data: transformFallback(null),
+            data: defaultData,
             query,
             variables,
           });
@@ -111,7 +140,7 @@ export function useGenericPage<T>({
     return () => {
       isMounted = false;
     };
-  }, [variablesKey, fallbackPath]);
+  }, [variablesKey, fallbackPath, isCacheValid, cacheKey, query]);
 
   // Memoize variables and data for useTinaOptional
   const tinaVariables = useMemo(() => {

@@ -119,8 +119,32 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
       if (onSubmit) {
         await onSubmit(formData);
       } else {
-        // Default behavior: simulate API call
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        // Formspark Integration
+        const formsparkId = import.meta.env.VITE_FORMSPARK_ID;
+
+        if (!formsparkId) {
+          console.warn('VITE_FORMSPARK_ID is missing. Simulating submission.');
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+        } else {
+          const response = await fetch(`https://submit-form.com/${formsparkId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json',
+            },
+            body: JSON.stringify({
+              name: formData.name,
+              email: formData.email,
+              topic: formData.topic,
+              message: formData.message,
+              _honeypot: formData._gotcha,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error('Form submission failed');
+          }
+        }
       }
 
       setSubmitStatus('success');

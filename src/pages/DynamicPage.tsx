@@ -17,11 +17,13 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }
   // Use prop slug if available, otherwise use the catch-all splat
   const slug = propSlug || splat;
 
+  // Move hook above conditional returns
+  const { data, isLoading, error } = usePageBuilderData(lang, slug || '');
+
   if (!slug) {
-    return <Navigate to={`/${lang}`} replace />;
+    return <Navigate to="/" replace />;
   }
 
-  const { data, isLoading, error } = usePageBuilderData(lang, slug);
   const page = (data as any)?.page;
 
   if (isLoading) {
@@ -34,7 +36,7 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }
 
   if (error || !page) {
     // If we can't find the page, redirect to 404
-    return <Navigate to={`/${lang}/404`} replace />;
+    return <Navigate to="/404" replace />;
   }
 
   return (

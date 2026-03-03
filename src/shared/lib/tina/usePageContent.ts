@@ -114,6 +114,9 @@ const globalContentCache: {
   timestamp: 0,
 };
 
+// Page content cache
+const pageContentCache: Record<string, { payload: TinaPayload; timestamp: number }> = {};
+
 // Cache TTL: 5 minutes
 const CACHE_TTL = 5 * 60 * 1000;
 
@@ -157,16 +160,20 @@ export function usePageContent(pageKey: string): UsePageContentResult {
     console.error(`usePageContent: Unknown page key "${pageKey}". Use 'home' or switch to usePageBuilderData for block-based pages.`);
   }
 
-  const [pagePayload, setPagePayload] = useState<TinaPayload | null>(null);
+  const cachedPage = pageContentCache[pageKey];
+  const isPageCacheValid = cachedPage && (Date.now() - cachedPage.timestamp < CACHE_TTL);
+  const isGlobalCacheValid = Boolean(isCacheValid() && globalContentCache.navigation && globalContentCache.footer && globalContentCache.settings);
+
+  const [pagePayload, setPagePayload] = useState<TinaPayload | null>(isPageCacheValid ? cachedPage.payload : null);
   const [globalData, setGlobalData] = useState<GlobalData>({
     navigation: globalContentCache.navigation,
     footer: globalContentCache.footer,
     settings: globalContentCache.settings,
   });
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(!(isPageCacheValid && isGlobalCacheValid));
 
   // Track if this is the initial mount
-  const isMounted = useRef(false);
+  const isMounted = useRef(true);
 
   // Default variables for page query
   const defaultVariables = useMemo(
@@ -175,26 +182,48 @@ export function usePageContent(pageKey: string): UsePageContentResult {
   );
 
   useEffect(() => {
+    isMounted.current = true;
     if (!config) {
       setIsLoading(false);
       return;
     }
 
+    if (isPageCacheValid && isGlobalCacheValid) {
+      return;
+    }
+
     const loadContent = async () => {
       // Load page data and global data in parallel
-      const pagePromise = loadPageData(config);
-      const globalPromise = loadGlobalData();
+      const pagePromise = isPageCacheValid
+        ? Promise.resolve(cachedPage.payload)
+        : loadPageData(config).then(res => {
+          pageContentCache[pageKey] = { payload: res, timestamp: Date.now() };
+          return res;
+        });
+
+      const globalPromise = isGlobalCacheValid
+        ? Promise.resolve({
+          navigation: globalContentCache.navigation,
+          footer: globalContentCache.footer,
+          settings: globalContentCache.settings,
+        })
+        : loadGlobalData();
 
       const [pageResult, globalResult] = await Promise.all([pagePromise, globalPromise]);
 
-      setPagePayload(pageResult);
-      setGlobalData(globalResult);
-      setIsLoading(false);
+      if (isMounted.current) {
+        setPagePayload(pageResult);
+        setGlobalData(globalResult as GlobalData);
+        setIsLoading(false);
+      }
     };
 
     loadContent();
-    isMounted.current = true;
-  }, [pageKey, config]);
+
+    return () => {
+      isMounted.current = false;
+    };
+  }, [pageKey, config, isPageCacheValid, isGlobalCacheValid]);
 
   // Memoize variables for stability
   const tinaVariables = useMemo(

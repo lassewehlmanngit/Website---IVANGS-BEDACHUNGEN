@@ -103,21 +103,23 @@ export const SmartLink: React.FC<SmartLinkProps> = ({ link, children, className,
         </a>
       );
 
-    case 'phone':
+    case 'phone': {
       const phoneUrl = url.startsWith('tel:') ? url : `tel:${url}`;
       return (
         <a href={phoneUrl} className={className} onClick={onClick}>
           {children}
         </a>
       );
+    }
 
-    case 'email':
+    case 'email': {
       const emailUrl = url.startsWith('mailto:') ? url : `mailto:${url}`;
       return (
         <a href={emailUrl} className={className} onClick={onClick}>
           {children}
         </a>
       );
+    }
 
     case 'internal':
     default:

@@ -30,15 +30,15 @@ const token =
 // =============================================================================
 const ROUTE_MAP: Record<string, string> = {
   // Pages
-  'startseite': '/de',
-  'about': '/de/about',
-  'career': '/de/career',
-  'contact': '/de/contact',
+  'startseite': '/',
+  'about': '/about',
+  'career': '/career',
+  'contact': '/contact',
   // Legal pages
-  'imprint': '/de/imprint',
-  'privacy': '/de/privacy',
-  'terms': '/de/terms',
-  'cookies': '/de/cookies',
+  'imprint': '/imprint',
+  'privacy': '/privacy',
+  'terms': '/terms',
+  'cookies': '/cookies',
 };
 
 function getRouteForDocument(filename: string, fallbackPath?: string): string {
@@ -373,7 +373,7 @@ export default defineConfig({
         match: { include: 'startseite' },
         ui: {
           global: true,
-          router: () => '/de',
+          router: () => '',
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -597,7 +597,7 @@ export default defineConfig({
         match: { include: 'about' },
         ui: {
           global: true,
-          router: () => '/de/about',
+          router: () => '/about',
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -695,7 +695,7 @@ export default defineConfig({
         match: { include: 'career' },
         ui: {
           global: true,
-          router: () => '/de/career',
+          router: () => '/career',
           allowedActions: { create: false, delete: false },
         },
         fields: [
@@ -744,7 +744,7 @@ export default defineConfig({
         match: { include: 'contact' },
         ui: {
           global: true,
-          router: () => '/de/contact',
+          router: () => '/contact',
           allowedActions: { create: false, delete: false },
         },
         fields: [
