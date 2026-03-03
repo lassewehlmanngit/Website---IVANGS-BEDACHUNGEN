@@ -56,7 +56,7 @@ export const ServiceNavigationStrip: React.FC<ServiceNavigationStripProps> = ({ 
         {services.map(({ id, label, Icon }: { id: string, label: string, Icon: React.ElementType }) => (
           <button
             key={id}
-            onClick={() => navigate(`/${lang}/services/${id}`)}
+            onClick={() => navigate(`/services/${id}`)}
             className="group flex flex-col items-center justify-center py-6 px-2 bg-white hover:bg-slate-50 transition-colors h-full w-full"
           >
             <Icon

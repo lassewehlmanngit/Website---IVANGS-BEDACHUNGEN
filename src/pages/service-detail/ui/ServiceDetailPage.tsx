@@ -151,7 +151,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             </h1>
           </div>
           <Link
-            to={`/${lang}/services`}
+            to={`/services`}
             className="absolute top-20 left-4 md:top-32 md:left-8 bg-slate-800/80 supports-[backdrop-filter]:bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-4 py-3 md:px-5 md:py-2.5 rounded-sm flex items-center gap-2 transition-colors font-medium text-sm md:text-base border border-white/20 z-10 min-h-[44px]"
           >
             <ArrowLeft size={18} className="shrink-0" />
@@ -305,7 +305,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                   Jedes Dach ist anders. Vereinbaren Sie einen unverbindlichen Termin vor Ort.
                 </p>
                 <Button
-                  onClick={() => navigate(`/${lang}/contact`)}
+                  onClick={() => navigate(`/contact`)}
                   size="xl"
                   className="w-full shadow-lg shadow-primary/20"
                 >
@@ -320,7 +320,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                   {Object.values(servicesData).filter(s => s.id !== service.id).map(s => (
                     <li key={s.id}>
                       <Link
-                        to={`/${lang}/services/${s.id}`}
+                        to={`/services/${s.id}`}
                         className="text-slate-600 hover:text-primary hover:bg-slate-50 transition-colors capitalize flex items-center justify-between w-full p-3 rounded-sm group text-left"
                       >
                         <span className="font-medium text-sm">{s.title}</span>
@@ -343,7 +343,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                 <h3 className="text-h3 font-bold mb-3 md:mb-4">Bereit für Ihr Projekt?</h3>
                 <p className="mb-8 text-primary-100 text-lg">Vereinbaren Sie einen unverbindlichen Beratungstermin vor Ort.</p>
                 <Button
-                  onClick={() => navigate(`/${lang}/contact`)}
+                  onClick={() => navigate(`/contact`)}
                   size="lg"
                   className="bg-white text-primary hover:bg-white/90 w-full md:w-auto"
                   data-tina-field={useTinaData && tinaField(data.service.uiText, 'contactButtonText')}
@@ -366,7 +366,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
                   {service.uiText?.careerCtaDescription || 'Werde Teil unseres 28-köpfigen Teams. Wir suchen Macher.'}
                 </p>
                 <Button
-                  onClick={() => navigate(`/${lang}/career`)}
+                  onClick={() => navigate(`/career`)}
                   variant="outline"
                   size="lg"
                   className="w-full md:w-auto border-white/20 hover:bg-white/10 text-white"

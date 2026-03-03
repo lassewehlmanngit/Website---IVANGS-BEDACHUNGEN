@@ -20,7 +20,7 @@ export function usePageData(lang: SupportedLang, slug: string) {
   });
 
   useEffect(() => {
-    const relativePath = `${lang}/${slug}.md`;
+    const relativePath = `${slug}.md`;
 
     tinaClient.queries
       .page({ relativePath })

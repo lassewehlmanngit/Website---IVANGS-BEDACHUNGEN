@@ -18,7 +18,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({ lang, onMenuClick }) => {
         <div className="flex justify-between items-center h-16 px-6 relative">
             {/* Left: Logo/Brand */}
             <Link
-              to={`/${lang}`}
+              to={`/`}
               className="flex items-center gap-2 cursor-pointer"
             >
               <div className="bg-primary p-1.5 rounded-md text-primary-foreground">
@@ -39,10 +39,10 @@ export const MobileNav: React.FC<MobileNavProps> = ({ lang, onMenuClick }) => {
 
             {/* Right: Home Button */}
             <Link
-              to={`/${lang}`}
+              to={`/`}
               className={cn(
                 "p-2 rounded-full transition-colors",
-                activePath === `/${lang}` || activePath === `/${lang}/` ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
+                activePath === `/` || activePath === `/` ? 'text-primary bg-primary/10' : 'text-muted-foreground hover:text-foreground'
               )}
             >
               <Home size={24} />

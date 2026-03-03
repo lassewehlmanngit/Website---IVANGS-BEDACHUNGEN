@@ -19,7 +19,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, lang, className
     <nav className={className} aria-label="Breadcrumb">
       <ol className="flex items-center flex-wrap gap-1 sm:gap-2 text-xs sm:text-sm text-slate-500">
         <li>
-          <Link to={`/${lang}`} className="hover:text-primary flex items-center transition-colors min-h-touch min-w-touch p-1">
+          <Link to={`/`} className="hover:text-primary flex items-center transition-colors min-h-touch min-w-touch p-1">
             <Home size={16} className="shrink-0" />
             <span className="sr-only">Home</span>
           </Link>
@@ -29,7 +29,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, lang, className
             <ChevronRight size={16} className="shrink-0 text-slate-400" aria-hidden="true" />
             {item.href ? (
               <Link 
-                to={`/${lang}${item.href}`} 
+                to={`${item.href}`} 
                 className="text-slate-500 hover:text-primary transition-colors truncate max-w-[120px] sm:max-w-[200px] md:max-w-none"
               >
                 {item.label}

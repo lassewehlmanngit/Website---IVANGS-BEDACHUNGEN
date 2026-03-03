@@ -37,7 +37,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
             </div>
 
             <SmartLink
-              link={ceo.buttonLink || `/${lang}/about`}
+              link={ceo.buttonLink || `/about`}
               className="group flex items-center gap-3 text-slate-900 font-bold hover:text-primary transition-colors"
             >
               <span data-tina-field={ceoData && tinaField(ceoData, 'buttonText')}>

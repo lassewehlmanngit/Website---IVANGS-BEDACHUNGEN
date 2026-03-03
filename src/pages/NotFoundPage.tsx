@@ -37,7 +37,7 @@ export const NotFoundPage: React.FC<NotFoundPageProps> = ({ lang }) => {
         </p>
         <div className="mt-8 flex justify-center">
           <ButtonLink 
-            to={`/${lang}`} 
+            to={`/`} 
             variant="primary"
             data-tina-field={data?.settings?.notFoundPage && tinaField(data.settings.notFoundPage, 'buttonText')}
           >

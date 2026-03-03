@@ -34,7 +34,7 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField 
           <Button
             onClick={(e) => {
               e.stopPropagation();
-              navigate(`/${lang}/contact?subject=Bewerbung%20als%20${encodeURIComponent(job.title || '')}`);
+              navigate(`/contact?subject=Bewerbung%20als%20${encodeURIComponent(job.title || '')}`);
             }}
             variant="outline"
             className="w-full justify-between group-hover:bg-primary group-hover:text-white transition-colors"
@@ -142,7 +142,7 @@ export const JobListing: React.FC<JobListingProps> = ({ job, lang, useTinaField 
               <Button
                 onClick={(e) => {
                   e.stopPropagation();
-                  navigate(`/${lang}/contact`);
+                  navigate(`/contact`);
                 }}
                 className="w-full shadow-lg"
               >

@@ -4,13 +4,13 @@ import type { ContentPage, PageMeta, PageBlock } from './types';
 
 type FrontMatterAttributes = Partial<PageMeta> & { blocks?: PageBlock[] } & Record<string, unknown>;
 
-const pageModules = import.meta.glob('../../../../content/pages/*/*.md', { as: 'raw' });
+const pageModules = import.meta.glob('../../../../content/pages/*.md', { as: 'raw' });
 
 const getPageKeyCandidates = (lang: SupportedLang, slug: string): string[] => {
   const safeSlug = slug.trim().toLowerCase();
   return [
-    `../../../../content/pages/${lang}/${safeSlug}.md`,
-    `../../../../content/pages/${lang}/${safeSlug}/index.md`,
+    `../../../../content/pages/${safeSlug}.md`,
+    `../../../../content/pages/${safeSlug}/index.md`,
   ];
 };
 
@@ -19,7 +19,7 @@ export async function loadPageBySlug(lang: SupportedLang, slug: string): Promise
   const key = candidates.find((k) => Object.prototype.hasOwnProperty.call(pageModules, k));
 
   if (!key) {
-    throw new Error(`Page not found: ${lang}/${slug}`);
+    throw new Error(`Page not found: ${slug}`);
   }
 
   const loader = pageModules[key];

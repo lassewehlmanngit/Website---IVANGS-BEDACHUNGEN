@@ -92,12 +92,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up flex-wrap">
-            <SmartLink link={heroData?.buttons?.primaryLink || `/${lang}/contact`} className="w-full sm:w-auto">
+            <SmartLink link={heroData?.buttons?.primaryLink || `/contact`} className="w-full sm:w-auto">
               <Button size="xl" className="w-full shadow-lg shadow-primary/30" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'primaryText')}>
                 {heroData?.buttons?.primaryText || 'Projekt anfragen'} <ArrowRight size={18} className="ml-2 shrink-0" />
               </Button>
             </SmartLink>
-            <SmartLink link={heroData?.buttons?.secondaryLink || `/${lang}/career`} className="w-full sm:w-auto">
+            <SmartLink link={heroData?.buttons?.secondaryLink || `/career`} className="w-full sm:w-auto">
               <Button variant="outline" size="xl" className="w-full bg-white/10 text-white border-white/20 hover:bg-white/20" data-tina-field={homeData?.hero?.buttons && tinaField(homeData.hero.buttons, 'secondaryText')}>
                 {heroData?.buttons?.secondaryText || 'Karriere starten'}
               </Button>

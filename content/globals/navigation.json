@@ -2,7 +2,7 @@
   "logo": "/uploads/ivangs-logo.avif",
   "ctaButton": {
     "text": "Angebot anfragen",
-    "link": "/de/contact"
+    "link": "contact"
   },
   "items": [
     { "label": "Startseite", "href": "/" },

@@ -15,7 +15,7 @@ export interface ServiceCardProps {
 export const ServiceCard: React.FC<ServiceCardProps> = ({ id, title, description, img, lang }) => {
   return (
     <Link
-      to={`/${lang}/services/${id}`}
+      to={`/services/${id}`}
       className="group bg-white rounded-sm overflow-hidden shadow-lg hover:shadow-lg transition-all duration-300 border border-slate-100 flex flex-col h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       {img && (

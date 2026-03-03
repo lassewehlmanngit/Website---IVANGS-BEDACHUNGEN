@@ -270,7 +270,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
               >
                 {about.cta.description}
               </p>
-              <SmartLink link={`/${lang}/contact`}>
+              <SmartLink link={`/contact`}>
                 <Button
                   variant="default"
                   size="2xl"

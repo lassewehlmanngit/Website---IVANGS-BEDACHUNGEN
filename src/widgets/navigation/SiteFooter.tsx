@@ -46,7 +46,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   // Brand section content (shared between mobile and desktop)
   const BrandContent = () => (
     <>
-      <Link to={`/${lang}`} className="block mb-6">
+      <Link to={`/`} className="block mb-6">
         {nav.logo ? (
           <img
             src={nav.logo}
@@ -143,7 +143,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
       {footer.links.length > 0 ? footer.links.map((link: any, index: number) => (
         <li key={link.href}>
           <Link
-            to={`/${lang}${link.href}`}
+            to={`${link.href}`}
             className="hover:text-white transition-colors"
             data-tina-field={data?.footer?.links && tinaField(data.footer.links[index], 'label')}
           >
@@ -152,10 +152,10 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         </li>
       )) : (
         <>
-          <li><Link to={`/${lang}/imprint`} className="hover:text-white transition-colors">Impressum</Link></li>
-          <li><Link to={`/${lang}/privacy`} className="hover:text-white transition-colors">Datenschutz</Link></li>
-          <li><Link to={`/${lang}/terms`} className="hover:text-white transition-colors">AGB</Link></li>
-          <li><Link to={`/${lang}/cookies`} className="hover:text-white transition-colors">Cookie Einstellungen</Link></li>
+          <li><Link to={`/imprint`} className="hover:text-white transition-colors">Impressum</Link></li>
+          <li><Link to={`/privacy`} className="hover:text-white transition-colors">Datenschutz</Link></li>
+          <li><Link to={`/terms`} className="hover:text-white transition-colors">AGB</Link></li>
+          <li><Link to={`/cookies`} className="hover:text-white transition-colors">Cookie Einstellungen</Link></li>
         </>
       )}
     </ul>
@@ -168,7 +168,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         Werde Teil unseres 28-köpfigen Teams. Wir bilden aus!
       </p>
       <Link
-        to={`/${lang}/career`}
+        to={`/career`}
         className="text-primary hover:text-white text-sm font-medium flex items-center gap-2 transition-colors"
       >
         Zu den Stellenangeboten <ArrowRight size={16} />

@@ -85,14 +85,14 @@ export const CookieBanner: React.FC<CookieBannerProps> = ({ lang, className }) =
             </p>
             <div className="flex gap-4 text-xs">
               <Link 
-                to={`/${lang}/privacy`}
+                to={`/privacy`}
                 className="text-slate-500 hover:text-primary underline"
                 data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'privacyLinkText')}
               >
                 {privacyLinkText}
               </Link>
               <Link 
-                to={`/${lang}/cookies`}
+                to={`/cookies`}
                 className="text-slate-500 hover:text-primary underline"
                 data-tina-field={data?.settings?.cookieBanner && tinaField(data.settings.cookieBanner, 'cookieLinkText')}
               >

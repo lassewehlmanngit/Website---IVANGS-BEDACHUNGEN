@@ -197,7 +197,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
                 </h2>
               </div>
               <div className="flex-shrink-0">
-                <SmartLink link={`/${lang}/contact`}>
+                <SmartLink link={`/contact`}>
                   <Button variant="outline" className="bg-white hover:bg-slate-50">
                     Initiativbewerbung senden
                   </Button>
@@ -231,7 +231,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
                 >
                   {career.jobsSection?.emptyMessage || 'Aktuell keine offenen Stellen verfügbar. Initiativbewerbungen sind jederzeit willkommen!'}
                 </p>
-                <SmartLink link={`/${lang}/contact`}>
+                <SmartLink link={`/contact`}>
                   <Button className="mt-6">Jetzt initiativ bewerben</Button>
                 </SmartLink>
               </div>
@@ -249,7 +249,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
             <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
               Gute Leute können wir immer gebrauchen. Zeig uns, was du drauf hast, und bewirb dich initiativ. Wir melden uns umgehend bei dir zurück!
             </p>
-            <SmartLink link={`/${lang}/contact`}>
+            <SmartLink link={`/contact`}>
               <Button size="2xl" className="bg-primary hover:bg-primary/90 text-white shadow-[0_0_30px_rgba(var(--primary),0.3)]">
                 Jetzt Initiativbewerbung starten
               </Button>

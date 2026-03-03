@@ -10,9 +10,9 @@
     "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.",
     "buttons": {
       "primaryText": "Projekt anfragen",
-      "primaryLink": "/de/contact",
+      "primaryLink": "contact",
       "secondaryText": "Karriere starten",
-      "secondaryLink": "/de/career"
+      "secondaryLink": "career"
     },
     "backgroundImage": "/uploads/ivangs-dachdecker-einsatz.avif",
     "videoUrl": "https://cdn.coverr.co/videos/coverr-roofing-works-5309/1080p.mp4",
@@ -64,7 +64,7 @@
           "Sturmschadensanierung"
         ],
         "ctaText": "Mehr zu Steildach",
-        "link": "/de/services/steildach"
+        "link": "services/steildach"
       },
       {
         "title": "Flachdach",
@@ -78,7 +78,7 @@
           "Wartungsverträge"
         ],
         "ctaText": "Mehr zu Flachdach",
-        "link": "/de/services/flachdach"
+        "link": "services/flachdach"
       },
       {
         "title": "Dachfenster & Gauben",
@@ -92,7 +92,7 @@
           "Montage in 3-4 Stunden"
         ],
         "ctaText": "Mehr zu Dachfenstern",
-        "link": "/de/services/fenster"
+        "link": "services/fenster"
       },
       {
         "title": "Dachsanierung",
@@ -106,7 +106,7 @@
           "BAFA- & KfW-Förderung"
         ],
         "ctaText": "Mehr zu Sanierung",
-        "link": "/de/services/sanierung"
+        "link": "services/sanierung"
       },
       {
         "title": "Brandschadensanierung",
@@ -120,7 +120,7 @@
           "Abwicklung mit Versicherung"
         ],
         "ctaText": "Hilfe bei Brandschaden",
-        "link": "/de/services/brandschaden"
+        "link": "services/brandschaden"
       },
       {
         "title": "Reparatur & Service",
@@ -134,7 +134,7 @@
           "Notdienst"
         ],
         "ctaText": "Reparatur anfragen",
-        "link": "/de/services/reparatur"
+        "link": "services/reparatur"
       }
     ]
   },
@@ -146,7 +146,7 @@
     "text": "Jede Person in unserem Team ist einzigartig – und wir alle teilen die gleichen Werte. Wenn wir sagen, wir sind pünktlich, dann sind wir es. Wenn wir einen Preis nennen, dann halten wir ihn. Handwerk ist Vertrauenssache, und dieses Vertrauen erarbeiten wir uns jeden Tag neu – auf Ihrem Dach.",
     "image": "/uploads/invangs-ceo-image.webp",
     "buttonText": "Mehr über uns erfahren",
-    "buttonLink": "/de/about"
+    "buttonLink": "about"
   },
   "projectsSection": {
     "eyebrow": "Referenzen",
@@ -237,13 +237,13 @@
       "description": "Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.",
       "phone": "02162 356666",
       "buttonText": "Nachricht senden",
-      "buttonLink": "/de/contact"
+      "buttonLink": "contact"
     }
   },
   "finalCTA": {
     "title": "Planen Sie sicher. Planen Sie mit Ivangs.",
     "description": "Bevor der erste Hammer fällt, beraten wir Sie ausführlich. Gerne auch gemeinsam mit Ihrem Architekten.",
     "buttonText": "Beratungstermin vereinbaren",
-    "buttonLink": "/de/contact"
+    "buttonLink": "contact"
   }
 }

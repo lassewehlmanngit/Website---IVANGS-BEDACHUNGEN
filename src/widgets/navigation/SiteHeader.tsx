@@ -35,7 +35,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
 
   // CTA button data with fallbacks
   const ctaText = nav.ctaButton?.text || 'Angebot anfragen';
-  const ctaLink = nav.ctaButton?.link || `/${lang}/contact`;
+  const ctaLink = nav.ctaButton?.link || `/contact`;
 
   const linkClassName = ({ isActive }: { isActive: boolean }): string =>
     cn(
@@ -66,7 +66,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
           <div className="container flex items-center justify-between py-4 md:py-5">
             {/* Logo Section - Uses logo from CMS navigation data */}
             <Link
-              to={`/${lang}`}
+              to={`/`}
               className="flex items-center gap-3 cursor-pointer group relative z-50"
               onClick={() => setMobileMenuOpen(false)}
               data-tina-field={nav.logo && tinaField(data?.navigation, 'logo')}
@@ -92,7 +92,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               {nav.items.map((item: any, index: number) => (
                 <NavLink
                   key={item.href}
-                  to={`/${lang}${item.href}`}
+                  to={`${item.href}`}
                   className={linkClassName}
                   data-tina-field={data?.navigation?.items && tinaField(data.navigation.items[index], 'label')}
                 >
@@ -130,7 +130,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             {serviceLinks.map((service) => (
               <NavLink
                 key={service.id}
-                to={`/${lang}/services/${service.id}`}
+                to={`/services/${service.id}`}
                 className={({ isActive }) => cn(
                   "text-sm font-medium transition-colors hover:text-primary relative group py-3",
                   isActive ? "text-primary" : "text-muted-foreground"
@@ -164,7 +164,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
           {nav.items.map((item: any, index: number) => (
             <NavLink
               key={item.href}
-              to={`/${lang}${item.href}`}
+              to={`${item.href}`}
               onClick={() => setMobileMenuOpen(false)}
               className={({ isActive }) => cn(
                 "text-h3 font-bold tracking-tight transition-colors",
@@ -182,7 +182,7 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
             {serviceLinks.map((service) => (
               <Link
                 key={service.id}
-                to={`/${lang}/services/${service.id}`}
+                to={`/services/${service.id}`}
                 onClick={() => setMobileMenuOpen(false)}
                 className="bg-slate-50 p-4 rounded-lg text-sm font-bold text-slate-700 hover:bg-slate-100 hover:text-primary transition-colors border border-slate-100"
               >

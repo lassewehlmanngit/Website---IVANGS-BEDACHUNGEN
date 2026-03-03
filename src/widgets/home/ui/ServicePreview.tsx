@@ -77,7 +77,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
     )}>
       {/* Image */}
       <div className="w-full lg:w-1/2">
-        <Link to={`/${lang}/services/${id}`} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block w-full h-[300px] md:h-[400px]">
+        <Link to={`/services/${id}`} className="relative rounded-sm overflow-hidden cursor-pointer border border-slate-100 group block w-full h-[300px] md:h-[400px]">
           <OptimizedImage
             src={img}
             alt={title}
@@ -111,7 +111,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
           </ul>
         )}
 
-        <Link to={`/${lang}/services/${id}`}>
+        <Link to={`/services/${id}`}>
           <Button
             size="lg"
             variant="outline"

@@ -76,7 +76,7 @@ export const HomeFAQ: React.FC<HomeFAQProps> = ({ lang, homeData, faqData, faqCT
   const ctaDescription = faqCTA?.description || 'Rufen Sie uns einfach an oder schreiben Sie uns – wir beraten Sie gerne persönlich.';
   const ctaPhone = faqCTA?.phone || '02162 356666';
   const ctaButtonText = faqCTA?.buttonText || 'Nachricht senden';
-  const ctaButtonLink = faqCTA?.buttonLink || `/${lang}/contact`;
+  const ctaButtonLink = faqCTA?.buttonLink || `/contact`;
 
   return (
     <section className="py-20 bg-white border-t border-slate-100">
