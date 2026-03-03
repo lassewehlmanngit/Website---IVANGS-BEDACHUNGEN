@@ -56,7 +56,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = ({ data, parentField })
       <OptimizedImage
         src={data.image!}
         alt={data.title || ''}
-        className="w-full h-auto rounded-md"
+        className="w-full h-full object-cover rounded-md max-h-[500px]"
         data-tina-field={parentField && tinaField(data, 'image')}
       />
     </div>

@@ -79,7 +79,7 @@ export const StoryBlock: React.FC<StoryBlockProps> = ({ data, parentField }) => 
             <OptimizedImage
               src={data.image}
               alt={data.title}
-              className="w-full h-auto rounded-md"
+              className="w-full h-full object-cover rounded-md max-h-[600px] aspect-[4/3] md:aspect-auto"
               data-tina-field={parentField && tinaField(data, 'image')}
             />
           </div>

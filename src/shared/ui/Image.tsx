@@ -122,7 +122,12 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
   return (
     <div
       ref={containerRef}
-      className={cn('relative overflow-hidden', containerClassName)}
+      className={cn(
+        'relative overflow-hidden',
+        className?.includes('w-full') && 'w-full',
+        className?.includes('h-full') && 'h-full',
+        containerClassName
+      )}
       style={aspectStyle}
     >
       {/* Blur placeholder */}
