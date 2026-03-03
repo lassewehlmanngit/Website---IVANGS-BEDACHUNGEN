@@ -47,20 +47,11 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
   const BrandContent = () => (
     <>
       <Link to={`/`} className="block mb-6">
-        {nav.logo ? (
-          <img
-            src={nav.logo}
-            alt="Ivangs Bedachungen Logo"
-            className="h-10 w-auto brightness-0 invert"
-          />
-        ) : (
-          <div className="flex items-center gap-2 text-white">
-            <div className="bg-primary p-1.5 rounded-sm text-primary-foreground">
-              <Hammer size={20} />
-            </div>
-            <span className="text-2xl font-bold">IVANGS</span>
-          </div>
-        )}
+        <img
+          src={nav.logo || '/uploads/ivangs-logo.avif'}
+          alt="Ivangs Bedachungen Logo"
+          className="h-10 w-auto brightness-0 invert"
+        />
       </Link>
       <p
         className="text-slate-300 text-sm leading-relaxed mb-6"

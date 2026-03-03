@@ -8,8 +8,7 @@ import { Button } from '@/shared/ui/Button';
 import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
 import { tinaField } from 'tinacms/dist/react';
 
-// Fallback logo SVG path
-const FALLBACK_LOGO = '/logo.svg';
+const FALLBACK_LOGO = '/uploads/ivangs-logo.avif';
 
 export interface SiteHeaderProps {
   lang: SupportedLang;
@@ -71,17 +70,11 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               onClick={() => setMobileMenuOpen(false)}
               data-tina-field={nav.logo && tinaField(data?.navigation, 'logo')}
             >
-              {nav.logo ? (
-                <img
-                  src={nav.logo}
-                  alt="Ivangs Bedachungen Logo"
-                  className="h-12 w-auto group-hover:scale-105 transition-transform"
-                />
-              ) : (
-                <div className="bg-primary p-2.5 rounded-sm text-primary-foreground shadow-lg shadow-primary/20 group-hover:scale-105 transition-transform">
-                  <Hammer size={24} />
-                </div>
-              )}
+              <img
+                src={nav.logo || FALLBACK_LOGO}
+                alt="Ivangs Bedachungen Logo"
+                className="h-12 w-auto group-hover:scale-105 transition-transform"
+              />
             </Link>
 
             {/* Desktop navigation */}
