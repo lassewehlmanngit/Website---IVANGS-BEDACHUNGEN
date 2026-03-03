@@ -5,7 +5,7 @@
   },
   "hero": {
     "eyebrow": "Meisterbetrieb seit 1996",
-    "title": "Dächer, die begeistern.",
+    "title": "Dächer, die begeistern!",
     "subtitle": "",
     "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.",
     "buttons": {
@@ -111,7 +111,7 @@
       {
         "title": "Brandschadensanierung",
         "description": "Spezialisierte Sanierung nach Feuer- und Löschwasserschäden. Statikprüfung, Abbruch und Wiederaufbau aus einer Hand.",
-        "image": "/images/services/brandschaden-dach.jpg",
+        "image": "/uploads/images/services/brandschaden-dach.jpg",
         "icon": "Flame",
         "checkpoints": [
           "Sofortmaßnahmen & Sicherung",
@@ -125,7 +125,7 @@
       {
         "title": "Reparatur & Service",
         "description": "Sturmschaden? Undichtes Fenster? Lose Ziegel? Wir kümmern uns sofort um den Werterhalt Ihrer Immobilie.",
-        "image": "/images/services/reparatur-service.jpg",
+        "image": "/uploads/images/services/reparatur-service.jpg",
         "icon": "Wrench",
         "checkpoints": [
           "Schnelle Reaktionszeiten",
@@ -176,14 +176,14 @@
     "image": "/uploads/ivangs-car-logo.avif",
     "items": [
       {
-        "icon": "Warehouse",
         "title": "Keine Wartezeiten",
-        "description": "Gängige Materialien für Reparaturen haben wir immer auf Lager."
+        "description": "Gängige Materialien für Reparaturen haben wir immer auf Lager.",
+        "icon": "Warehouse"
       },
       {
-        "icon": "Truck",
         "title": "Eigener Kran-Service",
-        "description": "Wir müssen nicht auf den Verleih warten. Unser Kran ist einsatzbereit, wenn wir ihn brauchen."
+        "description": "Wir müssen nicht auf den Verleih warten. Unser Kran ist einsatzbereit, wenn wir ihn brauchen.",
+        "icon": "Truck"
       }
     ]
   },
