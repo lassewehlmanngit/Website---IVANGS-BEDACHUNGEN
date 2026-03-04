@@ -82,6 +82,7 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
             src={img}
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            containerClassName="absolute inset-0 w-full h-full"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
           <div className="absolute inset-0 bg-slate-900/20 group-hover:bg-transparent transition-colors"></div>
@@ -207,6 +208,7 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                         src={service.image}
                         alt={service.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        containerClassName="absolute inset-0 w-full h-full"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         data-tina-field={tinaField(service, 'image')}
                       />

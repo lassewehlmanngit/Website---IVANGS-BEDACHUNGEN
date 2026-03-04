@@ -55,6 +55,7 @@ export const CeoQuote: React.FC<CeoQuoteProps> = ({ lang, ceoData }) => {
               src={ceo.image || '/uploads/invangs-ceo-image.webp'}
               alt={ceo.name || 'Marcus Ivangs'}
               className="rounded-sm w-full h-full object-cover transition-all duration-700 shadow-lg"
+              containerClassName="absolute inset-0 w-full h-full"
               width={800}
               height={1200}
               sizes="(max-width: 1024px) 100vw, 50vw"

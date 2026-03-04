@@ -40,6 +40,7 @@ export const InfrastructureSection: React.FC = () => {
                      src="/uploads/ivangs-dachdecker-einsatz.avif"
                      alt="Materiallager und Logistik"
                      className="w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-700"
+                     containerClassName="absolute inset-0 w-full h-full"
                   />
                </div>
             </div>

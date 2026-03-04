@@ -91,6 +91,7 @@ const ReferenceGallery: React.FC<{
                 src={img}
                 alt={`Projektbeispiel ${title} ${displayIdx + 1}`}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                containerClassName="absolute inset-0 w-full h-full"
                 onError={() => handleImageError(originalIdx)}
               />
             </div>
@@ -133,7 +134,7 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
             srcSet={generateUnsplashSrcSet(service.heroImage || service.image || service.img)}
             sizes="100vw"
             priority
-            containerClassName="absolute inset-0"
+            containerClassName="absolute inset-0 w-full h-full"
             data-tina-field={useTinaData && tinaField(data.service, 'heroImage')}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/50 to-slate-900/90 flex flex-col justify-center items-center text-white text-center px-4">
