@@ -3,14 +3,14 @@
   "name": "Ivangs Bedachungen",
   "icons": [
     {
-      "src": "/favicon.png",
+      "src": "/android-chrome-192x192.png",
       "type": "image/png",
-      "sizes": "32x32"
+      "sizes": "192x192"
     },
     {
-      "src": "/apple-touch-icon.png",
+      "src": "/android-chrome-512x512.png",
       "type": "image/png",
-      "sizes": "180x180"
+      "sizes": "512x512"
     }
   ],
   "start_url": "/",
