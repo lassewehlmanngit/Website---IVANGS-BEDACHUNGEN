@@ -1,16 +1,13 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
 import { useEffect, useState, useMemo } from 'react';
+import defaultSettingsData from '@content/globals/settings.json';
 
 // Stable constants defined outside the component
 const RELATIVE_PATH = 'settings.json';
-const EMPTY_DATA = { settings: null };
+const EMPTY_DATA = { settings: defaultSettingsData };
 const DEFAULT_VARIABLES = { relativePath: RELATIVE_PATH };
 
-const settingsCache: { payload: TinaPayload | null; timestamp: number } = { payload: null, timestamp: 0 };
-const CACHE_TTL = 5 * 60 * 1000;
-
-// Fallback query for settings
 const SETTINGS_QUERY = `
   query settings($relativePath: String!) {
     settings(relativePath: $relativePath) {
@@ -44,11 +41,17 @@ interface TinaPayload {
   variables: Record<string, any>;
 }
 
+const settingsCache: { payload: TinaPayload | null; timestamp: number } = {
+  payload: { data: { settings: defaultSettingsData }, query: SETTINGS_QUERY, variables: DEFAULT_VARIABLES },
+  timestamp: Date.now()
+};
+const CACHE_TTL = 5 * 60 * 1000;
+
 export function useSettingsData() {
   const isCacheValid = settingsCache.payload !== null && (Date.now() - settingsCache.timestamp < CACHE_TTL);
 
-  const [payload, setPayload] = useState<TinaPayload | null>(isCacheValid ? settingsCache.payload : null);
-  const [isLoading, setIsLoading] = useState(!isCacheValid);
+  const [payload, setPayload] = useState<TinaPayload | null>(isCacheValid ? settingsCache.payload : { data: { settings: defaultSettingsData }, query: SETTINGS_QUERY, variables: DEFAULT_VARIABLES });
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isCacheValid) return;

@@ -13,8 +13,6 @@ export interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeData }) => {
-  const [loadVideo, setLoadVideo] = useState(false);
-
   // Use homeData from TinaCMS if available, otherwise fall back to settings
   const heroData = homeData?.hero || settings;
   const mediaType = heroData?.mediaType || 'video';
@@ -41,12 +39,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
     return icons[iconName] || Users;
   };
 
-  useEffect(() => {
-    // Delay video loading to prioritize initial page render
-    const timer = setTimeout(() => setLoadVideo(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <section className="relative min-h-[85vh] min-h-[85dvh] flex flex-col bg-slate-900 overflow-hidden">
       {/* Background Media & Overlay */}
@@ -62,9 +54,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             className="w-full h-full object-cover"
             poster={backgroundImage}
           >
-            {loadVideo && (
-              <source src={videoUrl} type="video/mp4" />
-            )}
+            <source src={videoUrl} type="video/mp4" />
             <track kind="captions" srcLang="de" label="Keine Untertitel (Hintergrundvideo)" />
           </video>
         ) : (

@@ -1,6 +1,10 @@
 import { client } from './client';
 import { useTinaOptional } from './useTinaOptional';
 import { useEffect, useState, useMemo, useRef } from 'react';
+import defaultNavData from '@content/globals/navigation.json';
+import defaultFooterData from '@content/globals/footer.json';
+import defaultSettingsData from '@content/globals/settings.json';
+import defaultHomeData from '@content/home/startseite.json';
 
 /**
  * Page configuration mapping page keys to their Tina collection details
@@ -101,21 +105,30 @@ const SETTINGS_QUERY = `
   }
 `;
 
-// Global content cache to prevent redundant fetches
+// Global content cache pre-warmed with bundled defaults
 const globalContentCache: {
   navigation: any | null;
   footer: any | null;
   settings: any | null;
   timestamp: number;
 } = {
-  navigation: null,
-  footer: null,
-  settings: null,
-  timestamp: 0,
+  navigation: defaultNavData,
+  footer: defaultFooterData,
+  settings: defaultSettingsData,
+  timestamp: Date.now(),
 };
 
-// Page content cache
-const pageContentCache: Record<string, { payload: TinaPayload; timestamp: number }> = {};
+// Page content cache pre-warmed for instant load
+const pageContentCache: Record<string, { payload: TinaPayload; timestamp: number }> = {
+  home: {
+    payload: {
+      data: { homePage: defaultHomeData },
+      query: PAGE_CONFIGS.home.query,
+      variables: { relativePath: 'startseite.json' },
+    },
+    timestamp: Date.now(),
+  }
+};
 
 // Cache TTL: 5 minutes
 const CACHE_TTL = 5 * 60 * 1000;
