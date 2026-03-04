@@ -8,7 +8,7 @@ import { Button } from '@/shared/ui/Button';
 import { useNavigationData } from '@/shared/lib/tina/useNavigationData';
 import { tinaField } from 'tinacms/dist/react';
 
-const FALLBACK_LOGO = '/uploads/ivangs-logo.avif';
+const FALLBACK_LOGO = '/uploads/ivangs-logo-sm.avif';
 
 export interface SiteHeaderProps {
   lang: SupportedLang;
@@ -73,6 +73,8 @@ export const SiteHeader: React.FC<SiteHeaderProps> = ({ lang, mobileMenuOpen, se
               <img
                 src={nav.logo || FALLBACK_LOGO}
                 alt="Ivangs Bedachungen Logo"
+                width={250}
+                height={229}
                 className="h-16 w-auto group-hover:scale-105 transition-transform"
               />
             </Link>

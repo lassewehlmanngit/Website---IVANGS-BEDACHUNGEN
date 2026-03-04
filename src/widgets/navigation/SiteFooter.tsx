@@ -48,8 +48,10 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
     <>
       <Link to={`/`} className="block mb-6">
         <img
-          src={nav.logo || '/uploads/ivangs-logo.avif'}
+          src={nav.logo || '/uploads/ivangs-logo-sm.avif'}
           alt="Ivangs Bedachungen Logo"
+          width={250}
+          height={229}
           className="h-14 w-auto brightness-0 invert"
         />
       </Link>

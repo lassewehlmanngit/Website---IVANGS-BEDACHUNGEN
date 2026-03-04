@@ -1,13 +1,25 @@
 {
-  "logo": "/uploads/ivangs-logo.avif",
+  "logo": "/uploads/ivangs-logo-sm.avif",
   "ctaButton": {
     "text": "Angebot anfragen",
     "link": "contact"
   },
   "items": [
-    { "label": "Startseite", "href": "/" },
-    { "label": "Unternehmen", "href": "/about" },
-    { "label": "Karriere", "href": "/career" },
-    { "label": "Kontakt", "href": "/contact" }
+    {
+      "label": "Startseite",
+      "href": "/"
+    },
+    {
+      "label": "Unternehmen",
+      "href": "/about"
+    },
+    {
+      "label": "Karriere",
+      "href": "/career"
+    },
+    {
+      "label": "Kontakt",
+      "href": "/contact"
+    }
   ]
 }
