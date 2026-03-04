@@ -50,7 +50,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         <img
           src={nav.logo || '/uploads/ivangs-logo.avif'}
           alt="Ivangs Bedachungen Logo"
-          className="h-10 w-auto brightness-0 invert"
+          className="h-14 w-auto brightness-0 invert"
         />
       </Link>
       <p
