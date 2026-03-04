@@ -2,6 +2,7 @@ import React from 'react';
 import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { HeroSection } from '@/widgets/home/ui/HeroSection';
+import { TrustLogos } from '@/widgets/home/ui/TrustLogos';
 import { MobileQuickForm } from '@/widgets/home/ui/MobileQuickForm';
 import { ServiceNavigationStrip } from '@/widgets/home/ui/ServiceNavigationStrip';
 import { ServicePreview } from '@/widgets/home/ui/ServicePreview';
@@ -62,6 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
           }}
         />
         <HeroSection lang={lang} />
+        <TrustLogos />
         <ServiceNavigationStrip lang={lang} />
         <ServicePreview lang={lang} />
         <TrustIndicators />
@@ -114,6 +116,7 @@ export const HomePage: React.FC<HomePageProps> = ({ lang }) => {
         }}
       />
       <HeroSection lang={lang} settings={home.hero} homeData={home} />
+      <TrustLogos />
 
       {/* Mobile Quick Form (Visible only on mobile) */}
       <MobileQuickForm lang={lang} data={home} />
