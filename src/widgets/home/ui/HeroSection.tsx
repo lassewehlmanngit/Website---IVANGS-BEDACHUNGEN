@@ -58,12 +58,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             muted
             playsInline
             preload="none"
+            aria-hidden="true"
             className="w-full h-full object-cover"
             poster={backgroundImage}
           >
             {loadVideo && (
               <source src={videoUrl} type="video/mp4" />
             )}
+            <track kind="captions" srcLang="de" label="Keine Untertitel (Hintergrundvideo)" />
           </video>
         ) : (
           <img
@@ -71,6 +73,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
             alt="Hero Background"
             className="w-full h-full object-cover"
             fetchPriority="high"
+            decoding="async"
+            width="1920"
+            height="1080"
           />
         )}
 
@@ -135,12 +140,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                     <Icon size={24} />
                   </div>
                   <div>
-                    <h3
+                    <div
+                      role="heading"
+                      aria-level={2}
                       className="text-2xl font-medium text-white leading-none mb-1"
                       data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
                     >
                       {stat.value}
-                    </h3>
+                    </div>
                     <p
                       className="text-xs text-slate-300 uppercase tracking-wider font-bold"
                       data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'label')}
@@ -165,12 +172,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ lang, settings, homeDa
                 <div key={index} className="flex flex-col items-center text-center gap-2">
                   <Icon size={20} className="text-primary" />
                   <div>
-                    <h3
+                    <div
+                      role="heading"
+                      aria-level={2}
                       className="text-xl font-bold text-white leading-none mb-1"
                       data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'value')}
                     >
                       {stat.value}
-                    </h3>
+                    </div>
                     <p
                       className="text-[10px] text-slate-300 uppercase tracking-wider font-bold"
                       data-tina-field={homeData?.stats && tinaField(homeData.stats[index], 'label')}

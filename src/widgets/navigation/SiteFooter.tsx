@@ -68,7 +68,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white"
+              className="p-3 bg-slate-800 rounded-full hover:bg-primary transition-colors text-white min-w-[44px] min-h-[44px] flex items-center justify-center"
               aria-label={s.platform}
               data-tina-field={data?.footer?.social && tinaField(data.footer.social[index], 'url')}
             >
@@ -235,7 +235,7 @@ export const SiteFooter: React.FC<SiteFooterProps> = ({ lang }) => {
         </Accordion>
       </div>
 
-      <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-xs text-slate-500">
+      <div className="container mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-center text-sm text-slate-400">
         <span data-tina-field={data?.footer && tinaField(data.footer, 'copyright')}>
           {footer.copyright || `© ${year} Ivangs Bedachungen GmbH & Co. KG. Alle Rechte vorbehalten.`}
         </span>
