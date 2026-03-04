@@ -272,9 +272,10 @@ export function usePageContent(pageKey: string): UsePageContentResult {
  */
 async function loadPageData(config: PageConfig): Promise<TinaPayload> {
   const { collectionName, relativePath, contentPath, query } = config;
+  const isEditMode = typeof window !== 'undefined' && window.parent !== window;
 
-  // Try TinaCMS client first
-  if (client) {
+  // Try TinaCMS client first if in dev or edit mode
+  if (client && (!import.meta.env.PROD || isEditMode)) {
     try {
       // Dynamically call the correct query based on collection name
       const queryFn = (client.queries as any)[collectionName];
@@ -340,7 +341,8 @@ async function loadGlobalData(): Promise<GlobalData> {
 }
 
 async function loadNavigation(): Promise<any> {
-  if (client) {
+  const isEditMode = typeof window !== 'undefined' && window.parent !== window;
+  if (client && (!import.meta.env.PROD || isEditMode)) {
     try {
       const response = await client.queries.navigation({ relativePath: 'navigation.json' });
       return response.data?.navigation;
@@ -359,7 +361,8 @@ async function loadNavigation(): Promise<any> {
 }
 
 async function loadFooter(): Promise<any> {
-  if (client) {
+  const isEditMode = typeof window !== 'undefined' && window.parent !== window;
+  if (client && (!import.meta.env.PROD || isEditMode)) {
     try {
       const response = await client.queries.footer({ relativePath: 'footer.json' });
       return response.data?.footer;
@@ -378,7 +381,8 @@ async function loadFooter(): Promise<any> {
 }
 
 async function loadSettings(): Promise<any> {
-  if (client) {
+  const isEditMode = typeof window !== 'undefined' && window.parent !== window;
+  if (client && (!import.meta.env.PROD || isEditMode)) {
     try {
       const response = await client.queries.settings({ relativePath: 'settings.json' });
       return response.data?.settings;

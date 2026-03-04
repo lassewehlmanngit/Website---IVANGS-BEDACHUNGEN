@@ -57,8 +57,9 @@ export function useSettingsData() {
     if (isCacheValid) return;
 
     const loadData = async () => {
-      // Try to fetch from TinaCMS client first
-      if (client) {
+      const isEditMode = typeof window !== 'undefined' && window.parent !== window;
+      // Try to fetch from TinaCMS client first if in dev or edit mode
+      if (client && (!import.meta.env.PROD || isEditMode)) {
         try {
           const response = await client.queries.settings({ relativePath: RELATIVE_PATH });
           const newPayload = {

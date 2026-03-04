@@ -50,8 +50,9 @@ export function useGenericPage<T>({
       setIsLoading(true);
       setError(null);
 
-      // 1. Try fetching from TinaCMS client (if available)
-      if (client && clientQuery) {
+      const isEditMode = typeof window !== 'undefined' && window.parent !== window;
+      // 1. Try fetching from TinaCMS client (if available and in dev/edit mode)
+      if (client && clientQuery && (!import.meta.env.PROD || isEditMode)) {
         try {
           const response = await clientQuery(variables);
           if (isMounted) {
