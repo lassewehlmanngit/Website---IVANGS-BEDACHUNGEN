@@ -18,8 +18,16 @@ export const ContactPage: React.FC<ContactPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-0 bg-slate-900 animate-pulse flex items-center justify-center">
-        <Skeleton variant="rectangular" width="40%" height="60%" className="rounded-xl opacity-20" />
+      <div className="min-h-screen bg-slate-900 flex animate-pulse">
+        <div className="w-1/2 p-24 space-y-8 hidden lg:block">
+          <Skeleton variant="rectangular" height={60} className="w-1/4 rounded opacity-20" />
+          <Skeleton variant="rectangular" height={120} className="w-full rounded-xl opacity-20" />
+          <Skeleton variant="rectangular" height={100} className="w-full rounded-xl opacity-10" />
+          <Skeleton variant="rectangular" height={100} className="w-full rounded-xl opacity-10" />
+        </div>
+        <div className="w-full lg:w-1/2 bg-white p-24">
+          <Skeleton variant="rectangular" height={600} className="w-full rounded-3xl" />
+        </div>
       </div>
     );
   }

@@ -21,8 +21,14 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-0 bg-slate-900 animate-pulse flex items-center justify-center">
-        <Skeleton variant="rectangular" width="40%" height="60%" className="rounded-xl opacity-20" />
+      <div className="min-h-screen bg-white pt-32 px-4 animate-pulse">
+        <div className="container mx-auto max-w-4xl space-y-12">
+          <Skeleton variant="rectangular" height={100} className="w-3/4 mx-auto rounded-xl" />
+          <Skeleton variant="rectangular" height={400} className="w-full rounded-2xl" />
+          <div className="space-y-4">
+            <SkeletonText lines={4} />
+          </div>
+        </div>
       </div>
     );
   }

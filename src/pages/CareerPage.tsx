@@ -47,8 +47,15 @@ export const CareerPage: React.FC<CareerPageProps> = ({ lang }) => {
 
   if (isLoading) {
     return (
-      <div className="absolute inset-0 bg-slate-900 animate-pulse flex items-center justify-center">
-        <Skeleton variant="rectangular" width="40%" height="60%" className="rounded-xl opacity-20" />
+      <div className="min-h-screen bg-slate-900 pt-32 px-4 animate-pulse">
+        <div className="container mx-auto max-w-2xl space-y-12">
+          <Skeleton variant="rectangular" height={80} className="w-1/2 rounded-full opacity-20" />
+          <Skeleton variant="rectangular" height={150} className="w-full rounded-2xl opacity-20" />
+          <div className="grid grid-cols-2 gap-4">
+            <Skeleton variant="rectangular" height={300} className="rounded-2xl opacity-10" />
+            <Skeleton variant="rectangular" height={300} className="rounded-2xl opacity-10" />
+          </div>
+        </div>
       </div>
     );
   }
