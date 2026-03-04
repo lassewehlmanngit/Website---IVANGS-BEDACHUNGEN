@@ -4,6 +4,7 @@ import type { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { BlockRenderer } from '@/widgets/blocks';
 import { usePageBuilderData } from '@/shared/lib/tina/usePageBuilderData';
+import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton';
 
 export interface DynamicPageProps {
   lang: SupportedLang;
@@ -28,8 +29,15 @@ export const DynamicPage: React.FC<DynamicPageProps> = ({ lang, slug: propSlug }
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-dvh">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="container mx-auto px-4 py-32 space-y-12 animate-pulse">
+        <div className="space-y-6">
+          <Skeleton variant="rectangular" height={80} className="w-1/2 rounded" />
+          <SkeletonText lines={3} className="w-full" />
+        </div>
+        <div className="grid md:grid-cols-2 gap-8">
+          <Skeleton variant="rectangular" height={300} className="w-full rounded-2xl" />
+          <Skeleton variant="rectangular" height={300} className="w-full rounded-2xl" />
+        </div>
       </div>
     );
   }

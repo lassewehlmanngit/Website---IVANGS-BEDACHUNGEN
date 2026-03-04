@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { SupportedLang } from '@/shared/config/i18n';
 import { Seo } from '@/shared/ui/Seo';
 import { Button } from '@/shared/ui/Button';
-import { ArrowLeft, ArrowRight, CheckCircle2, Hammer, Thermometer, Layers, CloudRain, Sun, ShieldCheck, Calendar, Info, Ruler, HelpCircle, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, Hammer, Thermometer, Layers, CloudRain, Sun, ShieldCheck, Calendar, Info, Ruler, HelpCircle, Image as ImageIcon, Loader2 } from 'lucide-react';
 import { NotFoundPage } from '@/pages/NotFoundPage';
 import { servicesData, type ServiceId } from '@/features/service/model/serviceData';
 import { OptimizedImage, generateUnsplashSrcSet } from '@/shared/ui/Image';
@@ -12,6 +12,7 @@ import { ProcessTimeline } from '@/shared/ui/ProcessTimeline';
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/shared/ui/Accordion';
 import { TeamContactCard } from '@/features/service/ui/TeamContactCard';
 import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
+import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton';
 import { tinaField } from 'tinacms/dist/react';
 import { useServiceData } from '@/shared/lib/tina/useServiceData';
 import { teamMembersLegacy } from '@/features/company/model/teamData';
@@ -107,11 +108,31 @@ export const ServiceDetailPage: React.FC<{ lang: SupportedLang }> = ({ lang }) =
   const navigate = useNavigate();
 
   // Fetch service data from TinaCMS with visual editing support
-  const { data } = useServiceData(id || '');
+  const { data, isLoading } = useServiceData(id || '');
 
   // Fallback to static data if TinaCMS data is not available
   const service = data?.service || (id && id in servicesData ? servicesData[id as ServiceId] : null);
   const useTinaData = !!data?.service;
+
+  if (isLoading && !service) {
+    return (
+      <div className="min-h-screen bg-white animate-pulse">
+        <Skeleton variant="rectangular" height="60vh" className="w-full" />
+        <div className="container mx-auto px-4 py-16 space-y-12">
+          <div className="grid lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-8 space-y-8">
+              <Skeleton variant="rectangular" height={60} className="w-3/4 rounded" />
+              <SkeletonText lines={4} />
+              <Skeleton variant="rectangular" height={200} className="w-full rounded-xl" />
+            </div>
+            <div className="lg:col-span-4">
+              <Skeleton variant="rectangular" height={400} className="w-full rounded-xl" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!service) return <NotFoundPage lang={lang} />;
 

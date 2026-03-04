@@ -5,14 +5,21 @@ import { Breadcrumbs } from '@/shared/ui/Breadcrumbs';
 import { tinaField } from 'tinacms/dist/react';
 import { TinaMarkdown } from 'tinacms/dist/rich-text';
 import { useLegalPageData } from '@/shared/lib/tina/useLegalPageData';
+import { Skeleton, SkeletonText } from '@/shared/ui/Skeleton';
 
 export const TermsPage: React.FC<{ lang: SupportedLang }> = ({ lang }) => {
   const { data, isLoading } = useLegalPageData('terms');
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-dvh">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+      <div className="bg-white pt-12 pb-24 animate-pulse">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <Skeleton variant="rectangular" height={24} width={150} className="mb-6 rounded" />
+          <Skeleton variant="rectangular" height={60} className="w-1/2 mb-8 rounded" />
+          <div className="space-y-4">
+            <SkeletonText lines={10} />
+          </div>
+        </div>
       </div>
     );
   }
