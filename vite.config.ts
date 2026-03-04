@@ -86,22 +86,6 @@ export default defineConfig(({ mode }) => {
       },
       // Copy content/ to dist so it's available at runtime
       copyPublicDir: true,
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('@radix-ui')) return 'vendor-radix';
-              if (id.includes('framer-motion')) return 'vendor-animation';
-              if (id.includes('lucide-react')) return 'vendor-lucide';
-              if (id.includes('tinacms')) return 'vendor-tina';
-              if (id.includes('react/') || id.includes('react-dom/') || id.includes('scheduler')) return 'vendor-react';
-              if (id.includes('react-router')) return 'vendor-router';
-              if (id.includes('react-markdown') || id.includes('remark')) return 'vendor-markdown';
-              return 'vendor-core';
-            }
-          }
-        },
-      },
     },
   };
 });
