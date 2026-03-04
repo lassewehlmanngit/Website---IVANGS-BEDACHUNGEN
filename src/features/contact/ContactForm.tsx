@@ -187,7 +187,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
         autoComplete="off"
       />
 
-      <div className="space-y-4">
+      <div className="grid md:grid-cols-2 gap-x-6 gap-y-2">
         <FormField
           label="Name"
           htmlFor="contact-name"
@@ -229,6 +229,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
           htmlFor="contact-topic"
           error={errors.topic}
           required
+          className="md:col-span-2"
         >
           <Select
             id="contact-topic"
@@ -239,7 +240,9 @@ export const ContactForm: React.FC<ContactFormProps> = ({ onSubmit, className })
             aria-invalid={!!errors.topic}
           />
         </FormField>
+      </div>
 
+      <div className="space-y-4 mt-4">
         <FormField
           label="Nachricht"
           htmlFor="contact-message"
