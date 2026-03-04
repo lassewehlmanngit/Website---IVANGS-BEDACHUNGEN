@@ -124,8 +124,6 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
       ref={containerRef}
       className={cn(
         'relative overflow-hidden',
-        className?.includes('w-full') && 'w-full',
-        className?.includes('h-full') && 'h-full',
         containerClassName
       )}
       style={aspectStyle}
@@ -172,9 +170,11 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
           onLoad={handleLoad}
           onError={handleError}
           className={cn(
-            'h-full w-full transition-opacity duration-300',
+            'transition-opacity duration-300',
             fitClasses[fit],
             isLoaded ? 'opacity-100' : 'opacity-0',
+            // Default to full size if fit is cover/fill/contain, unless className overrides
+            (fit === 'cover' || fit === 'fill' || fit === 'contain') && 'w-full h-full',
             className,
           )}
         />

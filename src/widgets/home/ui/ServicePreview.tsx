@@ -81,7 +81,8 @@ const ServiceSection: React.FC<ServiceSectionProps> = ({ id, lang, reverse = fal
           <OptimizedImage
             src={img}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            fit="cover"
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 block"
             containerClassName="absolute inset-0 w-full h-full"
             sizes="(max-width: 1024px) 100vw, 50vw"
           />
@@ -207,7 +208,8 @@ export const ServicePreview: React.FC<ServicePreviewProps> = ({ lang, homeData }
                       <OptimizedImage
                         src={service.image}
                         alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        fit="cover"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 block"
                         containerClassName="absolute inset-0 w-full h-full"
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         data-tina-field={tinaField(service, 'image')}
