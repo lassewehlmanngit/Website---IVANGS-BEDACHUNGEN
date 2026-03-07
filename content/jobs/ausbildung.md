@@ -1,5 +1,5 @@
 ---
-title: Ausbildung 2024 (m/w/d)
+title: Ausbildung 2026 (m/w/d)
 location: Kreis Viersen
 type: Ausbildung
 shortDesc: Wir nehmen unsere Ausbildungspflicht sehr ernst. Starte deine Karriere im Handwerk.

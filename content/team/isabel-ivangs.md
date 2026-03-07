@@ -1,9 +1,9 @@
 ---
 name: Isabel Ivangs
-role: Assistenz Geschäftsführung, Buchhaltung
+role: Betriebswirtin und Assistenz der GF
 email: i.ivangs@ivangs.de
 category: office
 order: 3
 ---
 
-Assistenz der Geschäftsführung und Buchhaltung.
+Betriebswirtin und Assistenz der Geschäftsführung.

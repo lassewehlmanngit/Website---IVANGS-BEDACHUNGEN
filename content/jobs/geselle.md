@@ -15,7 +15,7 @@ profile:
   - Spaß an der Arbeit im Team
 benefits:
   - Leistungsgerechte Bezahlung
-  - Modernste Maschinen (eigener Kran, Hebebühnen)
+  - Modernster Maschinenpark
   - Regelmäßige Fortbildungen
   - Kollegiales Arbeitsklima
 published: true

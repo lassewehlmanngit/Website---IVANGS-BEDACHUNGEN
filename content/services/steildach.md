@@ -20,7 +20,7 @@ features:
 benefits:
   - Langjährige Erfahrung seit 1996
   - Festpreis-Garantie
-  - Eigener Kran-Service
+  - Moderner Maschinenpark
   - Top Materialien
 sections:
   - title: Materialkunde - Die Qual der Wahl

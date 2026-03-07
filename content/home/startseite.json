@@ -1,13 +1,13 @@
 {
   "seo": {
     "title": "Ivangs Bedachungen - Meisterbetrieb seit 1996",
-    "description": "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, eigener Kran, Festpreis."
+    "description": "Dächer, die begeistern. Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. 28 Experten, moderner Maschinenpark, Festpreis."
   },
   "hero": {
     "eyebrow": "Meisterbetrieb seit 1996",
     "title": "Dächer, die begeistern!",
     "subtitle": "",
-    "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, eigenem Kran und Festpreis-Garantie.",
+    "description": "Ob Sanierung, Neubau oder Reparatur: Wir schützen, was Ihnen wichtig ist. Mit 28 Experten, modernem Maschinenpark und Festpreis-Garantie.",
     "buttons": {
       "primaryText": "Projekt anfragen",
       "primaryLink": "contact",
@@ -32,12 +32,12 @@
       "icon": "Users"
     },
     {
-      "value": "Eigener",
-      "label": "Kran-Service",
+      "value": "Moderner",
+      "label": "Maschinenpark",
       "icon": "Truck"
     },
     {
-      "value": "400m²",
+      "value": "> 1.500m²",
       "label": "Lagerfläche",
       "icon": "Warehouse"
     },
@@ -130,11 +130,37 @@
         "checkpoints": [
           "Schnelle Reaktionszeiten",
           "Reparatur aller Dacharten",
-          "Wartungsservice",
-          "Notdienst"
+          "Dachwartungen",
+          "Wartung von Absturzsicherungen"
         ],
         "ctaText": "Reparatur anfragen",
         "link": "services/reparatur"
+      },
+      {
+        "title": "Fassaden & Metall",
+        "description": "Ob vorgehängte hinterlüftete Fassade oder anspruchsvolle Metalldächer – wir vereinen Funktionalität und modernes Design.",
+        "image": "/uploads/ivangs-steildach_Ziegeldach%20mit%20Gaubenbekleidung%20in%20Zinkstehfalz.avif",
+        "icon": "Layers",
+        "checkpoints": [
+          "Fassadenarbeiten",
+          "Metalldächer",
+          "Energetische Optimierung"
+        ],
+        "ctaText": "Mehr erfahren",
+        "link": "services/fassaden"
+      },
+      {
+        "title": "Asbestabbrüche",
+        "description": "Sicherer und fachgerechter Rückbau belasteter Dach- und Fassadenmaterialien nach TRGS 519.",
+        "image": "/uploads/flachdach-service.avif",
+        "icon": "Shield",
+        "checkpoints": [
+          "Zertifizierter Abbau",
+          "Fachgerechte Entsorgung",
+          "Sicherung der Baustelle"
+        ],
+        "ctaText": "Beratung anfragen",
+        "link": "services/asbestabbruch"
       }
     ]
   },
@@ -172,7 +198,7 @@
   "trustIndicators": {
     "eyebrow": "Prozess & Effizienz",
     "title": "Wir warten nicht auf Material. Wir haben es.",
-    "description": "Viele Betriebe sind abhängig von Baustoffhändlern und Mietgeräten. Wir nicht. Mit eigenen Lagerräumen, einem modernen Maschinenpark und dem firmeneigenen Autokran sind wir unabhängig von Lieferengpässen.",
+    "description": "Viele Betriebe sind abhängig von Baustoffhändlern und Mietgeräten. Wir nicht. Mit über 1.500 qm Lagerräumen und einem modernen Maschinenpark sind wir weitestgehend unabhängig von Lieferengpässen.",
     "image": "/uploads/ivangs-car-logo.avif",
     "items": [
       {
@@ -181,8 +207,8 @@
         "icon": "Warehouse"
       },
       {
-        "title": "Eigener Kran-Service",
-        "description": "Wir müssen nicht auf den Verleih warten. Unser Kran ist einsatzbereit, wenn wir ihn brauchen.",
+        "title": "Moderner Maschinenpark",
+        "description": "Unsere moderne Ausstattung macht uns effizient und flexibel einsetzbar.",
         "icon": "Truck"
       }
     ]
@@ -193,11 +219,11 @@
     "questions": [
       {
         "question": "Was kostet eine professionelle Dachsanierung im Kreis Viersen?",
-        "answer": "Die Kosten variieren je nach Projekt: Eine Steildachsanierung kostet bei einem Einfamilienhaus etwa 15.000-35.000 Euro, eine Flachdachabdichtung 80-150 Euro pro m². Wir erstellen Ihnen ein kostenloses, transparentes Festpreis-Angebot nach Besichtigung vor Ort."
+        "answer": "Jedes Projekt ist individuell, weshalb wir keine pauschalen Preise nennen können. Die genauen Kosten werden durch unsere Meister transparent kalkuliert. Hierfür kommen wir gerne für ein Aufmaß vor Ort vorbei und erstellen Ihnen ein Angebot."
       },
       {
         "question": "Wie lange dauern typische Dacharbeiten?",
-        "answer": "Ein Einfamilienhaus-Dach sanieren wir in ca. 2 Wochen, ein Dachfenster tauschen wir in 3-4 Stunden, eine Flachdachabdichtung dauert je nach Größe 3-7 Tage. Wir planen realistische Zeitfenster mit Wetterpuffer und halten Sie stets auf dem Laufenden."
+        "answer": "Ein Einfamilienhaus-Dach sanieren wir in ca. 2 Wochen, ein Dachfenster tauschen wir in 3-4 Stunden, eine Flachdachabdichtung dauert je nach Größe 3-7 Tage. Bitte beachten Sie, dass wir bei allen Arbeiten stark auf das Wetter angewiesen sind. Wir planen realistische Zeitfenster und halten Sie stets auf dem Laufenden."
       },
       {
         "question": "Arbeitet Ivangs Bedachungen nur im Kreis Viersen?",
@@ -221,7 +247,7 @@
       },
       {
         "question": "Was unterscheidet Ivangs von anderen Dachdeckerbetrieben?",
-        "answer": "Wir sind ein inhabergeführter Meisterbetrieb mit 28 Experten, eigenem Kran und 400 m² Lagerfläche. Das bedeutet: kurze Wege, schnelle Reaktion, keine Subunternehmer. Wir bilden aus (aktuell 5 Azubis) und setzen auf langfristige Kundenbeziehungen statt schnelles Geschäft."
+        "answer": "Wir sind ein inhabergeführter Meisterbetrieb mit 28 Experten, einem modernen Maschinenpark und über 1.500 qm Lagerfläche. Das bedeutet: kurze Wege, schnelle Reaktion, keine Subunternehmer. Wir bilden aus (aktuell 5 Azubis) und setzen auf langfristige Kundenbeziehungen statt schnelles Geschäft."
       },
       {
         "question": "Bieten Sie auch Wartungsverträge für Dächer an?",

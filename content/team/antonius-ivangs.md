@@ -1,8 +1,8 @@
 ---
 name: Antonius Ivangs
-role: Dachdeckergeselle / Vorarbeiter
+role: Meister
 category: craftsmen
 order: 10
 ---
 
-Dachdeckergeselle bei Ivangs Bedachungen.
+Meister bei Ivangs Bedachungen.

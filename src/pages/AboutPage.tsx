@@ -41,12 +41,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
     );
   }
 
-  // Pre-defined bento box configurations for up to 4 values
+  // Enhanced bento box configurations with glassmorphism and premium effects
   const bentoGridClasses = [
-    "col-span-12 lg:col-span-8 bg-slate-900 text-white rounded-[2rem] p-10 shadow-lg relative overflow-hidden group",
-    "col-span-12 lg:col-span-4 bg-primary text-white rounded-[2rem] p-10 shadow-lg relative overflow-hidden group",
-    "col-span-12 lg:col-span-5 bg-white border border-slate-100 rounded-[2rem] p-10 shadow-md relative group",
-    "col-span-12 lg:col-span-7 bg-surface-subtle border border-slate-100 rounded-[2rem] p-10 shadow-md relative group"
+    "col-span-12 lg:col-span-8 bg-slate-900 shadow-2xl rounded-[2.5rem] p-12 relative overflow-hidden group transition-all duration-500",
+    "col-span-12 lg:col-span-4 bg-primary shadow-xl rounded-[2.5rem] p-12 relative overflow-hidden group transition-all duration-500",
+    "col-span-12 lg:col-span-5 bg-white/40 backdrop-blur-md border border-white/60 shadow-xl rounded-[2.5rem] p-12 relative group overflow-hidden transition-all duration-500 hover:bg-white/60",
+    "col-span-12 lg:col-span-7 bg-slate-100/50 backdrop-blur-sm border border-slate-200 shadow-lg rounded-[2.5rem] p-12 relative group overflow-hidden transition-all duration-500 hover:bg-slate-100"
   ];
 
   return (
@@ -163,10 +163,9 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
                 <p className="text-xl text-slate-600 mt-6">Was uns als Team auszeichnet und wie wir arbeiten.</p>
               </div>
 
-              <div className="grid grid-cols-12 gap-6 max-w-6xl mx-auto">
+              <div className="grid grid-cols-12 gap-8 max-w-6xl mx-auto">
                 {about.values.map((value: { text: string; icon?: string }, index: number) => {
                   const styleClass = bentoGridClasses[index % bentoGridClasses.length];
-                  // Determine text styling based on background
                   const isDark = index === 0 || index === 1;
 
                   return (
@@ -175,15 +174,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ lang }) => {
                       className={styleClass}
                       data-tina-field={value && tinaField(value, 'text')}
                     >
-                      {/* Decorative background element per card */}
-                      {isDark && <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors"></div>}
-                      {!isDark && <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors"></div>}
+                      {/* Decorative ambient background */}
+                      {isDark ? (
+                        <div className="absolute -right-20 -top-20 w-80 h-80 bg-white/10 rounded-full blur-[100px] group-hover:bg-white/20 transition-all duration-1000"></div>
+                      ) : (
+                        <div className="absolute -right-20 -top-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px] group-hover:bg-primary/20 transition-all duration-1000"></div>
+                      )}
 
-                      <div className="relative z-10 flex flex-col h-full justify-between">
-                        <CheckCircle className={`w-10 h-10 mb-8 ${isDark ? 'text-white/80' : 'text-primary'}`} />
-                        <h3 className={`text-2xl md:text-3xl font-bold leading-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                          {value.text}
-                        </h3>
+                      <div className="relative z-10 flex flex-col h-full justify-between min-h-[140px]">
+                        <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-8 border transition-all duration-500 group-hover:scale-110 ${isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-primary/20 border-primary/30 text-primary'
+                          }`}>
+                          <CheckCircle className="w-7 h-7" />
+                        </div>
+                        <div>
+                          <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-4 ${isDark ? 'text-primary' : 'text-slate-400'}`}>
+                            Ivangs Qualitäts-Versprechen
+                          </p>
+                          <h3 className={`text-3xl md:text-4xl font-extrabold leading-tight tracking-tight ${isDark ? 'text-white' : 'text-slate-900'}`}>
+                            {value.text}
+                          </h3>
+                        </div>
                       </div>
                     </div>
                   );

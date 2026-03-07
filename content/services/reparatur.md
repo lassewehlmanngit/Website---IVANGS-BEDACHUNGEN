@@ -44,7 +44,7 @@ contactIds:
   - isabel
 faq:
   - question: Was kostet eine Dachreparatur?
-    answer: Kleine Reparaturen (einzelne Ziegel) ab ca. 200€. Wir geben Ihnen vorab eine Einschätzung.
+    answer: Anfahrtspauschale 25 € Kreis Viersen, 35 € außerhalb. Stundenverrechnungssätze 74,50 € Geselle, 67,50 € Helfer, 92,50 € Meister, 47,50 € Azubi.
   - question: Helfen Sie bei Sturmschäden?
     answer: Ja, wir sichern das Dach und dokumentieren den Schaden für Ihre Versicherung.
   - question: Reinigen Sie auch Dachrinnen?
